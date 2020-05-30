@@ -1,0 +1,50 @@
+<div class="container">
+	<div class="row">
+		<div class="col-12 text-center">
+			<button type="button" class="btn btn-info" (click)="toggleInputVisibility()">{{ hideUnitTypesWithZeroUnits ? "Show all inputs" : "Hide unused inputs" }}</button>
+		</div>
+	</div>
+	<div class="row top-buffer no-gutters">
+		<div class="col-6">
+			<app-player class="player1-bg" [simulator]="this" [player]="players[0]"></app-player>
+		</div>
+		<div class="col-6">
+			<app-player class="player2-bg" [simulator]="this" [player]="players[1]"></app-player>
+		</div>
+	</div>
+	<div class="row top-buffer">
+		<div class="col-4"></div>
+
+		<div class="col-4 text-center border border-dark rounded p-2 simulator-bg">
+			<table class="table table-sm table-dark">
+				<thead>
+					<tr>
+						<th scope="col" style="width: 50%"><label for="numberOfSimulationsTextbox">#Simulations</label></th>
+						<th scope="col" style="width: 50%"><label for="numberOfSimulationsTextbox">Hit&Run mode</label></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="text-center">
+							<input type="number" class="form-control" id="numberOfSimulationsTextbox" [(ngModel)]="numberOfSimulations" min="1" max="1000" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+						</td>
+						<td class="text-center">
+							<div ngbDropdown>
+								<button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>{{hitAndRunModes[hitAndRunMode]}}</button>
+								<div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+									<button ngbDropdownItem (click)="SetHnR(0)">No Hit&Run</button>
+									<button ngbDropdownItem (click)="SetHnR(1)">Medium Hit&Run</button>
+									<button ngbDropdownItem (click)="SetHnR(2)">Perfect Hit&Run</button>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<button type="button" class="btn btn-info top-buffer" (click)="Bt_fight_Click()">Start Simulation</button>
+		</div>
+
+		<div class="col-4"></div>
+	</div>
+</div>
