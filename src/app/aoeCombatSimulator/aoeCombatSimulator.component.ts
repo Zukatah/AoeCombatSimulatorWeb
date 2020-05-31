@@ -73,18 +73,17 @@ export class AoECombatSimulatorComponent {
 			}
 		}
 
-		for (let i: number = 0; i < 2; i++)
+		/*for (let i: number = 0; i < 2; i++)
 		{
 			console.log("Army " + (i + 1) + ": Attacking attacker: " + this.players[i].attackAttacker + ". Attacking random nearby target: " + this.players[i].attackRandomNearbyTarget + ".");
 			console.log(this.players[i] + " Hit: " + this.players[i].regularHit + " Total Miss MTAlive: " + this.players[i].missTotalMainTargetAlive + " Total Miss MTDead: " + this.players[i].missTotalMainTargetDead + " Miss Main Target: " + this.players[i].missMainTarget + " Miss Side Target: " + this.players[i].missSideTarget);
-		}
+		}*/
 		console.log("Elapsed time for simulation: " + (performance.now() - this.startTime) + "ms.");
 	}
 	
 
 	public SetHnR(mode: number){
 		this.hitAndRunMode = mode;
-		console.log("set to " + mode);
 	}
 
 
@@ -116,9 +115,7 @@ export class AoECombatSimulatorComponent {
 	}
 
 	public CreateBattles(){
-		console.log("Before battle " + this.calculatedSimulationsSoFar);
 		new Battle(this, 0, this.calculatedSimulationsSoFar, this.hitAndRunMode);
-		console.log("After battle " + this.calculatedSimulationsSoFar);
 		this.calculatedSimulationsSoFar++;
 		if (this.numberOfSimulations > this.calculatedSimulationsSoFar){
 			setTimeout(this.CreateBattles.bind(this), 0);

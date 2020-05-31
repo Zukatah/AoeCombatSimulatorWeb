@@ -257,7 +257,7 @@ export class Unit {
 			if (this.attackIsMissile)
 			{
 				let dx: number = this.target.x - this.x;
-				let dy: number = this.target.x - this.x;
+				let dy: number = this.target.y - this.y;
 				let distanceToTarget: number = Math.sqrt(dx*dx + dy*dy);
 				let dxNorm: number = distanceToTarget == 0 ? 1 : dx / distanceToTarget;
 				let dyNorm: number = distanceToTarget == 0 ? 0 : dy / distanceToTarget;
