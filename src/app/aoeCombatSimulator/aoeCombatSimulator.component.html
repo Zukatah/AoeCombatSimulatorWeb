@@ -26,7 +26,7 @@
 				<tbody>
 					<tr>
 						<td class="text-center">
-							<input type="number" class="form-control" id="numberOfSimulationsTextbox" [(ngModel)]="numberOfSimulations" min="1" max="1000" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+							<input type="number" class="form-control" id="numberOfSimulationsTextbox" [(ngModel)]="numberOfSimulations" min="1" max="1000" oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value == ''){ this.value = '0'; }">
 						</td>
 						<td class="text-center">
 							<div ngbDropdown>
@@ -42,7 +42,10 @@
 				</tbody>
 			</table>
 
-			<button type="button" class="btn btn-info top-buffer" (click)="Bt_fight_Click()">Start Simulation</button>
+			<div class="spinner-border" role="status" *ngIf="working"></div>
+			<div><span *ngIf="working">Loading... ({{calculatedSimulationsSoFar}} of {{numberOfSimulations}})</span></div>
+
+			<button type="button" class="btn btn-info top-buffer" (click)="Bt_fight_Click()" [disabled]="working">Start Simulation</button>
 		</div>
 
 		<div class="col-4"></div>

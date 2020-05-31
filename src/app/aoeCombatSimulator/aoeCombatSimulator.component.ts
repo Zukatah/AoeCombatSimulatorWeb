@@ -16,6 +16,8 @@ export class AoECombatSimulatorComponent {
 	public players: Player[] = [new Player(new Color(0, 0, 128), this, 0), new Player(new Color(0, 0, 128), this, 1)];
 	public numberOfSimulations: number = 20;
 	public startTime: number;
+	public calculatedSimulationsSoFar: number = 0;
+	public working: boolean = false;
 
 	public hideUnitTypesWithZeroUnits: boolean = false;
 
@@ -28,6 +30,8 @@ export class AoECombatSimulatorComponent {
 	
 	private PrintResults(): void
 	{
+		this.calculatedSimulationsSoFar = 0;
+		this.working = false;
 		for (let i: number = 0; i < 2; i++)
 		{
 			this.players[i].populationRemaining = 0;
@@ -68,6 +72,13 @@ export class AoECombatSimulatorComponent {
 				this.players[i].resourcesGeneratedTotal += this.players[i].resourcesGenerated[j];
 			}
 		}
+
+		for (let i: number = 0; i < 2; i++)
+		{
+			console.log("Army " + (i + 1) + ": Attacking attacker: " + this.players[i].attackAttacker + ". Attacking random nearby target: " + this.players[i].attackRandomNearbyTarget + ".");
+			console.log(this.players[i] + " Hit: " + this.players[i].regularHit + " Total Miss MTAlive: " + this.players[i].missTotalMainTargetAlive + " Total Miss MTDead: " + this.players[i].missTotalMainTargetDead + " Miss Main Target: " + this.players[i].missMainTarget + " Miss Side Target: " + this.players[i].missSideTarget);
+		}
+		console.log("Elapsed time for simulation: " + (performance.now() - this.startTime) + "ms.");
 	}
 	
 
@@ -96,18 +107,25 @@ export class AoECombatSimulatorComponent {
 		}
 
 		this.startTime = performance.now();
-		for (let i: number = 0; i < this.numberOfSimulations; i++){
-			new Battle(this, 0, i, this.hitAndRunMode);
-		}
 
-		this.PrintResults();
+		this.working = true;
+		setTimeout(this.CreateBattles.bind(this), 0);
 
-		for (let i: number = 0; i < 2; i++)
-		{
-			console.log("Army " + (i + 1) + ": Attacking attacker: " + this.players[i].attackAttacker + ". Attacking random nearby target: " + this.players[i].attackRandomNearbyTarget + ".");
-			console.log(this.players[i] + " Hit: " + this.players[i].regularHit + " Total Miss MTAlive: " + this.players[i].missTotalMainTargetAlive + " Total Miss MTDead: " + this.players[i].missTotalMainTargetDead + " Miss Main Target: " + this.players[i].missMainTarget + " Miss Side Target: " + this.players[i].missSideTarget);
+		//for (let i: number = 0; i < this.numberOfSimulations; i++){ new Battle(this, 0, i, this.hitAndRunMode); }
+		//this.PrintResults();
+	}
+
+	public CreateBattles(){
+		console.log("Before battle " + this.calculatedSimulationsSoFar);
+		new Battle(this, 0, this.calculatedSimulationsSoFar, this.hitAndRunMode);
+		console.log("After battle " + this.calculatedSimulationsSoFar);
+		this.calculatedSimulationsSoFar++;
+		if (this.numberOfSimulations > this.calculatedSimulationsSoFar){
+			setTimeout(this.CreateBattles.bind(this), 0);
 		}
-		console.log("Elapsed time for simulation: " + (performance.now() - this.startTime) + "ms.");
+		else{
+			this.PrintResults();
+		}
 	}
 
 }
