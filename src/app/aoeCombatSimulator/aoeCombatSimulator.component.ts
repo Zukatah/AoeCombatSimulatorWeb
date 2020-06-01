@@ -13,6 +13,11 @@ export class AoECombatSimulatorComponent {
 
 	public hitAndRunMode: number = 0; // 0=noHit&Run, 1=semi, 2=fullHit&Run
 	public hitAndRunModes: string[] = ["No Hit&Run", "Medium Hit&Run", "Perfect Hit&Run"];
+
+	public resourceValue: number = 0; // 0=noHit&Run, 1=semi, 2=fullHit&Run
+	public resourceValues: string[] = ["100F=100W=100G", "100F=100W=66,6G", "100F=100W=17G"];
+	public resourceValuesFactors: number[][] = [[1, 1, 1], [1, 1, 1.5], [1, 1, 5.88235]];
+
 	public players: Player[] = [new Player(new Color(0, 0, 128), this, 0), new Player(new Color(0, 0, 128), this, 1)];
 	public numberOfSimulations: number = 20;
 	public startTime: number;
@@ -48,8 +53,6 @@ export class AoECombatSimulatorComponent {
 				this.players[i].avgSurvivorsPercent[j] = this.players[i].avgSurvivorsNumber[j] / this.players[i].amountStartUnits[j];
 				this.players[i].avgSurvivorsColor[j] = this.players[i].amountStartUnits[j] == 0 ? new Color(128, 128, 128) :
 					new Color(255 - 128.0 * this.players[i].avgSurvivorsPercent[j], 127 + 128.0 * this.players[i].avgSurvivorsPercent[j], 0);
-				// console.log("Pl" + i + " UT" + j + ": " + this.players[i].avgSurvivorsColor[j].GetAsHex());
-				// 0.0 <-> (255, 128, 128), <=0.1 <-> (255, 192, 192), <=0.5 <-> (255, 255, 192), <=0.9 <-> (192, 255, 192), >0.9 <-> (128, 255, 128)
 
 				for (let k: number = 0; k < 3; k++)
 				{
@@ -58,20 +61,13 @@ export class AoECombatSimulatorComponent {
 			}
 			this.players[i].populationLost = this.players[i].populationInvested - this.players[i].populationRemaining;
 
-			this.players[i].resourcesLostTotal = 0;
-			this.players[i].resourcesRemainingTotal = 0;
-			this.players[i].resourcesGeneratedTotal = 0;
 			for (let j: number = 0; j < 3; j++)
 			{
 				this.players[i].resourcesLost[j] = this.players[i].resourcesInvested[j] - this.players[i].resourcesRemaining[j];
-				this.players[i].resourcesLostTotal += this.players[i].resourcesLost[j];
-
 				this.players[i].resourcesRemaining[j] += this.players[i].resourcesGenerated[j];
-				this.players[i].resourcesRemainingTotal += this.players[i].resourcesRemaining[j];
-
-				this.players[i].resourcesGeneratedTotal += this.players[i].resourcesGenerated[j];
 			}
 		}
+		this.CalculateWeightedSum();
 
 		/*for (let i: number = 0; i < 2; i++)
 		{
@@ -80,14 +76,32 @@ export class AoECombatSimulatorComponent {
 		}*/
 		console.log("Elapsed time for simulation: " + (performance.now() - this.startTime) + "ms.");
 	}
-	
 
+	public CalculateWeightedSum(): void{
+		for (let i: number = 0; i < 2; i++) {
+			this.players[i].resourcesLostTotal = 0;
+			this.players[i].resourcesRemainingTotal = 0;
+			this.players[i].resourcesGeneratedTotal = 0;
+			for (let j: number = 0; j < 3; j++) {
+				this.players[i].resourcesLostTotal += this.players[i].resourcesLost[j] * this.resourceValuesFactors[this.resourceValue][j];
+				this.players[i].resourcesRemainingTotal += this.players[i].resourcesRemaining[j] * this.resourceValuesFactors[this.resourceValue][j];
+				this.players[i].resourcesGeneratedTotal += this.players[i].resourcesGenerated[j] * this.resourceValuesFactors[this.resourceValue][j];
+			}
+		}
+	}
+	
 	public SetHnR(mode: number){
 		this.hitAndRunMode = mode;
 	}
 
+	public SetRV(mode: number){
+		this.resourceValue = mode;
+		for (let i: number = 0; i < 2; i++){
+			this.players[i].CalculateResourcesInvested();
+		}
+		this.CalculateWeightedSum();
+	}
 
-	// object sender, EventArgs e
 	public Bt_fight_Click(): void
 	{
 		if (this.numberOfSimulations == NaN || this.numberOfSimulations < 1 || this.numberOfSimulations > 1000 || !Number.isInteger(this.numberOfSimulations)){
@@ -110,8 +124,7 @@ export class AoECombatSimulatorComponent {
 		this.working = true;
 		setTimeout(this.CreateBattles.bind(this), 0);
 
-		//for (let i: number = 0; i < this.numberOfSimulations; i++){ new Battle(this, 0, i, this.hitAndRunMode); }
-		//this.PrintResults();
+		//for (let i: number = 0; i < this.numberOfSimulations; i++){ new Battle(this, 0, i, this.hitAndRunMode); } this.PrintResults();
 	}
 
 	public CreateBattles(){

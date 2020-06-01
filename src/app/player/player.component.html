@@ -31,45 +31,45 @@
 			<thead>
 				<tr>
 					<th scope="col"></th>
+					<th scope="col"><img src="assets/population1.png" class="border border-dark img-fluid"></th>
 					<th scope="col"><img src="assets/food1.jpg" class="border border-dark img-fluid"></th>
 					<th scope="col"><img src="assets/wood1.jpg" class="border border-dark img-fluid"></th>
 					<th scope="col"><img src="assets/gold1.jpg" class="border border-dark img-fluid"></th>
-					<th scope="col"><img src="assets/population1.png" class="border border-dark img-fluid"></th>
 					<th scope="col"><img src="assets/sum1.png" class="border border-dark img-fluid"></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
 					<td>Invested</td>
+					<td>{{player.populationInvested | number : '1.0-2'}}</td>
 					<td>{{player.resourcesInvested[0] | number : '1.0-2'}}</td>
 					<td>{{player.resourcesInvested[1] | number : '1.0-2'}}</td>
 					<td>{{player.resourcesInvested[2] | number : '1.0-2'}}</td>
 					<td>{{player.resourcesInvestedTotal | number : '1.0-2'}}</td>
-					<td>{{player.populationInvested | number : '1.0-2'}}</td>
 				</tr>
 				<tr>
 					<td>Generated</td>
+					<td>{{player.populationGenerated | number : '1.0-2'}}</td>
 					<td>{{player.resourcesGenerated[0] | number : '1.0-2'}}</td>
 					<td>{{player.resourcesGenerated[1] | number : '1.0-2'}}</td>
 					<td>{{player.resourcesGenerated[2] | number : '1.0-2'}}</td>
 					<td>{{player.resourcesGeneratedTotal | number : '1.0-2'}}</td>
-					<td>{{player.populationGenerated | number : '1.0-2'}}</td>
 				</tr>
 				<tr>
 					<td>Lost</td>
+					<td>{{player.populationLost | number : '1.0-2'}}</td>
 					<td>{{player.resourcesLost[0] | number : '1.0-2'}}</td>
 					<td>{{player.resourcesLost[1] | number : '1.0-2'}}</td>
 					<td>{{player.resourcesLost[2] | number : '1.0-2'}}</td>
 					<td>{{player.resourcesLostTotal | number : '1.0-2'}}</td>
-					<td>{{player.populationLost | number : '1.0-2'}}</td>
 				</tr>
 				<tr>
 					<td>Remaining</td>
+					<td>{{player.populationRemaining | number : '1.0-2'}}</td>
 					<td>{{player.resourcesRemaining[0] | number : '1.0-2'}}</td>
 					<td>{{player.resourcesRemaining[1] | number : '1.0-2'}}</td>
 					<td>{{player.resourcesRemaining[2] | number : '1.0-2'}}</td>
 					<td>{{player.resourcesRemainingTotal | number : '1.0-2'}}</td>
-					<td>{{player.populationRemaining | number : '1.0-2'}}</td>
 				</tr>
 			</tbody>
 		</table>

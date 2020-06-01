@@ -13,21 +13,19 @@
 		</div>
 	</div>
 	<div class="row top-buffer">
-		<div class="col-4"></div>
+		<div class="col-3"></div>
 
-		<div class="col-4 text-center border border-dark rounded p-2 simulator-bg">
+		<div class="col-6 text-center border border-dark rounded p-2 simulator-bg">
 			<table class="table table-sm table-dark">
 				<thead>
 					<tr>
-						<th scope="col" style="width: 50%"><label for="numberOfSimulationsTextbox">#Simulations</label></th>
-						<th scope="col" style="width: 50%"><label for="numberOfSimulationsTextbox">Hit&Run mode</label></th>
+						<th scope="col" style="width: 33%"><label for="numberOfSimulationsTextbox">Hit&Run mode</label></th>
+						<th scope="col" style="width: 33%"><label for="numberOfSimulationsTextbox">Resource value</label></th>
+						<th scope="col" style="width: 34%"><label for="numberOfSimulationsTextbox">#Simulations</label></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td class="text-center">
-							<input type="number" class="form-control" id="numberOfSimulationsTextbox" [(ngModel)]="numberOfSimulations" min="1" max="1000" oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value == ''){ this.value = '0'; }">
-						</td>
 						<td class="text-center">
 							<div ngbDropdown>
 								<button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>{{hitAndRunModes[hitAndRunMode]}}</button>
@@ -37,6 +35,19 @@
 									<button ngbDropdownItem (click)="SetHnR(2)">Perfect Hit&Run</button>
 								</div>
 							</div>
+						</td>
+						<td class="text-center">
+							<div ngbDropdown>
+								<button class="btn btn-primary" id="dropdownBasic2" ngbDropdownToggle>{{resourceValues[resourceValue]}}</button>
+								<div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+									<button ngbDropdownItem (click)="SetRV(0)">100F=100W=100G (All resources are worth the same)</button>
+									<button ngbDropdownItem (click)="SetRV(1)">100F=100W=66,6G (Gold is worth 50% more than F&W)</button>
+									<button ngbDropdownItem (click)="SetRV(2)">100F=100W=17G (Gold is worth much more than F&W (common late game market exchange rate))</button>
+								</div>
+							</div>
+						</td>
+						<td class="text-center">
+							<input type="number" class="form-control" id="numberOfSimulationsTextbox" [(ngModel)]="numberOfSimulations" min="1" max="1000" oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value == ''){ this.value = '0'; }">
 						</td>
 					</tr>
 				</tbody>
@@ -48,6 +59,6 @@
 			<button type="button" class="btn btn-info top-buffer" (click)="Bt_fight_Click()" [disabled]="working">Start Simulation</button>
 		</div>
 
-		<div class="col-4"></div>
+		<div class="col-3"></div>
 	</div>
 </div>

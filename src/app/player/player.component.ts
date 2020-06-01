@@ -31,7 +31,7 @@ export class PlayerComponent implements OnInit, AfterViewInit, DoCheck{
 	ngDoCheck(){
 		let changes = this.iterableDiffer.diff(this.player.amountStartUnits);
 		if (changes) {
-			this.calculateResourcesInvested();
+			this.player.CalculateResourcesInvested();
 		}
 	}
 
@@ -43,22 +43,6 @@ export class PlayerComponent implements OnInit, AfterViewInit, DoCheck{
 
 	public getSurvivorsColor(utInd: number): string{
 		return this.player.avgSurvivorsColor[utInd].GetAsHex();
-	}
-
-	private calculateResourcesInvested(): void{
-		this.player.populationInvested = 0;
-		for (let k: number = 0; k < 3; k++)
-		{
-			this.player.resourcesInvested[k] = 0;
-			for (let j: number = 0; j < AoeData.unitTypesList.length; j++)
-			{
-				this.player.resourcesInvested[k] += AoeData.unitTypesList[j].resourceCosts[k] * this.player.amountStartUnits[j];
-				if (k == 0){
-					this.player.populationInvested += AoeData.unitTypesList[j] == AoeData.ut_eliteKarambitWarrior ? this.player.amountStartUnits[j] * 0.5 : this.player.amountStartUnits[j];
-				}
-			}
-		}
-		this.player.resourcesInvestedTotal = this.player.resourcesInvested[0] + this.player.resourcesInvested[1] + this.player.resourcesInvested[2];
 	}
 
 	public getArrayLeftColumn(): number[]{
