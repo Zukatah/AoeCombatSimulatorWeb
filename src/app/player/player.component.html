@@ -18,7 +18,7 @@
 				<tr *ngFor="let item of getArrayAllColumns()" [hidden]="simulator.hideUnitTypesWithZeroUnits && player.amountStartUnits[item]==0">
 					<td class="align-middle"><label [attr.for]="'numberInput'+player.playerIndex+item">{{player.uts[item].name}}</label></td>
 					<td><input type="number" class="form-control" id="numberInput{{player.playerIndex}}{{item}}" oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value == ''){ this.value = '0'; }; if (this.value > 200) { this.value = '200'; }" value="0" min="0" max="200" [(ngModel)]="player.amountStartUnits[item]"></td>
-					<td class="text-center align-middle" [style.background-color]="getSurvivorsColor(item)">{{player.avgSurvivorsNumber[item]}}</td>
+					<td class="text-center align-middle" [style.background-color]="getSurvivorsColor(item)">{{player.avgSurvivorsNumber[item] | number : '1.0-2'}}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -82,7 +82,7 @@
 			</thead>
 			<tbody>
 				<tr class="text-center">
-					<td>{{player.sumWins}}</td>
+					<td>{{player.sumWins}} ({{100.0 * player.sumWins / player.userInterface.numberOfSimulationsLastRun | number : '1.0-2'}}%)</td>
 				</tr>
 			</tbody>
 		</table>

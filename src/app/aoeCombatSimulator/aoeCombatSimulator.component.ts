@@ -20,11 +20,12 @@ export class AoECombatSimulatorComponent {
 
 	public players: Player[] = [new Player(new Color(0, 0, 128), this, 0), new Player(new Color(0, 0, 128), this, 1)];
 	public numberOfSimulations: number = 20;
+	public numberOfSimulationsLastRun = this.numberOfSimulations;
 	public startTime: number;
 	public calculatedSimulationsSoFar: number = 0;
 	public working: boolean = false;
 
-	public hideUnitTypesWithZeroUnits: boolean = false;
+	public hideUnitTypesWithZeroUnits: boolean = true;
 
 	public toggleInputVisibility(): void{
 		this.hideUnitTypesWithZeroUnits = !this.hideUnitTypesWithZeroUnits;
@@ -121,6 +122,7 @@ export class AoECombatSimulatorComponent {
 
 		this.startTime = performance.now();
 
+		this.numberOfSimulationsLastRun = this.numberOfSimulations;
 		this.working = true;
 		setTimeout(this.CreateBattles.bind(this), 0);
 

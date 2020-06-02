@@ -1,0 +1,10 @@
+span {
+	color: #BBBBBB;
+}
+
+
+
+a:hover {
+	text-decoration: underline;
+	background-color: grey;
+}

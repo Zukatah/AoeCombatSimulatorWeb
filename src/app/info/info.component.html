@@ -1,0 +1,171 @@
+<div class="container">
+	<div class="row">
+		<div class="col-12">
+			<h1>FAQ</h1>
+			<hr>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-6">
+			<div class="border border-dark p-2 infobox-bg">
+				<div>
+					<span class="font-weight-bold">How do it use the simulator?</span>
+				</div>
+				<hr>
+				<ul>
+					<li>For each of the two armies choose the number and unit type of all units that are fighting in the respective army.</li>
+					<li>Decide whether ranged units will use Hit&Run tactics during the battle - and if so, to which extent.</li>
+					<li>Determine whether gold is of higher worth than food and wood - and if so, to which extent.</li>
+					<li>Choose how often the simulation shall be executed.</li>
+					<li>Click the "Start Simulation" button.</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-6">
+			<div class="border border-dark p-2 infobox-bg">
+				<div>
+					<span class="font-weight-bold">How does the simulator work on a technical level in detail?</span>
+				</div>
+				<hr>
+				<p>***Will be released soon***</p>
+			</div>
+		</div>
+	</div>
+	<div class="row top-buffer">
+		<div class="col-6">
+			<div class="border border-dark p-2 infobox-bg">
+				<div>
+					<span class="font-weight-bold">I don't want to watch the entire video. How are the units placed right before the battle starts?</span>
+				</div>
+				<hr>
+				<p>This graphic demonstrates the positioning of two exemplary armies:</p>
+				<img src="assets/unitPlacing.png" class="border border-dark img-fluid">
+				<ul>
+					<li>
+						The program first distinguishes between units that have a range of at most one
+						(so for example champions, halberdiers but also step lancers and kamayuks) - let's call them LowRangeUnits -
+						and units with a higher range (so archers, skirmishers but also throwing axemen and gbetos) -
+						let's call them HighRangeUnits.
+					</li>
+					<li>
+						The units of player 1 are on the left side of the map,
+						so they initially have negative x coordinates and the units of player 2 are on the right side of the map,
+						so they initially have positive x coordinates.
+					</li>
+					<li>
+						To make a compromise between very cramped and very open battles all units in the same group will be placed with a distance of 1 tile to the next unit.
+					</li>
+					<li>
+						Low Range units will be placed in a group two tiles away from the middle of the map, and hence close to the enemy.
+						High Range units will be placed in a group six tiles away from the middle of the map, so that they can make use of their range.
+					</li>
+					<li>
+						Regarding the formation, both, the Low Range and the High Range groups of both players have approximately a height double as high as their width.
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-6">
+			<div class="border border-dark p-2 infobox-bg">
+				<div>
+					<span class="font-weight-bold">I don't want to watch the entire video. How does the Hit&Run mode work?</span>
+				</div>
+				<hr>
+				<ul>
+					<li>
+						If you take the default setting "No Hit&Run", ranged units won't use Hit&Run at all - however,
+						they might still move to get in range of their targets or, if they have a minimum range like Skirmishers, to get out of it.
+					</li>
+					<li>
+						If you take the "Perfect Hit&Run" setting, ranged units will hit & run their targets with absolute perfect efficiency. What does that mean?
+						Let's take the arbalester as an example:
+						Arbalesters fire their arrows after 0.35s of attack animation time and with Thumb Ring they have an attack rate of 1.7s.
+						So with perfect Hit&Run they will use the remaining 1.7s-0.35s, so 1.35s to run away from their target before starting the next attack.
+						This, of course, is barely realizable for humans, even pro player. Therefore there is a third Hit&Run setting called "Medium Hit&Run".
+					</li>
+					<li>
+						If you take the "Medium Hit&Run" setting, Ranged units will run away from their targets with half of the maximal possible efficiency.
+						So compared with the previous example, the Arbalester needs 0.35s to fire his arrow but now uses half of the time until his next attack to run away;
+						so after his attack, he will stand still for 1.35s/2=0.675s and then run away for 0.675s before firing his next arrow.
+						This is still probably at least as efficient as the microing of the average human player.
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="row top-buffer">
+		<div class="col-6">
+			<div class="border border-dark p-2 infobox-bg">
+				<div>
+					<span class="font-weight-bold">I don't want to watch the entire video. How close is the simulation to the real game?</span>
+				</div>
+				<hr>
+				<p>This simulator takes all characteristics, properties and attributes of each unit type into consideration, including the following:</p>
+				<ul>
+					<li>Hit points & Hit point regeneration</li>
+					<li>Attack values & Armor classes</li>
+					<li>Attack speed</li>
+					<li>Maximum & minimum attack range</li>
+					<li>Attack (animation) delay</li>
+					<li>Projectile speed</li>
+					<li>Cleave damage (different types and radii)</li>
+					<li>Accuracy</li>
+					<li>Missile flight distance (Scorpions, Ballista elephants)</li>
+					<li>Secondary attack projectiles (Chu ko nu, Kipchak, ...)</li>
+					<li>Movement speed</li>
+					<li>Unit radius (size)</li>
+					<li>Resource costs</li>
+					<li>Name</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-6">
+		</div>
+	</div>
+	<div class="row top-buffer">
+		<div class="col-12">
+			<h1>Other videos I've recorded</h1>
+			<hr>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-6">
+			<div class="border border-dark p-2 infobox-bg">
+				<div>
+					<span class="font-weight-bold">Time units in Age of Empires 2</span>
+				</div>
+				<hr>
+				<div class="embed-responsive embed-responsive-16by9">
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/-XB5m8NZKzg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				</div>
+			</div>
+		</div>
+		<div class="col-6">
+			<div class="border border-dark p-2 infobox-bg">
+				<div>
+					<span class="font-weight-bold">Gold generation in Age of Empies 2</span>
+				</div>
+				<hr>
+				<div class="embed-responsive embed-responsive-16by9">
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/Hll5RwPo6I0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row top-buffer">
+		<div class="col-12">
+			<hr>
+			<p class="text-center">
+				© AoE Combat Simulator 2020 | Made by <a href="https://www.youtube.com/channel/UC5ftS3VE_lzWrHwdEfxlihA">Zukatah</a>
+			</p>
+			<p class="text-center">
+				Age of Empires II DE © Microsoft Corporation. aoestats.io was created under Microsoft's <a href="https://www.xbox.com/en-us/developers/rules">"Game Content Usage Rules"</a> using assets from Age of Empires II DE, and it is not endorsed by or affiliated with Microsoft.
+			</p>
+		</div>
+	</div>
+</div>
+
+
+
+
+
