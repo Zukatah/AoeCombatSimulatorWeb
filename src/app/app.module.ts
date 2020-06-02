@@ -26,8 +26,8 @@ import { InfoComponent } from './info/info.component';
 	HttpClientModule,
 	NgbModule, // why not?!
 	RouterModule.forRoot([
-		{ path: '', component: AoECombatSimulatorComponent },
 		{ path: 'info', component: InfoComponent },
+		{ path: '', component: AoECombatSimulatorComponent },
 		{ path: '**', component: AoECombatSimulatorComponent }
 	])
   ],
