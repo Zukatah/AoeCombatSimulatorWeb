@@ -219,26 +219,34 @@ export class Unit {
 			if (this.cleaveType != 0)
 			{
 				let targetArmy: Unit[] = this.armyIndex == 0 ? this.battle.armies[1] : this.battle.armies[0];
+				// let possibleCleaveTargets: Unit[] = this.cleaveType == 3 ? (this.armyIndex == 0 ? this.battle.armies[1] : this.battle.armies[0]) : this.attackedBy;
 				let affectedTargets: number = 0;
-				let maxTargets: number = 6 + Math.round(5.0 * (this.radius - 0.2)); // infantry cleaves up to 6 units, cavalry up to 7, elephants up to 8 (limit to offset non-existing collision detection)
+				let maxTargets: number = 1; // + Math.round(5.0 * (this.radius - 0.2)); // infantry cleaves up to 1 units, cavalry up to 2, elephants up to 3 (limit to offset non-existing collision detection)
+				let maxBystanderTargets: number = Math.max(0, maxTargets - this.attackedBy.length);
+				let bystandersHit: number = 0;
 				targetArmy.forEach(possibleTarget => {
-					if (possibleTarget != this.target && affectedTargets < maxTargets && (this.x - possibleTarget.x) * (this.x - possibleTarget.x) + (this.y - possibleTarget.y) * (this.y - possibleTarget.y) < (this.cleaveRadius + this.target.radius)* (this.cleaveRadius + this.target.radius))
-					{
-						if (this.cleaveType == 1)
-						{
-							damageDealt = 5.0;
-						}
-						else
-						{
-							damageDealt = Unit.CalculateDamageDealtToTarget(this, possibleTarget);
-							if (this.cleaveType == 2) // cleaveType 2 (elephants) deal 50% area damage; cleaveType 3 (petards, flaming camels) deal 100% area damage
-							{
-								damageDealt *= 0.5;
+					if ((this.x - possibleTarget.x) * (this.x - possibleTarget.x) + (this.y - possibleTarget.y) * (this.y - possibleTarget.y) < (this.cleaveRadius + this.target.radius)* (this.cleaveRadius + this.target.radius)){
+						if (possibleTarget != this.target && (this.attackedBy.includes(possibleTarget) || bystandersHit < maxBystanderTargets || this.cleaveType == 3)){
+							if (!this.attackedBy.includes(possibleTarget)){
+								bystandersHit++;
 							}
-							damageDealt = damageDealt < 1 ? 1 : damageDealt;
+
+							if (this.cleaveType == 1)
+							{
+								damageDealt = 5.0;
+							}
+							else
+							{
+								damageDealt = Unit.CalculateDamageDealtToTarget(this, possibleTarget);
+								if (this.cleaveType == 2) // cleaveType 2 (elephants) deal 50% area damage; cleaveType 3 (petards, flaming camels) deal 100% area damage
+								{
+									damageDealt *= 0.5;
+								}
+								damageDealt = damageDealt < 1 ? 1 : damageDealt;
+							}
+							possibleTarget.curHp -= damageDealt;
+							affectedTargets++;
 						}
-						possibleTarget.curHp -= damageDealt;
-						affectedTargets++;
 					}
 				});
 			}

@@ -120,6 +120,8 @@ export class AoECombatSimulatorComponent {
 			}
 		}
 
+		this.hideUnitTypesWithZeroUnits = true;
+
 		this.startTime = performance.now();
 
 		this.numberOfSimulationsLastRun = this.numberOfSimulations;
