@@ -53,6 +53,8 @@ export class Unit {
 	public index: number; // DEBUG purposes; each unit has a unique index within its army
 	public armyIndex: number; // 0=Army1, 1=Army2
 	public running: boolean = false; // for hit&run calculations
+	public timeSinceFirstTryToAttackTarget: number = 0; // if the target is surrounded by attackers for a longer while, the unit will eventually target a different unit
+	public maxNumberOfAttackers: number; // Max attackers for infantry 4, cav 6, elephants 8
 
 
 	constructor(unitType: UnitType, battle: Battle, armyIndex: number) {
@@ -81,6 +83,7 @@ export class Unit {
 		this.battle = battle;
 		this.curHp = this.hp;
 		this.armyIndex = armyIndex;
+		this.maxNumberOfAttackers = 4.0 + Math.round(10.0 * (this.radius - 0.2)); // Max attackers for infantry 4, cav 6, elephants 8
 	}
 
 
@@ -97,6 +100,28 @@ export class Unit {
 	public SetUnitIndex (index: number): void {
 		this.index = index;
 		// rnd = new Random(index + armyIndex * 1000 + Environment.TickCount); TODO: random generator seed!
+	}
+
+	public ApplyHpReg (): void {
+		this.curHp += this.hpRegPerMin / 6000.0;
+	}
+
+	public CantReachTarget(): boolean{
+		return this.target.attackedBy.indexOf(this) >= this.target.maxNumberOfAttackers;
+	}
+
+	public CheckIfToSwitchTarget(): void{ // this function is not perfectly symmetrical (because P1 units potentially get new targets first which might influence P2 target switches)
+		this.timeSinceFirstTryToAttackTarget++;
+		if(this.attackedBy.length > 0){
+			this.timeSinceFirstTryToAttackTarget = 0;
+			this.target.attackedBy.splice(this.target.attackedBy.indexOf(this), 1);
+			this.target = this.attackedBy[Math.floor(Math.random() * this.attackedBy.length)];
+			this.target.attackedBy.push(this);
+		}
+		else if (this.timeSinceFirstTryToAttackTarget > 200){
+			this.target.attackedBy.splice(this.target.attackedBy.indexOf(this), 1);
+			this.target = null;
+		}
 	}
 
 	public TargetWithinAttackRange(): boolean {
@@ -175,6 +200,7 @@ export class Unit {
 		this.inAttackMotion = true;
 		this.attackAnimDur = 0;
 		this.attackCd = this.attackSpeed;
+		this.timeSinceFirstTryToAttackTarget = 0;
 	}
 
 	public AttackAnimationFinished(): boolean {

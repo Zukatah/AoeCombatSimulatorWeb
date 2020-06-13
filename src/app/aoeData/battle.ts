@@ -169,8 +169,7 @@ export class Battle
 			this.armies[0].concat(this.armies[1]).forEach(unit =>
 			{
 				unit.EnsureHasTarget(); // first thing to ensure: each unit must have a target
-
-				unit.curHp += unit.hpRegPerMin / 6000.0;
+				unit.ApplyHpReg(); // apply hp regeneration (currently only affects berserks and camel archers)
 
 				if (!unit.inAttackMotion) // if a unit is not currently in attack motion, we consider things like moving towards or away from its target or starting an attack
 				{
@@ -188,7 +187,13 @@ export class Battle
 						{
 							if (unit.AttackCdReady()) // if the target is neither too far away or too close, we check whether the unit's attack cd is ready
 							{
-								unit.StartAttackAnimation(); // attack the target, if the attack cd is ready
+								if (unit.CantReachTarget()){
+									unit.CheckIfToSwitchTarget();
+								}
+								else{
+									unit.StartAttackAnimation(); // attack the target, if the attack cd is ready
+								}
+								
 							}
 							else
 							{
