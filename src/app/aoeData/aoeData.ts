@@ -83,7 +83,7 @@ export abstract class AoeData
 	public static ut_imperialSkirmisher: UnitType = new UnitType("Imperial Skirmisher", 42, 3.05, 8.0, 0.51, 7.0, 0.96, 25, 35, 0, 0.2, 1.0);
 
 	public static ut_eliteKonnik: UnitType = new UnitType("Elite Konnik", 140, 1.8, 0.0, 0.7, Number.MAX_VALUE, 1.485, 60, 0, 70, 0.4);
-	public static ut_eliteKonnikDismounted: UnitType = new UnitType("Elite Konnik (Foot)", 50, 1.8, 0.0, 0.7, Number.MAX_VALUE, 0.99, 0, 0, 0);
+	public static ut_eliteKonnikDismounted: UnitType = new UnitType("Elite Konnik (Foot)", 50, 1.8, 0.0, 0.7, Number.MAX_VALUE, 0.99, 30, 0, 35);
 	public static ut_eliteKipchak: UnitType = new UnitType("Elite Kipchak", 65, 1.98, 6.0, 0.0, 7.0, 1.54, 0, 60, 35, 0.4);
 	public static ut_eliteLeitis: UnitType = new UnitType("Elite Leitis", 150, 1.9, 0.0, 0.7, Number.MAX_VALUE, 1.54, 70, 0, 50, 0.4);
 	public static ut_eliteKeshik: UnitType = new UnitType("Elite Keshik", 160, 1.9, 0.0, 0.7, Number.MAX_VALUE, 1.54, 50, 0, 40, 0.4);

@@ -22,7 +22,7 @@ export class PlayerComponent implements OnInit, DoCheck{
 	ngDoCheck(){
 		let changes = this.iterableDiffer.diff(this.player.amountStartUnits);
 		if (changes) {
-			this.player.CalculateResourcesInvested();
+			this.simulator.CalcResInvForPlayer(this.player);
 		}
 	}
 

@@ -121,6 +121,8 @@ export class Unit {
 		else if (this.timeSinceFirstTryToAttackTarget > 200){
 			this.target.attackedBy.splice(this.target.attackedBy.indexOf(this), 1);
 			this.target = null;
+			this.timeSinceFirstTryToAttackTarget = 0;
+			this.EnsureHasTarget();
 		}
 	}
 

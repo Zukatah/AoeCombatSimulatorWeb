@@ -1,0 +1,22 @@
+<div class="container">
+	<div class="row top-buffer">
+		<div class="col-12 text-center border border-dark rounded p-2 matrix-bg">
+			<div class="row no-gutters">
+				<table class="table table-sm table-dark">
+					<thead>
+						<tr>
+							<th style="width: 1%" scope="col"></th>
+							<th style="width: 1%" *ngFor="let ut of uts" scope="col">{{ut.name}}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let ut of uts; index as i">
+							<td>{{ut.name}}</td>
+							<td *ngFor="let ut2 of uts; index as j" [style.background-color]="getSurvivorsColor(combatresults[i][j])">{{combatresults[i][j] | number : '1.0-2'}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

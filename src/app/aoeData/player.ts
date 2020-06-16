@@ -4,7 +4,7 @@ import { AoECombatSimulatorComponent } from "./../aoeCombatSimulator/aoeCombatSi
 import { AoeData } from "./aoeData";
 
 export class Player{
-	public userInterface: AoECombatSimulatorComponent; // a reference to the user interface instance to which this player's gui elements will be added
+	// public userInterface: AoECombatSimulatorComponent; // a reference to the user interface instance to which this player's gui elements will be added
 	public sumWins: number = 0; // number of battle wins (actually win = 2 points, draw = 1 point)
 	public attackAttacker: number = 0; // DEBUG purposes
 	public attackRandomNearbyTarget: number = 0; // DEBUG purposes
@@ -38,7 +38,7 @@ export class Player{
 	public uts: UnitType[] = AoeData.unitTypesList;
 	public playerColor: Color; // Player GUI //
 
-	public constructor(playerColor: Color, userInterface: AoECombatSimulatorComponent, playerIndex: number)
+	public constructor(playerColor: Color, playerIndex: number)
 	{
 		AoeData.unitTypesList.forEach(ut => {
 			this.survivorsSumArmy.set(ut, 0);
@@ -48,7 +48,6 @@ export class Player{
 			this.avgSurvivorsColor.push(new Color(128, 128, 128));
 		});
 		this.playerColor = playerColor;
-		this.userInterface = userInterface;
 		this.playerIndex = playerIndex;
 	}
 
@@ -66,7 +65,7 @@ export class Player{
 		AoeData.unitTypesList.forEach(ut => { this.survivorsSumArmy.set(ut, 0); });
 	}
 
-	public CalculateResourcesInvested(): void{
+	public CalculateResourcesInvested(resourceValuesFactors: number[]): void{
 		this.populationInvested = 0;
 		this.resourcesInvestedTotal = 0;
 		for (let k: number = 0; k < 3; k++)
@@ -79,7 +78,7 @@ export class Player{
 					this.populationInvested += AoeData.unitTypesList[j] == AoeData.ut_eliteKarambitWarrior ? this.amountStartUnits[j] * 0.5 : this.amountStartUnits[j];
 				}
 			}
-			this.resourcesInvestedTotal += this.resourcesInvested[k] * this.userInterface.resourceValuesFactors[this.userInterface.resourceValue][k];
+			this.resourcesInvestedTotal += this.resourcesInvested[k] * resourceValuesFactors[k];
 		}
 	}
 }

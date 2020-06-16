@@ -18,7 +18,7 @@ export class AoECombatSimulatorComponent {
 	public resourceValues: string[] = ["100F=100W=100G", "100F=100W=66,6G", "100F=100W=17G"];
 	public resourceValuesFactors: number[][] = [[1, 1, 1], [1, 1, 1.5], [1, 1, 5.88235]];
 
-	public players: Player[] = [new Player(new Color(0, 0, 128), this, 0), new Player(new Color(0, 0, 128), this, 1)];
+	public players: Player[] = [new Player(new Color(0, 0, 128), 0), new Player(new Color(0, 0, 128), 1)];
 	public numberOfSimulations: number = 20;
 	public numberOfSimulationsLastRun = this.numberOfSimulations;
 	public startTime: number;
@@ -98,9 +98,13 @@ export class AoECombatSimulatorComponent {
 	public SetRV(mode: number){
 		this.resourceValue = mode;
 		for (let i: number = 0; i < 2; i++){
-			this.players[i].CalculateResourcesInvested();
+			this.players[i].CalculateResourcesInvested(this.resourceValuesFactors[this.resourceValue]);
 		}
 		this.CalculateWeightedSum();
+	}
+
+	public CalcResInvForPlayer(player: Player): void{
+		this.players[player.playerIndex].CalculateResourcesInvested(this.resourceValuesFactors[this.resourceValue]);
 	}
 
 	public Bt_fight_Click(): void
@@ -132,7 +136,7 @@ export class AoECombatSimulatorComponent {
 	}
 
 	public CreateBattles(){
-		new Battle(this, 0, this.calculatedSimulationsSoFar, this.hitAndRunMode);
+		new Battle(0, this.calculatedSimulationsSoFar, this.hitAndRunMode, this.players);
 		this.calculatedSimulationsSoFar++;
 		if (this.numberOfSimulations > this.calculatedSimulationsSoFar){
 			setTimeout(this.CreateBattles.bind(this), 0);

@@ -4,11 +4,13 @@ import { Missile } from "./missile";
 import { AoeData } from "./aoeData";
 import { ExtensionMethods } from "./extensionMethods";
 import { AoECombatSimulatorComponent } from "./../aoeCombatSimulator/aoeCombatSimulator.component";
+import { Player } from './player';
 
 
 export class Battle
 {
-	private userInterface: AoECombatSimulatorComponent; // a reference to the user interface instance to which this battle's results will be reported
+	//private userInterface: AoECombatSimulatorComponent; // a reference to the user interface instance to which this battle's results will be reported
+	private players: Player[];
 	public hitAndRunMode: number; // 0 => no hit&run (except target too close for units with min range), 1 => hit&run with 50% efficiency, 2 => maximum hit&run possible
 	
 	public armies: Unit[][]  = [[], []]; // the armies of both players
@@ -23,9 +25,9 @@ export class Battle
 	public resourcesGenerated: number[][]  = [[0, 0, 0], [0, 0, 0]]; // currently only relevant for the Keshik gold generation
 
 
-	constructor(userInterface: AoECombatSimulatorComponent, taskId: number, battleId: number, hitAndRunMode: number)
+	constructor(taskId: number, battleId: number, hitAndRunMode: number, players: Player[])
 	{
-		this.userInterface = userInterface;
+		this.players = players;
 		this.hitAndRunMode = hitAndRunMode;
 		// rnd = new Random(taskId * Environment.ProcessorCount + battleId + Environment.TickCount);
 
@@ -61,12 +63,12 @@ export class Battle
 			for (let j: number = 0; j < AoeData.unitTypesList.length; j++)
 			{
 				if (AoeData.unitTypesList[j].attackRange <= 1.0){
-					army_SizeMelee[i] += this.userInterface.players[i].amountStartUnits[j];
+					army_SizeMelee[i] += this.players[i].amountStartUnits[j];
 				}
 				else{
-					army_SizeRanged[i] += this.userInterface.players[i].amountStartUnits[j];
+					army_SizeRanged[i] += this.players[i].amountStartUnits[j];
 				}
-				for (let k: number = 0; k < this.userInterface.players[i].amountStartUnits[j]; k++)
+				for (let k: number = 0; k < this.players[i].amountStartUnits[j]; k++)
 				{
 					this.armies[i].push(new Unit(AoeData.unitTypesList[j], this, i));
 				}
@@ -118,9 +120,9 @@ export class Battle
 					}
 				}
 				utSurvivorsArmy = tempCount;
-				this.userInterface.players[i].survivorsSumArmy.set(ut, this.userInterface.players[i].survivorsSumArmy.get(ut) + utSurvivorsArmy);
+				this.players[i].survivorsSumArmy.set(ut, this.players[i].survivorsSumArmy.get(ut) + utSurvivorsArmy);
 			});
-			this.userInterface.players[i].resourcesGenerated[2] += Math.round(this.resourcesGenerated[i][2]);
+			this.players[i].resourcesGenerated[2] += Math.round(this.resourcesGenerated[i][2]);
 		}
 	}
 
@@ -128,16 +130,16 @@ export class Battle
 	{
 		if (this.armies[0].length > this.armies[1].length)
 		{
-			this.userInterface.players[0].sumWins += 1;
+			this.players[0].sumWins += 1;
 		}
 		else if (this.armies[0].length == this.armies[1].length)
 		{
-			this.userInterface.players[0].sumWins += 0.5;
-			this.userInterface.players[1].sumWins += 0.5;
+			this.players[0].sumWins += 0.5;
+			this.players[1].sumWins += 0.5;
 		}
 		else
 		{
-			this.userInterface.players[1].sumWins += 1;
+			this.players[1].sumWins += 1;
 		}
 	}
 
@@ -149,6 +151,11 @@ export class Battle
 				dyingUnit.target.attackedBy.splice(dyingUnit.target.attackedBy.indexOf(dyingUnit, 0), 1);
 				dyingUnit.alive = false;
 				this.gridUnits[dyingUnit.gx][dyingUnit.gy].delete(dyingUnit);
+				if (dyingUnit.unitType == AoeData.ut_eliteKonnik){
+					let dismountedKonnik: Unit = new Unit(AoeData.ut_eliteKonnikDismounted, this, i);
+					this.armies[i].push(dismountedKonnik);
+					dismountedKonnik.SetXYInitial(dyingUnit.x, dyingUnit.y);
+				}
 			});
 			this.graveyard.push(...this.armies[i].filter(unit => unit.curHp <= 0.001));
 			let remainingUnits: Unit[] = this.armies[i].filter(unit => unit.curHp > 0.001);

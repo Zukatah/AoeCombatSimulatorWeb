@@ -11,6 +11,7 @@ import { PlayerComponent } from './player/player.component';
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { NavbarComponent } from './navbar/navbar.component';
 import { InfoComponent } from './info/info.component';
+import { MatrixComponent } from './matrix/matrix.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { InfoComponent } from './info/info.component';
     AoECombatSimulatorComponent,
     PlayerComponent,
     NavbarComponent,
-    InfoComponent
+    InfoComponent,
+    MatrixComponent
   ],
   imports: [ 
     BrowserModule,
@@ -27,6 +29,7 @@ import { InfoComponent } from './info/info.component';
 	NgbModule, // why not?!
 	RouterModule.forRoot([
 		{ path: 'info', component: InfoComponent },
+		{ path: 'matrix', component: MatrixComponent },
 		{ path: '', component: AoECombatSimulatorComponent },
 		{ path: '**', component: AoECombatSimulatorComponent }
 	])
