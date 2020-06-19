@@ -16,6 +16,9 @@ export class Color{
 	}
 
 	public GetAsHex(): string{
-		return "#" + (this.r == 0 ? "00" : this.r.toString(16)) + (this.g == 0 ? "00" : this.g.toString(16)) + (this.b == 0 ? "00" : this.b.toString(16));
+		return "#"
+		+ (this.r.toString(16).length == 1 ? ("0" + this.r.toString(16)) : this.r.toString(16))
+		+ (this.g.toString(16).length == 1 ? ("0" + this.g.toString(16)) : this.g.toString(16))
+		+ (this.b.toString(16).length == 1 ? ("0" + this.b.toString(16)) : this.b.toString(16));
 	}
 }

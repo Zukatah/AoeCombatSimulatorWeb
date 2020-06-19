@@ -107,18 +107,20 @@ export class Unit {
 	}
 
 	public CantReachTarget(): boolean{
-		return this.target.attackedBy.indexOf(this) >= this.target.maxNumberOfAttackers;
+		return this.target.attackedBy.indexOf(this) >= this.target.maxNumberOfAttackers && this.attackRange <= 1.0; // ranged units can always "reach" their target
 	}
 
 	public CheckIfToSwitchTarget(): void{ // this function is not perfectly symmetrical (because P1 units potentially get new targets first which might influence P2 target switches)
 		this.timeSinceFirstTryToAttackTarget++;
 		if(this.attackedBy.length > 0){
+			// console.log("Change target (attacker). AI: " + this.armyIndex + ". UI: " + this.index + ". Ms: " + this.battle.timeInterval);
 			this.timeSinceFirstTryToAttackTarget = 0;
 			this.target.attackedBy.splice(this.target.attackedBy.indexOf(this), 1);
 			this.target = this.attackedBy[Math.floor(Math.random() * this.attackedBy.length)];
 			this.target.attackedBy.push(this);
 		}
 		else if (this.timeSinceFirstTryToAttackTarget > 200){
+			// console.log("Change target (2 secs). AI: " + this.armyIndex + ". UI: " + this.index + ". Ms: " + this.battle.timeInterval);
 			this.target.attackedBy.splice(this.target.attackedBy.indexOf(this), 1);
 			this.target = null;
 			this.timeSinceFirstTryToAttackTarget = 0;
@@ -145,7 +147,7 @@ export class Unit {
 		dlength = (dlength == 0.0 ? 1.0 : dlength);
 		dx /= dlength;
 		dy /= dlength;
-		let speedAfterBumpReduction: number = this.target.attackedBy[0] == this ? this.moveSpeed * 0.01 : this.moveSpeed * 0.01 / Math.pow(this.target.attackedBy.length, 0.2); // 54
+		let speedAfterBumpReduction: number = this.target.attackedBy[0] == this ? this.moveSpeed * 0.01 : this.moveSpeed * 0.01 / Math.pow(this.target.attackedBy.length, 0.15); // 54
 		//if (speedAfterBumpReduction == NaN ||  !Number.isFinite(speedAfterBumpReduction)){
 		//	console.log("Error at speed calculation");
 		//}
@@ -157,18 +159,20 @@ export class Unit {
 		let dx: number = this.x - this.target.x;
 		let dy: number = this.y - this.target.y;
 		let dlength: number = Math.sqrt(dx * dx + dy * dy);
+		let numberOfCloseUnits = Math.max(this.battle.gridUnits[this.gx][this.gy].size - 1, 1);
+		let slowFactor = 1.0 / numberOfCloseUnits;
 		dlength = dlength == 0.0 ? 1.0 : dlength;
 		dx /= dlength;
 		dy /= dlength;
-		if (dlength + this.moveSpeed * 0.01 > this.attackRange)
+		if (dlength + this.moveSpeed * 0.01 * slowFactor > this.attackRange)
 		{
 			this.nx = this.target.x + this.attackRange * dx;
 			this.ny = this.target.y + this.attackRange * dy;
 		}
 		else
 		{
-			this.nx = this.x + this.moveSpeed * 0.01 * dx;
-			this.ny = this.y + this.moveSpeed * 0.01 * dy;
+			this.nx = this.x + this.moveSpeed * 0.01 * dx * slowFactor;
+			this.ny = this.y + this.moveSpeed * 0.01 * dy * slowFactor;
 		}
 		this.nx = this.nx > 120 ? 120.0 : (this.nx < -120.0 ? -120.0 : this.nx);
 		this.ny = this.ny > 120 ? 120.0 : (this.ny < -120.0 ? -120.0 : this.ny);

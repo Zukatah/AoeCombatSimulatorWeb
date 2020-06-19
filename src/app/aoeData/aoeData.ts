@@ -114,12 +114,14 @@ export abstract class AoeData
 		AoeData.ut_villager.armorClasses.set(AoeData.ac_baseMelee, 1);
 		AoeData.ut_villager.armorClasses.set(AoeData.ac_basePierce, 2);
 		AoeData.ut_villager.attackValues.set(AoeData.ac_baseMelee, 3);
+		AoeData.ut_villager.imagePath = "assets/unitTypes/MaleVillDE.jpg";
 
 		AoeData.ut_champion.armorClasses.set(AoeData.ac_infantry, 0);
 		AoeData.ut_champion.armorClasses.set(AoeData.ac_baseMelee, 4);
 		AoeData.ut_champion.armorClasses.set(AoeData.ac_basePierce, 5);
 		AoeData.ut_champion.attackValues.set(AoeData.ac_eagleWarrior, 8);
 		AoeData.ut_champion.attackValues.set(AoeData.ac_baseMelee, 17);
+		AoeData.ut_champion.imagePath = "assets/unitTypes/Champion_aoe2DE.png";
 
 		AoeData.ut_halberdier.armorClasses.set(AoeData.ac_infantry, 0);
 		AoeData.ut_halberdier.armorClasses.set(AoeData.ac_spearman, 0);
@@ -131,6 +133,7 @@ export abstract class AoeData
 		AoeData.ut_halberdier.attackValues.set(AoeData.ac_mameluke, 11);
 		AoeData.ut_halberdier.attackValues.set(AoeData.ac_eagleWarrior, 1);
 		AoeData.ut_halberdier.attackValues.set(AoeData.ac_baseMelee, 10);
+		AoeData.ut_halberdier.imagePath = "assets/unitTypes/Halberdier_aoe2DE.png";
 
 		AoeData.ut_eliteEagleWarrior.armorClasses.set(AoeData.ac_infantry, 0);
 		AoeData.ut_eliteEagleWarrior.armorClasses.set(AoeData.ac_eagleWarrior, 0);
@@ -140,16 +143,20 @@ export abstract class AoeData
 		AoeData.ut_eliteEagleWarrior.attackValues.set(AoeData.ac_cavalry, 4);
 		AoeData.ut_eliteEagleWarrior.attackValues.set(AoeData.ac_camel, 3);
 		AoeData.ut_eliteEagleWarrior.attackValues.set(AoeData.ac_baseMelee, 13);
+		AoeData.ut_eliteEagleWarrior.imagePath = "assets/unitTypes/Eliteeaglewarrior_aoe2DE.png";
 
 		AoeData.ut_hussar.armorClasses.set(AoeData.ac_baseMelee, 3);
 		AoeData.ut_hussar.armorClasses.set(AoeData.ac_basePierce, 6);
 		AoeData.ut_hussar.armorClasses.set(AoeData.ac_cavalry, 0);
 		AoeData.ut_hussar.attackValues.set(AoeData.ac_baseMelee, 11);
+		AoeData.ut_hussar.imagePath = "assets/unitTypes/Hussar_aoe2DE.png";
+		
 
 		AoeData.ut_paladin.armorClasses.set(AoeData.ac_baseMelee, 5);
 		AoeData.ut_paladin.armorClasses.set(AoeData.ac_basePierce, 7);
 		AoeData.ut_paladin.armorClasses.set(AoeData.ac_cavalry, 0);
 		AoeData.ut_paladin.attackValues.set(AoeData.ac_baseMelee, 18);
+		AoeData.ut_paladin.imagePath = "assets/unitTypes/Paladin_aoe2DE.png";
 
 		AoeData.ut_heavyCamelRider.armorClasses.set(AoeData.ac_baseMelee, 3);
 		AoeData.ut_heavyCamelRider.armorClasses.set(AoeData.ac_basePierce, 4);
@@ -158,6 +165,7 @@ export abstract class AoeData
 		AoeData.ut_heavyCamelRider.attackValues.set(AoeData.ac_cavalry, 18);
 		AoeData.ut_heavyCamelRider.attackValues.set(AoeData.ac_camel, 9);
 		AoeData.ut_heavyCamelRider.attackValues.set(AoeData.ac_mameluke, 7);
+		AoeData.ut_heavyCamelRider.imagePath = "assets/unitTypes/Aoe2_heavycamelriderDE.png";
 
 		AoeData.ut_eliteBattleElephant.armorClasses.set(AoeData.ac_baseMelee, 4);
 		AoeData.ut_eliteBattleElephant.armorClasses.set(AoeData.ac_basePierce, 7);
@@ -166,17 +174,20 @@ export abstract class AoeData
 		AoeData.ut_eliteBattleElephant.attackValues.set(AoeData.ac_baseMelee, 18);
 		AoeData.ut_eliteBattleElephant.cleaveType = 2;
 		AoeData.ut_eliteBattleElephant.cleaveRadius = 0.4;
+		AoeData.ut_eliteBattleElephant.imagePath = "assets/unitTypes/Elite_battle_elephant_aoe2DE.png";
 
 		AoeData.ut_eliteSteppeLancer.armorClasses.set(AoeData.ac_baseMelee, 3);
 		AoeData.ut_eliteSteppeLancer.armorClasses.set(AoeData.ac_basePierce, 5);
 		AoeData.ut_eliteSteppeLancer.armorClasses.set(AoeData.ac_cavalry, 0);
 		AoeData.ut_eliteSteppeLancer.attackValues.set(AoeData.ac_baseMelee, 15);
+		AoeData.ut_eliteSteppeLancer.imagePath = "assets/unitTypes/Elitesteppelancericon.png";
 
 		AoeData.ut_arbalester.armorClasses.set(AoeData.ac_baseMelee, 3);
 		AoeData.ut_arbalester.armorClasses.set(AoeData.ac_basePierce, 4);
 		AoeData.ut_arbalester.armorClasses.set(AoeData.ac_archer, 0);
 		AoeData.ut_arbalester.attackValues.set(AoeData.ac_basePierce, 10);
 		AoeData.ut_arbalester.attackValues.set(AoeData.ac_spearman, 3);
+		AoeData.ut_arbalester.imagePath = "assets/unitTypes/Arbalester_aoe2DE.png";
 
 		AoeData.ut_eliteSkirmisher.armorClasses.set(AoeData.ac_baseMelee, 3);
 		AoeData.ut_eliteSkirmisher.armorClasses.set(AoeData.ac_basePierce, 8);
@@ -185,6 +196,7 @@ export abstract class AoeData
 		AoeData.ut_eliteSkirmisher.attackValues.set(AoeData.ac_archer, 4);
 		AoeData.ut_eliteSkirmisher.attackValues.set(AoeData.ac_spearman, 3);
 		AoeData.ut_eliteSkirmisher.attackValues.set(AoeData.ac_cavalryArcher, 2);
+		AoeData.ut_eliteSkirmisher.imagePath = "assets/unitTypes/Elite_skirmisher_aoe2DE.png";
 
 		AoeData.ut_heavyCavalryArcher.armorClasses.set(AoeData.ac_baseMelee, 5);
 		AoeData.ut_heavyCavalryArcher.armorClasses.set(AoeData.ac_basePierce, 6);
@@ -193,6 +205,7 @@ export abstract class AoeData
 		AoeData.ut_heavyCavalryArcher.armorClasses.set(AoeData.ac_cavalry, 0);
 		AoeData.ut_heavyCavalryArcher.attackValues.set(AoeData.ac_basePierce, 11);
 		AoeData.ut_heavyCavalryArcher.attackValues.set(AoeData.ac_spearman, 6);
+		AoeData.ut_heavyCavalryArcher.imagePath = "assets/unitTypes/Heavycavalryarcher_aoe2de.png";
 
 		AoeData.ut_handCannoneer.armorClasses.set(AoeData.ac_baseMelee, 4);
 		AoeData.ut_handCannoneer.armorClasses.set(AoeData.ac_basePierce, 4);
@@ -202,6 +215,7 @@ export abstract class AoeData
 		AoeData.ut_handCannoneer.attackValues.set(AoeData.ac_infantry, 10);
 		AoeData.ut_handCannoneer.attackValues.set(AoeData.ac_ram, 2);
 		AoeData.ut_handCannoneer.attackValues.set(AoeData.ac_spearman, 1);
+		AoeData.ut_handCannoneer.imagePath = "assets/unitTypes/Hand_cannoneer_aoe2DE.png";
 
 		AoeData.ut_siegeRam.armorClasses.set(AoeData.ac_baseMelee, -3);
 		AoeData.ut_siegeRam.armorClasses.set(AoeData.ac_basePierce, 195);
@@ -209,6 +223,7 @@ export abstract class AoeData
 		AoeData.ut_siegeRam.armorClasses.set(AoeData.ac_ram, 2);
 		AoeData.ut_siegeRam.attackValues.set(AoeData.ac_baseMelee, 4);
 		AoeData.ut_siegeRam.attackValues.set(AoeData.ac_siegeWeapon, 65);
+		AoeData.ut_siegeRam.imagePath = "assets/unitTypes/Siege_ram_aoe2DE.png";
 
 		AoeData.ut_heavyScorpion.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_heavyScorpion.armorClasses.set(AoeData.ac_basePierce, 7);
@@ -219,6 +234,7 @@ export abstract class AoeData
 		AoeData.ut_heavyScorpion.attackValues.set(AoeData.ac_ram, 2);
 		AoeData.ut_heavyScorpion.attackIsMissile = true;
 		AoeData.ut_heavyScorpion.missileFlightDistance = 10.5; // scorpion missiles are always flying over a distance of 10.5 tiles, even if their attack range is only 8 tiles
+		AoeData.ut_heavyScorpion.imagePath = "assets/unitTypes/Heavyscorpion_aoe2DE.png";
 
 		AoeData.ut_eliteLongbowman.armorClasses.set(AoeData.ac_baseMelee, 3);
 		AoeData.ut_eliteLongbowman.armorClasses.set(AoeData.ac_basePierce, 5);
@@ -226,6 +242,7 @@ export abstract class AoeData
 		AoeData.ut_eliteLongbowman.armorClasses.set(AoeData.ac_uniqueUnit, 0);
 		AoeData.ut_eliteLongbowman.attackValues.set(AoeData.ac_basePierce, 11);
 		AoeData.ut_eliteLongbowman.attackValues.set(AoeData.ac_spearman, 2);
+		AoeData.ut_eliteLongbowman.imagePath = "assets/unitTypes/LongbowmanIcon-DE.png";
 
 		AoeData.ut_eliteCataphract.armorClasses.set(AoeData.ac_baseMelee, 5);
 		AoeData.ut_eliteCataphract.armorClasses.set(AoeData.ac_basePierce, 5);
@@ -236,6 +253,7 @@ export abstract class AoeData
 		AoeData.ut_eliteCataphract.attackValues.set(AoeData.ac_condottiero, 10);
 		AoeData.ut_eliteCataphract.cleaveType = 1;
 		AoeData.ut_eliteCataphract.cleaveRadius = 0.4;
+		AoeData.ut_eliteCataphract.imagePath = "assets/unitTypes/CataphractIcon-DE.png";
 
 		AoeData.ut_eliteWoadRaider.armorClasses.set(AoeData.ac_baseMelee, 3);
 		AoeData.ut_eliteWoadRaider.armorClasses.set(AoeData.ac_basePierce, 5);
@@ -243,6 +261,7 @@ export abstract class AoeData
 		AoeData.ut_eliteWoadRaider.armorClasses.set(AoeData.ac_uniqueUnit, 0);
 		AoeData.ut_eliteWoadRaider.attackValues.set(AoeData.ac_baseMelee, 17);
 		AoeData.ut_eliteWoadRaider.attackValues.set(AoeData.ac_eagleWarrior, 3);
+		AoeData.ut_eliteWoadRaider.imagePath = "assets/unitTypes/WoadRaiderIcon-DE.png";
 
 		AoeData.ut_eliteChuKoNu.armorClasses.set(AoeData.ac_baseMelee, 3);
 		AoeData.ut_eliteChuKoNu.armorClasses.set(AoeData.ac_basePierce, 4);
@@ -255,6 +274,7 @@ export abstract class AoeData
 		AoeData.ut_eliteChuKoNu.secondaryAttackValues = new Map();
 		AoeData.ut_eliteChuKoNu.secondaryAttackValues.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_eliteChuKoNu.secondaryAttackValues.set(AoeData.ac_basePierce, 3);
+		AoeData.ut_eliteChuKoNu.imagePath = "assets/unitTypes/ChukoNuIcon-DE.png";
 
 		AoeData.ut_eliteThrowingAxeman.armorClasses.set(AoeData.ac_baseMelee, 4);
 		AoeData.ut_eliteThrowingAxeman.armorClasses.set(AoeData.ac_basePierce, 4);
@@ -262,6 +282,7 @@ export abstract class AoeData
 		AoeData.ut_eliteThrowingAxeman.armorClasses.set(AoeData.ac_uniqueUnit, 0);
 		AoeData.ut_eliteThrowingAxeman.attackValues.set(AoeData.ac_baseMelee, 12);
 		AoeData.ut_eliteThrowingAxeman.attackValues.set(AoeData.ac_eagleWarrior, 2);
+		AoeData.ut_eliteThrowingAxeman.imagePath = "assets/unitTypes/ThrowingAxemanIcon-DE.png";
 
 		AoeData.ut_eliteHuskarl.armorClasses.set(AoeData.ac_baseMelee, 2);
 		AoeData.ut_eliteHuskarl.armorClasses.set(AoeData.ac_basePierce, 10);
@@ -270,6 +291,7 @@ export abstract class AoeData
 		AoeData.ut_eliteHuskarl.attackValues.set(AoeData.ac_baseMelee, 16);
 		AoeData.ut_eliteHuskarl.attackValues.set(AoeData.ac_eagleWarrior, 3);
 		AoeData.ut_eliteHuskarl.attackValues.set(AoeData.ac_archer, 10);
+		AoeData.ut_eliteHuskarl.imagePath = "assets/unitTypes/HuskarlIcon-DE.png";
 
 		AoeData.ut_eliteSamurai.armorClasses.set(AoeData.ac_baseMelee, 4);
 		AoeData.ut_eliteSamurai.armorClasses.set(AoeData.ac_basePierce, 5);
@@ -278,6 +300,7 @@ export abstract class AoeData
 		AoeData.ut_eliteSamurai.attackValues.set(AoeData.ac_baseMelee, 16);
 		AoeData.ut_eliteSamurai.attackValues.set(AoeData.ac_eagleWarrior, 3);
 		AoeData.ut_eliteSamurai.attackValues.set(AoeData.ac_uniqueUnit, 12);
+		AoeData.ut_eliteSamurai.imagePath = "assets/unitTypes/SamuraiIcon-DE.png";
 
 		AoeData.ut_eliteMangudai.armorClasses.set(AoeData.ac_baseMelee, 4);
 		AoeData.ut_eliteMangudai.armorClasses.set(AoeData.ac_basePierce, 4);
@@ -288,6 +311,7 @@ export abstract class AoeData
 		AoeData.ut_eliteMangudai.attackValues.set(AoeData.ac_basePierce, 12);
 		AoeData.ut_eliteMangudai.attackValues.set(AoeData.ac_spearman, 3);
 		AoeData.ut_eliteMangudai.attackValues.set(AoeData.ac_siegeWeapon, 5);
+		AoeData.ut_eliteMangudai.imagePath = "assets/unitTypes/MangudaiIcon-DE.png";
 
 		AoeData.ut_eliteWarElephant.armorClasses.set(AoeData.ac_baseMelee, 4);
 		AoeData.ut_eliteWarElephant.armorClasses.set(AoeData.ac_basePierce, 7);
@@ -297,6 +321,7 @@ export abstract class AoeData
 		AoeData.ut_eliteWarElephant.attackValues.set(AoeData.ac_baseMelee, 24);
 		AoeData.ut_eliteWarElephant.cleaveType = 2;
 		AoeData.ut_eliteWarElephant.cleaveRadius = 0.5;
+		AoeData.ut_eliteWarElephant.imagePath = "assets/unitTypes/WarElephantIcon-DE.png";
 
 		AoeData.ut_eliteMameluke.armorClasses.set(AoeData.ac_baseMelee, 4);
 		AoeData.ut_eliteMameluke.armorClasses.set(AoeData.ac_basePierce, 4);
@@ -307,6 +332,7 @@ export abstract class AoeData
 		AoeData.ut_eliteMameluke.attackValues.set(AoeData.ac_baseMelee, 14);
 		AoeData.ut_eliteMameluke.attackValues.set(AoeData.ac_cavalry, 12);
 		AoeData.ut_eliteMameluke.attackValues.set(AoeData.ac_mameluke, 1);
+		AoeData.ut_eliteMameluke.imagePath = "assets/unitTypes/MamelukeIcon-DE.png";
 
 		AoeData.ut_eliteTeutonicKnight.armorClasses.set(AoeData.ac_baseMelee, 13);
 		AoeData.ut_eliteTeutonicKnight.armorClasses.set(AoeData.ac_basePierce, 6);
@@ -314,6 +340,7 @@ export abstract class AoeData
 		AoeData.ut_eliteTeutonicKnight.armorClasses.set(AoeData.ac_uniqueUnit, 0);
 		AoeData.ut_eliteTeutonicKnight.attackValues.set(AoeData.ac_baseMelee, 21);
 		AoeData.ut_eliteTeutonicKnight.attackValues.set(AoeData.ac_eagleWarrior, 4);
+		AoeData.ut_eliteTeutonicKnight.imagePath = "assets/unitTypes/TeutonicKnightIcon-DE.png";
 
 		AoeData.ut_eliteJanissary.armorClasses.set(AoeData.ac_baseMelee, 5);
 		AoeData.ut_eliteJanissary.armorClasses.set(AoeData.ac_basePierce, 4);
@@ -322,6 +349,7 @@ export abstract class AoeData
 		AoeData.ut_eliteJanissary.armorClasses.set(AoeData.ac_uniqueUnit, 0);
 		AoeData.ut_eliteJanissary.attackValues.set(AoeData.ac_basePierce, 22);
 		AoeData.ut_eliteJanissary.attackValues.set(AoeData.ac_ram, 3);
+		AoeData.ut_eliteJanissary.imagePath = "assets/unitTypes/JanissaryIcon-DE.png";
 
 		AoeData.ut_eliteBerserk.armorClasses.set(AoeData.ac_baseMelee, 5);
 		AoeData.ut_eliteBerserk.armorClasses.set(AoeData.ac_basePierce, 5);
@@ -331,6 +359,7 @@ export abstract class AoeData
 		AoeData.ut_eliteBerserk.attackValues.set(AoeData.ac_eagleWarrior, 3);
 		AoeData.ut_eliteBerserk.attackValues.set(AoeData.ac_cavalry, 5);
 		AoeData.ut_eliteBerserk.attackValues.set(AoeData.ac_camel, 4);
+		AoeData.ut_eliteBerserk.imagePath = "assets/unitTypes/BerserkIcon-DE.png";
 
 		AoeData.ut_eliteJaguarWarrior.armorClasses.set(AoeData.ac_baseMelee, 5);
 		AoeData.ut_eliteJaguarWarrior.armorClasses.set(AoeData.ac_basePierce, 5);

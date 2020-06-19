@@ -3,3 +3,17 @@
 .matrix-bg {
 	background-color: lightyellow;
 }
+
+table{
+	table-layout: fixed;
+	width: 100%;
+}
+
+th, td{
+	color: black;
+	width: 3%;
+}
+
+span{
+	font-size: small;
+}

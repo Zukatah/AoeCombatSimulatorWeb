@@ -43,7 +43,7 @@ export class Missile extends Projectile
 			for (let j: number = minYGridIndex; j <= maxYGridIndex; j++)
 			{
 				for (let unit of this.battle.gridUnits[i][j]){
-					if (unit.armyIndex == targetArmyIndex && !this.alreadyAffectedUnits.has(unit) && (unit.x - this.x) * (unit.x - this.x) + (unit.y - this.y) * (unit.y - this.y) <= (0.1 + unit.radius) * (0.1 + unit.radius)){
+					if (unit.armyIndex == targetArmyIndex && !this.alreadyAffectedUnits.has(unit) && (unit.x - this.x) * (unit.x - this.x) + (unit.y - this.y) * (unit.y - this.y) <= (unit.radius) * (unit.radius)){
 						collisionTargets.push(unit);
 					}
 				}
@@ -51,7 +51,9 @@ export class Missile extends Projectile
 		}
 
 		collisionTargets.forEach(unit => {
-			unit.curHp -= Unit.CalculateDamageDealtToTarget(this.attacker, unit, this.secondary) * (unit == this.target ? 1.0 : 0.5);
+			let damageDealt: number = Unit.CalculateDamageDealtToTarget(this.attacker, unit, this.secondary) * (unit == this.target ? 1.0 : 0.5);
+			//console.log(damageDealt);
+			unit.curHp -= damageDealt;
 			this.alreadyAffectedUnits.add(unit);
 		});
 
