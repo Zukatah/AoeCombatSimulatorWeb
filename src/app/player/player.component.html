@@ -16,7 +16,11 @@
 			</thead>
 			<tbody>
 				<tr *ngFor="let item of getArrayAllColumns()" [hidden]="simulator.hideUnitTypesWithZeroUnits && player.amountStartUnits[item]==0">
-					<td class="align-middle"><label [attr.for]="'numberInput'+player.playerIndex+item">{{player.uts[item].name}}</label></td>
+					<td class="align-middle">
+						<!--<label [attr.for]="'numberInput'+player.playerIndex+item">{{player.uts[item].name}}</label>-->
+						<span *ngIf="player.uts[item].imagePath == ''">{{player.uts[item].name}}</span>
+						<img *ngIf="player.uts[item].imagePath != ''" src="{{player.uts[item].imagePath}}" class="border border-dark img-fluid" title="{{player.uts[item].name}}">
+					</td>
 					<td><input type="number" class="form-control" id="numberInput{{player.playerIndex}}{{item}}" oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value == ''){ this.value = '0'; }; if (this.value > 200) { this.value = '200'; }" value="0" min="0" max="200" [(ngModel)]="player.amountStartUnits[item]"></td>
 					<td class="text-center align-middle" [style.background-color]="getSurvivorsColor(item)">{{player.avgSurvivorsNumber[item] | number : '1.0-2'}}</td>
 				</tr>
@@ -27,14 +31,14 @@
 	<hr>
 
 	<div class="row no-gutters">
-		<table class="table table-sm table-dark">
+		<table class="table table-sm table-dark text-center">
 			<thead>
 				<tr>
 					<th scope="col"></th>
-					<th scope="col"><img src="assets/population1.png" class="border border-dark img-fluid"></th>
-					<th scope="col"><img src="assets/food1.jpg" class="border border-dark img-fluid"></th>
-					<th scope="col"><img src="assets/wood1.jpg" class="border border-dark img-fluid"></th>
-					<th scope="col"><img src="assets/gold1.jpg" class="border border-dark img-fluid"></th>
+					<th scope="col"><img src="assets/Aoe2de_population.png" class="border border-dark img-fluid"></th>
+					<th scope="col"><img src="assets/Aoe2de_food.png" class="border border-dark img-fluid"></th>
+					<th scope="col"><img src="assets/Aoe2de_wood.png" class="border border-dark img-fluid"></th>
+					<th scope="col"><img src="assets/Aoe2de_gold.png" class="border border-dark img-fluid"></th>
 					<th scope="col"><img src="assets/sum1.png" class="border border-dark img-fluid"></th>
 				</tr>
 			</thead>

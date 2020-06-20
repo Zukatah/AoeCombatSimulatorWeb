@@ -8,3 +8,17 @@
 .player1-bg {
 	background-color:lightcoral;
 }
+
+/*
+tr, td{
+	height: 10px;
+	max-height: 10px;
+	line-height: 10px;
+}
+*/
+
+img{
+	height: 40px;
+	max-height: 40px;
+	line-height: 40px;
+}
