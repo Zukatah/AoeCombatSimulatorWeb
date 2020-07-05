@@ -1,5 +1,6 @@
 import { ArmorClass } from './armorClass';
 import { UnitType } from './unitType';
+import { UnitTypeLine } from './unitTypeLine';
 
 export abstract class AoeData
 {
@@ -22,37 +23,122 @@ export abstract class AoeData
 
 
 	public static ut_villager: UnitType = new UnitType("Villager", 40, 2.0, 0.0, 0.53, Number.MAX_VALUE, 0.968, 50, 0, 0);
+	public static utl_villager: UnitTypeLine = new UnitTypeLine("Villager line", [AoeData.ut_villager]);
 
-	public static ut_champion: UnitType = new UnitType("Champion", 70, 2.0, 0.0, 0.63, Number.MAX_VALUE, 0.99, 45, 0, 20);
-	public static ut_halberdier: UnitType = new UnitType("Halberdier", 60, 3.05, 0.0, 0.5, Number.MAX_VALUE, 0.9, 35, 25, 0);
-	public static ut_eliteEagleWarrior: UnitType = new UnitType("Elite Eagle Warrior", 60, 2.0, 0.0, 0.8, Number.MAX_VALUE, 1.43, 20, 0, 50);
+	public static ut_militia: UnitType = new UnitType("Militia", 40, 2.0, 0.0, 0.5, Number.MAX_VALUE, 0.9, 60, 0, 20);
+	public static ut_manAtArms: UnitType = new UnitType("Man-at-Arms", 45, 2.0, 0.0, 0.88, Number.MAX_VALUE, 0.9, 60, 0, 20);
+	public static ut_longSwordsman: UnitType = new UnitType("Long Swordsman", 60, 2.0, 0.0, 0.63, Number.MAX_VALUE, 0.9, 60, 0, 20);
+	public static ut_twoHandedSwordsman: UnitType = new UnitType("Two-Handed Swordsman", 60, 2.0, 0.0, 0.5, Number.MAX_VALUE, 0.9, 60, 0, 20);
+	public static ut_champion: UnitType = new UnitType("Champion", 70, 2.0, 0.0, 0.63, Number.MAX_VALUE, 0.9, 60, 0, 20);
+	public static utl_militia: UnitTypeLine = new UnitTypeLine("Militia line", [AoeData.ut_militia, AoeData.ut_manAtArms, AoeData.ut_longSwordsman, AoeData.ut_twoHandedSwordsman, AoeData.ut_champion]);
 
-	public static ut_hussar: UnitType = new UnitType("Hussar", 95, 1.9, 0.0, 0.95, Number.MAX_VALUE, 1.65, 80, 0, 0, 0.4);
-	public static ut_paladin: UnitType = new UnitType("Paladin", 180, 1.9, 0.0, 0.68, Number.MAX_VALUE, 1.485, 60, 0, 75, 0.4);
-	public static ut_heavyCamelRider: UnitType = new UnitType("Heavy Camel Rider", 140, 2.0, 0.0, 0.5, Number.MAX_VALUE, 1.595, 55, 0, 60, 0.4);
-	public static ut_eliteBattleElephant: UnitType = new UnitType("Elite Battle Elephant", 320, 2.0, 0.0, 0.5, Number.MAX_VALUE, 0.935, 120, 0, 70, 0.6);
-	public static ut_eliteSteppeLancer: UnitType = new UnitType("Elite Steppe Lancer", 100, 2.3, 1.0, 0.68, Number.MAX_VALUE, 1.595, 70, 0, 45, 0.4);
+	public static ut_spearman: UnitType = new UnitType("Spearman", 45, 3, 0.0, 0.5, Number.MAX_VALUE, 1.0, 35, 25, 0);
+	public static ut_pikeman: UnitType = new UnitType("Pikeman", 55, 3, 0.0, 0.5, Number.MAX_VALUE, 1.0, 35, 25, 0);
+	public static ut_halberdier: UnitType = new UnitType("Halberdier", 60, 3, 0.0, 0.5, Number.MAX_VALUE, 1.0, 35, 25, 0);
+	public static utl_spearman: UnitTypeLine = new UnitTypeLine("Spearman line", [AoeData.ut_spearman, AoeData.ut_pikeman, AoeData.ut_halberdier]);
 
-	public static ut_arbalester: UnitType = new UnitType("Arbalester", 40, 1.7, 8.0, 0.35, 7.0, 0.96, 0, 25, 45);
-	public static ut_eliteSkirmisher: UnitType = new UnitType("Elite Skirmisher", 35, 3.05, 8.0, 0.51, 7.0, 0.96, 35, 25, 0, 0.2, 1.0);
-	public static ut_heavyCavalryArcher: UnitType = new UnitType("Heavy Cavalry Archer", 80, 1.8, 7.0, 1.0, 7.0, 1.54, 0, 40, 60, 0.4);
+	public static ut_eagleScout: UnitType = new UnitType("Eagle Scout", 50, 2.0, 0.0, 0.8, Number.MAX_VALUE, 1.1, 20, 0, 50);
+	public static ut_eagleWarrior: UnitType = new UnitType("Eagle Warrior", 55, 2.0, 0.0, 0.63, Number.MAX_VALUE, 1.15, 20, 0, 50);
+	public static ut_eliteEagleWarrior: UnitType = new UnitType("Elite Eagle Warrior", 60, 2.0, 0.0, 0.8, Number.MAX_VALUE, 1.3, 20, 0, 50);
+	public static utl_eagleScout: UnitTypeLine = new UnitTypeLine("Eagle Scout line", [AoeData.ut_eagleScout, AoeData.ut_eagleWarrior, AoeData.ut_eliteEagleWarrior]);
+
+	public static ut_scoutCavalry: UnitType = new UnitType("Scout Cavalry", 45, 2.0, 0.0, 0.68, Number.MAX_VALUE, 1.55, 80, 0, 0, 0.4);
+	public static ut_lightCavalry: UnitType = new UnitType("Light Cavalry", 60, 2.0, 0.0, 0.68, Number.MAX_VALUE, 1.5, 80, 0, 0, 0.4);
+	public static ut_hussar: UnitType = new UnitType("Hussar", 75, 1.9, 0.0, 0.68, Number.MAX_VALUE, 1.5, 80, 0, 0, 0.4);
+	public static utl_scoutCavalry: UnitTypeLine = new UnitTypeLine("Scout Cavalry line", [AoeData.ut_scoutCavalry, AoeData.ut_lightCavalry, AoeData.ut_hussar]);
+
+	public static ut_knight: UnitType = new UnitType("Knight", 100, 1.8, 0.0, 0.68, Number.MAX_VALUE, 1.35, 60, 0, 75, 0.4);
+	public static ut_chevalier: UnitType = new UnitType("Cavalier", 120, 1.8, 0.0, 0.68, Number.MAX_VALUE, 1.35, 60, 0, 75, 0.4);
+	public static ut_paladin: UnitType = new UnitType("Paladin", 160, 1.9, 0.0, 0.68, Number.MAX_VALUE, 1.35, 60, 0, 75, 0.4);
+	public static utl_knight: UnitTypeLine = new UnitTypeLine("Knight line", [AoeData.ut_knight, AoeData.ut_chevalier, AoeData.ut_paladin]);
+	
+	public static ut_camelRider: UnitType = new UnitType("Camel Rider", 100, 2.0, 0.0, 0.5, Number.MAX_VALUE, 1.45, 55, 0, 60, 0.4);
+	public static ut_heavyCamelRider: UnitType = new UnitType("Heavy Camel Rider", 120, 2.0, 0.0, 0.5, Number.MAX_VALUE, 1.45, 55, 0, 60, 0.4);
+	public static ut_imperialCamelRider: UnitType = new UnitType("Imperial Camel Rider", 140, 2.0, 0.0, 0.5, Number.MAX_VALUE, 1.45, 55, 0, 60, 0.4);
+	public static utl_camelRider: UnitTypeLine = new UnitTypeLine("Camel Rider line", [AoeData.ut_camelRider, AoeData.ut_heavyCamelRider, AoeData.ut_imperialCamelRider]);
+
+	public static ut_battleElephant: UnitType = new UnitType("Battle Elephant", 250, 2.0, 0.0, 0.5, Number.MAX_VALUE, 0.85, 120, 0, 70, 0.6);
+	public static ut_eliteBattleElephant: UnitType = new UnitType("Elite Battle Elephant", 300, 2.0, 0.0, 0.5, Number.MAX_VALUE, 0.85, 120, 0, 70, 0.6);
+	public static utl_battleElephant: UnitTypeLine = new UnitTypeLine("Battle Elephant line", [AoeData.ut_battleElephant, AoeData.ut_eliteBattleElephant]);
+
+	public static ut_steppeLancer: UnitType = new UnitType("Steppe Lancer", 60, 2.3, 1.0, 0.68, Number.MAX_VALUE, 1.45, 70, 0, 45, 0.4);
+	public static ut_eliteSteppeLancer: UnitType = new UnitType("Elite Steppe Lancer", 80, 2.3, 1.0, 0.68, Number.MAX_VALUE, 1.45, 70, 0, 45, 0.4);
+	public static utl_steppeLancer: UnitTypeLine = new UnitTypeLine("Steppe Lancer line", [AoeData.ut_steppeLancer, AoeData.ut_eliteSteppeLancer]);
+
+	public static ut_archer: UnitType = new UnitType("Archer", 30, 2.0, 4.0, 0.35, 7.0, 0.96, 0, 25, 45, 0.2, 0.0, 80);
+	public static ut_crossbowman: UnitType = new UnitType("Crossbowman", 35, 2.0, 5.0, 0.35, 7.0, 0.96, 0, 25, 45, 0.2, 0.0, 85);
+	public static ut_arbalester: UnitType = new UnitType("Arbalester", 40, 2.0, 5.0, 0.35, 7.0, 0.96, 0, 25, 45, 0.2, 0.0, 90);
+	public static utl_archer: UnitTypeLine = new UnitTypeLine("Archer line", [AoeData.ut_archer, AoeData.ut_crossbowman, AoeData.ut_arbalester]);
+
+	public static ut_skirmisher: UnitType = new UnitType("Skirmisher", 30, 3.0, 4.0, 0.51, 7.0, 0.96, 35, 25, 0, 0.2, 1.0, 90);
+	public static ut_eliteSkirmisher: UnitType = new UnitType("Elite Skirmisher", 35, 3.0, 5.0, 0.51, 7.0, 0.96, 35, 25, 0, 0.2, 1.0, 90);
+	public static ut_imperialSkirmisher: UnitType = new UnitType("Imperial Skirmisher", 35, 3.0, 5.0, 0.51, 7.0, 0.96, 25, 35, 0, 0.2, 1.0, 95);
+	public static utl_skirmisher: UnitTypeLine = new UnitTypeLine("Skirmisher line", [AoeData.ut_skirmisher, AoeData.ut_eliteSkirmisher, AoeData.ut_imperialSkirmisher]);
+
+	public static ut_cavalryArcher: UnitType = new UnitType("Cavalry Archer", 50, 2.0, 4.0, 1.02, 7.0, 1.4, 0, 40, 60, 0.4, 0.0, 50);
+	public static ut_heavyCavalryArcher: UnitType = new UnitType("Heavy Cavalry Archer", 60, 2.0, 4.0, 1.0, 7.0, 1.4, 0, 40, 60, 0.4, 0.0, 50);
+	public static utl_cavalryArcher: UnitTypeLine = new UnitTypeLine("Cavalry Archer line", [AoeData.ut_cavalryArcher, AoeData.ut_heavyCavalryArcher]);
+
 	public static ut_handCannoneer: UnitType = new UnitType("Hand Cannoneer", 35, 3.45, 7.0, 0.35, 5.5, 0.96, 45, 0, 50, 0.2, 0.0, 65);
+	public static utl_handCannoneer: UnitTypeLine = new UnitTypeLine("Hand Cannoneer line", [AoeData.ut_handCannoneer]);
 
+	public static ut_batteringRam: UnitType = new UnitType("Battering Ram", 175, 5.0, 0.0, 0.75, Number.MAX_VALUE, 0.5, 0, 160, 75, 0.8);
+	public static ut_cappedRam: UnitType = new UnitType("Capped Ram", 200, 5.0, 0.0, 0.75, Number.MAX_VALUE, 0.5, 0, 160, 75, 0.8);
 	public static ut_siegeRam: UnitType = new UnitType("Siege Ram", 270, 5.0, 0.0, 0.75, Number.MAX_VALUE, 0.6, 0, 160, 75, 0.8);
-	public static ut_heavyScorpion: UnitType = new UnitType("Heavy Scorpion", 50, 3.6, 8.0, 0.21, 6.0, 0.65, 0, 75, 75, 0.5, 2.0, 100);
+	public static utl_batteringRam: UnitTypeLine = new UnitTypeLine("Battering Ram line", [AoeData.ut_batteringRam, AoeData.ut_cappedRam, AoeData.ut_siegeRam]);
 
-	public static ut_eliteLongbowman: UnitType = new UnitType("Elite Longbowman", 40, 2.0, 12.0, 0.5, 7.0, 0.96, 0, 35, 40, 0.2, 0.0, 80);
-	public static ut_eliteCataphract: UnitType = new UnitType("Elite Cataphract", 150, 1.7, 0.0, 0.68, Number.MAX_VALUE, 1.48, 70, 0, 75, 0.4);
-	public static ut_eliteWoadRaider: UnitType = new UnitType("Elite Woad Raider", 80, 2.0, 0.0, 0.72, Number.MAX_VALUE, 1.38, 65, 0, 25);
-	public static ut_eliteChuKoNu: UnitType = new UnitType("Elite Chu Ko Nu", 50, 2.4, 7.0, 0.83, 7.0, 0.96, 0, 40, 35); // actually attack delay is 0.23s, but firing all the missiles takes longer
-	public static ut_eliteThrowingAxeman: UnitType = new UnitType("Elite Throwing Axeman", 70, 2.0, 5.0, 0.82, 7.0, 1.1, 55, 0, 25);
-	public static ut_eliteHuskarl: UnitType = new UnitType("Elite Huskarl", 70, 2.0, 0.0, 0.8, Number.MAX_VALUE, 1.155, 52, 0, 26);
-	public static ut_eliteSamurai: UnitType = new UnitType("Elite Samurai", 80, 1.45, 0.0, 0.8, Number.MAX_VALUE, 1.1, 60, 0, 30);
-	public static ut_eliteMangudai: UnitType = new UnitType("Elite Mangudai", 80, 1.445, 7.0, 0.5, 7.0, 1.595, 0, 55, 65, 0.4);
-	public static ut_eliteWarElephant: UnitType = new UnitType("Elite War Elephant", 620, 2.0, 0.0, 0.56, Number.MAX_VALUE, 0.858, 200, 0, 75, 0.6);
-	public static ut_eliteMameluke: UnitType = new UnitType("Elite Mameluke", 130, 2.0, 3.0, 0.2, Number.MAX_VALUE, 1.54, 55, 0, 85, 0.4);
-	public static ut_eliteTeutonicKnight: UnitType = new UnitType("Elite Teutonic Knight", 100, 2.0, 0.0, 0.75, Number.MAX_VALUE, 0.88, 85, 0, 40);
+	public static ut_scorpion: UnitType = new UnitType("Scorpion", 40, 3.6, 7.0, 0.21, 6.0, 0.65, 0, 75, 75, 0.5, 2.0, 100);
+	public static ut_heavyScorpion: UnitType = new UnitType("Heavy Scorpion", 50, 3.6, 7.0, 0.21, 6.0, 0.65, 0, 75, 75, 0.5, 2.0, 100);
+	public static utl_scorpion: UnitTypeLine = new UnitTypeLine("Scorpion line", [AoeData.ut_scorpion, AoeData.ut_heavyScorpion]);
+
+	public static ut_longbowman: UnitType = new UnitType("Longbowman", 35, 2.0, 5.0, 0.5, 7.0, 0.96, 0, 35, 40, 0.2, 0.0, 70);
+	public static ut_eliteLongbowman: UnitType = new UnitType("Elite Longbowman", 40, 2.0, 6.0, 0.5, 7.0, 0.96, 0, 35, 40, 0.2, 0.0, 80);
+	public static utl_longbowman: UnitTypeLine = new UnitTypeLine("Longbowman line", [AoeData.ut_longbowman, AoeData.ut_eliteLongbowman]);
+
+	public static ut_cataphract: UnitType = new UnitType("Cataphract", 110, 1.8, 0.0, 0.68, Number.MAX_VALUE, 1.35, 70, 0, 75, 0.4);
+	public static ut_eliteCataphract: UnitType = new UnitType("Elite Cataphract", 150, 1.7, 0.0, 0.68, Number.MAX_VALUE, 1.35, 70, 0, 75, 0.4);
+	public static utl_cataphract: UnitTypeLine = new UnitTypeLine("Cataphract line", [AoeData.ut_cataphract, AoeData.ut_eliteCataphract]);
+
+	public static ut_woadRaider: UnitType = new UnitType("Woad Raider", 65, 2.0, 0.0, 0.72, Number.MAX_VALUE, 1.2, 65, 0, 25);
+	public static ut_eliteWoadRaider: UnitType = new UnitType("Elite Woad Raider", 80, 2.0, 0.0, 0.72, Number.MAX_VALUE, 1.2, 65, 0, 25);
+	public static utl_woadRaider: UnitTypeLine = new UnitTypeLine("Woad Raider line", [AoeData.ut_woadRaider, AoeData.ut_eliteWoadRaider]);
+
+	public static ut_chuKoNu: UnitType = new UnitType("Chu Ko Nu", 45, 3.0, 4.0, 0.83, 7.0, 0.96, 0, 40, 35, 0.2, 0.0, 85); // actually attack delay is 0.23s, but firing all the missiles takes longer
+	public static ut_eliteChuKoNu: UnitType = new UnitType("Elite Chu Ko Nu", 50, 3.0, 4.0, 0.83, 7.0, 0.96, 0, 40, 35, 0.2, 0.0, 85); // actually attack delay is 0.23s, but firing all the missiles takes longer
+	public static utl_chuKoNu: UnitTypeLine = new UnitTypeLine("Chu Ko Nu line", [AoeData.ut_chuKoNu, AoeData.ut_eliteChuKoNu]); // check attack rate of chu ko nu again; compare to archers
+	
+	public static ut_throwingAxeman: UnitType = new UnitType("Throwing Axeman", 60, 2.0, 3.0, 1.0, 7.0, 1.0, 55, 0, 25);
+	public static ut_eliteThrowingAxeman: UnitType = new UnitType("Elite Throwing Axeman", 70, 2.0, 4.0, 0.82, 7.0, 1.0, 55, 0, 25);
+	public static utl_throwingAxeman: UnitTypeLine = new UnitTypeLine("Throwing Axeman line", [AoeData.ut_throwingAxeman, AoeData.ut_eliteThrowingAxeman]);
+	
+	public static ut_huskarl: UnitType = new UnitType("Huskarl", 60, 2.0, 0.0, 0.8, Number.MAX_VALUE, 1.05, 80, 0, 40);
+	public static ut_eliteHuskarl: UnitType = new UnitType("Elite Huskarl", 70, 2.0, 0.0, 0.8, Number.MAX_VALUE, 1.05, 80, 0, 40);
+	public static utl_huskarl: UnitTypeLine = new UnitTypeLine("Huskarl line", [AoeData.ut_huskarl, AoeData.ut_eliteHuskarl]);
+	
+	public static ut_samurai: UnitType = new UnitType("Samurai", 60, 1.9, 0.0, 0.8, Number.MAX_VALUE, 1.0, 60, 0, 30);
+	public static ut_eliteSamurai: UnitType = new UnitType("Elite Samurai", 80, 1.9, 0.0, 0.8, Number.MAX_VALUE, 1.0, 60, 0, 30);
+	public static utl_samurai: UnitTypeLine = new UnitTypeLine("Samurai line", [AoeData.ut_samurai, AoeData.ut_eliteSamurai]);
+
+	public static ut_mangudai: UnitType = new UnitType("Mangudai", 60, 2.1, 4.0, 0.5, 7.0, 1.45, 0, 55, 65, 0.4, 0.0, 95);
+	public static ut_eliteMangudai: UnitType = new UnitType("Elite Mangudai", 60, 2.1, 4.0, 0.5, 7.0, 1.45, 0, 55, 65, 0.4, 0.0, 95);
+	public static utl_mangudai: UnitTypeLine = new UnitTypeLine("Mangudai line", [AoeData.ut_mangudai, AoeData.ut_eliteMangudai]);
+	
+	public static ut_warElephant: UnitType = new UnitType("War Elephant", 450, 2.0, 0.0, 0.56, Number.MAX_VALUE, 0.6, 200, 0, 75, 0.6);
+	public static ut_eliteWarElephant: UnitType = new UnitType("Elite War Elephant", 600, 2.0, 0.0, 0.56, Number.MAX_VALUE, 0.6, 200, 0, 75, 0.6);
+	public static utl_warElephant: UnitTypeLine = new UnitTypeLine("War Elephant line", [AoeData.ut_warElephant, AoeData.ut_eliteWarElephant]);
+	
+	public static ut_mameluke: UnitType = new UnitType("Mameluke", 65, 2.0, 3.0, 0.2, 7.0, 1.4, 55, 0, 85, 0.4);
+	public static ut_eliteMameluke: UnitType = new UnitType("Elite Mameluke", 80, 2.0, 3.0, 0.2, 7.0, 1.4, 55, 0, 85, 0.4);
+	public static utl_mameluke: UnitTypeLine = new UnitTypeLine("Mameluke line", [AoeData.ut_mameluke, AoeData.ut_eliteMameluke]);
+
+	public static ut_teutonicKnight: UnitType = new UnitType("Teutonic Knight", 80, 2.0, 0.0, 0.75, Number.MAX_VALUE, 0.80, 85, 0, 40);
+	public static ut_eliteTeutonicKnight: UnitType = new UnitType("Elite Teutonic Knight", 100, 2.0, 0.0, 0.75, Number.MAX_VALUE, 0.80, 85, 0, 40);
+	public static utl_teutonicKnight: UnitTypeLine = new UnitTypeLine("Teutonic Knight line", [AoeData.ut_teutonicKnight, AoeData.ut_eliteTeutonicKnight]);
+
+	public static ut_janissary: UnitType = new UnitType("Janissary", 50, 3.49, 8.0, 0.0, 5.5, 0.96, 60, 0, 55, 0.2, 0.0, 50);
 	public static ut_eliteJanissary: UnitType = new UnitType("Elite Janissary", 50, 3.49, 8.0, 0.0, 5.5, 0.96, 60, 0, 55, 0.2, 0.0, 50);
+	public static utl_janissary: UnitTypeLine = new UnitTypeLine("Janissary line", [AoeData.ut_janissary, AoeData.ut_eliteJanissary]);
+	
 	public static ut_eliteBerserk: UnitType = new UnitType("Elite Berserk", 75, 2.0, 0.0, 0.5, Number.MAX_VALUE, 1.155, 65, 0, 25, 0.2, 0.0, 100, 40.0);
 
 	public static ut_eliteJaguarWarrior: UnitType = new UnitType("Elite Jaguar Warrior", 75, 2.0, 0.0, 0.8, Number.MAX_VALUE, 1.1, 60, 0, 30);
@@ -64,7 +150,6 @@ export abstract class AoeData
 	public static ut_eliteKamayuk: UnitType = new UnitType("Elite Kamayuk", 80, 2.0, 1.0, 0.5, Number.MAX_VALUE, 1.1, 60, 0, 30);
 	public static ut_slinger: UnitType = new UnitType("Slinger", 40, 2.0, 8.0, 0.8, 5.5, 0.96, 30, 0, 40);
 	public static ut_eliteElephantArcher: UnitType = new UnitType("Elite Elephant Archer", 350, 1.7, 7.0, 0.4, 7.0, 0.88, 100, 0, 70, 0.6);
-	public static ut_imperialCamelRider: UnitType = new UnitType("Imperial Camel Rider", 160, 2.0, 0.0, 0.5, Number.MAX_VALUE, 1.595, 55, 0, 60, 0.4);
 	public static ut_eliteGenoeseCrossbowman: UnitType = new UnitType("El. Gen. Crossbowman", 50, 1.7, 7.0, 0.5, 7.0, 0.96, 0, 45, 45);
 	public static ut_condottiero: UnitType = new UnitType("Condottiero", 80, 1.9, 0.0, 0.75, Number.MAX_VALUE, 1.32, 50, 0, 35);
 	public static ut_eliteMagyarHuszar: UnitType = new UnitType("Elite Magyar Huszar", 105, 1.8, 0.0, 0.68, Number.MAX_VALUE, 1.65, 80, 0, 0, 0.4);
@@ -80,7 +165,6 @@ export abstract class AoeData
 	public static ut_eliteBallistaElephant: UnitType = new UnitType("Elite Ballista Elephant", 310, 2.5, 6.0, 0.4, 6.0, 0.88, 100, 0, 80, 0.6);
 	public static ut_eliteKarambitWarrior: UnitType = new UnitType("Elite Karambit Warrior", 40, 2.0, 0.0, 0.81, Number.MAX_VALUE, 1.32, 30, 0, 15);
 	public static ut_eliteRattanArcher: UnitType = new UnitType("Elite Rattan Archer", 45, 1.7, 8.0, 0.69, 7.0, 1.1, 0, 50, 45);
-	public static ut_imperialSkirmisher: UnitType = new UnitType("Imperial Skirmisher", 42, 3.05, 8.0, 0.51, 7.0, 0.96, 25, 35, 0, 0.2, 1.0);
 
 	public static ut_eliteKonnik: UnitType = new UnitType("Elite Konnik", 140, 1.8, 0.0, 0.7, Number.MAX_VALUE, 1.485, 60, 0, 70, 0.4);
 	public static ut_eliteKonnikDismounted: UnitType = new UnitType("Elite Konnik (Foot)", 50, 1.8, 0.0, 0.7, Number.MAX_VALUE, 0.99, 30, 0, 35);
@@ -88,6 +172,7 @@ export abstract class AoeData
 	public static ut_eliteLeitis: UnitType = new UnitType("Elite Leitis", 150, 1.9, 0.0, 0.7, Number.MAX_VALUE, 1.54, 70, 0, 50, 0.4);
 	public static ut_eliteKeshik: UnitType = new UnitType("Elite Keshik", 160, 1.9, 0.0, 0.7, Number.MAX_VALUE, 1.54, 50, 0, 40, 0.4);
 	public static ut_flamingCamel: UnitType = new UnitType("Flaming Camel", 75, Number.MAX_VALUE, 0.0, 0.0, Number.MAX_VALUE, 1.43, 75, 0, 30, 0.4);
+
 
 	public static unitTypesList: UnitType[] = [AoeData.ut_villager, AoeData.ut_champion, AoeData.ut_halberdier, AoeData.ut_eliteEagleWarrior,
 		AoeData.ut_hussar, AoeData.ut_paladin, AoeData.ut_heavyCamelRider, AoeData.ut_eliteBattleElephant, AoeData.ut_eliteSteppeLancer,
