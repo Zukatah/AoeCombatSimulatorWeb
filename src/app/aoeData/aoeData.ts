@@ -1,6 +1,7 @@
 import { ArmorClass } from './armorClass';
 import { UnitType } from './unitType';
 import { UnitTypeLine } from './unitTypeLine';
+import { Civilization } from './civilization';
 
 export abstract class AoeData
 {
@@ -135,43 +136,118 @@ export abstract class AoeData
 	public static ut_eliteTeutonicKnight: UnitType = new UnitType("Elite Teutonic Knight", 100, 2.0, 0.0, 0.75, Number.MAX_VALUE, 0.80, 85, 0, 40);
 	public static utl_teutonicKnight: UnitTypeLine = new UnitTypeLine("Teutonic Knight line", [AoeData.ut_teutonicKnight, AoeData.ut_eliteTeutonicKnight]);
 
-	public static ut_janissary: UnitType = new UnitType("Janissary", 50, 3.49, 8.0, 0.0, 5.5, 0.96, 60, 0, 55, 0.2, 0.0, 50);
-	public static ut_eliteJanissary: UnitType = new UnitType("Elite Janissary", 50, 3.49, 8.0, 0.0, 5.5, 0.96, 60, 0, 55, 0.2, 0.0, 50);
+	public static ut_janissary: UnitType = new UnitType("Janissary", 35, 3.49, 8.0, 0.4, 5.5, 0.96, 60, 0, 55, 0.2, 0.0, 50);
+	public static ut_eliteJanissary: UnitType = new UnitType("Elite Janissary", 40, 3.49, 8.0, 0.0, 5.5, 0.96, 60, 0, 55, 0.2, 0.0, 50);
 	public static utl_janissary: UnitTypeLine = new UnitTypeLine("Janissary line", [AoeData.ut_janissary, AoeData.ut_eliteJanissary]);
 	
-	public static ut_eliteBerserk: UnitType = new UnitType("Elite Berserk", 75, 2.0, 0.0, 0.5, Number.MAX_VALUE, 1.155, 65, 0, 25, 0.2, 0.0, 100, 40.0);
+	public static ut_berserk: UnitType = new UnitType("Berserk", 54, 2.0, 0.0, 0.8, Number.MAX_VALUE, 1.05, 65, 0, 25, 0.2, 0.0, 100, 20.0);
+	public static ut_eliteBerserk: UnitType = new UnitType("Elite Berserk", 62, 2.0, 0.0, 0.5, Number.MAX_VALUE, 1.05, 65, 0, 25, 0.2, 0.0, 100, 20.0);
+	public static utl_berserk: UnitTypeLine = new UnitTypeLine("Berserk line", [AoeData.ut_berserk, AoeData.ut_eliteBerserk]);
 
-	public static ut_eliteJaguarWarrior: UnitType = new UnitType("Elite Jaguar Warrior", 75, 2.0, 0.0, 0.8, Number.MAX_VALUE, 1.1, 60, 0, 30);
-	public static ut_eliteTarkan: UnitType = new UnitType("Elite Tarkan", 170, 2.1, 0.0, 0.95, Number.MAX_VALUE, 1.48, 60, 0, 60, 0.4);
-	public static ut_eliteWarWagon: UnitType = new UnitType("Elite War Wagon", 200, 2.25, 8.0, 1.0, 6.0, 1.32, 0, 94, 60, 0.8);
-	public static ut_elitePlumedArcher: UnitType = new UnitType("Elite Plumed Archer", 65, 1.615, 8.0, 0.5, 7.0, 1.2, 0, 40, 40);
-	public static ut_eliteConquistador: UnitType = new UnitType("Elite Conquistador", 90, 2.9, 6.0, 0.41, 5.5, 1.43, 60, 0, 70, 0.4, 0.0, 70);
+	public static ut_jaguarWarrior: UnitType = new UnitType("Jaguar Warrior", 50, 2.0, 0.0, 0.8, Number.MAX_VALUE, 1.0, 60, 0, 30);
+	public static ut_eliteJaguarWarrior: UnitType = new UnitType("Elite Jaguar Warrior", 75, 2.0, 0.0, 0.8, Number.MAX_VALUE, 1.0, 60, 0, 30);
+	public static utl_jaguarWarrior: UnitTypeLine = new UnitTypeLine("Jaguar line", [AoeData.ut_jaguarWarrior, AoeData.ut_eliteJaguarWarrior]);
+	
+	public static ut_tarkan: UnitType = new UnitType("Tarkan", 100, 2.1, 0.0, 0.95, Number.MAX_VALUE, 1.35, 60, 0, 60, 0.4);
+	public static ut_eliteTarkan: UnitType = new UnitType("Elite Tarkan", 150, 2.1, 0.0, 0.95, Number.MAX_VALUE, 1.35, 60, 0, 60, 0.4);
+	public static utl_tarkan: UnitTypeLine = new UnitTypeLine("Tarkan line", [AoeData.ut_tarkan, AoeData.ut_eliteTarkan]);
+	
+	public static ut_warWagon: UnitType = new UnitType("War Wagon", 150, 2.5, 4.0, 1.0, 6.0, 1.2, 0, 110, 60, 0.8, 0.0, 100);
+	public static ut_eliteWarWagon: UnitType = new UnitType("Elite War Wagon", 200, 2.5, 5.0, 1.0, 6.0, 1.2, 0, 110, 60, 0.8, 0.0, 100);
+	public static utl_warWagon: UnitTypeLine = new UnitTypeLine("War Wagon line", [AoeData.ut_warWagon, AoeData.ut_eliteWarWagon]);
+	
+	public static ut_plumedArcher: UnitType = new UnitType("Plumed Archer", 65, 1.9, 4.0, 0.5, 7.0, 1.2, 0, 40, 40, 0.2, 0.0, 80);
+	public static ut_elitePlumedArcher: UnitType = new UnitType("Elite Plumed Archer", 65, 1.9, 5.0, 0.5, 7.0, 1.2, 0, 40, 40, 0.2, 0.0, 90);
+	public static utl_plumedArcher: UnitTypeLine = new UnitTypeLine("Plumed Archer line", [AoeData.ut_plumedArcher, AoeData.ut_elitePlumedArcher]);
+	
+	public static ut_conquistador: UnitType = new UnitType("Conquistador", 55, 2.9, 6.0, 0.41, 5.5, 1.3, 60, 0, 70, 0.4, 0.0, 65);
+	public static ut_eliteConquistador: UnitType = new UnitType("Elite Conquistador", 70, 2.9, 6.0, 0.41, 5.5, 1.3, 60, 0, 70, 0.4, 0.0, 70);
+	public static utl_conquistador: UnitTypeLine = new UnitTypeLine("Conquistador line", [AoeData.ut_conquistador, AoeData.ut_eliteConquistador]);
 
-	public static ut_eliteKamayuk: UnitType = new UnitType("Elite Kamayuk", 80, 2.0, 1.0, 0.5, Number.MAX_VALUE, 1.1, 60, 0, 30);
-	public static ut_slinger: UnitType = new UnitType("Slinger", 40, 2.0, 8.0, 0.8, 5.5, 0.96, 30, 0, 40);
-	public static ut_eliteElephantArcher: UnitType = new UnitType("Elite Elephant Archer", 350, 1.7, 7.0, 0.4, 7.0, 0.88, 100, 0, 70, 0.6);
-	public static ut_eliteGenoeseCrossbowman: UnitType = new UnitType("El. Gen. Crossbowman", 50, 1.7, 7.0, 0.5, 7.0, 0.96, 0, 45, 45);
-	public static ut_condottiero: UnitType = new UnitType("Condottiero", 80, 1.9, 0.0, 0.75, Number.MAX_VALUE, 1.32, 50, 0, 35);
-	public static ut_eliteMagyarHuszar: UnitType = new UnitType("Elite Magyar Huszar", 105, 1.8, 0.0, 0.68, Number.MAX_VALUE, 1.65, 80, 0, 0, 0.4);
-	public static ut_eliteBoyar: UnitType = new UnitType("Elite Boyar", 150, 1.9, 0.0, 0.7, Number.MAX_VALUE, 1.43, 50, 0, 80, 0.4);
+	public static ut_kamayuk: UnitType = new UnitType("Kamayuk", 60, 2.0, 1.0, 0.5, Number.MAX_VALUE, 1.0, 60, 0, 30);
+	public static ut_eliteKamayuk: UnitType = new UnitType("Elite Kamayuk", 80, 2.0, 1.0, 0.5, Number.MAX_VALUE, 1.0, 60, 0, 30);
+	public static utl_kamayuk: UnitTypeLine = new UnitTypeLine("Kamayuk line", [AoeData.ut_kamayuk, AoeData.ut_eliteKamayuk]);
+	
+	public static ut_slinger: UnitType = new UnitType("Slinger", 40, 2.0, 5.0, 0.8, 5.5, 0.96, 30, 0, 40, 0.2, 1.0, 90);
+	public static utl_slinger: UnitTypeLine = new UnitTypeLine("Slinger line", [AoeData.ut_slinger]);
+	
+	public static ut_elephantArcher: UnitType = new UnitType("Elephant Archer", 280, 2.0, 4.0, 0.4, 7.0, 0.8, 100, 0, 70, 0.6);
+	public static ut_eliteElephantArcher: UnitType = new UnitType("Elite Elephant Archer", 330, 2.0, 4.0, 0.4, 7.0, 0.8, 100, 0, 70, 0.6);
+	public static utl_elephantArcher: UnitTypeLine = new UnitTypeLine("Elephant Archer line", [AoeData.ut_elephantArcher, AoeData.ut_eliteElephantArcher]);
+	
+	public static ut_genoeseCrossbowman: UnitType = new UnitType("Gen. Crossbowman", 45, 2.0, 4.0, 0.5, 7.0, 0.96, 0, 45, 45);
+	public static ut_eliteGenoeseCrossbowman: UnitType = new UnitType("El. Gen. Crossbowman", 50, 2.0, 4.0, 0.5, 7.0, 0.96, 0, 45, 45);
+	public static utl_genoeseCrossbowman: UnitTypeLine = new UnitTypeLine("Gen. Crossbowman line", [AoeData.ut_genoeseCrossbowman, AoeData.ut_eliteGenoeseCrossbowman]);
+	
+	public static ut_condottiero: UnitType = new UnitType("Condottiero", 80, 1.9, 0.0, 0.75, Number.MAX_VALUE, 1.2, 50, 0, 35);
+	public static utl_condottiero: UnitTypeLine = new UnitTypeLine("Condottiero line", [AoeData.ut_condottiero]);
+	
+	public static ut_magyarHuszar: UnitType = new UnitType("Magyar Huszar", 70, 1.8, 0.0, 0.68, Number.MAX_VALUE, 1.5, 80, 0, 10, 0.4);
+	public static ut_eliteMagyarHuszar: UnitType = new UnitType("Elite Magyar Huszar", 85, 1.8, 0.0, 0.68, Number.MAX_VALUE, 1.5, 80, 0, 10, 0.4);
+	public static utl_magyarHuszar: UnitTypeLine = new UnitTypeLine("Magyar Huszar line", [AoeData.ut_magyarHuszar, AoeData.ut_eliteMagyarHuszar]);
+	
+	public static ut_boyar: UnitType = new UnitType("Boyar", 100, 1.9, 0.0, 0.7, Number.MAX_VALUE, 1.3, 50, 0, 80, 0.4);
+	public static ut_eliteBoyar: UnitType = new UnitType("Elite Boyar", 130, 1.9, 0.0, 0.7, Number.MAX_VALUE, 1.3, 50, 0, 80, 0.4);
+	public static utl_boyar: UnitTypeLine = new UnitTypeLine("Boyar line", [AoeData.ut_boyar, AoeData.ut_eliteBoyar]);
 
-	public static ut_eliteCamelArcher: UnitType = new UnitType("Elite Camel Archer", 80, 1.7, 7.0, 0.63, 7.0, 1.54, 0, 50, 60, 0.4, 0.0, 100, 15.0);
-	public static ut_eliteGenitour: UnitType = new UnitType("Elite Genitour", 75, 3.0, 7.0, 0.5, 7.0, 1.485, 50, 35, 0, 0.4, 1.0);
-	public static ut_eliteShotelWarrior: UnitType = new UnitType("Elite Shotel Warrior", 50, 2.0, 0.0, 0.75, Number.MAX_VALUE, 1.32, 50, 0, 35);
-	public static ut_eliteGbeto: UnitType = new UnitType("Elite Gbeto", 45, 2.0, 0.0, 1.2, Number.MAX_VALUE, 1.375, 50, 0, 40);
-	public static ut_eliteOrganGun: UnitType = new UnitType("Elite Organ Gun", 70, 3.45, 8.0, 0.6, 5.5, 0.85, 0, 80, 60, 0.4, 1.0, 50);
+	public static ut_camelArcher: UnitType = new UnitType("Camel Archer", 55, 2.0, 4.0, 0.63, 7.0, 1.4, 0, 50, 60, 0.4, 0.0, 95, 0.0);
+	public static ut_eliteCamelArcher: UnitType = new UnitType("Elite Camel Archer", 60, 2.0, 4.0, 0.63, 7.0, 1.4, 0, 50, 60, 0.4, 0.0, 95, 0.0);
+	public static utl_camelArcher: UnitTypeLine = new UnitTypeLine("Camel Archer line", [AoeData.ut_camelArcher, AoeData.ut_eliteCamelArcher]);
+	
+	public static ut_genitour: UnitType = new UnitType("Genitour", 50, 3.0, 4.0, 0.5, 7.0, 1.35, 50, 35, 0, 0.4, 1.0, 90);
+	public static ut_eliteGenitour: UnitType = new UnitType("Elite Genitour", 55, 3.0, 4.0, 0.5, 7.0, 1.35, 50, 35, 0, 0.4, 1.0, 90);
+	public static utl_genitour: UnitTypeLine = new UnitTypeLine("Genitour line", [AoeData.ut_genitour, AoeData.ut_eliteGenitour]);
+	
+	public static ut_shotelWarrior: UnitType = new UnitType("Shotel Warrior", 40, 2.0, 0.0, 0.75, Number.MAX_VALUE, 1.2, 50, 0, 35);
+	public static ut_eliteShotelWarrior: UnitType = new UnitType("Elite Shotel Warrior", 50, 2.0, 0.0, 0.75, Number.MAX_VALUE, 1.2, 50, 0, 35);
+	public static utl_shotelWarrior: UnitTypeLine = new UnitTypeLine("Shotel Warrior line", [AoeData.ut_shotelWarrior, AoeData.ut_eliteShotelWarrior]);
+	
+	public static ut_gbeto: UnitType = new UnitType("Gbeto", 30, 2.0, 0.0, 1.2, 7.0, 1.25, 50, 0, 40);
+	public static ut_eliteGbeto: UnitType = new UnitType("Elite Gbeto", 45, 2.0, 0.0, 1.2, 7.0, 1.25, 50, 0, 40);
+	public static utl_gbeto: UnitTypeLine = new UnitTypeLine("Gbeto line", [AoeData.ut_gbeto, AoeData.ut_eliteGbeto]);
 
-	public static ut_eliteArambai: UnitType = new UnitType("Elite Arambai", 85, 2.0, 5.0, 0.6, 7.0, 1.43, 0, 75, 60, 0.4, 0.0, 30);
-	public static ut_eliteBallistaElephant: UnitType = new UnitType("Elite Ballista Elephant", 310, 2.5, 6.0, 0.4, 6.0, 0.88, 100, 0, 80, 0.6);
-	public static ut_eliteKarambitWarrior: UnitType = new UnitType("Elite Karambit Warrior", 40, 2.0, 0.0, 0.81, Number.MAX_VALUE, 1.32, 30, 0, 15);
-	public static ut_eliteRattanArcher: UnitType = new UnitType("Elite Rattan Archer", 45, 1.7, 8.0, 0.69, 7.0, 1.1, 0, 50, 45);
+	public static ut_organGun: UnitType = new UnitType("Organ Gun", 60, 3.45, 7.0, 0.6, 5.5, 0.85, 0, 80, 60, 0.4, 1.0, 50);
+	public static ut_eliteOrganGun: UnitType = new UnitType("Elite Organ Gun", 70, 3.45, 7.0, 0.6, 5.5, 0.85, 0, 80, 60, 0.4, 1.0, 50);
+	public static utl_organGun: UnitTypeLine = new UnitTypeLine("Organ Gun line", [AoeData.ut_organGun, AoeData.ut_eliteOrganGun]);
 
-	public static ut_eliteKonnik: UnitType = new UnitType("Elite Konnik", 140, 1.8, 0.0, 0.7, Number.MAX_VALUE, 1.485, 60, 0, 70, 0.4);
-	public static ut_eliteKonnikDismounted: UnitType = new UnitType("Elite Konnik (Foot)", 50, 1.8, 0.0, 0.7, Number.MAX_VALUE, 0.99, 30, 0, 35);
-	public static ut_eliteKipchak: UnitType = new UnitType("Elite Kipchak", 65, 1.98, 6.0, 0.0, 7.0, 1.54, 0, 60, 35, 0.4);
-	public static ut_eliteLeitis: UnitType = new UnitType("Elite Leitis", 150, 1.9, 0.0, 0.7, Number.MAX_VALUE, 1.54, 70, 0, 50, 0.4);
-	public static ut_eliteKeshik: UnitType = new UnitType("Elite Keshik", 160, 1.9, 0.0, 0.7, Number.MAX_VALUE, 1.54, 50, 0, 40, 0.4);
-	public static ut_flamingCamel: UnitType = new UnitType("Flaming Camel", 75, Number.MAX_VALUE, 0.0, 0.0, Number.MAX_VALUE, 1.43, 75, 0, 30, 0.4);
+	public static ut_arambai: UnitType = new UnitType("Arambai", 60, 2.0, 5.0, 0.6, 7.0, 1.3, 0, 75, 60, 0.4, 0.0, 30);
+	public static ut_eliteArambai: UnitType = new UnitType("Elite Arambai", 65, 2.0, 5.0, 0.6, 7.0, 1.3, 0, 75, 60, 0.4, 0.0, 30);
+	public static utl_arambai: UnitTypeLine = new UnitTypeLine("Arambai line", [AoeData.ut_arambai, AoeData.ut_eliteArambai]);
+	
+	public static ut_ballistaElephant: UnitType = new UnitType("Ballista Elephant", 250, 2.5, 5.0, 0.4, 6.0, 0.80, 100, 0, 80, 0.6);
+	public static ut_eliteBallistaElephant: UnitType = new UnitType("Elite Ballista Elephant", 290, 2.5, 5.0, 0.4, 6.0, 0.80, 100, 0, 80, 0.6);
+	public static utl_ballistaElephant: UnitTypeLine = new UnitTypeLine("Ballista Elephant line", [AoeData.ut_ballistaElephant, AoeData.ut_eliteBallistaElephant]);
+
+	public static ut_karambitWarrior: UnitType = new UnitType("Karambit Warrior", 30, 2.0, 0.0, 0.81, Number.MAX_VALUE, 1.2, 30, 0, 15);
+	public static ut_eliteKarambitWarrior: UnitType = new UnitType("Elite Karambit Warrior", 40, 2.0, 0.0, 0.81, Number.MAX_VALUE, 1.2, 30, 0, 15);
+	public static utl_karambitWarrior: UnitTypeLine = new UnitTypeLine("Karambit Warrior line", [AoeData.ut_karambitWarrior, AoeData.ut_eliteKarambitWarrior]);
+	
+	public static ut_rattanArcher: UnitType = new UnitType("Rattan Archer", 35, 2.0, 4.0, 0.69, 7.0, 1.1, 0, 50, 45, 0.2, 0.0, 80);
+	public static ut_eliteRattanArcher: UnitType = new UnitType("Elite Rattan Archer", 40, 2.0, 5.0, 0.69, 7.0, 1.1, 0, 50, 45, 0.2, 0.0, 90);
+	public static utl_rattanArcher: UnitTypeLine = new UnitTypeLine("Rattan Archer line", [AoeData.ut_rattanArcher, AoeData.ut_eliteRattanArcher]);
+
+	public static ut_konnik: UnitType = new UnitType("Konnik", 100, 2.4, 0.0, 0.7, Number.MAX_VALUE, 1.35, 60, 0, 70, 0.4);
+	public static ut_eliteKonnik: UnitType = new UnitType("Elite Konnik", 120, 2.4, 0.0, 0.7, Number.MAX_VALUE, 1.35, 60, 0, 70, 0.4);
+	public static utl_konnik: UnitTypeLine = new UnitTypeLine("Konnik line", [AoeData.ut_konnik, AoeData.ut_eliteKonnik]);
+
+	public static ut_konnikDismounted: UnitType = new UnitType("Konnik (Foot)", 45, 2.4, 0.0, 0.7, Number.MAX_VALUE, 0.9, 30, 0, 35);
+	public static ut_eliteKonnikDismounted: UnitType = new UnitType("Elite Konnik (Foot)", 50, 2.4, 0.0, 0.7, Number.MAX_VALUE, 0.9, 30, 0, 35);
+	public static utl_konnikDismounted: UnitTypeLine = new UnitTypeLine("Konnik (Foot) line", [AoeData.ut_konnikDismounted, AoeData.ut_eliteKonnikDismounted]);
+	
+	public static ut_kipchak: UnitType = new UnitType("Kipchak", 40, 2.2, 4.0, 0.0, 7.0, 1.4, 0, 60, 35, 0.4, 0.0, 90);
+	public static ut_eliteKipchak: UnitType = new UnitType("Elite Kipchak", 45, 2.2, 4.0, 0.0, 7.0, 1.4, 0, 60, 35, 0.4, 0.0, 90);
+	public static utl_kipchak: UnitTypeLine = new UnitTypeLine("Kipchak line", [AoeData.ut_kipchak, AoeData.ut_eliteKipchak]);
+	
+	public static ut_leitis: UnitType = new UnitType("Leitis", 100, 1.9, 0.0, 0.7, Number.MAX_VALUE, 1.4, 70, 0, 50, 0.4);
+	public static ut_eliteLeitis: UnitType = new UnitType("Elite Leitis", 130, 1.9, 0.0, 0.7, Number.MAX_VALUE, 1.4, 70, 0, 50, 0.4);
+	public static utl_leitis: UnitTypeLine = new UnitTypeLine("Leitis line", [AoeData.ut_leitis, AoeData.ut_eliteLeitis]);
+	
+	public static ut_keshik: UnitType = new UnitType("Keshik", 110, 1.9, 0.0, 0.7, Number.MAX_VALUE, 1.4, 50, 0, 40, 0.4);
+	public static ut_eliteKeshik: UnitType = new UnitType("Elite Keshik", 140, 1.9, 0.0, 0.7, Number.MAX_VALUE, 1.4, 50, 0, 40, 0.4);
+	public static utl_keshik: UnitTypeLine = new UnitTypeLine("Keshik line", [AoeData.ut_keshik, AoeData.ut_eliteKeshik]);
+	
+	public static ut_flamingCamel: UnitType = new UnitType("Flaming Camel", 55, Number.MAX_VALUE, 0.0, 0.0, Number.MAX_VALUE, 1.3, 75, 0, 30, 0.4);
+	public static utl_flamingCamel: UnitTypeLine = new UnitTypeLine("Flaming Camel line", [AoeData.ut_flamingCamel]);
 
 
 	public static unitTypesList: UnitType[] = [AoeData.ut_villager, AoeData.ut_champion, AoeData.ut_halberdier, AoeData.ut_eliteEagleWarrior,
@@ -187,7 +263,64 @@ export abstract class AoeData
 		AoeData.ut_eliteKonnik, AoeData.ut_eliteKonnikDismounted, AoeData.ut_eliteKipchak, AoeData.ut_eliteLeitis, AoeData.ut_eliteKeshik, AoeData.ut_flamingCamel
 	];
 
-	// public static resourceImages: ImageBitmap[] = [ new ImageBitmap(), new ImageBitmap(), new ImageBitmap() ];
+	public static unitTypeLinesList: UnitTypeLine[] = [AoeData.utl_villager, AoeData.utl_militia, AoeData.utl_spearman, AoeData.utl_eagleScout,
+		AoeData.utl_scoutCavalry, AoeData.utl_knight, AoeData.utl_camelRider, AoeData.utl_battleElephant, AoeData.utl_steppeLancer,
+		AoeData.utl_archer, AoeData.utl_skirmisher, AoeData.utl_cavalryArcher, AoeData.utl_handCannoneer,
+		AoeData.utl_batteringRam, AoeData.utl_scorpion,
+		AoeData.utl_longbowman, AoeData.utl_cataphract, AoeData.utl_woadRaider, AoeData.utl_chuKoNu, AoeData.utl_throwingAxeman, AoeData.utl_huskarl, AoeData.utl_samurai,
+		AoeData.utl_mangudai, AoeData.utl_warElephant, AoeData.utl_mameluke, AoeData.utl_teutonicKnight, AoeData.utl_janissary,  AoeData.utl_berserk,
+		AoeData.utl_jaguarWarrior, AoeData.utl_tarkan, AoeData.utl_warWagon, AoeData.utl_plumedArcher, AoeData.utl_conquistador,
+		AoeData.utl_kamayuk, AoeData.utl_slinger, AoeData.utl_elephantArcher, AoeData.utl_genoeseCrossbowman, AoeData.utl_condottiero, AoeData.utl_magyarHuszar, AoeData.utl_boyar,
+		AoeData.utl_camelArcher, AoeData.utl_genitour, AoeData.utl_shotelWarrior, AoeData.utl_gbeto, AoeData.utl_organGun,
+		AoeData.utl_arambai, AoeData.utl_ballistaElephant, AoeData.utl_karambitWarrior, AoeData.utl_rattanArcher,
+		AoeData.utl_konnik, AoeData.utl_konnikDismounted, AoeData.utl_kipchak, AoeData.utl_leitis, AoeData.utl_keshik, AoeData.utl_flamingCamel
+	];
+
+	public static civ_aztecs: Civilization = new Civilization("Aztecs");
+	public static civ_berbers: Civilization = new Civilization("Berbers");
+	public static civ_britons: Civilization = new Civilization("Britons");
+	public static civ_bulgarians: Civilization = new Civilization("Bulgarians");
+	public static civ_burmese: Civilization = new Civilization("Burmese");
+	public static civ_byzantines: Civilization = new Civilization("Byzantines");
+	public static civ_celts: Civilization = new Civilization("Celts");
+	public static civ_chinese: Civilization = new Civilization("Chinese");
+	public static civ_cumans: Civilization = new Civilization("Cumans");
+	public static civ_ethiopians: Civilization = new Civilization("Ethiopians");
+	public static civ_franks: Civilization = new Civilization("Franks");
+	public static civ_goths: Civilization = new Civilization("Goths");
+	public static civ_huns: Civilization = new Civilization("Huns");
+	public static civ_incas: Civilization = new Civilization("Incas");
+	public static civ_indians: Civilization = new Civilization("Indians");
+	public static civ_italians: Civilization = new Civilization("Italians");
+	public static civ_japanese: Civilization = new Civilization("Japanese");
+	public static civ_khmer: Civilization = new Civilization("Khmer");
+	public static civ_koreans: Civilization = new Civilization("Koreans");
+	public static civ_lithuanians: Civilization = new Civilization("Lithuanians");
+	public static civ_magyars: Civilization = new Civilization("Magyars");
+	public static civ_malay: Civilization = new Civilization("Malay");
+	public static civ_malians: Civilization = new Civilization("Malians");
+	public static civ_mayans: Civilization = new Civilization("Mayans");
+	public static civ_mongols: Civilization = new Civilization("Mongols");
+	public static civ_persians: Civilization = new Civilization("Persians");
+	public static civ_portuguese: Civilization = new Civilization("Portuguese");
+	public static civ_saracens: Civilization = new Civilization("Saracens");
+	public static civ_slavs: Civilization = new Civilization("Slavs");
+	public static civ_spanish: Civilization = new Civilization("Spanish");
+	public static civ_tatars: Civilization = new Civilization("Tatars");
+	public static civ_teutons: Civilization = new Civilization("Teutons");
+	public static civ_turks: Civilization = new Civilization("Turks");
+	public static civ_vietnamese: Civilization = new Civilization("Vietnamese");
+	public static civ_vikings: Civilization = new Civilization("Vikings");
+
+	public static civsList: Civilization[] = [
+		AoeData.civ_aztecs, AoeData.civ_berbers, AoeData.civ_britons, AoeData.civ_bulgarians, AoeData.civ_burmese,
+		AoeData.civ_byzantines, AoeData.civ_celts, AoeData.civ_chinese, AoeData.civ_cumans, AoeData.civ_ethiopians,
+		AoeData.civ_franks, AoeData.civ_goths, AoeData.civ_huns, AoeData.civ_incas, AoeData.civ_indians,
+		AoeData.civ_italians, AoeData.civ_japanese, AoeData.civ_khmer, AoeData.civ_koreans, AoeData.civ_lithuanians,
+		AoeData.civ_magyars, AoeData.civ_malay, AoeData.civ_malians, AoeData.civ_mayans, AoeData.civ_mongols,
+		AoeData.civ_persians, AoeData.civ_portuguese, AoeData.civ_saracens, AoeData.civ_slavs, AoeData.civ_spanish,
+		AoeData.civ_tatars, AoeData.civ_teutons, AoeData.civ_turks, AoeData.civ_vietnamese, AoeData.civ_vikings,
+	];
 	
 	public static InitializeUnitTypes(): void
 	{
@@ -725,5 +858,17 @@ export abstract class AoeData
 		AoeData.ut_flamingCamel.cleaveType = 3;
 		AoeData.ut_flamingCamel.cleaveRadius = 1.5;
 		AoeData.ut_flamingCamel.imagePath = "assets/unitTypes/Flaming_camel_icon.png";
+	}
+
+	public static InitializeCivilizations(): void{
+		AoeData.civ_aztecs.unitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_aztecs.unitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_aztecs.unitTypeLineLevels.push([this.utl_spearman, 1]);
+		AoeData.civ_aztecs.unitTypeLineLevels.push([this.utl_eagleScout, 2]);
+		AoeData.civ_aztecs.unitTypeLineLevels.push([this.utl_archer, 2]);
+		AoeData.civ_aztecs.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_aztecs.unitTypeLineLevels.push([this.utl_batteringRam, 2]);
+		AoeData.civ_aztecs.unitTypeLineLevels.push([this.utl_scorpion, 0]);
+		AoeData.civ_aztecs.unitTypeLineLevels.push([this.utl_jaguarWarrior, 1]);
 	}
 }
