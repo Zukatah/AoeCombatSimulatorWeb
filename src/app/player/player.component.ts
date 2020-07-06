@@ -33,4 +33,12 @@ export class PlayerComponent implements OnInit, DoCheck{
 	public getArrayAllColumns(): number[]{
 		return [...Array(this.player.uts.length).keys()];
 	}
+
+	public getCivUnitTypeIndices(): number[]{
+		return [...Array(this.player.civUts.length).keys()];
+	}
+
+	public setCiv(civIndex: number): void{
+		this.player.SetCiv(civIndex);
+	}
 }

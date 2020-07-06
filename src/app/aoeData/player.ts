@@ -2,6 +2,7 @@ import { UnitType } from "./../aoeData/unitType";
 import { Color } from "./../helper/color";
 import { AoECombatSimulatorComponent } from "./../aoeCombatSimulator/aoeCombatSimulator.component";
 import { AoeData } from "./aoeData";
+import { Civilization } from './civilization';
 
 export class Player{
 	// public userInterface: AoECombatSimulatorComponent; // a reference to the user interface instance to which this player's gui elements will be added
@@ -36,7 +37,10 @@ export class Player{
 	public populationGenerated: number = 0;
 
 	public uts: UnitType[] = AoeData.unitTypesList;
+	public civs: Civilization[] = AoeData.civsList;
 	public playerColor: Color; // Player GUI //
+	public civilization: Civilization;
+	public civUts: UnitType[] = []; // unit types on the basis of the selected civ
 
 	public constructor(playerColor: Color, playerIndex: number)
 	{
@@ -49,6 +53,7 @@ export class Player{
 		});
 		this.playerColor = playerColor;
 		this.playerIndex = playerIndex;
+		this.civilization = AoeData.civ_aztecs;
 	}
 
 	public ResetData(): void
@@ -80,5 +85,13 @@ export class Player{
 			}
 			this.resourcesInvestedTotal += this.resourcesInvested[k] * resourceValuesFactors[k];
 		}
+	}
+
+	public SetCiv(civIndex: number): void{
+		this.civilization = this.civs[civIndex];
+		this.civUts = [];
+		this.civilization.unitTypeLineLevels.forEach(tuple => {
+			this.civUts.push(tuple[0][tuple[1]]);
+		});
 	}
 }

@@ -1,31 +1,38 @@
 <div class="container border border-dark rounded no-gutters pb-2 player{{player.playerIndex}}-bg">
 	<div class="row">
-		<div class="col-12">
-			<h1 class="text-center">Player {{player.playerIndex + 1}}</h1>
+		<div class="col-12 text-center mt-2" ngbDropdown>
+			<button class="btn btn-success" id="dropdownBasic3" ngbDropdownToggle>Player {{player.playerIndex + 1}}: {{player.civilization.name}}</button>
+			<div ngbDropdownMenu aria-labelledby="dropdownBasic3">
+				<button *ngFor="let civ of player.civs; index as i" ngbDropdownItem (click)="setCiv(i)">{{player.civs[i].name}}</button>
+			</div>
 		</div>
 	</div>
 
-	<div class="row no-gutters">
-		<table class="table table-sm table-dark">
-			<thead>
-				<tr>
-					<th scope="col">Unit type</th>
-					<th scope="col">#Units</th>
-					<th scope="col">#Avg. survivors</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr *ngFor="let item of getArrayAllColumns()" [hidden]="simulator.hideUnitTypesWithZeroUnits && player.amountStartUnits[item]==0">
-					<td class="align-middle">
-						<!--<label [attr.for]="'numberInput'+player.playerIndex+item">{{player.uts[item].name}}</label>-->
-						<span *ngIf="player.uts[item].imagePath == ''">{{player.uts[item].name}}</span>
-						<img *ngIf="player.uts[item].imagePath != ''" src="{{player.uts[item].imagePath}}" class="border border-dark img-fluid" title="{{player.uts[item].name}}">
-					</td>
-					<td><input type="number" class="form-control" id="numberInput{{player.playerIndex}}{{item}}" oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value == ''){ this.value = '0'; }; if (this.value > 200) { this.value = '200'; }" value="0" min="0" max="200" [(ngModel)]="player.amountStartUnits[item]"></td>
-					<td class="text-center align-middle" [style.background-color]="getSurvivorsColor(item)">{{player.avgSurvivorsNumber[item] | number : '1.0-2'}}</td>
-				</tr>
-			</tbody>
-		</table>
+	<hr>
+
+	<div class="row">
+		<div class="col-12">
+			<table class="table table-sm table-dark">
+				<thead>
+					<tr>
+						<th scope="col">Unit type</th>
+						<th scope="col">#Units</th>
+						<th scope="col">#Avg. survivors</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let item of getCivUnitTypeIndices()" [hidden]="simulator.hideUnitTypesWithZeroUnits && player.amountStartUnits[item]==0">
+						<td class="align-middle">
+							<!--<label [attr.for]="'numberInput'+player.playerIndex+item">{{player.uts[item].name}}</label>-->
+							<span *ngIf="player.uts[item].imagePath == ''">{{player.uts[item].name}}</span>
+							<img *ngIf="player.uts[item].imagePath != ''" src="{{player.uts[item].imagePath}}" class="border border-dark img-fluid" title="{{player.uts[item].name}}">
+						</td>
+						<td><input type="number" class="form-control" id="numberInput{{player.playerIndex}}{{item}}" oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value == ''){ this.value = '0'; }; if (this.value > 200) { this.value = '200'; }" value="0" min="0" max="200" [(ngModel)]="player.amountStartUnits[item]"></td>
+						<td class="text-center align-middle" [style.background-color]="getSurvivorsColor(item)">{{player.avgSurvivorsNumber[item] | number : '1.0-2'}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 
 	<hr>
