@@ -38,6 +38,7 @@ export class MatrixComponent implements OnInit {
 
 	constructor() {
 		AoeData.InitializeUnitTypes();
+		AoeData.InitializeCivilizations();
 
 		// uncomment to calculate matrix (commented out to get pre-calculated values)
 		/*

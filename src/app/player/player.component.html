@@ -21,14 +21,14 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr *ngFor="let item of getCivUnitTypeIndices()" [hidden]="simulator.hideUnitTypesWithZeroUnits && player.amountStartUnits[item]==0">
+					<tr *ngFor="let item of getCivUnitTypeIndices()" [hidden]="simulator.hideUnitTypesWithZeroUnits && player.amountStartUnits[player.civUts[item].unitTypeIndex]==0">
 						<td class="align-middle">
 							<!--<label [attr.for]="'numberInput'+player.playerIndex+item">{{player.uts[item].name}}</label>-->
-							<span *ngIf="player.uts[item].imagePath == ''">{{player.uts[item].name}}</span>
-							<img *ngIf="player.uts[item].imagePath != ''" src="{{player.uts[item].imagePath}}" class="border border-dark img-fluid" title="{{player.uts[item].name}}">
+							<span *ngIf="player.uts[player.civUts[item].unitTypeIndex].imagePath == ''">{{player.uts[player.civUts[item].unitTypeIndex].name}}</span>
+							<img *ngIf="player.uts[player.civUts[item].unitTypeIndex].imagePath != ''" src="{{player.uts[player.civUts[item].unitTypeIndex].imagePath}}" class="border border-dark img-fluid" title="{{player.uts[player.civUts[item].unitTypeIndex].name}}">
 						</td>
-						<td><input type="number" class="form-control" id="numberInput{{player.playerIndex}}{{item}}" oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value == ''){ this.value = '0'; }; if (this.value > 200) { this.value = '200'; }" value="0" min="0" max="200" [(ngModel)]="player.amountStartUnits[item]"></td>
-						<td class="text-center align-middle" [style.background-color]="getSurvivorsColor(item)">{{player.avgSurvivorsNumber[item] | number : '1.0-2'}}</td>
+						<td><input type="number" class="form-control" id="numberInput{{player.playerIndex}}{{item}}" oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value == ''){ this.value = '0'; }; if (this.value > 200) { this.value = '200'; }" value="0" min="0" max="200" [(ngModel)]="player.amountStartUnits[player.civUts[item].unitTypeIndex]"></td>
+						<td class="text-center align-middle" [style.background-color]="getSurvivorsColor(player.civUts[item].unitTypeIndex)">{{player.avgSurvivorsNumber[player.civUts[item].unitTypeIndex] | number : '1.0-2'}}</td>
 					</tr>
 				</tbody>
 			</table>

@@ -31,7 +31,7 @@ export class AoECombatSimulatorComponent {
 		this.hideUnitTypesWithZeroUnits = !this.hideUnitTypesWithZeroUnits;
 	}
 
-	constructor() { AoeData.InitializeUnitTypes(); }
+	constructor() { AoeData.InitializeUnitTypes(); AoeData.InitializeCivilizations(); }
 
 	
 	private PrintResults(): void

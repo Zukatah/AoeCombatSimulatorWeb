@@ -53,7 +53,7 @@ export class Player{
 		});
 		this.playerColor = playerColor;
 		this.playerIndex = playerIndex;
-		this.civilization = AoeData.civ_aztecs;
+		this.SetCiv(0); // default civ is aztecs (alphabetically first civ)
 	}
 
 	public ResetData(): void
@@ -91,7 +91,7 @@ export class Player{
 		this.civilization = this.civs[civIndex];
 		this.civUts = [];
 		this.civilization.unitTypeLineLevels.forEach(tuple => {
-			this.civUts.push(tuple[0][tuple[1]]);
+			this.civUts.push(tuple[0].unitTypes[tuple[1]]);
 		});
 	}
 }
