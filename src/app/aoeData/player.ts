@@ -92,6 +92,7 @@ export class Player{
 		this.civUts = [];
 		this.civilization.unitTypeLineLevels.forEach(tuple => {
 			this.civUts.push(tuple[0].unitTypes[tuple[1]]);
+			console.log(tuple.length);
 		});
 	}
 }

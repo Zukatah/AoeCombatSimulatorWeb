@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from "rxjs/operators";
+import { AoeData } from './aoeData/aoeData';
 
 declare var gtag; // for google analytics
 
@@ -19,5 +20,8 @@ export class AppComponent {
 				'page_path': event.urlAfterRedirects
 			});
 		});
+
+		AoeData.InitializeUnitTypes();
+		AoeData.InitializeCivilizations();
 	}
 }
