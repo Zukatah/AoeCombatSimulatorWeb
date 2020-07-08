@@ -4,6 +4,7 @@ import { AoeData} from './aoeData';
 import { Battle } from "./battle";
 import { Arrow } from "./arrow";
 import { Missile } from "./missile";
+import { CivUnitType } from './civUnitType';
 
 export class Unit {
 
@@ -34,7 +35,7 @@ export class Unit {
 	public radius: number; // size of the unit in tiles
 
 
-	public unitType: UnitType; // this unit's unit type; the unit type defines many attributes of each unit
+	public civUnitType: CivUnitType; // this unit's unit type; the unit type defines many attributes of each unit
 	public battle: Battle; // the reference to the battle instance this unit belongs to
 	public curHp: number; // the current hit points of this unit
 	public alive: boolean = true; // a unit is alive until the END of the frame its HP reaches 0 or below 0
@@ -57,29 +58,29 @@ export class Unit {
 	public maxNumberOfAttackers: number; // Max attackers for infantry 4, cav 6, elephants 8
 
 
-	constructor(unitType: UnitType, battle: Battle, armyIndex: number) {
-		this.hp = unitType.hp;
-		this.attackSpeed = unitType.attackSpeed;
-		this.attackRange = unitType.attackRange;
-		this.attackRangeMin = unitType.attackRangeMin;
-		this.attackDelay = unitType.attackDelay;
-		this.attackIsMissile = unitType.attackIsMissile;
-		this.secondaryAttack = unitType.secondaryAttack;
-		this.secondaryAttackProjectileCount = unitType.secondaryAttackProjectileCount;
-		this.missileFlightDistance = unitType.missileFlightDistance;
-		this.secondaryMissileFlightDistance = unitType.secondaryMissileFlightDistance;
-		this.secondaryAttackValues = unitType.secondaryAttackValues;
-		this.projectileSpeed = unitType.projectileSpeed;
-		this.cleaveType = unitType.cleaveType;
-		this.cleaveRadius = unitType.cleaveRadius;
-		this.moveSpeed = unitType.moveSpeed;
-		this.attackValues = unitType.attackValues;
-		this.armorClasses = unitType.armorClasses;
-		this.radius = unitType.radius;
-		this.accuracyPercent = unitType.accuracyPercent;
-		this.hpRegPerMin = unitType.hpRegPerMin;
+	constructor(civUnitType: CivUnitType, battle: Battle, armyIndex: number) {
+		this.hp = civUnitType.hp;
+		this.attackSpeed = civUnitType.attackSpeed;
+		this.attackRange = civUnitType.attackRange;
+		this.attackRangeMin = civUnitType.attackRangeMin;
+		this.attackDelay = civUnitType.attackDelay;
+		this.attackIsMissile = civUnitType.attackIsMissile;
+		this.secondaryAttack = civUnitType.secondaryAttack;
+		this.secondaryAttackProjectileCount = civUnitType.secondaryAttackProjectileCount;
+		this.missileFlightDistance = civUnitType.missileFlightDistance;
+		this.secondaryMissileFlightDistance = civUnitType.secondaryMissileFlightDistance;
+		this.secondaryAttackValues = civUnitType.secondaryAttackValues;
+		this.projectileSpeed = civUnitType.projectileSpeed;
+		this.cleaveType = civUnitType.cleaveType;
+		this.cleaveRadius = civUnitType.cleaveRadius;
+		this.moveSpeed = civUnitType.moveSpeed;
+		this.attackValues = civUnitType.attackValues;
+		this.armorClasses = civUnitType.armorClasses;
+		this.radius = civUnitType.radius;
+		this.accuracyPercent = civUnitType.accuracyPercent;
+		this.hpRegPerMin = civUnitType.hpRegPerMin;
 
-		this.unitType = unitType;
+		this.civUnitType = civUnitType;
 		this.battle = battle;
 		this.curHp = this.hp;
 		this.armyIndex = armyIndex;
@@ -220,11 +221,11 @@ export class Unit {
 	public static CalculateDamageDealtToTarget(attacker: Unit, target: Unit, secondary: boolean = false): number
 	{
 		let damageDealt: number = 0.0;
-		if (attacker.unitType == AoeData.ut_eliteLeitis) // leitis ignore armor and don't have any attack bonusses
+		if (attacker.civUnitType.baseUnitType == AoeData.ut_eliteLeitis) // leitis ignore armor and don't have any attack bonusses
 		{
 			damageDealt = attacker.attackValues.get(AoeData.ac_baseMelee);
 		}
-		else if (secondary && attacker.unitType == AoeData.ut_eliteOrganGun) // secondary missiles of organ guns always deal 2 damage (and 1 if target wasn't the main target)
+		else if (secondary && attacker.civUnitType.baseUnitType == AoeData.ut_eliteOrganGun) // secondary missiles of organ guns always deal 2 damage (and 1 if target wasn't the main target)
 		{
 			damageDealt = 2;
 		}
@@ -283,11 +284,11 @@ export class Unit {
 				});
 			}
 
-			if (this.unitType == AoeData.ut_eliteKeshik)
+			if (this.civUnitType.baseUnitType == AoeData.ut_eliteKeshik)
 			{
 				this.battle.resourcesGenerated[this.armyIndex][2] += 0.695;
 			}
-			if (this.unitType == AoeData.ut_flamingCamel)
+			if (this.civUnitType.baseUnitType == AoeData.ut_flamingCamel)
 			{
 				this.curHp = 0.0;
 			}

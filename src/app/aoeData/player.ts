@@ -3,6 +3,7 @@ import { Color } from "./../helper/color";
 import { AoECombatSimulatorComponent } from "./../aoeCombatSimulator/aoeCombatSimulator.component";
 import { AoeData } from "./aoeData";
 import { Civilization } from './civilization';
+import { CivUnitType } from './civUnitType';
 
 export class Player{
 	// public userInterface: AoECombatSimulatorComponent; // a reference to the user interface instance to which this player's gui elements will be added
@@ -40,24 +41,19 @@ export class Player{
 	public civs: Civilization[] = AoeData.civsList;
 	public playerColor: Color; // Player GUI //
 	public civilization: Civilization;
-	public civUts: UnitType[] = []; // unit types on the basis of the selected civ
+	public civUts: CivUnitType[] = []; // unit types on the basis of the selected civ
 
 	public constructor(playerColor: Color, playerIndex: number)
 	{
-		AoeData.unitTypesList.forEach(ut => {
-			this.survivorsSumArmy.set(ut, 0);
-			this.amountStartUnits.push(0);
-			this.avgSurvivorsNumber.push(0);
-			this.avgSurvivorsPercent.push(0);
-			this.avgSurvivorsColor.push(new Color(128, 128, 128));
-		});
 		this.playerColor = playerColor;
 		this.playerIndex = playerIndex;
 		this.SetCiv(0); // default civ is aztecs (alphabetically first civ)
+		this.ResetData();
 	}
 
-	public ResetData(): void
+	public ResetData(resetInput: boolean = true): void
 	{
+		console.log("ResetData");
 		this.sumWins = 0;
 		for (let i: number = 0; i < 3; i++)
 		{
@@ -67,7 +63,19 @@ export class Player{
 		}
 		this.attackAttacker = 0;
 		this.attackRandomNearbyTarget = 0;
-		AoeData.unitTypesList.forEach(ut => { this.survivorsSumArmy.set(ut, 0); });
+
+		this.survivorsSumArmy.clear();
+		if (resetInput) { this.amountStartUnits = []; }
+		this.avgSurvivorsNumber = [];
+		this.avgSurvivorsPercent = [];
+		this.avgSurvivorsColor = [];
+		this.civUts.forEach(ut => {
+			this.survivorsSumArmy.set(ut, 0);
+			if (resetInput) { this.amountStartUnits.push(0); }
+			this.avgSurvivorsNumber.push(0);
+			this.avgSurvivorsPercent.push(0);
+			this.avgSurvivorsColor.push(new Color(128, 128, 128));
+		});
 	}
 
 	public CalculateResourcesInvested(resourceValuesFactors: number[]): void{
@@ -76,11 +84,11 @@ export class Player{
 		for (let k: number = 0; k < 3; k++)
 		{
 			this.resourcesInvested[k] = 0;
-			for (let j: number = 0; j < AoeData.unitTypesList.length; j++)
+			for (let j: number = 0; j < this.civUts.length; j++)
 			{
-				this.resourcesInvested[k] += AoeData.unitTypesList[j].resourceCosts[k] * this.amountStartUnits[j];
+				this.resourcesInvested[k] += this.civUts[j].resourceCosts[k] * this.amountStartUnits[j];
 				if (k == 0){
-					this.populationInvested += AoeData.unitTypesList[j] == AoeData.ut_eliteKarambitWarrior ? this.amountStartUnits[j] * 0.5 : this.amountStartUnits[j];
+					this.populationInvested += this.civUts[j].baseUnitType == AoeData.ut_eliteKarambitWarrior ? this.amountStartUnits[j] * 0.5 : this.amountStartUnits[j];
 				}
 			}
 			this.resourcesInvestedTotal += this.resourcesInvested[k] * resourceValuesFactors[k];
@@ -91,8 +99,8 @@ export class Player{
 		this.civilization = this.civs[civIndex];
 		this.civUts = [];
 		this.civilization.unitTypeLineLevels.forEach(tuple => {
-			this.civUts.push(tuple[0].unitTypes[tuple[1]]);
-			console.log(tuple.length);
+			this.civUts.push(new CivUnitType(tuple[0].unitTypes[tuple[1]], this.civilization));
 		});
+		this.ResetData();
 	}
 }

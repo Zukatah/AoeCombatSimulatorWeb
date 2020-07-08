@@ -60,9 +60,9 @@ export class Battle
 
 		for (let i: number = 0; i < 2; i++)
 		{
-			for (let j: number = 0; j < AoeData.unitTypesList.length; j++)
+			for (let j: number = 0; j < this.players[i].civUts.length; j++)
 			{
-				if (AoeData.unitTypesList[j].attackRange <= 1.0){
+				if (this.players[i].civUts[j].attackRange <= 1.0){
 					army_SizeMelee[i] += this.players[i].amountStartUnits[j];
 				}
 				else{
@@ -70,7 +70,7 @@ export class Battle
 				}
 				for (let k: number = 0; k < this.players[i].amountStartUnits[j]; k++)
 				{
-					this.armies[i].push(new Unit(AoeData.unitTypesList[j], this, i));
+					this.armies[i].push(new Unit(this.players[i].civUts[j], this, i));
 				}
 			}
 
@@ -112,10 +112,10 @@ export class Battle
 		let tempCount: number;
 		for (let i: number = 0; i < 2; i++)
 		{
-			AoeData.unitTypesList.forEach(ut => {
+			this.players[i].civUts.forEach(ut => {
 				tempCount = 0;
 				for (let j=0; j < this.armies[i].length; j++){
-					if (this.armies[i][j].unitType == ut){
+					if (this.armies[i][j].civUnitType == ut){
 						tempCount++;
 					}
 				}
@@ -151,8 +151,8 @@ export class Battle
 				dyingUnit.target.attackedBy.splice(dyingUnit.target.attackedBy.indexOf(dyingUnit, 0), 1);
 				dyingUnit.alive = false;
 				this.gridUnits[dyingUnit.gx][dyingUnit.gy].delete(dyingUnit);
-				if (dyingUnit.unitType == AoeData.ut_eliteKonnik){
-					let dismountedKonnik: Unit = new Unit(AoeData.ut_eliteKonnikDismounted, this, i);
+				if (dyingUnit.civUnitType.baseUnitType == AoeData.ut_eliteKonnik){
+					let dismountedKonnik: Unit = new Unit(this.players[dyingUnit.armyIndex].civUts.find(cut => cut.baseUnitType == AoeData.ut_eliteKonnikDismounted), this, i);
 					this.armies[i].push(dismountedKonnik);
 					dismountedKonnik.SetXYInitial(dyingUnit.x, dyingUnit.y);
 				}

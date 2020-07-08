@@ -47,17 +47,17 @@ export class AoECombatSimulatorComponent {
 				this.players[i].resourcesGenerated[k] /= this.numberOfSimulations;
 			}
 
-			for (let j: number = 0; j < AoeData.unitTypesList.length; j++)
+			for (let j: number = 0; j < this.players[i].civUts.length; j++)
 			{
-				this.players[i].avgSurvivorsNumber[j] = 1.0 * this.players[i].survivorsSumArmy.get(AoeData.unitTypesList[j]) / this.numberOfSimulations;
-				this.players[i].populationRemaining += this.players[i].avgSurvivorsNumber[j] * (AoeData.unitTypesList[j] == AoeData.ut_eliteKarambitWarrior ? 0.5 : 1.0);
+				this.players[i].avgSurvivorsNumber[j] = 1.0 * this.players[i].survivorsSumArmy.get(this.players[i].civUts[j]) / this.numberOfSimulations;
+				this.players[i].populationRemaining += this.players[i].avgSurvivorsNumber[j] * (this.players[i].civUts[j].baseUnitType == AoeData.ut_eliteKarambitWarrior ? 0.5 : 1.0);
 				this.players[i].avgSurvivorsPercent[j] = this.players[i].avgSurvivorsNumber[j] / this.players[i].amountStartUnits[j];
 				this.players[i].avgSurvivorsColor[j] = this.players[i].amountStartUnits[j] == 0 ? new Color(128, 128, 128) :
 					new Color(255 - 128.0 * this.players[i].avgSurvivorsPercent[j], 127 + 128.0 * this.players[i].avgSurvivorsPercent[j], 0);
 
 				for (let k: number = 0; k < 3; k++)
 				{
-					this.players[i].resourcesRemaining[k] += Math.round(AoeData.unitTypesList[j].resourceCosts[k] * this.players[i].avgSurvivorsNumber[j]);
+					this.players[i].resourcesRemaining[k] += Math.round(this.players[i].civUts[j].resourceCosts[k] * this.players[i].avgSurvivorsNumber[j]);
 				}
 			}
 			this.players[i].populationLost = this.players[i].populationInvested - this.players[i].populationRemaining;
@@ -70,8 +70,7 @@ export class AoECombatSimulatorComponent {
 		}
 		this.CalculateWeightedSum();
 
-		/*for (let i: number = 0; i < 2; i++)
-		{
+		/*for (let i: number = 0; i < 2; i++){
 			console.log("Army " + (i + 1) + ": Attacking attacker: " + this.players[i].attackAttacker + ". Attacking random nearby target: " + this.players[i].attackRandomNearbyTarget + ".");
 			console.log(this.players[i] + " Hit: " + this.players[i].regularHit + " Total Miss MTAlive: " + this.players[i].missTotalMainTargetAlive + " Total Miss MTDead: " + this.players[i].missTotalMainTargetDead + " Miss Main Target: " + this.players[i].missMainTarget + " Miss Side Target: " + this.players[i].missSideTarget);
 		}*/
@@ -115,8 +114,8 @@ export class AoECombatSimulatorComponent {
 
 		for (let i: number = 0; i < 2; i++)
 		{
-			this.players[i].ResetData();
-			for (let j: number = 0; j < AoeData.unitTypesList.length; j++)
+			this.players[i].ResetData(false);
+			for (let j: number = 0; j < this.players[i].civUts.length; j++)
 			{
 				if (this.players[i].amountStartUnits[j] == NaN || this.players[i].amountStartUnits[j] > 200 || !Number.isInteger(this.players[i].amountStartUnits[j])){
 					return;
