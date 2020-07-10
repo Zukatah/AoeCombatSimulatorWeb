@@ -5,6 +5,7 @@ import { AoeData } from "./aoeData";
 import { ExtensionMethods } from "./extensionMethods";
 import { AoECombatSimulatorComponent } from "./../aoeCombatSimulator/aoeCombatSimulator.component";
 import { Player } from './player';
+import { UnitType } from './unitType';
 
 
 export class Battle
@@ -151,8 +152,9 @@ export class Battle
 				dyingUnit.target.attackedBy.splice(dyingUnit.target.attackedBy.indexOf(dyingUnit, 0), 1);
 				dyingUnit.alive = false;
 				this.gridUnits[dyingUnit.gx][dyingUnit.gy].delete(dyingUnit);
-				if (dyingUnit.civUnitType.baseUnitType == AoeData.ut_eliteKonnik){
-					let dismountedKonnik: Unit = new Unit(this.players[dyingUnit.armyIndex].civUts.find(cut => cut.baseUnitType == AoeData.ut_eliteKonnikDismounted), this, i);
+				if (dyingUnit.civUnitType.baseUnitType == AoeData.ut_eliteKonnik || dyingUnit.civUnitType.baseUnitType == AoeData.ut_konnik){
+					let dyingBaseUnitType: UnitType = dyingUnit.civUnitType.baseUnitType;
+					let dismountedKonnik: Unit = new Unit(this.players[dyingUnit.armyIndex].civUts.find(cut => cut.baseUnitType == dyingBaseUnitType), this, i);
 					this.armies[i].push(dismountedKonnik);
 					dismountedKonnik.SetXYInitial(dyingUnit.x, dyingUnit.y);
 				}

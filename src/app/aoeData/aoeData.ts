@@ -403,12 +403,15 @@ export abstract class AoeData
 		AoeData.ut_villager.armorClasses.set(AoeData.ac_basePierce, 0);
 		AoeData.ut_villager.attackValues.set(AoeData.ac_baseMelee, 3);
 		AoeData.ut_villager.imagePath = "assets/unitTypes/MaleVillDE.jpg";
+		AoeData.ut_villager.techsForUnitList.push(this.tec_loom);
 
 		AoeData.ut_militia.armorClasses.set(AoeData.ac_infantry, 0);
 		AoeData.ut_militia.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_militia.armorClasses.set(AoeData.ac_basePierce, 1);
 		AoeData.ut_militia.attackValues.set(AoeData.ac_baseMelee, 4);
 		AoeData.ut_militia.imagePath = "assets/unitTypes/MilitiaDE.png";
+		AoeData.ut_militia.techsForUnitList.push(this.tec_supplies, this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_manAtArms.armorClasses.set(AoeData.ac_infantry, 0);
 		AoeData.ut_manAtArms.armorClasses.set(AoeData.ac_baseMelee, 0);
@@ -416,6 +419,8 @@ export abstract class AoeData
 		AoeData.ut_manAtArms.attackValues.set(AoeData.ac_eagleWarrior, 2);
 		AoeData.ut_manAtArms.attackValues.set(AoeData.ac_baseMelee, 6);
 		AoeData.ut_manAtArms.imagePath = "assets/unitTypes/Manatarms_aoe2DE.png";
+		AoeData.ut_manAtArms.techsForUnitList.push(this.tec_supplies, this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_longSwordsman.armorClasses.set(AoeData.ac_infantry, 0);
 		AoeData.ut_longSwordsman.armorClasses.set(AoeData.ac_baseMelee, 0);
@@ -423,6 +428,8 @@ export abstract class AoeData
 		AoeData.ut_longSwordsman.attackValues.set(AoeData.ac_eagleWarrior, 6);
 		AoeData.ut_longSwordsman.attackValues.set(AoeData.ac_baseMelee, 9);
 		AoeData.ut_longSwordsman.imagePath = "assets/unitTypes/Longswordsman_aoe2DE.png";
+		AoeData.ut_longSwordsman.techsForUnitList.push(this.tec_supplies, this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_twoHandedSwordsman.armorClasses.set(AoeData.ac_infantry, 0);
 		AoeData.ut_twoHandedSwordsman.armorClasses.set(AoeData.ac_baseMelee, 0);
@@ -430,6 +437,8 @@ export abstract class AoeData
 		AoeData.ut_twoHandedSwordsman.attackValues.set(AoeData.ac_eagleWarrior, 8);
 		AoeData.ut_twoHandedSwordsman.attackValues.set(AoeData.ac_baseMelee, 12);
 		AoeData.ut_twoHandedSwordsman.imagePath = "assets/unitTypes/Twohanded_aoe2DE.png";
+		AoeData.ut_twoHandedSwordsman.techsForUnitList.push(this.tec_supplies, this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_champion.armorClasses.set(AoeData.ac_infantry, 0);
 		AoeData.ut_champion.armorClasses.set(AoeData.ac_baseMelee, 1);
@@ -437,6 +446,8 @@ export abstract class AoeData
 		AoeData.ut_champion.attackValues.set(AoeData.ac_eagleWarrior, 8);
 		AoeData.ut_champion.attackValues.set(AoeData.ac_baseMelee, 13);
 		AoeData.ut_champion.imagePath = "assets/unitTypes/Champion_aoe2DE.png";
+		AoeData.ut_champion.techsForUnitList.push(this.tec_supplies, this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_spearman.armorClasses.set(AoeData.ac_infantry, 0);
 		AoeData.ut_spearman.armorClasses.set(AoeData.ac_spearman, 0);
@@ -449,6 +460,8 @@ export abstract class AoeData
 		AoeData.ut_spearman.attackValues.set(AoeData.ac_eagleWarrior, 1);
 		AoeData.ut_spearman.attackValues.set(AoeData.ac_baseMelee, 3);
 		AoeData.ut_spearman.imagePath = "assets/unitTypes/Spearman_aoe2DE.png";
+		AoeData.ut_spearman.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_pikeman.armorClasses.set(AoeData.ac_infantry, 0);
 		AoeData.ut_pikeman.armorClasses.set(AoeData.ac_spearman, 0);
@@ -461,6 +474,8 @@ export abstract class AoeData
 		AoeData.ut_pikeman.attackValues.set(AoeData.ac_eagleWarrior, 1);
 		AoeData.ut_pikeman.attackValues.set(AoeData.ac_baseMelee, 4);
 		AoeData.ut_pikeman.imagePath = "assets/unitTypes/Aoe2-infantry-2-pikeman.png";
+		AoeData.ut_pikeman.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_halberdier.armorClasses.set(AoeData.ac_infantry, 0);
 		AoeData.ut_halberdier.armorClasses.set(AoeData.ac_spearman, 0);
@@ -473,6 +488,8 @@ export abstract class AoeData
 		AoeData.ut_halberdier.attackValues.set(AoeData.ac_eagleWarrior, 1);
 		AoeData.ut_halberdier.attackValues.set(AoeData.ac_baseMelee, 6);
 		AoeData.ut_halberdier.imagePath = "assets/unitTypes/Halberdier_aoe2DE.png";
+		AoeData.ut_halberdier.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_eagleScout.armorClasses.set(AoeData.ac_infantry, 0);
 		AoeData.ut_eagleScout.armorClasses.set(AoeData.ac_eagleWarrior, 0);
@@ -483,6 +500,8 @@ export abstract class AoeData
 		AoeData.ut_eagleScout.attackValues.set(AoeData.ac_camel, 1);
 		AoeData.ut_eagleScout.attackValues.set(AoeData.ac_baseMelee, 4);
 		AoeData.ut_eagleScout.imagePath = "assets/unitTypes/Eaglescout_aoe2DE.png";
+		AoeData.ut_eagleScout.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_eagleWarrior.armorClasses.set(AoeData.ac_infantry, 0);
 		AoeData.ut_eagleWarrior.armorClasses.set(AoeData.ac_eagleWarrior, 0);
@@ -493,6 +512,8 @@ export abstract class AoeData
 		AoeData.ut_eagleWarrior.attackValues.set(AoeData.ac_camel, 2);
 		AoeData.ut_eagleWarrior.attackValues.set(AoeData.ac_baseMelee, 7);
 		AoeData.ut_eagleWarrior.imagePath = "assets/unitTypes/Eaglewarrior_aoe2DE.png";
+		AoeData.ut_eagleWarrior.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_eliteEagleWarrior.armorClasses.set(AoeData.ac_infantry, 0);
 		AoeData.ut_eliteEagleWarrior.armorClasses.set(AoeData.ac_eagleWarrior, 0);
@@ -503,42 +524,56 @@ export abstract class AoeData
 		AoeData.ut_eliteEagleWarrior.attackValues.set(AoeData.ac_camel, 3);
 		AoeData.ut_eliteEagleWarrior.attackValues.set(AoeData.ac_baseMelee, 9);
 		AoeData.ut_eliteEagleWarrior.imagePath = "assets/unitTypes/Eliteeaglewarrior_aoe2DE.png";
+		AoeData.ut_eliteEagleWarrior.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_scoutCavalry.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_scoutCavalry.armorClasses.set(AoeData.ac_basePierce, 2);
 		AoeData.ut_scoutCavalry.armorClasses.set(AoeData.ac_cavalry, 0);
 		AoeData.ut_scoutCavalry.attackValues.set(AoeData.ac_baseMelee, 5);
 		AoeData.ut_scoutCavalry.imagePath = "assets/unitTypes/Scoutcavalry_aoe2DE.png";
+		AoeData.ut_scoutCavalry.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_lightCavalry.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_lightCavalry.armorClasses.set(AoeData.ac_basePierce, 2);
 		AoeData.ut_lightCavalry.armorClasses.set(AoeData.ac_cavalry, 0);
 		AoeData.ut_lightCavalry.attackValues.set(AoeData.ac_baseMelee, 7);
 		AoeData.ut_lightCavalry.imagePath = "assets/unitTypes/Lightcavalry_aoe2DE.png";
+		AoeData.ut_lightCavalry.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_hussar.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_hussar.armorClasses.set(AoeData.ac_basePierce, 2);
 		AoeData.ut_hussar.armorClasses.set(AoeData.ac_cavalry, 0);
 		AoeData.ut_hussar.attackValues.set(AoeData.ac_baseMelee, 7);
 		AoeData.ut_hussar.imagePath = "assets/unitTypes/Hussar_aoe2DE.png";
+		AoeData.ut_hussar.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 		
 		AoeData.ut_knight.armorClasses.set(AoeData.ac_baseMelee, 2);
 		AoeData.ut_knight.armorClasses.set(AoeData.ac_basePierce, 2);
 		AoeData.ut_knight.armorClasses.set(AoeData.ac_cavalry, 0);
 		AoeData.ut_knight.attackValues.set(AoeData.ac_baseMelee, 10);
 		AoeData.ut_knight.imagePath = "assets/unitTypes/Knight_aoe2DE.png";
+		AoeData.ut_knight.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_cavalier.armorClasses.set(AoeData.ac_baseMelee, 2);
 		AoeData.ut_cavalier.armorClasses.set(AoeData.ac_basePierce, 2);
 		AoeData.ut_cavalier.armorClasses.set(AoeData.ac_cavalry, 0);
 		AoeData.ut_cavalier.attackValues.set(AoeData.ac_baseMelee, 12);
 		AoeData.ut_cavalier.imagePath = "assets/unitTypes/Cavalier_aoe2DE.png";
+		AoeData.ut_cavalier.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_paladin.armorClasses.set(AoeData.ac_baseMelee, 2);
 		AoeData.ut_paladin.armorClasses.set(AoeData.ac_basePierce, 3);
 		AoeData.ut_paladin.armorClasses.set(AoeData.ac_cavalry, 0);
 		AoeData.ut_paladin.attackValues.set(AoeData.ac_baseMelee, 14);
 		AoeData.ut_paladin.imagePath = "assets/unitTypes/Paladin_aoe2DE.png";
+		AoeData.ut_paladin.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_camelRider.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_camelRider.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -547,6 +582,8 @@ export abstract class AoeData
 		AoeData.ut_camelRider.attackValues.set(AoeData.ac_cavalry, 9);
 		AoeData.ut_camelRider.attackValues.set(AoeData.ac_camel, 5);
 		AoeData.ut_camelRider.imagePath = "assets/unitTypes/Camelrider_aoe2DE.png";
+		AoeData.ut_camelRider.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_heavyCamelRider.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_heavyCamelRider.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -556,6 +593,8 @@ export abstract class AoeData
 		AoeData.ut_heavyCamelRider.attackValues.set(AoeData.ac_camel, 9);
 		AoeData.ut_heavyCamelRider.attackValues.set(AoeData.ac_mameluke, 7);
 		AoeData.ut_heavyCamelRider.imagePath = "assets/unitTypes/Aoe2_heavycamelriderDE.png";
+		AoeData.ut_heavyCamelRider.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_imperialCamelRider.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_imperialCamelRider.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -565,6 +604,8 @@ export abstract class AoeData
 		AoeData.ut_imperialCamelRider.attackValues.set(AoeData.ac_camel, 9);
 		AoeData.ut_imperialCamelRider.attackValues.set(AoeData.ac_mameluke, 7);
 		AoeData.ut_imperialCamelRider.imagePath = "assets/unitTypes/ImperialCamelRiderIcon-DE.png";
+		AoeData.ut_imperialCamelRider.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_battleElephant.armorClasses.set(AoeData.ac_baseMelee, 1);
 		AoeData.ut_battleElephant.armorClasses.set(AoeData.ac_basePierce, 2);
@@ -574,6 +615,8 @@ export abstract class AoeData
 		AoeData.ut_battleElephant.cleaveType = 2;
 		AoeData.ut_battleElephant.cleaveRadius = 0.4;
 		AoeData.ut_battleElephant.imagePath = "assets/unitTypes/Battle_elephant_aoe2DE.png";
+		AoeData.ut_battleElephant.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_eliteBattleElephant.armorClasses.set(AoeData.ac_baseMelee, 1);
 		AoeData.ut_eliteBattleElephant.armorClasses.set(AoeData.ac_basePierce, 3);
@@ -583,18 +626,24 @@ export abstract class AoeData
 		AoeData.ut_eliteBattleElephant.cleaveType = 2;
 		AoeData.ut_eliteBattleElephant.cleaveRadius = 0.4;
 		AoeData.ut_eliteBattleElephant.imagePath = "assets/unitTypes/Elite_battle_elephant_aoe2DE.png";
+		AoeData.ut_eliteBattleElephant.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_steppeLancer.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_steppeLancer.armorClasses.set(AoeData.ac_basePierce, 1);
 		AoeData.ut_steppeLancer.armorClasses.set(AoeData.ac_cavalry, 0);
 		AoeData.ut_steppeLancer.attackValues.set(AoeData.ac_baseMelee, 9);
 		AoeData.ut_steppeLancer.imagePath = "assets/unitTypes/Steppelancericon.png";
+		AoeData.ut_steppeLancer.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_eliteSteppeLancer.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_eliteSteppeLancer.armorClasses.set(AoeData.ac_basePierce, 1);
 		AoeData.ut_eliteSteppeLancer.armorClasses.set(AoeData.ac_cavalry, 0);
 		AoeData.ut_eliteSteppeLancer.attackValues.set(AoeData.ac_baseMelee, 11);
 		AoeData.ut_eliteSteppeLancer.imagePath = "assets/unitTypes/Elitesteppelancericon.png";
+		AoeData.ut_eliteSteppeLancer.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_archer.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_archer.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -602,6 +651,8 @@ export abstract class AoeData
 		AoeData.ut_archer.attackValues.set(AoeData.ac_basePierce, 4);
 		AoeData.ut_archer.attackValues.set(AoeData.ac_spearman, 3);
 		AoeData.ut_archer.imagePath = "assets/unitTypes/Archer_aoe2DE.png";
+		AoeData.ut_archer.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_crossbowman.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_crossbowman.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -609,6 +660,8 @@ export abstract class AoeData
 		AoeData.ut_crossbowman.attackValues.set(AoeData.ac_basePierce, 5);
 		AoeData.ut_crossbowman.attackValues.set(AoeData.ac_spearman, 3);
 		AoeData.ut_crossbowman.imagePath = "assets/unitTypes/Crossbowman_aoe2DE.png";
+		AoeData.ut_crossbowman.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_arbalester.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_arbalester.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -616,6 +669,8 @@ export abstract class AoeData
 		AoeData.ut_arbalester.attackValues.set(AoeData.ac_basePierce, 6);
 		AoeData.ut_arbalester.attackValues.set(AoeData.ac_spearman, 3);
 		AoeData.ut_arbalester.imagePath = "assets/unitTypes/Arbalester_aoe2DE.png";
+		AoeData.ut_arbalester.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_skirmisher.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_skirmisher.armorClasses.set(AoeData.ac_basePierce, 3);
@@ -624,6 +679,8 @@ export abstract class AoeData
 		AoeData.ut_skirmisher.attackValues.set(AoeData.ac_archer, 3);
 		AoeData.ut_skirmisher.attackValues.set(AoeData.ac_spearman, 3);
 		AoeData.ut_skirmisher.imagePath = "assets/unitTypes/Skirmisher_aoe2DE.png";
+		AoeData.ut_skirmisher.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_eliteSkirmisher.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_eliteSkirmisher.armorClasses.set(AoeData.ac_basePierce, 4);
@@ -633,6 +690,8 @@ export abstract class AoeData
 		AoeData.ut_eliteSkirmisher.attackValues.set(AoeData.ac_spearman, 3);
 		AoeData.ut_eliteSkirmisher.attackValues.set(AoeData.ac_cavalryArcher, 2);
 		AoeData.ut_eliteSkirmisher.imagePath = "assets/unitTypes/Elite_skirmisher_aoe2DE.png";
+		AoeData.ut_eliteSkirmisher.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_imperialSkirmisher.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_imperialSkirmisher.armorClasses.set(AoeData.ac_basePierce, 5);
@@ -642,6 +701,8 @@ export abstract class AoeData
 		AoeData.ut_imperialSkirmisher.attackValues.set(AoeData.ac_spearman, 3);
 		AoeData.ut_imperialSkirmisher.attackValues.set(AoeData.ac_cavalryArcher, 3);
 		AoeData.ut_imperialSkirmisher.imagePath = "assets/unitTypes/Imperialskirmishericon-DE.png";
+		AoeData.ut_imperialSkirmisher.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_cavalryArcher.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_cavalryArcher.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -651,6 +712,8 @@ export abstract class AoeData
 		AoeData.ut_cavalryArcher.attackValues.set(AoeData.ac_basePierce, 6);
 		AoeData.ut_cavalryArcher.attackValues.set(AoeData.ac_spearman, 2);
 		AoeData.ut_cavalryArcher.imagePath = "assets/unitTypes/Cavalryarcher_aoe2DE.png";
+		AoeData.ut_cavalryArcher.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry, this.tec_parthianTactics, this.tec_bloodlines, this.tec_husbandry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_heavyCavalryArcher.armorClasses.set(AoeData.ac_baseMelee, 1);
 		AoeData.ut_heavyCavalryArcher.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -660,6 +723,8 @@ export abstract class AoeData
 		AoeData.ut_heavyCavalryArcher.attackValues.set(AoeData.ac_basePierce, 7);
 		AoeData.ut_heavyCavalryArcher.attackValues.set(AoeData.ac_spearman, 2);
 		AoeData.ut_heavyCavalryArcher.imagePath = "assets/unitTypes/Heavycavalryarcher_aoe2de.png";
+		AoeData.ut_heavyCavalryArcher.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry, this.tec_parthianTactics, this.tec_bloodlines, this.tec_husbandry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_handCannoneer.armorClasses.set(AoeData.ac_baseMelee, 1);
 		AoeData.ut_handCannoneer.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -670,6 +735,7 @@ export abstract class AoeData
 		AoeData.ut_handCannoneer.attackValues.set(AoeData.ac_ram, 2);
 		AoeData.ut_handCannoneer.attackValues.set(AoeData.ac_spearman, 1);
 		AoeData.ut_handCannoneer.imagePath = "assets/unitTypes/Hand_cannoneer_aoe2DE.png";
+		AoeData.ut_handCannoneer.techsForUnitList.push(this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_batteringRam.armorClasses.set(AoeData.ac_baseMelee, -3);
 		AoeData.ut_batteringRam.armorClasses.set(AoeData.ac_basePierce, 180);
@@ -705,6 +771,7 @@ export abstract class AoeData
 		AoeData.ut_scorpion.attackIsMissile = true;
 		AoeData.ut_scorpion.missileFlightDistance = 10.5; // scorpion missiles are always flying over a distance of 10.5 tiles, even if their attack range is only 8 tiles
 		AoeData.ut_scorpion.imagePath = "assets/unitTypes/Scorpion_aoe2DE.png";
+		AoeData.ut_scorpion.techsForUnitList.push(this.tec_siegeEngineers, this.tec_chemistry);
 
 		AoeData.ut_heavyScorpion.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_heavyScorpion.armorClasses.set(AoeData.ac_basePierce, 7);
@@ -716,6 +783,7 @@ export abstract class AoeData
 		AoeData.ut_heavyScorpion.attackIsMissile = true;
 		AoeData.ut_heavyScorpion.missileFlightDistance = 10.5; // scorpion missiles are always flying over a distance of 10.5 tiles, even if their attack range is only 8 tiles
 		AoeData.ut_heavyScorpion.imagePath = "assets/unitTypes/Heavyscorpion_aoe2DE.png";
+		AoeData.ut_heavyScorpion.techsForUnitList.push(this.tec_siegeEngineers, this.tec_chemistry);
 
 		AoeData.ut_longbowman.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_longbowman.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -724,6 +792,8 @@ export abstract class AoeData
 		AoeData.ut_longbowman.attackValues.set(AoeData.ac_basePierce, 6);
 		AoeData.ut_longbowman.attackValues.set(AoeData.ac_spearman, 2);
 		AoeData.ut_longbowman.imagePath = "assets/unitTypes/LongbowmanIcon-DE.png";
+		AoeData.ut_longbowman.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_eliteLongbowman.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_eliteLongbowman.armorClasses.set(AoeData.ac_basePierce, 1);
@@ -732,6 +802,8 @@ export abstract class AoeData
 		AoeData.ut_eliteLongbowman.attackValues.set(AoeData.ac_basePierce, 7);
 		AoeData.ut_eliteLongbowman.attackValues.set(AoeData.ac_spearman, 2);
 		AoeData.ut_eliteLongbowman.imagePath = "assets/unitTypes/LongbowmanIcon-DE.png";
+		AoeData.ut_eliteLongbowman.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_cataphract.armorClasses.set(AoeData.ac_baseMelee, 2);
 		AoeData.ut_cataphract.armorClasses.set(AoeData.ac_basePierce, 1);
@@ -743,6 +815,8 @@ export abstract class AoeData
 		AoeData.ut_cataphract.cleaveType = 1;
 		AoeData.ut_cataphract.cleaveRadius = 0.4;
 		AoeData.ut_cataphract.imagePath = "assets/unitTypes/CataphractIcon-DE.png";
+		AoeData.ut_cataphract.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_eliteCataphract.armorClasses.set(AoeData.ac_baseMelee, 2);
 		AoeData.ut_eliteCataphract.armorClasses.set(AoeData.ac_basePierce, 1);
@@ -754,6 +828,8 @@ export abstract class AoeData
 		AoeData.ut_eliteCataphract.cleaveType = 1;
 		AoeData.ut_eliteCataphract.cleaveRadius = 0.4;
 		AoeData.ut_eliteCataphract.imagePath = "assets/unitTypes/CataphractIcon-DE.png"; // todo cleave dmg actually only with tech
+		AoeData.ut_eliteCataphract.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_woadRaider.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_woadRaider.armorClasses.set(AoeData.ac_basePierce, 1);
@@ -762,6 +838,8 @@ export abstract class AoeData
 		AoeData.ut_woadRaider.attackValues.set(AoeData.ac_baseMelee, 8);
 		AoeData.ut_woadRaider.attackValues.set(AoeData.ac_eagleWarrior, 2);
 		AoeData.ut_woadRaider.imagePath = "assets/unitTypes/WoadRaiderIcon-DE.png";
+		AoeData.ut_woadRaider.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_eliteWoadRaider.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_eliteWoadRaider.armorClasses.set(AoeData.ac_basePierce, 1);
@@ -770,6 +848,8 @@ export abstract class AoeData
 		AoeData.ut_eliteWoadRaider.attackValues.set(AoeData.ac_baseMelee, 13);
 		AoeData.ut_eliteWoadRaider.attackValues.set(AoeData.ac_eagleWarrior, 3);
 		AoeData.ut_eliteWoadRaider.imagePath = "assets/unitTypes/WoadRaiderIcon-DE.png";
+		AoeData.ut_eliteWoadRaider.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_chuKoNu.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_chuKoNu.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -784,6 +864,8 @@ export abstract class AoeData
 		AoeData.ut_chuKoNu.secondaryAttackValues.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_chuKoNu.secondaryAttackValues.set(AoeData.ac_basePierce, 3);
 		AoeData.ut_chuKoNu.imagePath = "assets/unitTypes/ChukoNuIcon-DE.png";
+		AoeData.ut_chuKoNu.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_eliteChuKoNu.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_eliteChuKoNu.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -798,6 +880,8 @@ export abstract class AoeData
 		AoeData.ut_eliteChuKoNu.secondaryAttackValues.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_eliteChuKoNu.secondaryAttackValues.set(AoeData.ac_basePierce, 3);
 		AoeData.ut_eliteChuKoNu.imagePath = "assets/unitTypes/ChukoNuIcon-DE.png";
+		AoeData.ut_eliteChuKoNu.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_throwingAxeman.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_throwingAxeman.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -806,6 +890,8 @@ export abstract class AoeData
 		AoeData.ut_throwingAxeman.attackValues.set(AoeData.ac_baseMelee, 7);
 		AoeData.ut_throwingAxeman.attackValues.set(AoeData.ac_eagleWarrior, 1);
 		AoeData.ut_throwingAxeman.imagePath = "assets/unitTypes/ThrowingAxemanIcon-DE.png";
+		AoeData.ut_throwingAxeman.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_eliteThrowingAxeman.armorClasses.set(AoeData.ac_baseMelee, 1);
 		AoeData.ut_eliteThrowingAxeman.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -814,6 +900,8 @@ export abstract class AoeData
 		AoeData.ut_eliteThrowingAxeman.attackValues.set(AoeData.ac_baseMelee, 8);
 		AoeData.ut_eliteThrowingAxeman.attackValues.set(AoeData.ac_eagleWarrior, 2);
 		AoeData.ut_eliteThrowingAxeman.imagePath = "assets/unitTypes/ThrowingAxemanIcon-DE.png";
+		AoeData.ut_eliteThrowingAxeman.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_huskarl.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_huskarl.armorClasses.set(AoeData.ac_basePierce, 6);
@@ -823,6 +911,8 @@ export abstract class AoeData
 		AoeData.ut_huskarl.attackValues.set(AoeData.ac_eagleWarrior, 2);
 		AoeData.ut_huskarl.attackValues.set(AoeData.ac_archer, 6);
 		AoeData.ut_huskarl.imagePath = "assets/unitTypes/HuskarlIcon-DE.png";
+		AoeData.ut_huskarl.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_eliteHuskarl.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_eliteHuskarl.armorClasses.set(AoeData.ac_basePierce, 8);
@@ -832,6 +922,8 @@ export abstract class AoeData
 		AoeData.ut_eliteHuskarl.attackValues.set(AoeData.ac_eagleWarrior, 3);
 		AoeData.ut_eliteHuskarl.attackValues.set(AoeData.ac_archer, 10);
 		AoeData.ut_eliteHuskarl.imagePath = "assets/unitTypes/HuskarlIcon-DE.png";
+		AoeData.ut_eliteHuskarl.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_samurai.armorClasses.set(AoeData.ac_baseMelee, 1);
 		AoeData.ut_samurai.armorClasses.set(AoeData.ac_basePierce, 1);
@@ -841,6 +933,8 @@ export abstract class AoeData
 		AoeData.ut_samurai.attackValues.set(AoeData.ac_eagleWarrior, 2);
 		AoeData.ut_samurai.attackValues.set(AoeData.ac_uniqueUnit, 10);
 		AoeData.ut_samurai.imagePath = "assets/unitTypes/SamuraiIcon-DE.png";
+		AoeData.ut_samurai.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_eliteSamurai.armorClasses.set(AoeData.ac_baseMelee, 1);
 		AoeData.ut_eliteSamurai.armorClasses.set(AoeData.ac_basePierce, 1);
@@ -850,6 +944,8 @@ export abstract class AoeData
 		AoeData.ut_eliteSamurai.attackValues.set(AoeData.ac_eagleWarrior, 3);
 		AoeData.ut_eliteSamurai.attackValues.set(AoeData.ac_uniqueUnit, 12);
 		AoeData.ut_eliteSamurai.imagePath = "assets/unitTypes/SamuraiIcon-DE.png";
+		AoeData.ut_eliteSamurai.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_mangudai.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_mangudai.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -861,6 +957,8 @@ export abstract class AoeData
 		AoeData.ut_mangudai.attackValues.set(AoeData.ac_spearman, 1);
 		AoeData.ut_mangudai.attackValues.set(AoeData.ac_siegeWeapon, 3);
 		AoeData.ut_mangudai.imagePath = "assets/unitTypes/MangudaiIcon-DE.png";
+		AoeData.ut_mangudai.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry, this.tec_parthianTactics, this.tec_bloodlines, this.tec_husbandry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_eliteMangudai.armorClasses.set(AoeData.ac_baseMelee, 1);
 		AoeData.ut_eliteMangudai.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -872,6 +970,8 @@ export abstract class AoeData
 		AoeData.ut_eliteMangudai.attackValues.set(AoeData.ac_spearman, 1);
 		AoeData.ut_eliteMangudai.attackValues.set(AoeData.ac_siegeWeapon, 5);
 		AoeData.ut_eliteMangudai.imagePath = "assets/unitTypes/MangudaiIcon-DE.png";
+		AoeData.ut_eliteMangudai.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry, this.tec_parthianTactics, this.tec_bloodlines, this.tec_husbandry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_warElephant.armorClasses.set(AoeData.ac_baseMelee, 1);
 		AoeData.ut_warElephant.armorClasses.set(AoeData.ac_basePierce, 2);
@@ -882,6 +982,8 @@ export abstract class AoeData
 		AoeData.ut_warElephant.cleaveType = 2;
 		AoeData.ut_warElephant.cleaveRadius = 0.5;
 		AoeData.ut_warElephant.imagePath = "assets/unitTypes/WarElephantIcon-DE.png";
+		AoeData.ut_warElephant.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_eliteWarElephant.armorClasses.set(AoeData.ac_baseMelee, 1);
 		AoeData.ut_eliteWarElephant.armorClasses.set(AoeData.ac_basePierce, 3);
@@ -892,6 +994,8 @@ export abstract class AoeData
 		AoeData.ut_eliteWarElephant.cleaveType = 2;
 		AoeData.ut_eliteWarElephant.cleaveRadius = 0.5;
 		AoeData.ut_eliteWarElephant.imagePath = "assets/unitTypes/WarElephantIcon-DE.png";
+		AoeData.ut_eliteWarElephant.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_mameluke.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_mameluke.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -903,6 +1007,8 @@ export abstract class AoeData
 		AoeData.ut_mameluke.attackValues.set(AoeData.ac_cavalry, 9);
 		AoeData.ut_mameluke.attackValues.set(AoeData.ac_mameluke, 1);
 		AoeData.ut_mameluke.imagePath = "assets/unitTypes/MamelukeIcon-DE.png";
+		AoeData.ut_mameluke.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_eliteMameluke.armorClasses.set(AoeData.ac_baseMelee, 1);
 		AoeData.ut_eliteMameluke.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -914,6 +1020,8 @@ export abstract class AoeData
 		AoeData.ut_eliteMameluke.attackValues.set(AoeData.ac_cavalry, 12);
 		AoeData.ut_eliteMameluke.attackValues.set(AoeData.ac_mameluke, 1);
 		AoeData.ut_eliteMameluke.imagePath = "assets/unitTypes/MamelukeIcon-DE.png";
+		AoeData.ut_eliteMameluke.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_teutonicKnight.armorClasses.set(AoeData.ac_baseMelee, 5);
 		AoeData.ut_teutonicKnight.armorClasses.set(AoeData.ac_basePierce, 2);
@@ -922,6 +1030,8 @@ export abstract class AoeData
 		AoeData.ut_teutonicKnight.attackValues.set(AoeData.ac_baseMelee, 12);
 		AoeData.ut_teutonicKnight.attackValues.set(AoeData.ac_eagleWarrior, 4);
 		AoeData.ut_teutonicKnight.imagePath = "assets/unitTypes/TeutonicKnightIcon-DE.png";
+		AoeData.ut_teutonicKnight.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_eliteTeutonicKnight.armorClasses.set(AoeData.ac_baseMelee, 10);
 		AoeData.ut_eliteTeutonicKnight.armorClasses.set(AoeData.ac_basePierce, 2);
@@ -930,6 +1040,8 @@ export abstract class AoeData
 		AoeData.ut_eliteTeutonicKnight.attackValues.set(AoeData.ac_baseMelee, 17);
 		AoeData.ut_eliteTeutonicKnight.attackValues.set(AoeData.ac_eagleWarrior, 4);
 		AoeData.ut_eliteTeutonicKnight.imagePath = "assets/unitTypes/TeutonicKnightIcon-DE.png";
+		AoeData.ut_eliteTeutonicKnight.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_janissary.armorClasses.set(AoeData.ac_baseMelee, 1);
 		AoeData.ut_janissary.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -939,6 +1051,7 @@ export abstract class AoeData
 		AoeData.ut_janissary.attackValues.set(AoeData.ac_basePierce, 17);
 		AoeData.ut_janissary.attackValues.set(AoeData.ac_ram, 2);
 		AoeData.ut_janissary.imagePath = "assets/unitTypes/JanissaryIcon-DE.png";
+		AoeData.ut_janissary.techsForUnitList.push(this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_eliteJanissary.armorClasses.set(AoeData.ac_baseMelee, 2);
 		AoeData.ut_eliteJanissary.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -948,6 +1061,7 @@ export abstract class AoeData
 		AoeData.ut_eliteJanissary.attackValues.set(AoeData.ac_basePierce, 22);
 		AoeData.ut_eliteJanissary.attackValues.set(AoeData.ac_ram, 3);
 		AoeData.ut_eliteJanissary.imagePath = "assets/unitTypes/JanissaryIcon-DE.png";
+		AoeData.ut_eliteJanissary.techsForUnitList.push(this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_berserk.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_berserk.armorClasses.set(AoeData.ac_basePierce, 1);
@@ -956,6 +1070,8 @@ export abstract class AoeData
 		AoeData.ut_berserk.attackValues.set(AoeData.ac_baseMelee, 9);
 		AoeData.ut_berserk.attackValues.set(AoeData.ac_eagleWarrior, 2);
 		AoeData.ut_berserk.imagePath = "assets/unitTypes/BerserkIcon-DE.png";
+		AoeData.ut_berserk.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_eliteBerserk.armorClasses.set(AoeData.ac_baseMelee, 2);
 		AoeData.ut_eliteBerserk.armorClasses.set(AoeData.ac_basePierce, 1);
@@ -964,6 +1080,8 @@ export abstract class AoeData
 		AoeData.ut_eliteBerserk.attackValues.set(AoeData.ac_baseMelee, 14);
 		AoeData.ut_eliteBerserk.attackValues.set(AoeData.ac_eagleWarrior, 3);
 		AoeData.ut_eliteBerserk.imagePath = "assets/unitTypes/BerserkIcon-DE.png";
+		AoeData.ut_eliteBerserk.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_jaguarWarrior.armorClasses.set(AoeData.ac_baseMelee, 1);
 		AoeData.ut_jaguarWarrior.armorClasses.set(AoeData.ac_basePierce, 1);
@@ -974,6 +1092,8 @@ export abstract class AoeData
 		AoeData.ut_jaguarWarrior.attackValues.set(AoeData.ac_condottiero, 10);
 		AoeData.ut_jaguarWarrior.attackValues.set(AoeData.ac_eagleWarrior, 2);
 		AoeData.ut_jaguarWarrior.imagePath = "assets/unitTypes/JaguarWarriorIcon-DE.png";
+		AoeData.ut_jaguarWarrior.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_eliteJaguarWarrior.armorClasses.set(AoeData.ac_baseMelee, 2);
 		AoeData.ut_eliteJaguarWarrior.armorClasses.set(AoeData.ac_basePierce, 1);
@@ -984,6 +1104,8 @@ export abstract class AoeData
 		AoeData.ut_eliteJaguarWarrior.attackValues.set(AoeData.ac_condottiero, 10);
 		AoeData.ut_eliteJaguarWarrior.attackValues.set(AoeData.ac_eagleWarrior, 2);
 		AoeData.ut_eliteJaguarWarrior.imagePath = "assets/unitTypes/JaguarWarriorIcon-DE.png";
+		AoeData.ut_eliteJaguarWarrior.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_tarkan.armorClasses.set(AoeData.ac_baseMelee, 1);
 		AoeData.ut_tarkan.armorClasses.set(AoeData.ac_basePierce, 3);
@@ -991,6 +1113,8 @@ export abstract class AoeData
 		AoeData.ut_tarkan.armorClasses.set(AoeData.ac_uniqueUnit, 0);
 		AoeData.ut_tarkan.attackValues.set(AoeData.ac_baseMelee, 8);
 		AoeData.ut_tarkan.imagePath = "assets/unitTypes/TarkanIcon-DE.png";
+		AoeData.ut_tarkan.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_eliteTarkan.armorClasses.set(AoeData.ac_baseMelee, 1);
 		AoeData.ut_eliteTarkan.armorClasses.set(AoeData.ac_basePierce, 4);
@@ -998,6 +1122,8 @@ export abstract class AoeData
 		AoeData.ut_eliteTarkan.armorClasses.set(AoeData.ac_uniqueUnit, 0);
 		AoeData.ut_eliteTarkan.attackValues.set(AoeData.ac_baseMelee, 11);
 		AoeData.ut_eliteTarkan.imagePath = "assets/unitTypes/TarkanIcon-DE.png";
+		AoeData.ut_eliteTarkan.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_warWagon.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_warWagon.armorClasses.set(AoeData.ac_basePierce, 3);
@@ -1007,6 +1133,8 @@ export abstract class AoeData
 		AoeData.ut_warWagon.armorClasses.set(AoeData.ac_uniqueUnit, 0);
 		AoeData.ut_warWagon.attackValues.set(AoeData.ac_basePierce, 9);
 		AoeData.ut_warWagon.imagePath = "assets/unitTypes/WarWagonIcon-DE.png";
+		AoeData.ut_warWagon.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry, this.tec_parthianTactics, this.tec_bloodlines, this.tec_husbandry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_eliteWarWagon.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_eliteWarWagon.armorClasses.set(AoeData.ac_basePierce, 4);
@@ -1016,6 +1144,8 @@ export abstract class AoeData
 		AoeData.ut_eliteWarWagon.armorClasses.set(AoeData.ac_uniqueUnit, 0);
 		AoeData.ut_eliteWarWagon.attackValues.set(AoeData.ac_basePierce, 9);
 		AoeData.ut_eliteWarWagon.imagePath = "assets/unitTypes/WarWagonIcon-DE.png";
+		AoeData.ut_eliteWarWagon.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry, this.tec_parthianTactics, this.tec_bloodlines, this.tec_husbandry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_plumedArcher.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_plumedArcher.armorClasses.set(AoeData.ac_basePierce, 1);
@@ -1026,6 +1156,8 @@ export abstract class AoeData
 		AoeData.ut_plumedArcher.attackValues.set(AoeData.ac_infantry, 1);
 		AoeData.ut_plumedArcher.attackValues.set(AoeData.ac_condottiero, 1);
 		AoeData.ut_plumedArcher.imagePath = "assets/unitTypes/PlumedArcherIcon-DE.png";
+		AoeData.ut_plumedArcher.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_elitePlumedArcher.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_elitePlumedArcher.armorClasses.set(AoeData.ac_basePierce, 2);
@@ -1036,6 +1168,8 @@ export abstract class AoeData
 		AoeData.ut_elitePlumedArcher.attackValues.set(AoeData.ac_infantry, 2);
 		AoeData.ut_elitePlumedArcher.attackValues.set(AoeData.ac_condottiero, 2);
 		AoeData.ut_elitePlumedArcher.imagePath = "assets/unitTypes/PlumedArcherIcon-DE.png";
+		AoeData.ut_elitePlumedArcher.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_conquistador.armorClasses.set(AoeData.ac_baseMelee, 2);
 		AoeData.ut_conquistador.armorClasses.set(AoeData.ac_basePierce, 2);
@@ -1047,6 +1181,7 @@ export abstract class AoeData
 		AoeData.ut_conquistador.attackValues.set(AoeData.ac_basePierce, 16);
 		AoeData.ut_conquistador.attackValues.set(AoeData.ac_ram, 4);
 		AoeData.ut_conquistador.imagePath = "assets/unitTypes/ConquistadorIcon-DE.png";
+		AoeData.ut_conquistador.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_eliteConquistador.armorClasses.set(AoeData.ac_baseMelee, 2);
 		AoeData.ut_eliteConquistador.armorClasses.set(AoeData.ac_basePierce, 2);
@@ -1058,6 +1193,7 @@ export abstract class AoeData
 		AoeData.ut_eliteConquistador.attackValues.set(AoeData.ac_basePierce, 18);
 		AoeData.ut_eliteConquistador.attackValues.set(AoeData.ac_ram, 6);
 		AoeData.ut_eliteConquistador.imagePath = "assets/unitTypes/ConquistadorIcon-DE.png";
+		AoeData.ut_eliteConquistador.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,	this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_kamayuk.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_kamayuk.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -1069,6 +1205,8 @@ export abstract class AoeData
 		AoeData.ut_kamayuk.attackValues.set(AoeData.ac_camel, 6);
 		AoeData.ut_kamayuk.attackValues.set(AoeData.ac_mameluke, 1);
 		AoeData.ut_kamayuk.imagePath = "assets/unitTypes/KamayukIcon-DE.png";
+		AoeData.ut_kamayuk.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_eliteKamayuk.armorClasses.set(AoeData.ac_baseMelee, 1);
 		AoeData.ut_eliteKamayuk.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -1080,6 +1218,8 @@ export abstract class AoeData
 		AoeData.ut_eliteKamayuk.attackValues.set(AoeData.ac_camel, 10);
 		AoeData.ut_eliteKamayuk.attackValues.set(AoeData.ac_mameluke, 1);
 		AoeData.ut_eliteKamayuk.imagePath = "assets/unitTypes/KamayukIcon-DE.png";
+		AoeData.ut_eliteKamayuk.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_slinger.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_slinger.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -1091,6 +1231,8 @@ export abstract class AoeData
 		AoeData.ut_slinger.attackValues.set(AoeData.ac_ram, 3);
 		AoeData.ut_slinger.attackValues.set(AoeData.ac_spearman, 1);
 		AoeData.ut_slinger.imagePath = "assets/unitTypes/SlingerIcon-DE.png";
+		AoeData.ut_slinger.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_elephantArcher.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_elephantArcher.armorClasses.set(AoeData.ac_basePierce, 3);
@@ -1101,6 +1243,8 @@ export abstract class AoeData
 		AoeData.ut_elephantArcher.armorClasses.set(AoeData.ac_uniqueUnit, 0);
 		AoeData.ut_elephantArcher.attackValues.set(AoeData.ac_basePierce, 6); // todo parthian tactics
 		AoeData.ut_elephantArcher.imagePath = "assets/unitTypes/ElephantArcherIcon-DE.png";
+		AoeData.ut_elephantArcher.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry, this.tec_parthianTactics, this.tec_bloodlines, this.tec_husbandry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_eliteElephantArcher.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_eliteElephantArcher.armorClasses.set(AoeData.ac_basePierce, 3);
@@ -1111,6 +1255,8 @@ export abstract class AoeData
 		AoeData.ut_eliteElephantArcher.armorClasses.set(AoeData.ac_uniqueUnit, 0);
 		AoeData.ut_eliteElephantArcher.attackValues.set(AoeData.ac_basePierce, 7);
 		AoeData.ut_eliteElephantArcher.imagePath = "assets/unitTypes/ElephantArcherIcon-DE.png";
+		AoeData.ut_eliteElephantArcher.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry, this.tec_parthianTactics, this.tec_bloodlines, this.tec_husbandry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_genoeseCrossbowman.armorClasses.set(AoeData.ac_baseMelee, 1);
 		AoeData.ut_genoeseCrossbowman.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -1121,6 +1267,8 @@ export abstract class AoeData
 		AoeData.ut_genoeseCrossbowman.attackValues.set(AoeData.ac_warElephant, 5);
 		AoeData.ut_genoeseCrossbowman.attackValues.set(AoeData.ac_camel, 4);
 		AoeData.ut_genoeseCrossbowman.imagePath = "assets/unitTypes/GenoeseCrossbowmanIcon-DE.png";
+		AoeData.ut_genoeseCrossbowman.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_eliteGenoeseCrossbowman.armorClasses.set(AoeData.ac_baseMelee, 1);
 		AoeData.ut_eliteGenoeseCrossbowman.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -1131,6 +1279,8 @@ export abstract class AoeData
 		AoeData.ut_eliteGenoeseCrossbowman.attackValues.set(AoeData.ac_warElephant, 7);
 		AoeData.ut_eliteGenoeseCrossbowman.attackValues.set(AoeData.ac_camel, 6);
 		AoeData.ut_eliteGenoeseCrossbowman.imagePath = "assets/unitTypes/GenoeseCrossbowmanIcon-DE.png";
+		AoeData.ut_eliteGenoeseCrossbowman.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_condottiero.armorClasses.set(AoeData.ac_baseMelee, 1);
 		AoeData.ut_condottiero.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -1140,6 +1290,8 @@ export abstract class AoeData
 		AoeData.ut_condottiero.attackValues.set(AoeData.ac_baseMelee, 9);
 		AoeData.ut_condottiero.attackValues.set(AoeData.ac_gunpowderUnit, 10);
 		AoeData.ut_condottiero.imagePath = "assets/unitTypes/CondottieroIcon-DE.png";
+		AoeData.ut_condottiero.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_magyarHuszar.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_magyarHuszar.armorClasses.set(AoeData.ac_basePierce, 2);
@@ -1149,6 +1301,8 @@ export abstract class AoeData
 		AoeData.ut_magyarHuszar.attackValues.set(AoeData.ac_siegeWeapon, 5);
 		AoeData.ut_magyarHuszar.attackValues.set(AoeData.ac_ram, 1);
 		AoeData.ut_magyarHuszar.imagePath = "assets/unitTypes/MagyarHuszarIcon-DE.png";
+		AoeData.ut_magyarHuszar.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_eliteMagyarHuszar.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_eliteMagyarHuszar.armorClasses.set(AoeData.ac_basePierce, 2);
@@ -1158,6 +1312,8 @@ export abstract class AoeData
 		AoeData.ut_eliteMagyarHuszar.attackValues.set(AoeData.ac_siegeWeapon, 8);
 		AoeData.ut_eliteMagyarHuszar.attackValues.set(AoeData.ac_ram, 2);
 		AoeData.ut_eliteMagyarHuszar.imagePath = "assets/unitTypes/MagyarHuszarIcon-DE.png";
+		AoeData.ut_eliteMagyarHuszar.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_boyar.armorClasses.set(AoeData.ac_baseMelee, 4);
 		AoeData.ut_boyar.armorClasses.set(AoeData.ac_basePierce, 2);
@@ -1165,6 +1321,8 @@ export abstract class AoeData
 		AoeData.ut_boyar.armorClasses.set(AoeData.ac_uniqueUnit, 0);
 		AoeData.ut_boyar.attackValues.set(AoeData.ac_baseMelee, 12);
 		AoeData.ut_boyar.imagePath = "assets/unitTypes/BoyarIcon-DE.png";
+		AoeData.ut_boyar.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_eliteBoyar.armorClasses.set(AoeData.ac_baseMelee, 6);
 		AoeData.ut_eliteBoyar.armorClasses.set(AoeData.ac_basePierce, 3);
@@ -1172,6 +1330,8 @@ export abstract class AoeData
 		AoeData.ut_eliteBoyar.armorClasses.set(AoeData.ac_uniqueUnit, 0);
 		AoeData.ut_eliteBoyar.attackValues.set(AoeData.ac_baseMelee, 14);
 		AoeData.ut_eliteBoyar.imagePath = "assets/unitTypes/BoyarIcon-DE.png";
+		AoeData.ut_eliteBoyar.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_camelArcher.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_camelArcher.armorClasses.set(AoeData.ac_basePierce, 1);
@@ -1182,6 +1342,8 @@ export abstract class AoeData
 		AoeData.ut_camelArcher.attackValues.set(AoeData.ac_basePierce, 7);
 		AoeData.ut_camelArcher.attackValues.set(AoeData.ac_cavalryArcher, 4);
 		AoeData.ut_camelArcher.imagePath = "assets/unitTypes/CamelArcherIcon-DE.png";
+		AoeData.ut_camelArcher.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry, this.tec_parthianTactics, this.tec_bloodlines, this.tec_husbandry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_eliteCamelArcher.armorClasses.set(AoeData.ac_baseMelee, 1);
 		AoeData.ut_eliteCamelArcher.armorClasses.set(AoeData.ac_basePierce, 1);
@@ -1192,6 +1354,8 @@ export abstract class AoeData
 		AoeData.ut_eliteCamelArcher.attackValues.set(AoeData.ac_basePierce, 8);
 		AoeData.ut_eliteCamelArcher.attackValues.set(AoeData.ac_cavalryArcher, 6);
 		AoeData.ut_eliteCamelArcher.imagePath = "assets/unitTypes/CamelArcherIcon-DE.png";
+		AoeData.ut_eliteCamelArcher.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry, this.tec_parthianTactics, this.tec_bloodlines, this.tec_husbandry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_genitour.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_genitour.armorClasses.set(AoeData.ac_basePierce, 4);
@@ -1203,6 +1367,8 @@ export abstract class AoeData
 		AoeData.ut_genitour.attackValues.set(AoeData.ac_archer, 4);
 		AoeData.ut_genitour.attackValues.set(AoeData.ac_spearman, 2);
 		AoeData.ut_genitour.imagePath = "assets/unitTypes/GenitourIcon-DE.png";
+		AoeData.ut_genitour.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry, this.tec_bloodlines, this.tec_husbandry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_eliteGenitour.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_eliteGenitour.armorClasses.set(AoeData.ac_basePierce, 4);
@@ -1215,6 +1381,8 @@ export abstract class AoeData
 		AoeData.ut_eliteGenitour.attackValues.set(AoeData.ac_spearman, 2);
 		AoeData.ut_eliteGenitour.attackValues.set(AoeData.ac_cavalryArcher, 2);
 		AoeData.ut_eliteGenitour.imagePath = "assets/unitTypes/GenitourIcon-DE.png";
+		AoeData.ut_eliteGenitour.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry, this.tec_bloodlines, this.tec_husbandry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_shotelWarrior.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_shotelWarrior.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -1223,6 +1391,8 @@ export abstract class AoeData
 		AoeData.ut_shotelWarrior.attackValues.set(AoeData.ac_baseMelee, 16);
 		AoeData.ut_shotelWarrior.attackValues.set(AoeData.ac_eagleWarrior, 2);
 		AoeData.ut_shotelWarrior.imagePath = "assets/unitTypes/Shotelwarrioricon-DE.png";
+		AoeData.ut_shotelWarrior.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_eliteShotelWarrior.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_eliteShotelWarrior.armorClasses.set(AoeData.ac_basePierce, 1);
@@ -1231,6 +1401,8 @@ export abstract class AoeData
 		AoeData.ut_eliteShotelWarrior.attackValues.set(AoeData.ac_baseMelee, 18);
 		AoeData.ut_eliteShotelWarrior.attackValues.set(AoeData.ac_eagleWarrior, 2);
 		AoeData.ut_eliteShotelWarrior.imagePath = "assets/unitTypes/Shotelwarrioricon-DE.png";
+		AoeData.ut_eliteShotelWarrior.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_gbeto.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_gbeto.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -1239,6 +1411,8 @@ export abstract class AoeData
 		AoeData.ut_gbeto.attackValues.set(AoeData.ac_baseMelee, 10);
 		AoeData.ut_gbeto.attackValues.set(AoeData.ac_eagleWarrior, 1);
 		AoeData.ut_gbeto.imagePath = "assets/unitTypes/GbetoIcon-DE.png";
+		AoeData.ut_gbeto.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_eliteGbeto.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_eliteGbeto.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -1247,6 +1421,8 @@ export abstract class AoeData
 		AoeData.ut_eliteGbeto.attackValues.set(AoeData.ac_baseMelee, 13);
 		AoeData.ut_eliteGbeto.attackValues.set(AoeData.ac_eagleWarrior, 1);
 		AoeData.ut_eliteGbeto.imagePath = "assets/unitTypes/GbetoIcon-DE.png";
+		AoeData.ut_eliteGbeto.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_organGun.armorClasses.set(AoeData.ac_baseMelee, 2);
 		AoeData.ut_organGun.armorClasses.set(AoeData.ac_basePierce, 4);
@@ -1260,6 +1436,7 @@ export abstract class AoeData
 		AoeData.ut_organGun.secondaryAttackValues = new Map();
 		AoeData.ut_organGun.secondaryAttackValues.set(AoeData.ac_basePierce, 2); // todo: is the dmg pure (of non elites too)?
 		AoeData.ut_organGun.imagePath = "assets/unitTypes/OrganGunIcon-DE.png";
+		AoeData.ut_organGun.techsForUnitList.push(this.tec_siegeEngineers);
 
 		AoeData.ut_eliteOrganGun.armorClasses.set(AoeData.ac_baseMelee, 2);
 		AoeData.ut_eliteOrganGun.armorClasses.set(AoeData.ac_basePierce, 6);
@@ -1273,6 +1450,7 @@ export abstract class AoeData
 		AoeData.ut_eliteOrganGun.secondaryAttackValues = new Map();
 		AoeData.ut_eliteOrganGun.secondaryAttackValues.set(AoeData.ac_basePierce, 2);
 		AoeData.ut_eliteOrganGun.imagePath = "assets/unitTypes/OrganGunIcon-DE.png";
+		AoeData.ut_eliteOrganGun.techsForUnitList.push(this.tec_siegeEngineers);
 
 		AoeData.ut_arambai.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_arambai.armorClasses.set(AoeData.ac_basePierce, 1);
@@ -1283,6 +1461,7 @@ export abstract class AoeData
 		AoeData.ut_arambai.attackValues.set(AoeData.ac_basePierce, 17);
 		AoeData.ut_arambai.attackValues.set(AoeData.ac_ram, 2);
 		AoeData.ut_arambai.imagePath = "assets/unitTypes/Arambaiicon-DE.png";
+		AoeData.ut_arambai.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_eliteArambai.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_eliteArambai.armorClasses.set(AoeData.ac_basePierce, 2);
@@ -1293,6 +1472,7 @@ export abstract class AoeData
 		AoeData.ut_eliteArambai.attackValues.set(AoeData.ac_basePierce, 19);
 		AoeData.ut_eliteArambai.attackValues.set(AoeData.ac_ram, 2);
 		AoeData.ut_eliteArambai.imagePath = "assets/unitTypes/Arambaiicon-DE.png";
+		AoeData.ut_eliteArambai.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_ballistaElephant.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_ballistaElephant.armorClasses.set(AoeData.ac_basePierce, 3);
@@ -1308,6 +1488,8 @@ export abstract class AoeData
 		AoeData.ut_ballistaElephant.secondaryAttackValues = new Map();
 		AoeData.ut_ballistaElephant.secondaryAttackValues.set(AoeData.ac_basePierce, 7); // todo: secondary missile same (7) dmg as elite version?
 		AoeData.ut_ballistaElephant.imagePath = "assets/unitTypes/Ballistaelephanticon-DE.png";
+		AoeData.ut_ballistaElephant.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry, this.tec_chemistry, this.tec_siegeEngineers,
+			this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_eliteBallistaElephant.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_eliteBallistaElephant.armorClasses.set(AoeData.ac_basePierce, 3);
@@ -1323,6 +1505,8 @@ export abstract class AoeData
 		AoeData.ut_eliteBallistaElephant.secondaryAttackValues = new Map();
 		AoeData.ut_eliteBallistaElephant.secondaryAttackValues.set(AoeData.ac_basePierce, 7);
 		AoeData.ut_eliteBallistaElephant.imagePath = "assets/unitTypes/Ballistaelephanticon-DE.png";
+		AoeData.ut_eliteBallistaElephant.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry, this.tec_chemistry, this.tec_siegeEngineers,
+			this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_karambitWarrior.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_karambitWarrior.armorClasses.set(AoeData.ac_basePierce, 1);
@@ -1331,6 +1515,8 @@ export abstract class AoeData
 		AoeData.ut_karambitWarrior.attackValues.set(AoeData.ac_baseMelee, 6);
 		AoeData.ut_karambitWarrior.attackValues.set(AoeData.ac_eagleWarrior, 2);
 		AoeData.ut_karambitWarrior.imagePath = "assets/unitTypes/Karambitwarrioricon-DE.png";
+		AoeData.ut_karambitWarrior.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_eliteKarambitWarrior.armorClasses.set(AoeData.ac_baseMelee, 1);
 		AoeData.ut_eliteKarambitWarrior.armorClasses.set(AoeData.ac_basePierce, 1);
@@ -1339,6 +1525,8 @@ export abstract class AoeData
 		AoeData.ut_eliteKarambitWarrior.attackValues.set(AoeData.ac_baseMelee, 7);
 		AoeData.ut_eliteKarambitWarrior.attackValues.set(AoeData.ac_eagleWarrior, 2);
 		AoeData.ut_eliteKarambitWarrior.imagePath = "assets/unitTypes/Karambitwarrioricon-DE.png";
+		AoeData.ut_eliteKarambitWarrior.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_rattanArcher.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_rattanArcher.armorClasses.set(AoeData.ac_basePierce, 4);
@@ -1347,6 +1535,8 @@ export abstract class AoeData
 		AoeData.ut_rattanArcher.attackValues.set(AoeData.ac_basePierce, 6);
 		AoeData.ut_rattanArcher.attackValues.set(AoeData.ac_spearman, 2);
 		AoeData.ut_rattanArcher.imagePath = "assets/unitTypes/Rattanarchericon-DE.png";
+		AoeData.ut_rattanArcher.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_eliteRattanArcher.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_eliteRattanArcher.armorClasses.set(AoeData.ac_basePierce, 6);
@@ -1355,13 +1545,17 @@ export abstract class AoeData
 		AoeData.ut_eliteRattanArcher.attackValues.set(AoeData.ac_basePierce, 7);
 		AoeData.ut_eliteRattanArcher.attackValues.set(AoeData.ac_spearman, 2);
 		AoeData.ut_eliteRattanArcher.imagePath = "assets/unitTypes/Rattanarchericon-DE.png";
+		AoeData.ut_eliteRattanArcher.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_konnik.armorClasses.set(AoeData.ac_baseMelee, 2);
 		AoeData.ut_konnik.armorClasses.set(AoeData.ac_basePierce, 1);
 		AoeData.ut_konnik.armorClasses.set(AoeData.ac_cavalry, 0);
 		AoeData.ut_konnik.armorClasses.set(AoeData.ac_uniqueUnit, 0);
 		AoeData.ut_konnik.attackValues.set(AoeData.ac_baseMelee, 12);
-		AoeData.ut_konnik.imagePath = "assets/unitTypes/Konnikicon.png"; // todo: non elite konniks create non elite dismounted konniks when dying
+		AoeData.ut_konnik.imagePath = "assets/unitTypes/Konnikicon.png"; // todo: check if non elite konniks spawn non elite dismounted konniks
+		AoeData.ut_konnik.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_eliteKonnik.armorClasses.set(AoeData.ac_baseMelee, 2);
 		AoeData.ut_eliteKonnik.armorClasses.set(AoeData.ac_basePierce, 2);
@@ -1369,6 +1563,8 @@ export abstract class AoeData
 		AoeData.ut_eliteKonnik.armorClasses.set(AoeData.ac_uniqueUnit, 0);
 		AoeData.ut_eliteKonnik.attackValues.set(AoeData.ac_baseMelee, 14);
 		AoeData.ut_eliteKonnik.imagePath = "assets/unitTypes/Konnikicon.png";
+		AoeData.ut_eliteKonnik.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_konnikDismounted.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_konnikDismounted.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -1376,6 +1572,8 @@ export abstract class AoeData
 		AoeData.ut_konnikDismounted.armorClasses.set(AoeData.ac_uniqueUnit, 0);
 		AoeData.ut_konnikDismounted.attackValues.set(AoeData.ac_baseMelee, 12);
 		AoeData.ut_konnikDismounted.imagePath = "assets/unitTypes/Konnikdismountedicon.png";
+		AoeData.ut_konnikDismounted.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_eliteKonnikDismounted.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_eliteKonnikDismounted.armorClasses.set(AoeData.ac_basePierce, 1);
@@ -1383,6 +1581,8 @@ export abstract class AoeData
 		AoeData.ut_eliteKonnikDismounted.armorClasses.set(AoeData.ac_uniqueUnit, 0);
 		AoeData.ut_eliteKonnikDismounted.attackValues.set(AoeData.ac_baseMelee, 13);
 		AoeData.ut_eliteKonnikDismounted.imagePath = "assets/unitTypes/Konnikdismountedicon.png";
+		AoeData.ut_eliteKonnikDismounted.techsForUnitList.push(this.tec_squires,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 
 		AoeData.ut_kipchak.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_kipchak.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -1398,6 +1598,8 @@ export abstract class AoeData
 		AoeData.ut_kipchak.secondaryAttackValues.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_kipchak.secondaryAttackValues.set(AoeData.ac_basePierce, 3);
 		AoeData.ut_kipchak.imagePath = "assets/unitTypes/Kipchakicon.png";
+		AoeData.ut_kipchak.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry, this.tec_parthianTactics, this.tec_bloodlines, this.tec_husbandry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_eliteKipchak.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_eliteKipchak.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -1413,6 +1615,8 @@ export abstract class AoeData
 		AoeData.ut_eliteKipchak.secondaryAttackValues.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_eliteKipchak.secondaryAttackValues.set(AoeData.ac_basePierce, 3);
 		AoeData.ut_eliteKipchak.imagePath = "assets/unitTypes/Kipchakicon.png";
+		AoeData.ut_eliteKipchak.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry, this.tec_parthianTactics, this.tec_bloodlines, this.tec_husbandry,
+			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_leitis.armorClasses.set(AoeData.ac_baseMelee, 1);
 		AoeData.ut_leitis.armorClasses.set(AoeData.ac_basePierce, 2);
@@ -1420,6 +1624,8 @@ export abstract class AoeData
 		AoeData.ut_leitis.armorClasses.set(AoeData.ac_uniqueUnit, 0);
 		AoeData.ut_leitis.attackValues.set(AoeData.ac_baseMelee, 12); // todo: non elite leitis do also pierce armor
 		AoeData.ut_leitis.imagePath = "assets/unitTypes/Leitisicon.png";
+		AoeData.ut_leitis.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_eliteLeitis.armorClasses.set(AoeData.ac_baseMelee, 2);
 		AoeData.ut_eliteLeitis.armorClasses.set(AoeData.ac_basePierce, 2);
@@ -1427,6 +1633,8 @@ export abstract class AoeData
 		AoeData.ut_eliteLeitis.armorClasses.set(AoeData.ac_uniqueUnit, 0);
 		AoeData.ut_eliteLeitis.attackValues.set(AoeData.ac_baseMelee, 14);
 		AoeData.ut_eliteLeitis.imagePath = "assets/unitTypes/Leitisicon.png";
+		AoeData.ut_eliteLeitis.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_keshik.armorClasses.set(AoeData.ac_baseMelee, 1);
 		AoeData.ut_keshik.armorClasses.set(AoeData.ac_basePierce, 2);
@@ -1434,6 +1642,8 @@ export abstract class AoeData
 		AoeData.ut_keshik.armorClasses.set(AoeData.ac_uniqueUnit, 0);
 		AoeData.ut_keshik.attackValues.set(AoeData.ac_baseMelee, 9);
 		AoeData.ut_keshik.imagePath = "assets/unitTypes/Keshikicon.png";
+		AoeData.ut_keshik.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_eliteKeshik.armorClasses.set(AoeData.ac_baseMelee, 1);
 		AoeData.ut_eliteKeshik.armorClasses.set(AoeData.ac_basePierce, 3);
@@ -1441,6 +1651,8 @@ export abstract class AoeData
 		AoeData.ut_eliteKeshik.armorClasses.set(AoeData.ac_uniqueUnit, 0);
 		AoeData.ut_eliteKeshik.attackValues.set(AoeData.ac_baseMelee, 11);
 		AoeData.ut_eliteKeshik.imagePath = "assets/unitTypes/Keshikicon.png";
+		AoeData.ut_eliteKeshik.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_flamingCamel.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_flamingCamel.armorClasses.set(AoeData.ac_basePierce, 0);
@@ -1453,6 +1665,7 @@ export abstract class AoeData
 		AoeData.ut_flamingCamel.cleaveType = 3;
 		AoeData.ut_flamingCamel.cleaveRadius = 1.5;
 		AoeData.ut_flamingCamel.imagePath = "assets/unitTypes/Flaming_camel_icon.png";
+		AoeData.ut_flamingCamel.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry);
 	}
 
 	public static InitializeCivilizations(): void{
@@ -1460,8 +1673,6 @@ export abstract class AoeData
 			civ.technologies.push(this.tec_chemistry, this.tec_loom, this.tec_forging, this.tec_ironCasting, this.tec_scaleMailArmor, this.tec_fletching, this.tec_bodkinArrow,
 				this.tec_paddedArcherArmor);
 		});
-
-		// tec_chainBardingArmor tec_plateBardingArmor tec_bracer tec_leatherArcherArmor tec_ringArcherArmor
 
 		AoeData.civ_aztecs.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_aztecs.unitTypeLineLevels.push([this.utl_militia, 4]);
@@ -1472,7 +1683,8 @@ export abstract class AoeData
 		AoeData.civ_aztecs.unitTypeLineLevels.push([this.utl_batteringRam, 2]);
 		AoeData.civ_aztecs.unitTypeLineLevels.push([this.utl_scorpion, 0]);
 		AoeData.civ_aztecs.unitTypeLineLevels.push([this.utl_jaguarWarrior, 1]);
-		AoeData.civ_aztecs.technologies.push(this.tec_supplies, this.tec_squires, this.tec_siegeEngineers, this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor);
+		AoeData.civ_aztecs.technologies.push(this.tec_supplies, this.tec_squires, this.tec_siegeEngineers, this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor,
+			this.tec_bracer, this.tec_leatherArcherArmor);
 
 		AoeData.civ_berbers.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_berbers.unitTypeLineLevels.push([this.utl_militia, 4]);
@@ -1489,7 +1701,8 @@ export abstract class AoeData
 		AoeData.civ_berbers.unitTypeLineLevels.push([this.utl_scorpion, 1]);
 		AoeData.civ_berbers.unitTypeLineLevels.push([this.utl_camelArcher, 1]);
 		AoeData.civ_berbers.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_siegeEngineers, this.tec_bloodlines, this.tec_husbandry,
-			this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor);
+			this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer,
+			this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.civ_britons.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_britons.unitTypeLineLevels.push([this.utl_militia, 4]);
@@ -1503,7 +1716,8 @@ export abstract class AoeData
 		AoeData.civ_britons.unitTypeLineLevels.push([this.utl_scorpion, 1]);
 		AoeData.civ_britons.unitTypeLineLevels.push([this.utl_longbowman, 1]);
 		AoeData.civ_britons.technologies.push(this.tec_supplies, this.tec_squires, this.tec_siegeEngineers, this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor,
-			this.tec_plateMailArmor, this.tec_scaleBardingArmor);
+			this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor,
+			this.tec_ringArcherArmor);
 
 		AoeData.civ_bulgarians.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_bulgarians.unitTypeLineLevels.push([this.utl_militia, 3]);
@@ -1517,7 +1731,8 @@ export abstract class AoeData
 		AoeData.civ_bulgarians.unitTypeLineLevels.push([this.utl_scorpion, 1]);
 		AoeData.civ_bulgarians.unitTypeLineLevels.push([this.utl_konnik, 1]);
 		AoeData.civ_bulgarians.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_parthianTactics, this.tec_siegeEngineers, this.tec_bloodlines,
-			this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor);
+			this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor,
+			this.tec_plateBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor);
 
 		AoeData.civ_burmese.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_burmese.unitTypeLineLevels.push([this.utl_militia, 4]);
@@ -1532,7 +1747,7 @@ export abstract class AoeData
 		AoeData.civ_burmese.unitTypeLineLevels.push([this.utl_scorpion, 1]);
 		AoeData.civ_burmese.unitTypeLineLevels.push([this.utl_arambai, 1]);
 		AoeData.civ_burmese.technologies.push(this.tec_supplies, this.tec_squires, this.tec_parthianTactics, this.tec_siegeEngineers, this.tec_bloodlines, this.tec_husbandry,
-			this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor);
+			this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer);
 
 		AoeData.civ_byzantines.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_byzantines.unitTypeLineLevels.push([this.utl_militia, 4]);
@@ -1548,7 +1763,7 @@ export abstract class AoeData
 		AoeData.civ_byzantines.unitTypeLineLevels.push([this.utl_scorpion, 0]);
 		AoeData.civ_byzantines.unitTypeLineLevels.push([this.utl_cataphract, 1]);
 		AoeData.civ_byzantines.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_husbandry, this.tec_chainMailArmor, this.tec_plateMailArmor,
-			this.tec_scaleBardingArmor);
+			this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.civ_celts.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_celts.unitTypeLineLevels.push([this.utl_militia, 4]);
@@ -1562,7 +1777,7 @@ export abstract class AoeData
 		AoeData.civ_celts.unitTypeLineLevels.push([this.utl_scorpion, 1]);
 		AoeData.civ_celts.unitTypeLineLevels.push([this.utl_woadRaider, 1]);
 		AoeData.civ_celts.technologies.push(this.tec_supplies, this.tec_siegeEngineers, this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor,
-			this.tec_scaleBardingArmor);
+			this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_leatherArcherArmor);
 
 		AoeData.civ_chinese.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_chinese.unitTypeLineLevels.push([this.utl_militia, 4]);
@@ -1577,7 +1792,8 @@ export abstract class AoeData
 		AoeData.civ_chinese.unitTypeLineLevels.push([this.utl_scorpion, 1]);
 		AoeData.civ_chinese.unitTypeLineLevels.push([this.utl_chuKoNu, 1]);
 		AoeData.civ_chinese.technologies.push(this.tec_squires, this.tec_thumbRing, this.tec_bloodlines, this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor,
-			this.tec_plateMailArmor, this.tec_scaleBardingArmor);
+			this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor,
+			this.tec_ringArcherArmor);
 
 		AoeData.civ_cumans.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_cumans.unitTypeLineLevels.push([this.utl_militia, 4]);
@@ -1593,7 +1809,7 @@ export abstract class AoeData
 		AoeData.civ_cumans.unitTypeLineLevels.push([this.utl_scorpion, 0]);
 		AoeData.civ_cumans.unitTypeLineLevels.push([this.utl_kipchak, 1]);
 		AoeData.civ_cumans.technologies.push(this.tec_squires, this.tec_thumbRing, this.tec_parthianTactics, this.tec_bloodlines, this.tec_blastFurnace, this.tec_chainMailArmor,
-			this.tec_plateMailArmor, this.tec_scaleBardingArmor);
+			this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.civ_ethiopians.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_ethiopians.unitTypeLineLevels.push([this.utl_militia, 3]);
@@ -1608,7 +1824,8 @@ export abstract class AoeData
 		AoeData.civ_ethiopians.unitTypeLineLevels.push([this.utl_scorpion, 1]);
 		AoeData.civ_ethiopians.unitTypeLineLevels.push([this.utl_shotelWarrior, 1]);
 		AoeData.civ_ethiopians.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_siegeEngineers, this.tec_husbandry, this.tec_blastFurnace,
-			this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor);
+			this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor,
+			this.tec_ringArcherArmor);
 
 		AoeData.civ_franks.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_franks.unitTypeLineLevels.push([this.utl_militia, 4]);
@@ -1623,7 +1840,7 @@ export abstract class AoeData
 		AoeData.civ_franks.unitTypeLineLevels.push([this.utl_scorpion, 1]);
 		AoeData.civ_franks.unitTypeLineLevels.push([this.utl_throwingAxeman, 1]);
 		AoeData.civ_franks.technologies.push(this.tec_supplies, this.tec_squires, this.tec_siegeEngineers, this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor,
-			this.tec_plateMailArmor, this.tec_scaleBardingArmor);
+			this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_leatherArcherArmor);
 
 		AoeData.civ_goths.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_goths.unitTypeLineLevels.push([this.utl_militia, 4]);
@@ -1637,7 +1854,8 @@ export abstract class AoeData
 		AoeData.civ_goths.unitTypeLineLevels.push([this.utl_batteringRam, 1]);
 		AoeData.civ_goths.unitTypeLineLevels.push([this.utl_scorpion, 1]);
 		AoeData.civ_goths.unitTypeLineLevels.push([this.utl_huskarl, 1]);
-		AoeData.civ_goths.technologies.push(this.tec_squires, this.tec_bloodlines, this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_scaleBardingArmor);
+		AoeData.civ_goths.technologies.push(this.tec_squires, this.tec_bloodlines, this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_scaleBardingArmor,
+			this.tec_chainBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.civ_huns.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_huns.unitTypeLineLevels.push([this.utl_militia, 3]);
@@ -1651,7 +1869,7 @@ export abstract class AoeData
 		AoeData.civ_huns.unitTypeLineLevels.push([this.utl_scorpion, 0]);
 		AoeData.civ_huns.unitTypeLineLevels.push([this.utl_tarkan, 1]);
 		AoeData.civ_huns.technologies.push(this.tec_squires, this.tec_thumbRing, this.tec_parthianTactics, this.tec_bloodlines, this.tec_husbandry, this.tec_blastFurnace,
-			this.tec_chainMailArmor, this.tec_scaleBardingArmor);
+			this.tec_chainMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor);
 
 		AoeData.civ_incas.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_incas.unitTypeLineLevels.push([this.utl_militia, 4]);
@@ -1664,7 +1882,7 @@ export abstract class AoeData
 		AoeData.civ_incas.unitTypeLineLevels.push([this.utl_scorpion, 1]);
 		AoeData.civ_incas.unitTypeLineLevels.push([this.utl_kamayuk, 1]);
 		AoeData.civ_incas.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_siegeEngineers, this.tec_blastFurnace, this.tec_chainMailArmor,
-			this.tec_plateMailArmor);
+			this.tec_plateMailArmor, this.tec_bracer, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.civ_indians.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_indians.unitTypeLineLevels.push([this.utl_militia, 4]);
@@ -1679,7 +1897,8 @@ export abstract class AoeData
 		AoeData.civ_indians.unitTypeLineLevels.push([this.utl_scorpion, 0]);
 		AoeData.civ_indians.unitTypeLineLevels.push([this.utl_elephantArcher, 1]);
 		AoeData.civ_indians.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_parthianTactics, this.tec_siegeEngineers, this.tec_bloodlines,
-			this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_scaleBardingArmor);
+			this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer,
+			this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.civ_italians.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_italians.unitTypeLineLevels.push([this.utl_militia, 4]);
@@ -1695,7 +1914,8 @@ export abstract class AoeData
 		AoeData.civ_italians.unitTypeLineLevels.push([this.utl_scorpion, 0]);
 		AoeData.civ_italians.unitTypeLineLevels.push([this.utl_genoeseCrossbowman, 1]);
 		AoeData.civ_italians.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_bloodlines, this.tec_husbandry, this.tec_blastFurnace,
-			this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor);
+			this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer,
+			this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.civ_japanese.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_japanese.unitTypeLineLevels.push([this.utl_militia, 4]);
@@ -1710,7 +1930,8 @@ export abstract class AoeData
 		AoeData.civ_japanese.unitTypeLineLevels.push([this.utl_scorpion, 1]);
 		AoeData.civ_japanese.unitTypeLineLevels.push([this.utl_samurai, 1]);
 		AoeData.civ_japanese.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_parthianTactics, this.tec_siegeEngineers, this.tec_bloodlines,
-			this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor);
+			this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_bracer,
+			this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.civ_khmer.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_khmer.unitTypeLineLevels.push([this.utl_militia, 3]);
@@ -1726,7 +1947,7 @@ export abstract class AoeData
 		AoeData.civ_khmer.unitTypeLineLevels.push([this.utl_scorpion, 1]);
 		AoeData.civ_khmer.unitTypeLineLevels.push([this.utl_ballistaElephant, 1]);
 		AoeData.civ_khmer.technologies.push(this.tec_parthianTactics, this.tec_siegeEngineers, this.tec_bloodlines, this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor,
-			this.tec_scaleBardingArmor);
+			this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.civ_koreans.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_koreans.unitTypeLineLevels.push([this.utl_militia, 4]);
@@ -1741,7 +1962,7 @@ export abstract class AoeData
 		AoeData.civ_koreans.unitTypeLineLevels.push([this.utl_scorpion, 0]);
 		AoeData.civ_koreans.unitTypeLineLevels.push([this.utl_warWagon, 1]);
 		AoeData.civ_koreans.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_siegeEngineers, this.tec_husbandry, this.tec_chainMailArmor,
-			this.tec_plateMailArmor, this.tec_scaleBardingArmor);
+			this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.civ_lithuanians.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_lithuanians.unitTypeLineLevels.push([this.utl_militia, 4]);
@@ -1756,7 +1977,7 @@ export abstract class AoeData
 		AoeData.civ_lithuanians.unitTypeLineLevels.push([this.utl_scorpion, 0]);
 		AoeData.civ_lithuanians.unitTypeLineLevels.push([this.utl_leitis, 1]);
 		AoeData.civ_lithuanians.technologies.push(this.tec_squires, this.tec_thumbRing, this.tec_bloodlines, this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor,
-			this.tec_scaleBardingArmor);
+			this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.civ_magyars.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_magyars.unitTypeLineLevels.push([this.utl_militia, 4]);
@@ -1770,7 +1991,8 @@ export abstract class AoeData
 		AoeData.civ_magyars.unitTypeLineLevels.push([this.utl_scorpion, 1]);
 		AoeData.civ_magyars.unitTypeLineLevels.push([this.utl_magyarHuszar, 1]);
 		AoeData.civ_magyars.technologies.push(this.tec_supplies, this.tec_thumbRing, this.tec_parthianTactics, this.tec_siegeEngineers, this.tec_bloodlines, this.tec_husbandry,
-			this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_scaleBardingArmor);
+			this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer,
+			this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.civ_malay.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_malay.unitTypeLineLevels.push([this.utl_militia, 3]);
@@ -1785,7 +2007,7 @@ export abstract class AoeData
 		AoeData.civ_malay.unitTypeLineLevels.push([this.utl_scorpion, 1]);
 		AoeData.civ_malay.unitTypeLineLevels.push([this.utl_karambitWarrior, 1]);
 		AoeData.civ_malay.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_siegeEngineers, this.tec_husbandry, this.tec_blastFurnace,
-			this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor);
+			this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.civ_malians.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_malians.unitTypeLineLevels.push([this.utl_militia, 4]);
@@ -1801,7 +2023,7 @@ export abstract class AoeData
 		AoeData.civ_malians.unitTypeLineLevels.push([this.utl_scorpion, 0]);
 		AoeData.civ_malians.unitTypeLineLevels.push([this.utl_gbeto, 1]);
 		AoeData.civ_malians.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_bloodlines, this.tec_husbandry, this.tec_chainMailArmor,
-			this.tec_plateMailArmor, this.tec_scaleBardingArmor);
+			this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.civ_mayans.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_mayans.unitTypeLineLevels.push([this.utl_militia, 3]);
@@ -1812,7 +2034,8 @@ export abstract class AoeData
 		AoeData.civ_mayans.unitTypeLineLevels.push([this.utl_batteringRam, 2]);
 		AoeData.civ_mayans.unitTypeLineLevels.push([this.utl_scorpion, 1]);
 		AoeData.civ_mayans.unitTypeLineLevels.push([this.utl_plumedArcher, 1]);
-		AoeData.civ_mayans.technologies.push(this.tec_squires, this.tec_thumbRing, this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor);
+		AoeData.civ_mayans.technologies.push(this.tec_squires, this.tec_thumbRing, this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_bracer,
+			this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.civ_mongols.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_mongols.unitTypeLineLevels.push([this.utl_militia, 4]);
@@ -1828,7 +2051,7 @@ export abstract class AoeData
 		AoeData.civ_mongols.unitTypeLineLevels.push([this.utl_scorpion, 1]);
 		AoeData.civ_mongols.unitTypeLineLevels.push([this.utl_mangudai, 1]);
 		AoeData.civ_mongols.technologies.push(this.tec_squires, this.tec_thumbRing, this.tec_parthianTactics, this.tec_siegeEngineers, this.tec_bloodlines, this.tec_husbandry,
-			this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor);
+			this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor);
 
 		AoeData.civ_persians.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_persians.unitTypeLineLevels.push([this.utl_militia, 2]);
@@ -1844,7 +2067,8 @@ export abstract class AoeData
 		AoeData.civ_persians.unitTypeLineLevels.push([this.utl_scorpion, 1]);
 		AoeData.civ_persians.unitTypeLineLevels.push([this.utl_warElephant, 1]);
 		AoeData.civ_persians.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_parthianTactics, this.tec_bloodlines, this.tec_husbandry,
-			this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor);
+			this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor,
+			this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.civ_portuguese.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_portuguese.unitTypeLineLevels.push([this.utl_militia, 4]);
@@ -1859,7 +2083,8 @@ export abstract class AoeData
 		AoeData.civ_portuguese.unitTypeLineLevels.push([this.utl_scorpion, 0]);
 		AoeData.civ_portuguese.unitTypeLineLevels.push([this.utl_organGun, 1]);
 		AoeData.civ_portuguese.technologies.push(this.tec_supplies, this.tec_thumbRing, this.tec_siegeEngineers, this.tec_bloodlines, this.tec_husbandry, this.tec_blastFurnace,
-			this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor);
+			this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer,
+			this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.civ_saracens.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_saracens.unitTypeLineLevels.push([this.utl_militia, 4]);
@@ -1875,7 +2100,8 @@ export abstract class AoeData
 		AoeData.civ_saracens.unitTypeLineLevels.push([this.utl_scorpion, 0]);
 		AoeData.civ_saracens.unitTypeLineLevels.push([this.utl_mameluke, 1]);
 		AoeData.civ_saracens.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_parthianTactics, this.tec_siegeEngineers, this.tec_bloodlines,
-			this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor);
+			this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor,
+			this.tec_plateBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.civ_slavs.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_slavs.unitTypeLineLevels.push([this.utl_militia, 4]);
@@ -1889,7 +2115,8 @@ export abstract class AoeData
 		AoeData.civ_slavs.unitTypeLineLevels.push([this.utl_scorpion, 1]);
 		AoeData.civ_slavs.unitTypeLineLevels.push([this.utl_boyar, 1]);
 		AoeData.civ_slavs.technologies.push(this.tec_supplies, this.tec_squires, this.tec_siegeEngineers, this.tec_bloodlines, this.tec_husbandry, this.tec_blastFurnace,
-			this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor);
+			this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_leatherArcherArmor,
+			this.tec_ringArcherArmor);
 
 		AoeData.civ_spanish.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_spanish.unitTypeLineLevels.push([this.utl_militia, 4]);
@@ -1904,7 +2131,8 @@ export abstract class AoeData
 		AoeData.civ_spanish.unitTypeLineLevels.push([this.utl_scorpion, 0]);
 		AoeData.civ_spanish.unitTypeLineLevels.push([this.utl_conquistador, 1]);
 		AoeData.civ_spanish.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_bloodlines, this.tec_husbandry, this.tec_blastFurnace,
-			this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor);
+			this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer,
+			this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.civ_tatars.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_tatars.unitTypeLineLevels.push([this.utl_militia, 3]);
@@ -1921,7 +2149,8 @@ export abstract class AoeData
 		AoeData.civ_tatars.unitTypeLineLevels.push([this.utl_scorpion, 1]);
 		AoeData.civ_tatars.unitTypeLineLevels.push([this.utl_keshik, 1]);
 		AoeData.civ_tatars.technologies.push(this.tec_squires, this.tec_thumbRing, this.tec_parthianTactics, this.tec_siegeEngineers, this.tec_bloodlines, this.tec_husbandry,
-			this.tec_blastFurnace, this.tec_scaleBardingArmor);
+			this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor,
+			this.tec_ringArcherArmor);
 
 		AoeData.civ_teutons.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_teutons.unitTypeLineLevels.push([this.utl_militia, 4]);
@@ -1936,7 +2165,7 @@ export abstract class AoeData
 		AoeData.civ_teutons.unitTypeLineLevels.push([this.utl_scorpion, 1]);
 		AoeData.civ_teutons.unitTypeLineLevels.push([this.utl_teutonicKnight, 1]);
 		AoeData.civ_teutons.technologies.push(this.tec_supplies, this.tec_squires, this.tec_siegeEngineers, this.tec_bloodlines, this.tec_blastFurnace, this.tec_chainMailArmor,
-			this.tec_plateMailArmor, this.tec_scaleBardingArmor);
+			this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.civ_turks.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_turks.unitTypeLineLevels.push([this.utl_militia, 4]);
@@ -1952,7 +2181,8 @@ export abstract class AoeData
 		AoeData.civ_turks.unitTypeLineLevels.push([this.utl_scorpion, 1]);
 		AoeData.civ_turks.unitTypeLineLevels.push([this.utl_janissary, 1]);
 		AoeData.civ_turks.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_parthianTactics, this.tec_bloodlines, this.tec_husbandry,
-			this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor);
+			this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer,
+			this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.civ_vietnamese.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_vietnamese.unitTypeLineLevels.push([this.utl_militia, 4]);
@@ -1967,7 +2197,8 @@ export abstract class AoeData
 		AoeData.civ_vietnamese.unitTypeLineLevels.push([this.utl_scorpion, 0]);
 		AoeData.civ_vietnamese.unitTypeLineLevels.push([this.utl_rattanArcher, 1]);
 		AoeData.civ_vietnamese.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_siegeEngineers, this.tec_bloodlines, this.tec_husbandry,
-			this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor);
+			this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer,
+			this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.civ_vikings.unitTypeLineLevels.push([this.utl_villager, 0]);
 		AoeData.civ_vikings.unitTypeLineLevels.push([this.utl_militia, 4]);
@@ -1981,6 +2212,6 @@ export abstract class AoeData
 		AoeData.civ_vikings.unitTypeLineLevels.push([this.utl_scorpion, 1]);
 		AoeData.civ_vikings.unitTypeLineLevels.push([this.utl_berserk, 1]);
 		AoeData.civ_vikings.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_siegeEngineers, this.tec_blastFurnace, this.tec_chainMailArmor,
-			this.tec_plateMailArmor, this.tec_scaleBardingArmor);
+			this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 	}
 }

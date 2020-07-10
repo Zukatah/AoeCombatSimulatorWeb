@@ -1,4 +1,5 @@
 import { ArmorClass } from './armorClass';
+import { Technology } from './technology';
 
 export class UnitType {
 
@@ -33,6 +34,7 @@ export class UnitType {
 	public unitTypeIndex: number; // this unit type's index in the unittypes list (for performance purposes)
 	public name: string; // this unit type's name
 	public imagePath: string = "";
+	public techsForUnitList: Technology[] = [];
 
 	constructor(name: string, hp: number, attackSpeed: number, attackRange: number, attackDelay: number, projectileSpeed: number, moveSpeed: number,
 		foodCost: number, woodCost: number, goldCost: number, radius: number = 0.2, attackRangeMin: number = 0.0, accuracyPercent: number = 100, hpRegPerMin: number = 0) {
