@@ -1,6 +1,7 @@
 import { Projectile } from "./projectile";
 import { Unit } from "./unit";
 import { Battle } from "./battle";
+import { AoeData } from './aoeData';
 
 export class Missile extends Projectile
 {
@@ -37,13 +38,14 @@ export class Missile extends Projectile
 		let maxYGridIndex: number = Math.min(Battle.GRID_LENGTH - 1, gy + 1);
 		let targetArmyIndex: number = this.attacker.armyIndex == 1 ? 0 : 1;
 		let collisionTargets: Unit[] = [];
+		let bonusAoe: number = this.attacker.civUnitType.civ == AoeData.civ_ethiopians && this.attacker.civUnitType.age == 4 ? 0.1 : 0;
 
 		for (let i: number = minXGridIndex; i <= maxXGridIndex; i++)
 		{
 			for (let j: number = minYGridIndex; j <= maxYGridIndex; j++)
 			{
 				for (let unit of this.battle.gridUnits[i][j]){
-					if (unit.armyIndex == targetArmyIndex && !this.alreadyAffectedUnits.has(unit) && (unit.x - this.x) * (unit.x - this.x) + (unit.y - this.y) * (unit.y - this.y) <= (unit.radius) * (unit.radius)){
+					if (unit.armyIndex == targetArmyIndex && !this.alreadyAffectedUnits.has(unit) && (unit.x - this.x) * (unit.x - this.x) + (unit.y - this.y) * (unit.y - this.y) <= (unit.radius + bonusAoe) * (unit.radius + bonusAoe)){
 						collisionTargets.push(unit);
 					}
 				}

@@ -24,7 +24,7 @@ export abstract class AoeData
 	public static ac_mameluke: ArmorClass = new ArmorClass("Mameluke");
 
 
-	public static ut_villager: UnitType = new UnitType("Villager", 40, 2.0, 0.0, 0.53, Number.MAX_VALUE, 0.968, 50, 0, 0);
+	public static ut_villager: UnitType = new UnitType("Villager", 25, 2.0, 0.0, 0.53, Number.MAX_VALUE, 0.8, 50, 0, 0);
 	public static utl_villager: UnitTypeLine = new UnitTypeLine("Villager line", [AoeData.ut_villager]);
 
 	public static ut_militia: UnitType = new UnitType("Militia", 40, 2.0, 0.0, 0.5, Number.MAX_VALUE, 0.9, 60, 0, 20);
@@ -72,8 +72,8 @@ export abstract class AoeData
 	public static ut_arbalester: UnitType = new UnitType("Arbalester", 40, 2.0, 5.0, 0.35, 7.0, 0.96, 0, 25, 45, 0.2, 0.0, 90);
 	public static utl_archer: UnitTypeLine = new UnitTypeLine("Archer line", [AoeData.ut_archer, AoeData.ut_crossbowman, AoeData.ut_arbalester]);
 
-	public static ut_skirmisher: UnitType = new UnitType("Skirmisher", 30, 3.0, 4.0, 0.51, 7.0, 0.96, 35, 25, 0, 0.2, 1.0, 90);
-	public static ut_eliteSkirmisher: UnitType = new UnitType("Elite Skirmisher", 35, 3.0, 5.0, 0.51, 7.0, 0.96, 35, 25, 0, 0.2, 1.0, 90);
+	public static ut_skirmisher: UnitType = new UnitType("Skirmisher", 30, 3.0, 4.0, 0.51, 7.0, 0.96, 25, 35, 0, 0.2, 1.0, 90);
+	public static ut_eliteSkirmisher: UnitType = new UnitType("Elite Skirmisher", 35, 3.0, 5.0, 0.51, 7.0, 0.96, 25, 35, 0, 0.2, 1.0, 90);
 	public static ut_imperialSkirmisher: UnitType = new UnitType("Imperial Skirmisher", 35, 3.0, 5.0, 0.51, 7.0, 0.96, 25, 35, 0, 0.2, 1.0, 95);
 	public static utl_skirmisher: UnitTypeLine = new UnitTypeLine("Skirmisher line", [AoeData.ut_skirmisher, AoeData.ut_eliteSkirmisher, AoeData.ut_imperialSkirmisher]);
 
@@ -157,8 +157,8 @@ export abstract class AoeData
 	public static ut_eliteWarWagon: UnitType = new UnitType("Elite War Wagon", 200, 2.5, 5.0, 1.0, 6.0, 1.2, 0, 110, 60, 0.8, 0.0, 100);
 	public static utl_warWagon: UnitTypeLine = new UnitTypeLine("War Wagon line", [AoeData.ut_warWagon, AoeData.ut_eliteWarWagon]);
 	
-	public static ut_plumedArcher: UnitType = new UnitType("Plumed Archer", 65, 1.9, 4.0, 0.5, 7.0, 1.2, 0, 40, 40, 0.2, 0.0, 80);
-	public static ut_elitePlumedArcher: UnitType = new UnitType("Elite Plumed Archer", 65, 1.9, 5.0, 0.5, 7.0, 1.2, 0, 40, 40, 0.2, 0.0, 90);
+	public static ut_plumedArcher: UnitType = new UnitType("Plumed Archer", 65, 1.9, 4.0, 0.5, 7.0, 1.2, 0, 55, 55, 0.2, 0.0, 80);
+	public static ut_elitePlumedArcher: UnitType = new UnitType("Elite Plumed Archer", 65, 1.9, 5.0, 0.5, 7.0, 1.2, 0, 55, 55, 0.2, 0.0, 90);
 	public static utl_plumedArcher: UnitTypeLine = new UnitTypeLine("Plumed Archer line", [AoeData.ut_plumedArcher, AoeData.ut_elitePlumedArcher]);
 	
 	public static ut_conquistador: UnitType = new UnitType("Conquistador", 55, 2.9, 6.0, 0.41, 5.5, 1.3, 60, 0, 70, 0.4, 0.0, 65);
@@ -330,6 +330,8 @@ export abstract class AoeData
 	public static tec_bloodlines: Technology = new Technology("Bloodlines", 2);
 	public static tec_husbandry: Technology = new Technology("Husbandry", 3);
 	public static tec_loom: Technology = new Technology("Loom", 1);
+	public static tec_wheelbarrow: Technology = new Technology("Wheelbarrow", 2);
+	public static tec_handCart: Technology = new Technology("Hand Cart", 3);
 	public static tec_forging: Technology = new Technology("Forging", 2);
 	public static tec_ironCasting: Technology = new Technology("Iron Casting", 3);
 	public static tec_blastFurnace: Technology = new Technology("Blast Furnace", 4);
@@ -404,6 +406,8 @@ export abstract class AoeData
 		AoeData.ut_villager.attackValues.set(AoeData.ac_baseMelee, 3);
 		AoeData.ut_villager.imagePath = "assets/unitTypes/MaleVillDE.jpg";
 		AoeData.ut_villager.techsForUnitList.push(this.tec_loom);
+		AoeData.ut_villager.techsForUnitList.push(this.tec_wheelbarrow);
+		AoeData.ut_villager.techsForUnitList.push(this.tec_handCart);
 
 		AoeData.ut_militia.armorClasses.set(AoeData.ac_infantry, 0);
 		AoeData.ut_militia.armorClasses.set(AoeData.ac_baseMelee, 0);
@@ -1671,7 +1675,7 @@ export abstract class AoeData
 	public static InitializeCivilizations(): void{
 		this.civsList.forEach(civ => {
 			civ.technologies.push(this.tec_chemistry, this.tec_loom, this.tec_forging, this.tec_ironCasting, this.tec_scaleMailArmor, this.tec_fletching, this.tec_bodkinArrow,
-				this.tec_paddedArcherArmor);
+				this.tec_paddedArcherArmor, this.tec_wheelbarrow, this.tec_handCart);
 		});
 
 		AoeData.civ_aztecs.unitTypeLineLevels.push([this.utl_villager, 0]);
@@ -1730,6 +1734,7 @@ export abstract class AoeData
 		AoeData.civ_bulgarians.unitTypeLineLevels.push([this.utl_batteringRam, 2]);
 		AoeData.civ_bulgarians.unitTypeLineLevels.push([this.utl_scorpion, 1]);
 		AoeData.civ_bulgarians.unitTypeLineLevels.push([this.utl_konnik, 1]);
+		AoeData.civ_bulgarians.unitTypeLineLevels.push([this.utl_konnikDismounted, 1]);
 		AoeData.civ_bulgarians.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_parthianTactics, this.tec_siegeEngineers, this.tec_bloodlines,
 			this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor,
 			this.tec_plateBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor);

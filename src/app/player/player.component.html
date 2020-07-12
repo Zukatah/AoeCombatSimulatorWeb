@@ -27,8 +27,16 @@
 							<br>
 							<span><img class="smallImg" src="assets/hitpoints.png" title="Hit points">{{player.civUts[item].hp}}</span>
 							<br>
+							<span>
+								<img class="smallImg" src="assets/attack.png" title="Hit points">
+								<img class="smallImg" src="assets/attackSpeed.png" title="Attack speed">{{player.civUts[item].attackSpeed | number : '1.0-2'}}s
+							</span>
+							<br>
 							<span *ngFor="let av of player.civUts[item].attackValues | keyvalue"><img class="smallImg" src="assets/attack.png" title="Hit points"> {{av.key.name}}: {{av.value}}<br></span>
 							<span *ngFor="let av of player.civUts[item].armorClasses | keyvalue"><img class="smallImg" src="assets/armor.png" title="Hit points"> {{av.key.name}}: {{av.value}}<br></span>
+							<span><img class="smallImg" src="assets/range.png" title="Range and accuracy">{{player.civUts[item].attackRange}}t - {{player.civUts[item].accuracyPercent}}%</span>
+							<br>
+							<span><img class="smallImg" src="assets/movementSpeedInv.png" title="Movement speed">{{player.civUts[item].moveSpeed | number : '1.0-2'}}t/s</span>
 						</ng-template>
 						<td class="align-middle" [ngbTooltip]="utTooltip" container="body">
 							<!--<label [attr.for]="'numberInput'+player.playerIndex+item">{{player.uts[item].name}}</label>-->
@@ -50,11 +58,11 @@
 			<thead>
 				<tr>
 					<th scope="col"></th>
-					<th scope="col"><img src="assets/Aoe2de_population.png" class="border border-dark img-fluid"></th>
-					<th scope="col"><img src="assets/Aoe2de_food.png" class="border border-dark img-fluid"></th>
-					<th scope="col"><img src="assets/Aoe2de_wood.png" class="border border-dark img-fluid"></th>
-					<th scope="col"><img src="assets/Aoe2de_gold.png" class="border border-dark img-fluid"></th>
-					<th scope="col"><img src="assets/sum1.png" class="border border-dark img-fluid"></th>
+					<th scope="col"><img src="assets/Aoe2de_population.png" title="Population" class="border border-dark img-fluid"></th>
+					<th scope="col"><img src="assets/Aoe2de_food.png" title="Food" class="border border-dark img-fluid"></th>
+					<th scope="col"><img src="assets/Aoe2de_wood.png" title="Wood" class="border border-dark img-fluid"></th>
+					<th scope="col"><img src="assets/Aoe2de_gold.png" title="Gold" class="border border-dark img-fluid"></th>
+					<th scope="col"><img src="assets/sum1.png" title="Sum of all resources (with optional weighting)" class="border border-dark img-fluid"></th>
 				</tr>
 			</thead>
 			<tbody>
