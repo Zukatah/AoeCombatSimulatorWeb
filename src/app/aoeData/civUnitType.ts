@@ -61,6 +61,16 @@ export class CivUnitType extends UnitType {
 		if (civ == AoeData.civ_malians){ this.ApplyMaliansBonusses(); }
 		if (civ == AoeData.civ_mayans){ this.ApplyMayansBonusses(); }
 		if (civ == AoeData.civ_mongols){ this.ApplyMongolsBonusses(); }
+		if (civ == AoeData.civ_persians){ this.ApplyPersiansBonusses(); }
+		if (civ == AoeData.civ_portuguese){ this.ApplyPortugueseBonusses(); }
+		if (civ == AoeData.civ_saracens){ this.ApplySaracensBonusses(); }
+		if (civ == AoeData.civ_slavs){ this.ApplySlavsBonusses(); }
+		if (civ == AoeData.civ_spanish){ this.ApplySpanishBonusses(); }
+		if (civ == AoeData.civ_tatars){ this.ApplyTatarsBonusses(); }
+		if (civ == AoeData.civ_teutons){ this.ApplyTeutonsBonusses(); }
+		if (civ == AoeData.civ_turks){ this.ApplyTurksBonusses(); }
+		if (civ == AoeData.civ_vietnamese){ this.ApplyVietnameseBonusses(); }
+		if (civ == AoeData.civ_vikings){ this.ApplyVikingsBonusses(); }
 
 		this.ApplyBlacksmithTechs();
 		this.ApplyUniversityTechs();
@@ -509,6 +519,125 @@ export class CivUnitType extends UnitType {
 		}
 		if (AoeData.ut_lightCavalry == this.baseUnitType || AoeData.ut_hussar == this.baseUnitType || AoeData.utl_steppeLancer.unitTypes.includes(this.baseUnitType)){
 			this.hp *= 1.3;
+		}
+	}
+
+
+	public ApplyPersiansBonusses(): void{
+		if (AoeData.utl_archer.unitTypes.includes(this.baseUnitType) && this.age >= 3){
+			this.resourceCosts[1] = 60;
+			this.resourceCosts[2] = 0;
+		}
+		if (AoeData.utl_warElephant.unitTypes.includes(this.baseUnitType) && this.age == 4){
+			this.moveSpeed *= 1.3;
+		}
+		if (AoeData.utl_knight.unitTypes.includes(this.baseUnitType)){
+			this.attackValues.set(AoeData.ac_archer, 2);
+		}
+	}
+
+
+	public ApplyPortugueseBonusses(): void{
+		this.resourceCosts[2] *= 0.85;
+	}
+
+
+	public ApplySaracensBonusses(): void{
+		if (this.armorClasses.has(AoeData.ac_camel)){
+			this.hp += 30;
+		}
+	}
+
+
+	public ApplySlavsBonusses(): void{
+		if (this.armorClasses.has(AoeData.ac_infantry) && this.age == 4){ // todo: check druzhina ingame cleave vs simulated cleave
+			this.cleaveType = 1;
+			this.cleaveRadius = 0.5;
+		}
+		if (AoeData.utl_batteringRam.unitTypes.includes(this.baseUnitType) || AoeData.utl_scorpion.unitTypes.includes(this.baseUnitType)){
+			for (let i: number = 0; i < 3; i++){
+				this.resourceCosts[i] *= 0.85;
+			}
+		}
+	}
+
+
+	public ApplySpanishBonusses(): void{
+		if (AoeData.utl_villager.unitTypes.includes(this.baseUnitType) && this.age == 4){
+			this.attackValues.set(AoeData.ac_baseMelee, this.attackValues.get(AoeData.ac_baseMelee) + 6);
+			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 2);
+			this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 2);
+			this.hp += 40;
+		}
+		if (AoeData.utl_handCannoneer.unitTypes.includes(this.baseUnitType)){
+			this.attackSpeed *= 0.85;
+		}
+	}
+
+
+	public ApplyTatarsBonusses(): void{
+		if ((AoeData.utl_scoutCavalry.unitTypes.includes(this.baseUnitType) || AoeData.utl_steppeLancer.unitTypes.includes(this.baseUnitType) ||
+			AoeData.utl_cavalryArcher.unitTypes.includes(this.baseUnitType)) && this.age >= 3){
+			this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 1);
+		}
+	}
+
+
+	public ApplyTeutonsBonusses(): void{
+		if ((AoeData.utl_scorpion.unitTypes.includes(this.baseUnitType) || AoeData.utl_batteringRam.unitTypes.includes(this.baseUnitType)) && this.age >= 3){
+			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 4);
+		}
+		if (AoeData.utl_militia.unitTypes.includes(this.baseUnitType) || AoeData.utl_spearman.unitTypes.includes(this.baseUnitType) ||
+			AoeData.utl_condottiero.unitTypes.includes(this.baseUnitType) ||
+			AoeData.utl_scoutCavalry.unitTypes.includes(this.baseUnitType) || AoeData.utl_knight.unitTypes.includes(this.baseUnitType)){
+			if (this.age == 2){
+				this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 1);
+			} else if (this.age >= 3){
+				this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 2);
+			}
+		}
+	}
+
+
+	public ApplyTurksBonusses(): void{
+		if (this.armorClasses.has(AoeData.ac_cavalryArcher) && this.age >= 3){
+			this.hp += 20;
+		}
+		if (this.armorClasses.has(AoeData.ac_gunpowderUnit)){
+			this.hp *= 1.25;
+		}
+	}
+
+
+	public ApplyVietnameseBonusses(): void{
+		if (AoeData.utl_archer.unitTypes.includes(this.baseUnitType) || AoeData.utl_skirmisher.unitTypes.includes(this.baseUnitType)
+			|| AoeData.utl_cavalryArcher.unitTypes.includes(this.baseUnitType) || AoeData.utl_genitour.unitTypes.includes(this.baseUnitType)){
+			this.hp *= 1.2;
+		}
+		if (AoeData.utl_battleElephant.unitTypes.includes(this.baseUnitType)){
+			this.hp += 50;
+		}
+	}
+
+
+	public ApplyVikingsBonusses(): void{
+		if (AoeData.utl_berserk.unitTypes.includes(this.baseUnitType) && this.age == 4){
+			this.hpRegPerMin *= 2;
+		}
+		if (this.armorClasses.has(AoeData.ac_infantry)){
+			if (this.age >= 3){
+				if (this.attackValues.has(AoeData.ac_cavalry)){
+					this.attackValues.set(AoeData.ac_cavalry, this.attackValues.get(AoeData.ac_cavalry) + 5);
+				} else {
+					this.attackValues.set(AoeData.ac_cavalry, 5);
+				}
+				if (this.attackValues.has(AoeData.ac_camel)){
+					this.attackValues.set(AoeData.ac_camel, this.attackValues.get(AoeData.ac_camel) + 4);
+				} else {
+					this.attackValues.set(AoeData.ac_camel, 4);
+				}
+			}
+			this.hp *= this.age == 1 ? 1.1 : (this.age == 2 ? 1.15 : this.age >= 3 ? 1.2 : 0);
 		}
 	}
 }

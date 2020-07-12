@@ -207,8 +207,8 @@ export abstract class AoeData
 	public static ut_eliteGbeto: UnitType = new UnitType("Elite Gbeto", 45, 2.0, 0.0, 1.2, 7.0, 1.25, 50, 0, 40);
 	public static utl_gbeto: UnitTypeLine = new UnitTypeLine("Gbeto line", [AoeData.ut_gbeto, AoeData.ut_eliteGbeto]);
 
-	public static ut_organGun: UnitType = new UnitType("Organ Gun", 60, 3.45, 7.0, 0.6, 5.5, 0.85, 0, 80, 60, 0.4, 1.0, 50);
-	public static ut_eliteOrganGun: UnitType = new UnitType("Elite Organ Gun", 70, 3.45, 7.0, 0.6, 5.5, 0.85, 0, 80, 60, 0.4, 1.0, 50);
+	public static ut_organGun: UnitType = new UnitType("Organ Gun", 60, 3.45, 7.0, 0.6, 5.5, 0.85, 0, 80, 70, 0.4, 1.0, 50);
+	public static ut_eliteOrganGun: UnitType = new UnitType("Elite Organ Gun", 70, 3.45, 7.0, 0.6, 5.5, 0.85, 0, 80, 70, 0.4, 1.0, 50);
 	public static utl_organGun: UnitTypeLine = new UnitTypeLine("Organ Gun line", [AoeData.ut_organGun, AoeData.ut_eliteOrganGun]);
 
 	public static ut_arambai: UnitType = new UnitType("Arambai", 60, 2.0, 5.0, 0.6, 7.0, 1.3, 0, 75, 60, 0.4, 0.0, 30);
@@ -223,8 +223,8 @@ export abstract class AoeData
 	public static ut_eliteKarambitWarrior: UnitType = new UnitType("Elite Karambit Warrior", 40, 2.0, 0.0, 0.81, Number.MAX_VALUE, 1.2, 30, 0, 15);
 	public static utl_karambitWarrior: UnitTypeLine = new UnitTypeLine("Karambit Warrior line", [AoeData.ut_karambitWarrior, AoeData.ut_eliteKarambitWarrior]);
 	
-	public static ut_rattanArcher: UnitType = new UnitType("Rattan Archer", 35, 2.0, 4.0, 0.69, 7.0, 1.1, 0, 50, 45, 0.2, 0.0, 80);
-	public static ut_eliteRattanArcher: UnitType = new UnitType("Elite Rattan Archer", 40, 2.0, 5.0, 0.69, 7.0, 1.1, 0, 50, 45, 0.2, 0.0, 90);
+	public static ut_rattanArcher: UnitType = new UnitType("Rattan Archer", 40, 2.0, 4.0, 0.69, 7.0, 1.1, 0, 50, 45, 0.2, 0.0, 80);
+	public static ut_eliteRattanArcher: UnitType = new UnitType("Elite Rattan Archer", 45, 2.0, 5.0, 0.69, 7.0, 1.1, 0, 50, 45, 0.2, 0.0, 90);
 	public static utl_rattanArcher: UnitTypeLine = new UnitTypeLine("Rattan Archer line", [AoeData.ut_rattanArcher, AoeData.ut_eliteRattanArcher]);
 
 	public static ut_konnik: UnitType = new UnitType("Konnik", 100, 2.4, 0.0, 0.7, Number.MAX_VALUE, 1.35, 60, 0, 70, 0.4);
@@ -817,7 +817,7 @@ export abstract class AoeData
 		AoeData.ut_cataphract.attackValues.set(AoeData.ac_infantry, 9);
 		AoeData.ut_cataphract.attackValues.set(AoeData.ac_condottiero, 9);
 		AoeData.ut_cataphract.cleaveType = 1;
-		AoeData.ut_cataphract.cleaveRadius = 0.4;
+		AoeData.ut_cataphract.cleaveRadius = 0.5;
 		AoeData.ut_cataphract.imagePath = "assets/unitTypes/CataphractIcon-DE.png";
 		AoeData.ut_cataphract.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
 			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
@@ -830,7 +830,7 @@ export abstract class AoeData
 		AoeData.ut_eliteCataphract.attackValues.set(AoeData.ac_infantry, 12);
 		AoeData.ut_eliteCataphract.attackValues.set(AoeData.ac_condottiero, 10);
 		AoeData.ut_eliteCataphract.cleaveType = 1;
-		AoeData.ut_eliteCataphract.cleaveRadius = 0.4;
+		AoeData.ut_eliteCataphract.cleaveRadius = 0.5;
 		AoeData.ut_eliteCataphract.imagePath = "assets/unitTypes/CataphractIcon-DE.png"; // todo cleave dmg actually only with tech
 		AoeData.ut_eliteCataphract.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
 			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);

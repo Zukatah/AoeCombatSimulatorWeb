@@ -25,7 +25,8 @@
 						<ng-template #utTooltip style="size: 100px;">
 							<b>{{player.civUts[item].name}}</b>
 							<br>
-							<span><img class="smallImg" src="assets/hitpoints.png" title="Hit points">{{player.civUts[item].hp}}</span>
+							<span><img class="smallImg" src="assets/hitpoints.png" title="Hit points">{{player.civUts[item].hp | number : '1.0-2'}}</span>
+							<span *ngIf="player.civUts[item].hpRegPerMin != 0"> (+{{player.civUts[item].hpRegPerMin | number : '1.0-2'}}/min)</span>
 							<br>
 							<span>
 								<img class="smallImg" src="assets/attack.png" title="Hit points">
