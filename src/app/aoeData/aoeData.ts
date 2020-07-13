@@ -348,6 +348,7 @@ export abstract class AoeData
 	public static tec_leatherArcherArmor: Technology = new Technology("Leather Archer Armor", 3);
 	public static tec_ringArcherArmor: Technology = new Technology("Ring Archer Armor", 4);
 
+	
 	public static civ_aztecs: Civilization = new Civilization("Aztecs");
 	public static civ_berbers: Civilization = new Civilization("Berbers");
 	public static civ_britons: Civilization = new Civilization("Britons");
@@ -383,6 +384,7 @@ export abstract class AoeData
 	public static civ_turks: Civilization = new Civilization("Turks");
 	public static civ_vietnamese: Civilization = new Civilization("Vietnamese");
 	public static civ_vikings: Civilization = new Civilization("Vikings");
+	public static civ_generic: Civilization = new Civilization("Generic Civilization");
 
 	public static civsList: Civilization[] = [
 		AoeData.civ_aztecs, AoeData.civ_berbers, AoeData.civ_britons, AoeData.civ_bulgarians, AoeData.civ_burmese,
@@ -392,6 +394,7 @@ export abstract class AoeData
 		AoeData.civ_magyars, AoeData.civ_malay, AoeData.civ_malians, AoeData.civ_mayans, AoeData.civ_mongols,
 		AoeData.civ_persians, AoeData.civ_portuguese, AoeData.civ_saracens, AoeData.civ_slavs, AoeData.civ_spanish,
 		AoeData.civ_tatars, AoeData.civ_teutons, AoeData.civ_turks, AoeData.civ_vietnamese, AoeData.civ_vikings,
+		AoeData.civ_generic
 	];
 	
 	public static InitializeUnitTypes(): void
@@ -2218,5 +2221,24 @@ export abstract class AoeData
 		AoeData.civ_vikings.unitTypeLineLevels.push([this.utl_berserk, 1]);
 		AoeData.civ_vikings.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_siegeEngineers, this.tec_blastFurnace, this.tec_chainMailArmor,
 			this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
+		
+		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_eagleScout, 2]);
+		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_archer, 2]);
+		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
+		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_handCannoneer, 0]);
+		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
+		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_knight, 2]);
+		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_camelRider, 1]);
+		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_battleElephant, 1]);
+		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_steppeLancer, 1]);
+		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_batteringRam, 2]);
+		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_scorpion, 1]);
+		AoeData.civ_generic.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_parthianTactics, this.tec_siegeEngineers, this.tec_bloodlines,
+			this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor,
+			this.tec_plateBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 	}
 }

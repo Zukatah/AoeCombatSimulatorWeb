@@ -98,16 +98,16 @@
 						<tr>
 							<th scope="col"></th>
 							<th *ngFor="let utInd of CreateIncrArray(numberUtToDisplay)" scope="col">
-								<span *ngIf="uts[utInd].imagePath == ''">{{uts[utInd].name}}</span>
-								<img *ngIf="uts[utInd].imagePath != ''" src="{{uts[utInd].imagePath}}" class="border border-dark img-fluid" title="{{uts[utInd].name}}">
+								<span *ngIf="matrixUts[utInd].imagePath == ''">{{matrixUts[utInd].name}}</span>
+								<img *ngIf="matrixUts[utInd].imagePath != ''" src="{{matrixUts[utInd].imagePath}}" class="border border-dark img-fluid" title="{{matrixUts[utInd].name}}">
 							</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr *ngFor="let utInd of CreateIncrArray(numberUtToDisplay); index as i">
 							<td>
-								<span *ngIf="uts[utInd].imagePath == ''">{{uts[utInd].name}}</span>
-								<img *ngIf="uts[utInd].imagePath != ''" src="{{uts[utInd].imagePath}}" class="border border-dark img-fluid" title="{{uts[utInd].name}}">
+								<span *ngIf="matrixUts[utInd].imagePath == ''">{{matrixUts[utInd].name}}</span>
+								<img *ngIf="matrixUts[utInd].imagePath != ''" src="{{matrixUts[utInd].imagePath}}" class="border border-dark img-fluid" title="{{matrixUts[utInd].name}}">
 							</td>
 							<td *ngFor="let utInd2 of CreateIncrArray(numberUtToDisplay); index as j" [style.background-color]="getSurvivorsColor(combatresultsNoHnR[i][j])" class="align-middle">
 								<span class="align-middle">{{combatresultsNoHnR[i][j] | number : '1.0-2'}}</span>
@@ -137,16 +137,16 @@
 						<tr>
 							<th scope="col"></th>
 							<th *ngFor="let utInd of CreateIncrArray(numberUtToDisplay)" scope="col">
-								<span *ngIf="uts[utInd].imagePath == ''">{{uts[utInd].name}}</span>
-								<img *ngIf="uts[utInd].imagePath != ''" src="{{uts[utInd].imagePath}}" class="border border-dark img-fluid" title="{{uts[utInd].name}}">
+								<span *ngIf="matrixUts[utInd].imagePath == ''">{{matrixUts[utInd].name}}</span>
+								<img *ngIf="matrixUts[utInd].imagePath != ''" src="{{matrixUts[utInd].imagePath}}" class="border border-dark img-fluid" title="{{matrixUts[utInd].name}}">
 							</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr *ngFor="let utInd of CreateIncrArray(numberUtToDisplay); index as i">
 							<td>
-								<span *ngIf="uts[utInd].imagePath == ''">{{uts[utInd].name}}</span>
-								<img *ngIf="uts[utInd].imagePath != ''" src="{{uts[utInd].imagePath}}" class="border border-dark img-fluid" title="{{uts[utInd].name}}">
+								<span *ngIf="matrixUts[utInd].imagePath == ''">{{matrixUts[utInd].name}}</span>
+								<img *ngIf="matrixUts[utInd].imagePath != ''" src="{{matrixUts[utInd].imagePath}}" class="border border-dark img-fluid" title="{{matrixUts[utInd].name}}">
 							</td>
 							<td *ngFor="let utInd2 of CreateIncrArray(numberUtToDisplay); index as j" [style.background-color]="getSurvivorsColor(combatresultsSemiHnR[i][j])" class="align-middle">
 								<span class="align-middle">{{combatresultsSemiHnR[i][j] | number : '1.0-2'}}</span>
@@ -176,16 +176,16 @@
 						<tr>
 							<th scope="col"></th>
 							<th *ngFor="let utInd of CreateIncrArray(numberUtToDisplay)" scope="col">
-								<span *ngIf="uts[utInd].imagePath == ''">{{uts[utInd].name}}</span>
-								<img *ngIf="uts[utInd].imagePath != ''" src="{{uts[utInd].imagePath}}" class="border border-dark img-fluid" title="{{uts[utInd].name}}">
+								<span *ngIf="matrixUts[utInd].imagePath == ''">{{matrixUts[utInd].name}}</span>
+								<img *ngIf="matrixUts[utInd].imagePath != ''" src="{{matrixUts[utInd].imagePath}}" class="border border-dark img-fluid" title="{{matrixUts[utInd].name}}">
 							</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr *ngFor="let utInd of CreateIncrArray(numberUtToDisplay); index as i">
 							<td>
-								<span *ngIf="uts[utInd].imagePath == ''">{{uts[utInd].name}}</span>
-								<img *ngIf="uts[utInd].imagePath != ''" src="{{uts[utInd].imagePath}}" class="border border-dark img-fluid" title="{{uts[utInd].name}}">
+								<span *ngIf="matrixUts[utInd].imagePath == ''">{{matrixUts[utInd].name}}</span>
+								<img *ngIf="matrixUts[utInd].imagePath != ''" src="{{matrixUts[utInd].imagePath}}" class="border border-dark img-fluid" title="{{matrixUts[utInd].name}}">
 							</td>
 							<td *ngFor="let utInd2 of CreateIncrArray(numberUtToDisplay); index as j" [style.background-color]="getSurvivorsColor(combatresultsFullHnR[i][j])" class="align-middle">
 								<span class="align-middle">{{combatresultsFullHnR[i][j] | number : '1.0-2'}}</span>
@@ -215,16 +215,16 @@
 						<tr>
 							<th scope="col"></th>
 							<th *ngFor="let utInd of CreateIncrArray(numberUtToDisplay)" scope="col">
-								<span *ngIf="uts[utInd].imagePath == ''">{{uts[utInd].name}}</span>
-								<img *ngIf="uts[utInd].imagePath != ''" src="{{uts[utInd].imagePath}}" class="border border-dark img-fluid" title="{{uts[utInd].name}}">
+								<span *ngIf="matrixUts[utInd].imagePath == ''">{{matrixUts[utInd].name}}</span>
+								<img *ngIf="matrixUts[utInd].imagePath != ''" src="{{matrixUts[utInd].imagePath}}" class="border border-dark img-fluid" title="{{matrixUts[utInd].name}}">
 							</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr *ngFor="let utInd of CreateIncrArray(numberUtToDisplay); index as i">
 							<td>
-								<span *ngIf="uts[utInd].imagePath == ''">{{uts[utInd].name}}</span>
-								<img *ngIf="uts[utInd].imagePath != ''" src="{{uts[utInd].imagePath}}" class="border border-dark img-fluid" title="{{uts[utInd].name}}">
+								<span *ngIf="matrixUts[utInd].imagePath == ''">{{matrixUts[utInd].name}}</span>
+								<img *ngIf="matrixUts[utInd].imagePath != ''" src="{{matrixUts[utInd].imagePath}}" class="border border-dark img-fluid" title="{{matrixUts[utInd].name}}">
 							</td>
 							<td *ngFor="let utInd2 of CreateIncrArray(numberUtToDisplay); index as j" [style.background-color]="getSurvivorsColor(combatresultsNoHnR_LGMP[i][j])" class="align-middle">
 								<span class="align-middle">{{combatresultsNoHnR_LGMP[i][j] | number : '1.0-2'}}</span>

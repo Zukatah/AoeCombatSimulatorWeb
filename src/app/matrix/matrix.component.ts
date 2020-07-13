@@ -4,6 +4,8 @@ import { UnitType } from "./../aoeData/unitType";
 import { Player } from "./../aoeData/player";
 import { Color } from "./../helper/color";
 import { Battle } from "./../aoeData/battle";
+import { CivUnitType } from '../aoeData/civUnitType';
+import { AoECombatSimulatorComponent } from '../aoeCombatSimulator/aoeCombatSimulator.component';
 
 @Component({
   selector: 'app-matrix',
@@ -13,6 +15,7 @@ import { Battle } from "./../aoeData/battle";
 export class MatrixComponent implements OnInit {
 
 	public uts: UnitType[] = AoeData.unitTypesList;
+	public matrixUts: UnitType[] = [];
 	public combatresults: number[][];
 	public combatresultsNoHnR: number[][];
 	public combatresultsSemiHnR: number[][];
@@ -51,6 +54,18 @@ export class MatrixComponent implements OnInit {
 		this.working = true;
 		setTimeout(this.CreateBattles.bind(this), 0);
 		*/
+		//AoeData.civ_generic.unitTypeLineLevels.forEach(tuple => {
+		//	this.matrixUts.push(new CivUnitType(tuple[0].unitTypes[tuple[1]], AoeData.civ_generic));
+		//});
+		this.matrixUts.push(
+			AoeData.ut_villager,
+			AoeData.ut_champion, AoeData.ut_halberdier, AoeData.ut_eliteEagleWarrior,
+			AoeData.ut_hussar, AoeData.ut_paladin, AoeData.ut_heavyCamelRider, AoeData.ut_eliteBattleElephant, AoeData.ut_eliteSteppeLancer,
+			AoeData.ut_arbalester, AoeData.ut_eliteSkirmisher, AoeData.ut_heavyCavalryArcher, AoeData.ut_handCannoneer,
+			AoeData.ut_siegeRam, AoeData.ut_heavyScorpion,
+			AoeData.ut_eliteLongbowman, AoeData.ut_eliteCataphract, AoeData.ut_eliteWoadRaider, AoeData.ut_eliteChuKoNu, AoeData.ut_eliteThrowingAxeman,
+			AoeData.ut_eliteHuskarl, AoeData.ut_eliteSamurai, AoeData.ut_eliteMangudai, AoeData.ut_eliteWarElephant, AoeData.ut_eliteMameluke,
+			AoeData.ut_eliteTeutonicKnight, AoeData.ut_eliteJanissary, AoeData.ut_eliteBerserk);
 	}
 
 

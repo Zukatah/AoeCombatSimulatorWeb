@@ -35,9 +35,16 @@
 							<br>
 							<span *ngFor="let av of player.civUts[item].attackValues | keyvalue"><img class="smallImg" src="assets/attack.png" title="Hit points"> {{av.key.name}}: {{av.value}}<br></span>
 							<span *ngFor="let av of player.civUts[item].armorClasses | keyvalue"><img class="smallImg" src="assets/armor.png" title="Hit points"> {{av.key.name}}: {{av.value}}<br></span>
-							<span><img class="smallImg" src="assets/range.png" title="Range and accuracy">{{player.civUts[item].attackRange}}t - {{player.civUts[item].accuracyPercent}}%</span>
+							<span>
+								<img class="smallImg" src="assets/range.png" title="Range and accuracy">
+								{{player.civUts[item].attackRange}}t {{player.civUts[item].attackRangeMin != 0 ? "(min: " + player.civUts[item].attackRangeMin + "t)" : ""}} - {{player.civUts[item].accuracyPercent}}%
+							</span>
 							<br>
 							<span><img class="smallImg" src="assets/movementSpeedInv.png" title="Movement speed">{{player.civUts[item].moveSpeed | number : '1.0-2'}}t/s</span>
+							<br>
+							<span *ngIf="player.civUts[item].resourceCosts[0] != 0"><img class="smallImg" src="assets/Aoe2de_food.png" title="Food">{{player.civUts[item].resourceCosts[0] | number : '1.0-2'}} </span>
+							<span *ngIf="player.civUts[item].resourceCosts[1] != 0"><img class="smallImg" src="assets/Aoe2de_wood.png" title="Wood">{{player.civUts[item].resourceCosts[1] | number : '1.0-2'}} </span>
+							<span *ngIf="player.civUts[item].resourceCosts[2] != 0"><img class="smallImg" src="assets/Aoe2de_gold.png" title="Gold">{{player.civUts[item].resourceCosts[2] | number : '1.0-2'}}</span>
 						</ng-template>
 						<td class="align-middle" [ngbTooltip]="utTooltip" container="body">
 							<!--<label [attr.for]="'numberInput'+player.playerIndex+item">{{player.uts[item].name}}</label>-->
