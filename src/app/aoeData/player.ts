@@ -18,7 +18,7 @@ export class Player{
 	public playerIndex: number; // currently either 0 (first player) or 1 (second player)
 
 	public amountStartUnits: number[] = []; // contains the number of start units of each unit type; a list of all unit types can be found in the static AoeData.cs class
-	public survivorsSumArmy: Map<UnitType, number>  = new Map<UnitType, number>(); // the sum of survivors of all battles by unit type
+	public survivorsSumArmy: Map<CivUnitType, number>  = new Map<CivUnitType, number>(); // the sum of survivors of all battles by unit type
 	public avgSurvivorsNumber: number[] = [];
 	public avgSurvivorsPercent: number[] = [];
 	public avgSurvivorsColor: Color[] = [];
@@ -53,7 +53,7 @@ export class Player{
 
 	public ResetData(resetInput: boolean = true): void
 	{
-		console.log("ResetData");
+		// console.log("ResetData"); // todo: apparently called more often than necessary
 		this.sumWins = 0;
 		for (let i: number = 0; i < 3; i++)
 		{

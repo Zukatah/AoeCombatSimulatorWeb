@@ -94,7 +94,7 @@ export class Unit {
 
 		this.gx = x < -20.0 ? 0 : Math.min(Battle.GRID_LENGTH - 1, 1 + Math.floor(x + 20.0));
 		this.gy = y < -20.0 ? 0 : Math.min(Battle.GRID_LENGTH - 1, 1 + Math.floor(y + 20.0));
-
+		
 		this.battle.gridUnits[this.gx][this.gy].add(this);
 	}
 

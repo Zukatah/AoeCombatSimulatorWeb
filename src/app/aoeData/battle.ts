@@ -6,6 +6,7 @@ import { ExtensionMethods } from "./extensionMethods";
 import { AoECombatSimulatorComponent } from "./../aoeCombatSimulator/aoeCombatSimulator.component";
 import { Player } from './player';
 import { UnitType } from './unitType';
+import { CivUnitType } from './civUnitType';
 
 
 export class Battle
@@ -109,7 +110,6 @@ export class Battle
 	private CountSurvivors(): void
 	{
 		let utSurvivorsArmy: number;
-		let curValue: number;
 		let tempCount: number;
 		for (let i: number = 0; i < 2; i++)
 		{
@@ -120,6 +120,7 @@ export class Battle
 						tempCount++;
 					}
 				}
+				// console.log("i " + i + " utname " + ut.name + " tc " + tempCount);
 				utSurvivorsArmy = tempCount;
 				this.players[i].survivorsSumArmy.set(ut, this.players[i].survivorsSumArmy.get(ut) + utSurvivorsArmy);
 			});
@@ -153,8 +154,9 @@ export class Battle
 				dyingUnit.alive = false;
 				this.gridUnits[dyingUnit.gx][dyingUnit.gy].delete(dyingUnit);
 				if (dyingUnit.civUnitType.baseUnitType == AoeData.ut_eliteKonnik || dyingUnit.civUnitType.baseUnitType == AoeData.ut_konnik){
-					let dyingBaseUnitType: UnitType = dyingUnit.civUnitType.baseUnitType;
-					let dismountedKonnik: Unit = new Unit(this.players[dyingUnit.armyIndex].civUts.find(cut => cut.baseUnitType == dyingBaseUnitType), this, i);
+					let isElite: boolean = dyingUnit.civUnitType.baseUnitType == AoeData.ut_eliteKonnik;
+					let dismountedKonnikCivUnitType: CivUnitType = this.players[dyingUnit.armyIndex].civUts.find(cut => cut.baseUnitType == (isElite ? AoeData.ut_eliteKonnikDismounted : AoeData.ut_konnikDismounted));
+					let dismountedKonnik: Unit = new Unit(dismountedKonnikCivUnitType, this, i);
 					this.armies[i].push(dismountedKonnik);
 					dismountedKonnik.SetXYInitial(dyingUnit.x, dyingUnit.y);
 				}
