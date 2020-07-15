@@ -17,3 +17,12 @@ th, td{
 span{
 	font-size: small;
 }
+
+.brightText{
+	color: lightgray;
+}
+
+.fixedHeight img{
+	width: 40px;
+	height: 40px;
+}
