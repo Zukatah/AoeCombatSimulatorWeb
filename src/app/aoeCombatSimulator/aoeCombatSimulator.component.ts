@@ -121,6 +121,9 @@ export class AoECombatSimulatorComponent {
 					return;
 				}
 			}
+			if (this.players[i].numberOfRelics == NaN || this.players[i].numberOfRelics > 10 || this.players[i].numberOfRelics < 0){
+				return;
+			}
 		}
 
 		this.hideUnitTypesWithZeroUnits = true;
@@ -130,8 +133,6 @@ export class AoECombatSimulatorComponent {
 		this.numberOfSimulationsLastRun = this.numberOfSimulations;
 		this.working = true;
 		setTimeout(this.CreateBattles.bind(this), 0);
-
-		//for (let i: number = 0; i < this.numberOfSimulations; i++){ new Battle(this, 0, i, this.hitAndRunMode); } this.PrintResults();
 	}
 
 	public CreateBattles(){

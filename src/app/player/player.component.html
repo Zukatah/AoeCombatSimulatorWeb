@@ -59,6 +59,15 @@
 		</div>
 	</div>
 
+	<div class="row" *ngIf="player.civilization.name=='Lithuanians'">
+		<div class="col-6">
+			<span><img src="assets/Relic_sprite_aoe2de.png" title="Number of relics"></span>
+		</div>
+		<div class="col-6">
+			<input type="number" class="form-control" id="numberOfRelicsInput" oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value == ''){ this.value = '0'; }; if (this.value > 4) { this.value = '4'; };" (ngModelChange)="player.RelicCountChanged($event)" value="0" min="0" max="4" [ngModel]="player.numberOfRelics">
+		</div>
+	</div>
+
 	<hr>
 
 	<div class="row no-gutters">

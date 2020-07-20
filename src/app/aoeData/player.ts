@@ -4,6 +4,7 @@ import { AoECombatSimulatorComponent } from "./../aoeCombatSimulator/aoeCombatSi
 import { AoeData } from "./aoeData";
 import { Civilization } from './civilization';
 import { CivUnitType } from './civUnitType';
+import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 
 export class Player{
 	// public userInterface: AoECombatSimulatorComponent; // a reference to the user interface instance to which this player's gui elements will be added
@@ -16,6 +17,7 @@ export class Player{
 	public missMainTarget: number = 0; // DEBUG purposes
 	public missSideTarget: number = 0; // DEBUG purposes
 	public playerIndex: number; // currently either 0 (first player) or 1 (second player)
+	public numberOfRelics: number = 0; // currently only relevant for Lithuanians
 
 	public amountStartUnits: number[] = []; // contains the number of start units of each unit type; a list of all unit types can be found in the static AoeData.cs class
 	public survivorsSumArmy: Map<CivUnitType, number>  = new Map<CivUnitType, number>(); // the sum of survivors of all battles by unit type
@@ -101,6 +103,33 @@ export class Player{
 		this.civilization.unitTypeLineLevels.forEach(tuple => {
 			this.civUts.push(new CivUnitType(tuple[0].unitTypes[tuple[1]], this.civilization));
 		});
+		this.numberOfRelics = 0;
 		this.ResetData();
+	}
+
+	public RelicCountChanged(newValue): void{
+		this.numberOfRelics = newValue > 4 ? 4 : newValue;
+		if (this.civilization == AoeData.civ_lithuanians){
+			if (this.civUts.find(ut => ut.baseUnitType == AoeData.ut_knight) != undefined){
+				this.civUts.find(ut => ut.baseUnitType == AoeData.ut_knight).attackValues
+				.set(AoeData.ac_baseMelee, new CivUnitType(AoeData.ut_knight, this.civilization).attackValues.get(AoeData.ac_baseMelee) + this.numberOfRelics);
+			}
+			if (this.civUts.find(ut => ut.baseUnitType == AoeData.ut_cavalier) != undefined){
+				this.civUts.find(ut => ut.baseUnitType == AoeData.ut_cavalier).attackValues
+				.set(AoeData.ac_baseMelee, new CivUnitType(AoeData.ut_cavalier, this.civilization).attackValues.get(AoeData.ac_baseMelee) + this.numberOfRelics);
+			}
+			if (this.civUts.find(ut => ut.baseUnitType == AoeData.ut_paladin) != undefined){
+				this.civUts.find(ut => ut.baseUnitType == AoeData.ut_paladin).attackValues
+				.set(AoeData.ac_baseMelee, new CivUnitType(AoeData.ut_paladin, this.civilization).attackValues.get(AoeData.ac_baseMelee) + this.numberOfRelics);
+			}
+			if (this.civUts.find(ut => ut.baseUnitType == AoeData.ut_leitis) != undefined){
+				this.civUts.find(ut => ut.baseUnitType == AoeData.ut_leitis).attackValues
+				.set(AoeData.ac_baseMelee, new CivUnitType(AoeData.ut_leitis, this.civilization).attackValues.get(AoeData.ac_baseMelee) + this.numberOfRelics);
+			}
+			if (this.civUts.find(ut => ut.baseUnitType == AoeData.ut_eliteLeitis) != undefined){
+				this.civUts.find(ut => ut.baseUnitType == AoeData.ut_eliteLeitis).attackValues
+				.set(AoeData.ac_baseMelee, new CivUnitType(AoeData.ut_eliteLeitis, this.civilization).attackValues.get(AoeData.ac_baseMelee) + this.numberOfRelics);
+			}
+		}
 	}
 }
