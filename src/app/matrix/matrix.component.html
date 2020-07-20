@@ -1,5 +1,17 @@
 <div class="container">
+
 	<div class="row top-buffer">
+		<div class="col-12 text-center">
+			<div ngbDropdown>
+				<button class="btn btn-primary" id="contentSelector" ngbDropdownToggle>{{contentValues[contentValue]}}</button>
+				<div ngbDropdownMenu aria-labelledby="contentSelector">
+					<button ngbDropdownItem (click)="SetContentValue(i)" *ngFor="let item of contentValues; index as i">{{contentValues[i]}}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row top-buffer" *ngIf="contentValue==0">
 		<div class="col-12 border border-dark rounded p-2 matrix-bg">
 			<div>
 				<h3>Cost efficiency matrices</h3>
@@ -80,7 +92,7 @@
 		</div>
 	</div>
 
-	<div class="row top-buffer">
+	<div class="row top-buffer" *ngIf="contentValue==1">
 		<div class="col-12 border border-dark rounded p-2 matrix-bg">
 			<div class="row no-gutters">
 				<h3>Cost efficiency matrix 1</h3>
@@ -119,7 +131,7 @@
 		</div>
 	</div>
 
-	<div class="row top-buffer">
+	<div class="row top-buffer" *ngIf="contentValue==2">
 		<div class="col-12 border border-dark rounded p-2 matrix-bg">
 			<div class="row no-gutters">
 				<h3>Cost efficiency matrix 2</h3>
@@ -158,7 +170,7 @@
 		</div>
 	</div>
 
-	<div class="row top-buffer">
+	<div class="row top-buffer" *ngIf="contentValue==3">
 		<div class="col-12 border border-dark rounded p-2 matrix-bg">
 			<div class="row no-gutters">
 				<h3>Cost efficiency matrix 3</h3>
@@ -197,7 +209,7 @@
 		</div>
 	</div>
 
-	<div class="row top-buffer">
+	<div class="row top-buffer" *ngIf="contentValue==4">
 		<div class="col-12 border border-dark rounded p-2 matrix-bg">
 			<div class="row no-gutters">
 				<h3>Cost efficiency matrix 4</h3>
@@ -260,49 +272,4 @@
 		</div>
 	</div>
 
-	<div class="row top-buffer">
-		<div class="col-12 border border-dark rounded p-2 matrix-bg">
-			<div class="row no-gutters">
-				<h3>Live Cost efficiency matrix</h3>
-			</div>
-			<div class="row no-gutters">
-				<ul>
-					<li>No Hit&Run</li>
-					<li>Food & wood & gold of equal worth</li>
-				</ul>
-			</div>
-
-			<div class="row no-gutters text-center">
-				<table class="table table-sm table-dark fixedHeight">
-					<thead>
-						<tr>
-							<th scope="col"></th>
-							<th scope="col"></th>
-							<th *ngFor="let utInd of CreateIncrArray(numberUtToDisplayColumns)" scope="col">
-								<span class="brightText">{{trashCivUts[utInd].civ.name}}</span>
-								<img *ngIf="trashCivUts[utInd].imagePath != ''" src="{{trashCivUts[utInd].imagePath}}" class="border border-dark img-fluid" title="{{trashCivUts[utInd].name}}">
-							</th>
-							<th *ngIf="showAvgCol" scope="col">Avg</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr *ngFor="let utInd of CreateIncrArray(numberUtToDisplayRows); index as i">
-							<td>
-								<span class="brightText">{{championCivUts[utInd].civ.name}}</span>
-							</td>
-							<td>
-								<img *ngIf="championCivUts[utInd].imagePath != ''" src="{{championCivUts[utInd].imagePath}}" class="border border-dark img-fluid" title="{{championCivUts[utInd].name}}">
-							</td>
-							<td *ngFor="let utInd2 of CreateIncrArray(numberUtToDisplayColumns); index as j" [style.background-color]="getSurvivorsColor(combatresults[i][j])" class="align-middle">
-								<span class="align-middle">{{combatresults[i][j] | number : '1.0-2'}}</span>
-							</td>
-							<td *ngIf="showAvgCol" [style.background-color]="getSurvivorsColor(combatresults[i][numberUtToDisplayColumns])" class="align-middle">
-								<span class="align-middle">{{combatresults[i][numberUtToDisplayColumns] | number : '1.0-2'}}</span>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
 </div>

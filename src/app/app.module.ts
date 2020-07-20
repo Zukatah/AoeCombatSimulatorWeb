@@ -12,6 +12,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { NavbarComponent } from './navbar/navbar.component';
 import { InfoComponent } from './info/info.component';
 import { MatrixComponent } from './matrix/matrix.component';
+import { MatrixCreationComponent } from './matrix-creation/matrix-creation.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MatrixComponent } from './matrix/matrix.component';
     PlayerComponent,
     NavbarComponent,
     InfoComponent,
-    MatrixComponent
+    MatrixComponent,
+    MatrixCreationComponent
   ],
   imports: [ 
     BrowserModule,
@@ -30,6 +32,7 @@ import { MatrixComponent } from './matrix/matrix.component';
 	RouterModule.forRoot([
 		{ path: 'info', component: InfoComponent },
 		{ path: 'matrix', component: MatrixComponent },
+		{ path: 'matrix-creation', component: MatrixCreationComponent },
 		{ path: '', component: AoECombatSimulatorComponent },
 		{ path: '**', component: AoECombatSimulatorComponent }
 	])
