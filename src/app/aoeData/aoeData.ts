@@ -105,8 +105,8 @@ export abstract class AoeData
 	public static ut_eliteWoadRaider: UnitType = new UnitType("Elite Woad Raider", 80, 2.0, 0.0, 0.72, Number.MAX_VALUE, 1.2, 65, 0, 25);
 	public static utl_woadRaider: UnitTypeLine = new UnitTypeLine("Woad Raider line", [AoeData.ut_woadRaider, AoeData.ut_eliteWoadRaider]);
 
-	public static ut_chuKoNu: UnitType = new UnitType("Chu Ko Nu", 45, 3.0, 4.0, 0.83, 7.0, 0.96, 0, 40, 35, 0.2, 0.0, 85); // actually attack delay is 0.23s, but firing all the missiles takes longer
-	public static ut_eliteChuKoNu: UnitType = new UnitType("Elite Chu Ko Nu", 50, 3.0, 4.0, 0.83, 7.0, 0.96, 0, 40, 35, 0.2, 0.0, 85); // actually attack delay is 0.23s, but firing all the missiles takes longer
+	public static ut_chuKoNu: UnitType = new UnitType("Chu Ko Nu", 45, 3.85, 4.0, 0.83, 7.0, 0.96, 0, 40, 35, 0.2, 0.0, 85); // actually attack delay is 0.23s, but firing all the missiles takes longer
+	public static ut_eliteChuKoNu: UnitType = new UnitType("Elite Chu Ko Nu", 50, 3.85, 4.0, 0.83, 7.0, 0.96, 0, 40, 35, 0.2, 0.0, 85); // actually attack delay is 0.23s, but firing all the missiles takes longer
 	public static utl_chuKoNu: UnitTypeLine = new UnitTypeLine("Chu Ko Nu line", [AoeData.ut_chuKoNu, AoeData.ut_eliteChuKoNu]); // check attack rate of chu ko nu again; compare to archers
 	
 	public static ut_throwingAxeman: UnitType = new UnitType("Throwing Axeman", 60, 2.0, 3.0, 1.0, 7.0, 1.0, 55, 0, 25);
