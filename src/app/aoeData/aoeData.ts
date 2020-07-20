@@ -203,8 +203,8 @@ export abstract class AoeData
 	public static ut_eliteShotelWarrior: UnitType = new UnitType("Elite Shotel Warrior", 50, 2.0, 0.0, 0.75, Number.MAX_VALUE, 1.2, 50, 0, 35);
 	public static utl_shotelWarrior: UnitTypeLine = new UnitTypeLine("Shotel Warrior line", [AoeData.ut_shotelWarrior, AoeData.ut_eliteShotelWarrior]);
 	
-	public static ut_gbeto: UnitType = new UnitType("Gbeto", 30, 2.0, 0.0, 1.2, 7.0, 1.25, 50, 0, 40);
-	public static ut_eliteGbeto: UnitType = new UnitType("Elite Gbeto", 45, 2.0, 0.0, 1.2, 7.0, 1.25, 50, 0, 40);
+	public static ut_gbeto: UnitType = new UnitType("Gbeto", 30, 2.0, 5.0, 1.2, 7.0, 1.25, 50, 0, 40);
+	public static ut_eliteGbeto: UnitType = new UnitType("Elite Gbeto", 45, 2.0, 6.0, 1.2, 7.0, 1.25, 50, 0, 40);
 	public static utl_gbeto: UnitTypeLine = new UnitTypeLine("Gbeto line", [AoeData.ut_gbeto, AoeData.ut_eliteGbeto]);
 
 	public static ut_organGun: UnitType = new UnitType("Organ Gun", 60, 3.45, 7.0, 0.6, 5.5, 0.85, 0, 80, 70, 0.4, 1.0, 50);
