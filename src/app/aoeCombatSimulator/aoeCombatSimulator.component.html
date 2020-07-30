@@ -30,9 +30,7 @@
 							<div ngbDropdown>
 								<button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>{{hitAndRunModes[hitAndRunMode]}}</button>
 								<div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-									<button ngbDropdownItem (click)="SetHnR(0)">No Hit&Run</button>
-									<button ngbDropdownItem (click)="SetHnR(1)">Medium Hit&Run</button>
-									<button ngbDropdownItem (click)="SetHnR(2)">Perfect Hit&Run</button>
+									<button *ngFor="let item of hitAndRunModes; index as i" ngbDropdownItem (click)="SetHnR(i)">{{hitAndRunModes[i]}}</button>
 								</div>
 							</div>
 						</td>

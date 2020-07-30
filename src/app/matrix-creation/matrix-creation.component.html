@@ -1,4 +1,58 @@
 <div class="container">
+
+	<div class="row top-buffer">
+		<div class="col-2"></div>
+
+		<div class="col-8 text-center border border-dark rounded p-2 matrix-bg">
+			<table class="table table-sm table-dark">
+				<thead>
+					<tr>
+						<th scope="col" style="width: 25%"><label class="brightText" for="numberOfSimulationsTextbox">Hit&Run mode</label></th>
+						<th scope="col" style="width: 25%"><label class="brightText" for="numberOfSimulationsTextbox">Resource value</label></th>
+						<th scope="col" style="width: 25%"><label class="brightText" for="numberOfSimulationsTextbox">Combat type</label></th>
+						<th scope="col" style="width: 25%"><label class="brightText" for="numberOfSimulationsTextbox">#Simulations</label></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="text-center">
+							<div ngbDropdown>
+								<button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>{{hitAndRunModes[hitAndRunMode]}}</button>
+								<div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+									<button *ngFor="let item of hitAndRunModes; index as i" ngbDropdownItem (click)="SetHnR(i)">{{hitAndRunModes[i]}}</button>
+								</div>
+							</div>
+						</td>
+						<td class="text-center">
+							<div ngbDropdown>
+								<button class="btn btn-primary" id="dropdownBasic2" ngbDropdownToggle>{{resourceValues[resourceValue]}}</button>
+								<div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+									<button *ngFor="let item of resourceValues; index as i" ngbDropdownItem (click)="SetRV(i)">{{resourceValues[i]}}</button>
+								</div>
+							</div>
+						</td>
+						<td class="text-center">
+							<div ngbDropdown>
+								<button class="btn btn-primary" id="dropdownBasic3" ngbDropdownToggle>{{combatTypes[combatType]}}</button>
+								<div ngbDropdownMenu aria-labelledby="dropdownBasic3">
+									<button *ngFor="let item of combatTypes; index as i" ngbDropdownItem (click)="SetCT(i)">{{combatTypes[i]}}</button>
+								</div>
+							</div>
+						</td>
+						<td class="text-center">
+							<input type="number" class="form-control" id="numberOfSimulationsTextbox" [(ngModel)]="numberOfSimulations" min="1" max="1000" oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value == ''){ this.value = '1'; } if (this.value > 1000) { this.value = '1000'; }">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div class="spinner-border" role="status" *ngIf="working"></div><br>
+
+			<button type="button" class="btn btn-info" (click)="StartMatrixCalculations()" [disabled]="working">Start Simulation</button>
+		</div>
+
+		<div class="col-2"></div>
+	</div>
 	
 	<div class="row top-buffer">
 		<div class="col-12 border border-dark rounded p-2 matrix-bg">
@@ -16,13 +70,13 @@
 				<table class="table table-sm table-dark fixedHeight">
 					<thead>
 						<tr>
-							<th scope="col"></th>
-							<th scope="col"></th>
-							<th *ngFor="let utInd of CreateIncrArray(numberUtToDisplayColumns)" scope="col">
+							<th style="width: 10%" scope="col"></th>
+							<th style="width: 5%" scope="col"></th>
+							<th *ngFor="let utInd of CreateIncrArray(numberUtToDisplayColumns)" [ngStyle]="{'width': 75/numberUtToDisplayColumns + '%'}" scope="col">
 								<span class="brightText">{{trashCivUts[utInd].civ.name}}</span>
 								<img *ngIf="trashCivUts[utInd].imagePath != ''" src="{{trashCivUts[utInd].imagePath}}" class="border border-dark img-fluid" title="{{trashCivUts[utInd].name}}">
 							</th>
-							<th *ngIf="showAvgCol" scope="col">Avg</th>
+							<th style="width: 10%" *ngIf="showAvgCol" scope="col" class="brightText">Avg</th>
 						</tr>
 					</thead>
 					<tbody>

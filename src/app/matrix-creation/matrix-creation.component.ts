@@ -24,15 +24,20 @@ export class MatrixCreationComponent{
 	public resourceValues: string[] = ["100F=100W=100G", "100F=100W=66,6G", "100F=100W=17G"];
 	public resourceValuesFactors: number[][] = [[1, 1, 1], [1, 1, 1.5], [1, 1, 5.88235]];
 
+	public combatType: number = 0;
+	public combatTypes: string[] = ["Equal resources", "Equal numbers", "Equal numbers rep."];
+
 	public numberOfSimulations: number = 40;
-	public ut1: number = 0;
-	public ut2: number = 0;
+	public ut1: number; // counter variable
+	public ut2: number; // counter variable
 	public showAvgCol: boolean = true;
 
 	public players: Player[];
 
 	public numberUtToDisplayRows: number; // to display all unit types in the matrix, set this to 57; to display all non-unique unit types, set this to 15
 	public numberUtToDisplayColumns: number; // to display all unit types in the matrix, set this to 57; to display all non-unique unit types, set this to 15
+
+	public working: boolean = false;
 	// end of dynamically calculated parts //
 
 
@@ -71,8 +76,23 @@ export class MatrixCreationComponent{
 			}
 			this.combatresults[i].push(0);
 		}
+	}
+
+
+	public StartMatrixCalculations(){
+		this.working = true;
+		this.ut1 = this.ut2 = 0;
+		this.combatresults = [];
+		this.numberUtToDisplayRows = this.championCivUts.length;
+		this.numberUtToDisplayColumns = this.trashCivUts.length;
+		for(let i: number = 0; i < this.numberUtToDisplayRows; i++){
+			this.combatresults.push([]);
+			for (let j: number = 0; j < this.numberUtToDisplayColumns; j++){
+				this.combatresults[i].push((this.championCivUts[i].civ == this.trashCivUts[j].civ && this.championCivUts[i].baseUnitType.name == this.trashCivUts[j].baseUnitType.name) ? 1 : 0);
+			}
+			this.combatresults[i].push(0);
+		}
 		setTimeout(this.CreateBattles.bind(this), 0);
-		
 	}
 
 
@@ -90,8 +110,10 @@ export class MatrixCreationComponent{
 			this.players[1].amountStartUnits[this.ut2] = 50;
 			this.players[0].CalculateResourcesInvested(this.resourceValuesFactors[this.resourceValue]);
 			this.players[1].CalculateResourcesInvested(this.resourceValuesFactors[this.resourceValue]);
-			this.players[1].amountStartUnits[this.ut2] = Math.round(50 * this.players[0].resourcesInvestedTotal / this.players[1].resourcesInvestedTotal);
-			this.players[1].CalculateResourcesInvested(this.resourceValuesFactors[this.resourceValue]);
+			if (this.combatType == 0){
+				this.players[1].amountStartUnits[this.ut2] = Math.round(50 * this.players[0].resourcesInvestedTotal / this.players[1].resourcesInvestedTotal);
+				this.players[1].CalculateResourcesInvested(this.resourceValuesFactors[this.resourceValue]);
+			}
 
 			for (let i: number = 0; i < this.numberOfSimulations; i++){
 				new Battle(0, i, this.hitAndRunMode, this.players);
@@ -132,6 +154,7 @@ export class MatrixCreationComponent{
 				this.championCivUts[row] = tempSortList[row].civUnitType;
 				this.combatresults[row] = tempSortList[row].cR;
 			}
+			this.working = false;
 		}
 	}
 
@@ -203,5 +226,17 @@ export class MatrixCreationComponent{
 
 	public CreateIncrArray(n: number): number[] {
 		return [...Array(n).keys()];
+	}
+
+	public SetHnR(mode: number){
+		this.hitAndRunMode = mode;
+	}
+
+	public SetRV(mode: number){
+		this.resourceValue = mode;
+	}
+
+	public SetCT(mode: number){
+		this.combatType = mode;
 	}
 }
