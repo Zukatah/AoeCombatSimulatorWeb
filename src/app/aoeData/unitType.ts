@@ -28,6 +28,7 @@ export class UnitType {
 
 	public moveSpeed: number; // move speed in tiles/s
 	public radius: number; // size of the unit in tiles
+	public maxNumberOfAttackers: number; // Max attackers for infantry 4, cav 6, elephants 8
 
 
 	public resourceCosts: number[] = [0, 0, 0]; // [0]=food, [1]=wood, [2]=gold
@@ -52,5 +53,6 @@ export class UnitType {
 		this.radius = radius;
 		this.accuracyPercent = accuracyPercent;
 		this.hpRegPerMin = hpRegPerMin;
+		this.maxNumberOfAttackers = 4.0 + Math.round(10.0 * (this.radius - 0.2)); // Max attackers for infantry 4, cav 6, elephants 8
 	}
 }

@@ -7,6 +7,7 @@ import { AoECombatSimulatorComponent } from "./../aoeCombatSimulator/aoeCombatSi
 import { Player } from './player';
 import { UnitType } from './unitType';
 import { CivUnitType } from './civUnitType';
+import { threadId } from 'worker_threads';
 
 
 export class Battle
@@ -25,27 +26,39 @@ export class Battle
 	public timeInterval: number = 0; // number of time intervals since begin of the battle; one time interval = 0,01s
 	// private Random rnd; // a random generator for slight shifts of initial unit placement (further reduces determinism and improves quality of battle results if number of iterations is large)
 	public resourcesGenerated: number[][]  = [[0, 0, 0], [0, 0, 0]]; // currently only relevant for the Keshik gold generation
+	public battleIterationCounter: number = 0; // used only for repeated equal pop battles (when repetitions > 1)
 
 
-	constructor(taskId: number, battleId: number, hitAndRunMode: number, players: Player[])
+	constructor(taskId: number, battleId: number, hitAndRunMode: number, players: Player[], repetitions: number = 0)
 	{
 		this.players = players;
 		this.hitAndRunMode = hitAndRunMode;
-		// rnd = new Random(taskId * Environment.ProcessorCount + battleId + Environment.TickCount);
-
-		for (let i: number = 0; i < Battle.GRID_LENGTH; i++)
-		{
-			this.gridUnits.push([]);
-			for (let j: number = 0; j < Battle.GRID_LENGTH; j++)
+		
+		while (this.battleIterationCounter <= repetitions){
+			this.gridUnits = [];
+			this.graveyard = [];
+			this.arrows = [];
+			this.missiles = [];
+			this.timeInterval = 0;
+			this.resourcesGenerated = [[0, 0, 0], [0, 0, 0]];
+			for (let i: number = 0; i < Battle.GRID_LENGTH; i++)
 			{
-				this.gridUnits[i].push(new Set<Unit>());
+				this.gridUnits.push([]);
+				for (let j: number = 0; j < Battle.GRID_LENGTH; j++)
+				{
+					this.gridUnits[i].push(new Set<Unit>());
+				}
 			}
+
+			this.CreateArmys();
+			this.Fight();
+			this.CountSurvivors();
+			this.battleIterationCounter++;
 		}
 
-		this.CreateArmys();
-		this.Fight();
-		this.CountSurvivors();
-		this.SaveWinner();
+		if (repetitions == 0){
+			this.SaveWinner();
+		}
 	}
 	
 	private CreateArmys(): void
@@ -70,7 +83,8 @@ export class Battle
 				else{
 					army_SizeRanged[i] += this.players[i].amountStartUnits[j];
 				}
-				for (let k: number = 0; k < this.players[i].amountStartUnits[j]; k++)
+				let survivorsOfPrevBattle: number = this.armies[i].filter(unit => unit.civUnitType == this.players[i].civUts[j]).length;
+				for (let k: number = 0; k < this.players[i].amountStartUnits[j] - survivorsOfPrevBattle; k++)
 				{
 					this.armies[i].push(new Unit(this.players[i].civUts[j], this, i));
 				}
@@ -124,7 +138,7 @@ export class Battle
 				utSurvivorsArmy = tempCount;
 				this.players[i].survivorsSumArmy.set(ut, this.players[i].survivorsSumArmy.get(ut) + utSurvivorsArmy);
 			});
-			this.players[i].resourcesGenerated[2] += Math.round(this.resourcesGenerated[i][2]);
+			this.players[i].resourcesGenerated[2] += Math.round(this.resourcesGenerated[i][2]); // just used for keshig gold currently, so only index 2 used
 		}
 	}
 
@@ -255,6 +269,10 @@ export class Battle
 
 			this.Cleanup();
 		}
+
+		this.armies[0].concat(this.armies[1]).forEach(unit =>{ // important to "reset" all targets in case battles are repeated
+			unit.SetIntoDefaultState();
+		});
 	}
 
 }

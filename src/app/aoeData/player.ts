@@ -89,7 +89,7 @@ export class Player{
 			for (let j: number = 0; j < this.civUts.length; j++)
 			{
 				this.resourcesInvested[k] += this.civUts[j].resourceCosts[k] * this.amountStartUnits[j];
-				if (k == 0){
+				if (k == 0){ // count population space only once (not three times)
 					this.populationInvested += this.civUts[j].baseUnitType == AoeData.ut_eliteKarambitWarrior ? this.amountStartUnits[j] * 0.5 : this.amountStartUnits[j];
 				}
 			}

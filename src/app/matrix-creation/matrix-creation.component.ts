@@ -106,18 +106,23 @@ export class MatrixCreationComponent{
 			this.players[0].ResetData();
 			this.players[1].ResetData();
 
-			this.players[0].amountStartUnits[this.ut1] = 50;
-			this.players[1].amountStartUnits[this.ut2] = 50;
+			this.players[0].amountStartUnits[this.ut1] = AoeData.utl_karambitWarrior.unitTypes.includes(this.players[0].civUts[this.ut1].baseUnitType) ? 100 : 50;
+			this.players[1].amountStartUnits[this.ut2] = AoeData.utl_karambitWarrior.unitTypes.includes(this.players[1].civUts[this.ut2].baseUnitType) ? 100 : 50;
 			this.players[0].CalculateResourcesInvested(this.resourceValuesFactors[this.resourceValue]);
 			this.players[1].CalculateResourcesInvested(this.resourceValuesFactors[this.resourceValue]);
 			if (this.combatType == 0){
-				this.players[1].amountStartUnits[this.ut2] = Math.round(50 * this.players[0].resourcesInvestedTotal / this.players[1].resourcesInvestedTotal);
+				this.players[1].amountStartUnits[this.ut2] = Math.round(this.players[1].amountStartUnits[this.ut2] * this.players[0].resourcesInvestedTotal / this.players[1].resourcesInvestedTotal);
 				this.players[1].CalculateResourcesInvested(this.resourceValuesFactors[this.resourceValue]);
 			}
 
-			for (let i: number = 0; i < this.numberOfSimulations; i++){
-				new Battle(0, i, this.hitAndRunMode, this.players);
+			if (this.combatType == 0 || this.combatType == 1){
+				for (let i: number = 0; i < this.numberOfSimulations; i++){
+					new Battle(0, i, this.hitAndRunMode, this.players);
+				}
+			} else if (this.combatType == 2){
+				new Battle(0, 0, this.hitAndRunMode, this.players, this.numberOfSimulations-1);
 			}
+			
 			this.CalculateStats();
 			this.combatresults[this.ut1][this.ut2] = this.players[0].resourcesLostTotal != 0 ? this.players[1].resourcesLostTotal / this.players[0].resourcesLostTotal : Number.POSITIVE_INFINITY;
 			// console.log(this.ut1 + " " + this.ut2 + ": " + this.combatresults[this.ut1][this.ut2] + " (" + this.players[0].resourcesLostTotal + " / " + this.players[1].resourcesLostTotal + ")");
@@ -193,7 +198,7 @@ export class MatrixCreationComponent{
 			for (let j: number = 0; j < this.players[i].civUts.length; j++)
 			{
 				this.players[i].avgSurvivorsNumber[j] = 1.0 * this.players[i].survivorsSumArmy.get(this.players[i].civUts[j]) / this.numberOfSimulations;
-				this.players[i].populationRemaining += this.players[i].avgSurvivorsNumber[j] * (this.players[i].civUts[j].baseUnitType == AoeData.ut_eliteKarambitWarrior ? 0.5 : 1.0);
+				this.players[i].populationRemaining += this.players[i].avgSurvivorsNumber[j] * (AoeData.utl_karambitWarrior.unitTypes.includes(this.players[i].civUts[j].baseUnitType) ? 0.5 : 1.0);
 
 				for (let k: number = 0; k < 3; k++)
 				{

@@ -33,6 +33,7 @@ export class Unit {
 
 	public moveSpeed: number; // move speed in tiles/s
 	public radius: number; // size of the unit in tiles
+	public maxNumberOfAttackers: number; // Max attackers for infantry 4, cav 6, elephants 8
 
 
 	public civUnitType: CivUnitType; // this unit's unit type; the unit type defines many attributes of each unit
@@ -55,7 +56,6 @@ export class Unit {
 	public armyIndex: number; // 0=Army1, 1=Army2
 	public running: boolean = false; // for hit&run calculations
 	public timeSinceFirstTryToAttackTarget: number = 0; // if the target is surrounded by attackers for a longer while, the unit will eventually target a different unit
-	public maxNumberOfAttackers: number; // Max attackers for infantry 4, cav 6, elephants 8
 
 
 	constructor(civUnitType: CivUnitType, battle: Battle, armyIndex: number) {
@@ -79,12 +79,12 @@ export class Unit {
 		this.radius = civUnitType.radius;
 		this.accuracyPercent = civUnitType.accuracyPercent;
 		this.hpRegPerMin = civUnitType.hpRegPerMin;
+		this.maxNumberOfAttackers = civUnitType.maxNumberOfAttackers;
 
 		this.civUnitType = civUnitType;
 		this.battle = battle;
 		this.curHp = this.hp;
 		this.armyIndex = armyIndex;
-		this.maxNumberOfAttackers = 4.0 + Math.round(10.0 * (this.radius - 0.2)); // Max attackers for infantry 4, cav 6, elephants 8
 	}
 
 
@@ -374,5 +374,16 @@ export class Unit {
 			this.target = targetArmy[closestUnitIndex[Math.floor(Math.random() * (targetArmy.length >= 6 ? 6 : targetArmy.length))]];
 			this.target.attackedBy.push(this);
 		}
+	}
+
+	public SetIntoDefaultState(): void{
+		this.target = null;
+		this.attackedBy = [];
+		this.meleeDamagedBy = null;
+		this.attackCd = 0;
+		this.inAttackMotion = false;
+		this.attackAnimDur = 0;
+		this.running = false;
+		this.timeSinceFirstTryToAttackTarget = 0;
 	}
 }
