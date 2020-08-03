@@ -19,7 +19,7 @@ export class Unit {
 	public attackRangeMin: number; // minimum attack range in tiles (skirmishers, genitours, ...); the actual minimum attack range is attackRangeMin + radius
 	public attackDelay: number; // the time in seconds between starting an attack and dealing the damage (or launching the projectile for ranged units); especially important for Hit&Run
 	public projectileSpeed: number; // projectile speed in tiles/s
-	public cleaveType: number = 0; // 0=none, 1=flat5 (slav infantry, cataphracts), 2=50% (elephants), 3=100% (flaming camels)
+	public cleaveType: number = 0; // 0=none, 1=flat5 (slav infantry, cataphracts), 2=50% (war elephants), 3=100% (flaming camels), 4=25% (battle elephants)
 	public cleaveRadius: number = 0.0; // cleaves enemy units if they are closer than cleaveRadius+ownRadius to cleaving unit
 	public accuracyPercent: number; // 100 does always hit; 50 does mean 50% will hit and 50% are randomly distributed (they can still hit the main target or other targets)
 
@@ -271,10 +271,8 @@ export class Unit {
 							else
 							{
 								damageDealt = Unit.CalculateDamageDealtToTarget(this, possibleTarget);
-								if (this.cleaveType == 2) // cleaveType 2 (elephants) deal 50% area damage; cleaveType 3 (petards, flaming camels) deal 100% area damage
-								{
-									damageDealt *= 0.5;
-								}
+								// cleaveType 2 (war elephants) deals 50% area damage; cleaveType 3 (petards, flaming camels) deals 100% area damage; cleaveType 4 (battle elephants) deals 25% area damage
+								damageDealt *= this.cleaveType == 2 ? 0.5 : (this.cleaveType == 4 ? 0.25 : 1.0);
 								damageDealt = damageDealt < 1 ? 1 : damageDealt;
 							}
 							possibleTarget.curHp -= damageDealt;

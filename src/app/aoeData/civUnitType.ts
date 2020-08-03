@@ -405,7 +405,8 @@ export class CivUnitType extends UnitType {
 
 
 	public ApplyItaliansBonusses(): void{
-		if ((AoeData.utl_archer.unitTypes.includes(this.baseUnitType) || AoeData.utl_genoeseCrossbowman.unitTypes.includes(this.baseUnitType)) && this.age >= 3){
+		if ((AoeData.utl_archer.unitTypes.includes(this.baseUnitType) || AoeData.utl_genoeseCrossbowman.unitTypes.includes(this.baseUnitType) || AoeData.utl_condottiero.unitTypes.includes(this.baseUnitType))
+			&& this.age >= 3){
 			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 1);
 			this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 1);
 		}
@@ -445,7 +446,7 @@ export class CivUnitType extends UnitType {
 
 	public ApplyKoreansBonusses(): void{
 		if (!this.armorClasses.has(AoeData.ac_siegeWeapon)){
-			this.resourceCosts[1] *= 0.85;
+			this.resourceCosts[1] *= 0.8;
 		}
 	}
 
@@ -538,7 +539,7 @@ export class CivUnitType extends UnitType {
 
 
 	public ApplyPortugueseBonusses(): void{
-		this.resourceCosts[2] *= 0.85;
+		this.resourceCosts[2] *= 0.8;
 	}
 
 

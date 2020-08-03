@@ -61,9 +61,10 @@ export class MatrixCreationComponent{
 		);
 
 		this.trashCivUts.push(
-			new CivUnitType(AoeData.ut_eliteEagleWarrior, AoeData.civ_aztecs),
-			new CivUnitType(AoeData.ut_eliteEagleWarrior, AoeData.civ_incas),
-			new CivUnitType(AoeData.ut_eliteEagleWarrior, AoeData.civ_mayans)
+			new CivUnitType(AoeData.ut_eliteSkirmisher, AoeData.civ_spanish),
+			new CivUnitType(AoeData.ut_eliteGenitour, AoeData.civ_berbers),
+			new CivUnitType(AoeData.ut_imperialSkirmisher, AoeData.civ_vietnamese),
+			new CivUnitType(AoeData.ut_crossbowman, AoeData.civ_persians),
 		);
 
 		this.combatresults = [];
@@ -122,7 +123,7 @@ export class MatrixCreationComponent{
 			} else if (this.combatType == 2){
 				new Battle(0, 0, this.hitAndRunMode, this.players, this.numberOfSimulations-1);
 			}
-			
+
 			this.CalculateStats();
 			this.combatresults[this.ut1][this.ut2] = this.players[0].resourcesLostTotal != 0 ? this.players[1].resourcesLostTotal / this.players[0].resourcesLostTotal : Number.POSITIVE_INFINITY;
 			// console.log(this.ut1 + " " + this.ut2 + ": " + this.combatresults[this.ut1][this.ut2] + " (" + this.players[0].resourcesLostTotal + " / " + this.players[1].resourcesLostTotal + ")");

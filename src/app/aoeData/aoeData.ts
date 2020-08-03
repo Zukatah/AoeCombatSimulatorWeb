@@ -153,8 +153,8 @@ export abstract class AoeData
 	public static ut_eliteTarkan: UnitType = new UnitType("Elite Tarkan", 150, 2.1, 0.0, 0.95, Number.MAX_VALUE, 1.35, 60, 0, 60, 0.4);
 	public static utl_tarkan: UnitTypeLine = new UnitTypeLine("Tarkan line", [AoeData.ut_tarkan, AoeData.ut_eliteTarkan]);
 	
-	public static ut_warWagon: UnitType = new UnitType("War Wagon", 150, 2.5, 4.0, 1.0, 6.0, 1.2, 0, 110, 60, 0.8, 0.0, 100);
-	public static ut_eliteWarWagon: UnitType = new UnitType("Elite War Wagon", 200, 2.5, 5.0, 1.0, 6.0, 1.2, 0, 110, 60, 0.8, 0.0, 100);
+	public static ut_warWagon: UnitType = new UnitType("War Wagon", 150, 2.5, 4.0, 1.0, 6.0, 1.2, 0, 115, 60, 0.8, 0.0, 100);
+	public static ut_eliteWarWagon: UnitType = new UnitType("Elite War Wagon", 200, 2.5, 5.0, 1.0, 6.0, 1.2, 0, 115, 60, 0.8, 0.0, 100);
 	public static utl_warWagon: UnitTypeLine = new UnitTypeLine("War Wagon line", [AoeData.ut_warWagon, AoeData.ut_eliteWarWagon]);
 	
 	public static ut_plumedArcher: UnitType = new UnitType("Plumed Archer", 65, 1.9, 4.0, 0.5, 7.0, 1.2, 0, 55, 55, 0.2, 0.0, 80);
@@ -219,8 +219,8 @@ export abstract class AoeData
 	public static ut_eliteBallistaElephant: UnitType = new UnitType("Elite Ballista Elephant", 290, 2.5, 5.0, 0.4, 6.0, 0.80, 100, 0, 80, 0.6);
 	public static utl_ballistaElephant: UnitTypeLine = new UnitTypeLine("Ballista Elephant line", [AoeData.ut_ballistaElephant, AoeData.ut_eliteBallistaElephant]);
 
-	public static ut_karambitWarrior: UnitType = new UnitType("Karambit Warrior", 30, 2.0, 0.0, 0.81, Number.MAX_VALUE, 1.2, 30, 0, 15);
-	public static ut_eliteKarambitWarrior: UnitType = new UnitType("Elite Karambit Warrior", 40, 2.0, 0.0, 0.81, Number.MAX_VALUE, 1.2, 30, 0, 15);
+	public static ut_karambitWarrior: UnitType = new UnitType("Karambit Warrior", 30, 2.0, 0.0, 0.81, Number.MAX_VALUE, 1.2, 25, 0, 15);
+	public static ut_eliteKarambitWarrior: UnitType = new UnitType("Elite Karambit Warrior", 40, 2.0, 0.0, 0.81, Number.MAX_VALUE, 1.2, 25, 0, 15);
 	public static utl_karambitWarrior: UnitTypeLine = new UnitTypeLine("Karambit Warrior line", [AoeData.ut_karambitWarrior, AoeData.ut_eliteKarambitWarrior]);
 	
 	public static ut_rattanArcher: UnitType = new UnitType("Rattan Archer", 40, 2.0, 4.0, 0.69, 7.0, 1.1, 0, 50, 45, 0.2, 0.0, 80);
@@ -368,23 +368,23 @@ export abstract class AoeData
 	public static civ_japanese: Civilization = new Civilization("Japanese");
 	public static civ_khmer: Civilization = new Civilization("Khmer");
 	public static civ_koreans: Civilization = new Civilization("Koreans");
-	public static civ_lithuanians: Civilization = new Civilization("Lithuanians");
+	public static civ_lithuanians: Civilization = new Civilization("Lithuan.");
 	public static civ_magyars: Civilization = new Civilization("Magyars");
 	public static civ_malay: Civilization = new Civilization("Malay");
 	public static civ_malians: Civilization = new Civilization("Malians");
 	public static civ_mayans: Civilization = new Civilization("Mayans");
 	public static civ_mongols: Civilization = new Civilization("Mongols");
 	public static civ_persians: Civilization = new Civilization("Persians");
-	public static civ_portuguese: Civilization = new Civilization("Portuguese");
+	public static civ_portuguese: Civilization = new Civilization("Portug.");
 	public static civ_saracens: Civilization = new Civilization("Saracens");
 	public static civ_slavs: Civilization = new Civilization("Slavs");
 	public static civ_spanish: Civilization = new Civilization("Spanish");
 	public static civ_tatars: Civilization = new Civilization("Tatars");
 	public static civ_teutons: Civilization = new Civilization("Teutons");
 	public static civ_turks: Civilization = new Civilization("Turks");
-	public static civ_vietnamese: Civilization = new Civilization("Vietnamese");
+	public static civ_vietnamese: Civilization = new Civilization("Vietnam.");
 	public static civ_vikings: Civilization = new Civilization("Vikings");
-	public static civ_generic: Civilization = new Civilization("Generic Civilization");
+	public static civ_generic: Civilization = new Civilization("Generic");
 
 	public static civsList: Civilization[] = [
 		AoeData.civ_aztecs, AoeData.civ_berbers, AoeData.civ_britons, AoeData.civ_bulgarians, AoeData.civ_burmese,
@@ -619,7 +619,7 @@ export abstract class AoeData
 		AoeData.ut_battleElephant.armorClasses.set(AoeData.ac_cavalry, 0);
 		AoeData.ut_battleElephant.armorClasses.set(AoeData.ac_warElephant, 0);
 		AoeData.ut_battleElephant.attackValues.set(AoeData.ac_baseMelee, 12);
-		AoeData.ut_battleElephant.cleaveType = 2;
+		AoeData.ut_battleElephant.cleaveType = 4;
 		AoeData.ut_battleElephant.cleaveRadius = 0.4;
 		AoeData.ut_battleElephant.imagePath = "assets/unitTypes/Battle_elephant_aoe2DE.png";
 		AoeData.ut_battleElephant.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
@@ -630,7 +630,7 @@ export abstract class AoeData
 		AoeData.ut_eliteBattleElephant.armorClasses.set(AoeData.ac_cavalry, 0);
 		AoeData.ut_eliteBattleElephant.armorClasses.set(AoeData.ac_warElephant, 0);
 		AoeData.ut_eliteBattleElephant.attackValues.set(AoeData.ac_baseMelee, 14);
-		AoeData.ut_eliteBattleElephant.cleaveType = 2;
+		AoeData.ut_eliteBattleElephant.cleaveType = 4;
 		AoeData.ut_eliteBattleElephant.cleaveRadius = 0.4;
 		AoeData.ut_eliteBattleElephant.imagePath = "assets/unitTypes/Elite_battle_elephant_aoe2DE.png";
 		AoeData.ut_eliteBattleElephant.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
@@ -1294,7 +1294,7 @@ export abstract class AoeData
 		AoeData.ut_condottiero.armorClasses.set(AoeData.ac_infantry, 10);
 		AoeData.ut_condottiero.armorClasses.set(AoeData.ac_uniqueUnit, 0);
 		AoeData.ut_condottiero.armorClasses.set(AoeData.ac_condottiero, 0);
-		AoeData.ut_condottiero.attackValues.set(AoeData.ac_baseMelee, 9);
+		AoeData.ut_condottiero.attackValues.set(AoeData.ac_baseMelee, 10);
 		AoeData.ut_condottiero.attackValues.set(AoeData.ac_gunpowderUnit, 10);
 		AoeData.ut_condottiero.imagePath = "assets/unitTypes/CondottieroIcon-DE.png";
 		AoeData.ut_condottiero.techsForUnitList.push(this.tec_squires,
@@ -1668,9 +1668,9 @@ export abstract class AoeData
 		AoeData.ut_flamingCamel.attackValues.set(AoeData.ac_baseMelee, 20);
 		AoeData.ut_flamingCamel.attackValues.set(AoeData.ac_cavalry, 50);
 		AoeData.ut_flamingCamel.attackValues.set(AoeData.ac_camel, 50);
-		AoeData.ut_flamingCamel.attackValues.set(AoeData.ac_warElephant, 100);
+		AoeData.ut_flamingCamel.attackValues.set(AoeData.ac_warElephant, 130);
 		AoeData.ut_flamingCamel.cleaveType = 3;
-		AoeData.ut_flamingCamel.cleaveRadius = 1.5;
+		AoeData.ut_flamingCamel.cleaveRadius = 2.0;
 		AoeData.ut_flamingCamel.imagePath = "assets/unitTypes/Flaming_camel_icon.png";
 		AoeData.ut_flamingCamel.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry);
 	}
@@ -2156,6 +2156,7 @@ export abstract class AoeData
 		AoeData.civ_tatars.unitTypeLineLevels.push([this.utl_batteringRam, 2]);
 		AoeData.civ_tatars.unitTypeLineLevels.push([this.utl_scorpion, 1]);
 		AoeData.civ_tatars.unitTypeLineLevels.push([this.utl_keshik, 1]);
+		AoeData.civ_tatars.unitTypeLineLevels.push([this.utl_flamingCamel, 0]);
 		AoeData.civ_tatars.technologies.push(this.tec_squires, this.tec_thumbRing, this.tec_parthianTactics, this.tec_siegeEngineers, this.tec_bloodlines, this.tec_husbandry,
 			this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor,
 			this.tec_ringArcherArmor);

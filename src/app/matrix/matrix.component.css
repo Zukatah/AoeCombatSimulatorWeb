@@ -26,3 +26,7 @@ span{
 	width: 40px;
 	height: 40px;
 }
+
+:host ::ng-deep .card-header, :host ::ng-deep .card-body{
+	padding: 0;
+}
