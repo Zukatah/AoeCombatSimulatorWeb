@@ -54,17 +54,22 @@ export class MatrixCreationComponent{
 			new CivUnitType(AoeData.ut_champion, AoeData.civ_celts),
 			new CivUnitType(AoeData.ut_champion, AoeData.civ_berbers),
 			new CivUnitType(AoeData.ut_champion, AoeData.civ_portuguese),
-			new CivUnitType(AoeData.ut_champion, AoeData.civ_byzantines),
 			new CivUnitType(AoeData.ut_champion, AoeData.civ_malians),
 			new CivUnitType(AoeData.ut_champion, AoeData.civ_chinese),
 			new CivUnitType(AoeData.ut_twoHandedSwordsman, AoeData.civ_malay)
 		);
 
 		this.trashCivUts.push(
-			new CivUnitType(AoeData.ut_eliteSkirmisher, AoeData.civ_spanish),
-			new CivUnitType(AoeData.ut_eliteGenitour, AoeData.civ_berbers),
-			new CivUnitType(AoeData.ut_imperialSkirmisher, AoeData.civ_vietnamese),
-			new CivUnitType(AoeData.ut_crossbowman, AoeData.civ_persians),
+			new CivUnitType(AoeData.ut_arbalester, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_handCannoneer, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_heavyCavalryArcher, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_heavyScorpion, AoeData.civ_generic),
+			/*
+			new CivUnitType(AoeData.ut_heavyCamelRider, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_paladin, AoeData.civ_generic),  
+			new CivUnitType(AoeData.ut_eliteSteppeLancer, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_eliteBattleElephant, AoeData.civ_generic),
+			*/
 		);
 
 		this.combatresults = [];
