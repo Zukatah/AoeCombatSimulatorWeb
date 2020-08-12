@@ -38,7 +38,7 @@ export class Missile extends Projectile
 		let maxYGridIndex: number = Math.min(Battle.GRID_LENGTH - 1, gy + 1);
 		let targetArmyIndex: number = this.attacker.armyIndex == 1 ? 0 : 1;
 		let collisionTargets: Unit[] = [];
-		let bonusAoe: number = this.attacker.civUnitType.civ == AoeData.civ_ethiopians && this.attacker.civUnitType.age == 4 ? 0.1 : 0;
+		let bonusAoe: number = this.attacker.civUnitType.civ == AoeData.civ_ethiopians && this.attacker.civUnitType.age == 4 ? 0.2 : 0.1;
 
 		for (let i: number = minXGridIndex; i <= maxXGridIndex; i++)
 		{
@@ -54,7 +54,6 @@ export class Missile extends Projectile
 
 		collisionTargets.forEach(unit => {
 			let damageDealt: number = Unit.CalculateDamageDealtToTarget(this.attacker, unit, this.secondary) * (unit == this.target ? 1.0 : 0.5);
-			//console.log(damageDealt);
 			unit.curHp -= damageDealt;
 			this.alreadyAffectedUnits.add(unit);
 		});

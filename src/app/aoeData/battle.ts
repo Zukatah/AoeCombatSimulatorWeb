@@ -3,11 +3,8 @@ import { Arrow } from "./arrow";
 import { Missile } from "./missile";
 import { AoeData } from "./aoeData";
 import { ExtensionMethods } from "./extensionMethods";
-import { AoECombatSimulatorComponent } from "./../aoeCombatSimulator/aoeCombatSimulator.component";
 import { Player } from './player';
-import { UnitType } from './unitType';
 import { CivUnitType } from './civUnitType';
-import { threadId } from 'worker_threads';
 
 
 export class Battle
@@ -207,6 +204,9 @@ export class Battle
 						if (!unit.TargetNotCloserThanMinimumAttackRange()) // if the target is too close (can happen for units with minimum range), the unit moves away from it
 						{
 							unit.MoveAwayFromTarget_CalculateNewPos();
+							if (this.timeInterval % 100 == 0){ // once every second a unit with minimum range whose target is too close will check if there is a target out of min range
+								unit.TryToFindTargetOutOfMinRange();
+							}
 						}
 						else
 						{

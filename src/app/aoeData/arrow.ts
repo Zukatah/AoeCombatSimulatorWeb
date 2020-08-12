@@ -21,7 +21,8 @@ export class Arrow extends Projectile
 		let hitRoll: number = Math.random() * 100.0;
 		if (this.target.alive && (hitRoll < this.attacker.accuracyPercent))
 		{
-			this.target.curHp -= Unit.CalculateDamageDealtToTarget(this.attacker, this.target, this.secondary);
+			let damageDealt : number = Unit.CalculateDamageDealtToTarget(this.attacker, this.target, this.secondary);
+			this.target.curHp -= damageDealt;
 		}
 		else
 		{

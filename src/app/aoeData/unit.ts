@@ -333,7 +333,7 @@ export class Unit {
 		this.attackAnimDur = 0; // Reset attack animation time
 	}
 
-	/* Idea for finding new targets tested previously: Pick up to 5 random targets of the enemy army and choose the closest one as the next target. */
+	/* Idea for finding new targets tested previously: Pick up to 6 random targets of the enemy army and choose the closest one as the next target. */
 	public EnsureHasTarget(): void
 	{
 		let targetArmy: Unit[] = this.armyIndex == 0 ? this.battle.armies[1] : this.battle.armies[0];
@@ -371,6 +371,20 @@ export class Unit {
 
 			this.target = targetArmy[closestUnitIndex[Math.floor(Math.random() * (targetArmy.length >= 6 ? 6 : targetArmy.length))]];
 			this.target.attackedBy.push(this);
+		}
+	}
+
+	public TryToFindTargetOutOfMinRange(): void{
+		let targetArmy: Unit[] = this.armyIndex == 0 ? this.battle.armies[1] : this.battle.armies[0];
+		
+		for (let i: number = 0; i < 10; i++){
+			let randomEnemyUnit: Unit = targetArmy[Math.floor(Math.random() * targetArmy.length)];
+			let distToRandomEnemyUnit: number = Math.sqrt((this.x - randomEnemyUnit.x) * (this.x - randomEnemyUnit.x) + (this.y - randomEnemyUnit.y) * (this.y - randomEnemyUnit.y)) - this.radius;
+			if (distToRandomEnemyUnit <= this.attackRange && distToRandomEnemyUnit >= this.attackRangeMin){
+				this.target.attackedBy.splice(this.target.attackedBy.indexOf(this, 0), 1);
+				this.target = randomEnemyUnit;
+				return;
+			}
 		}
 	}
 
