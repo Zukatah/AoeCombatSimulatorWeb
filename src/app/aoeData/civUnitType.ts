@@ -320,7 +320,7 @@ export class CivUnitType extends UnitType {
 		if ((AoeData.utl_batteringRam.unitTypes.includes(this.baseUnitType) || AoeData.utl_scorpion.unitTypes.includes(this.baseUnitType)) && this.age == 4){
 			this.hp *= 1.4;
 		}
-		if (this.armorClasses.has(AoeData.ac_infantry)){
+		if (this.armorClasses.has(AoeData.ac_infantry) && this.age > 0){
 			this.moveSpeed *= 1.15;
 		}
 		if (this.armorClasses.has(AoeData.ac_siegeWeapon)){
@@ -398,8 +398,12 @@ export class CivUnitType extends UnitType {
 		if (AoeData.utl_handCannoneer.unitTypes.includes(this.baseUnitType) && this.age == 4){
 			this.attackRange += 1;
 		}
-		if (AoeData.utl_camelRider.unitTypes.includes(this.baseUnitType)){
-			this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 1);
+		if (this.armorClasses.has(AoeData.ac_cavalry) || this.armorClasses.has(AoeData.ac_camel)){
+			if (this.age == 2){
+				this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 1);
+			} else if (this.age >= 3){
+				this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 2);
+			}
 		}
 	}
 
@@ -439,7 +443,7 @@ export class CivUnitType extends UnitType {
 			if (this.age >= 3){
 				this.attackValues.set(AoeData.ac_baseMelee, this.attackValues.get(AoeData.ac_baseMelee) + 3);
 			}
-			this.moveSpeed *= 1.15;
+			this.moveSpeed *= 1.1;
 		}
 	}
 
@@ -579,6 +583,7 @@ export class CivUnitType extends UnitType {
 	public ApplyTatarsBonusses(): void{
 		if ((AoeData.utl_scoutCavalry.unitTypes.includes(this.baseUnitType) || AoeData.utl_steppeLancer.unitTypes.includes(this.baseUnitType) ||
 			AoeData.utl_cavalryArcher.unitTypes.includes(this.baseUnitType)) && this.age >= 3){
+			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 1);
 			this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 1);
 		}
 	}
@@ -606,6 +611,9 @@ export class CivUnitType extends UnitType {
 		}
 		if (this.armorClasses.has(AoeData.ac_gunpowderUnit)){
 			this.hp *= 1.25;
+		}
+		if (AoeData.utl_scoutCavalry.unitTypes.includes(this.baseUnitType)){
+			this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 1);
 		}
 	}
 

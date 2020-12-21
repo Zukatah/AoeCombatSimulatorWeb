@@ -137,8 +137,8 @@ export abstract class AoeData
 	public static ut_eliteTeutonicKnight: UnitType = new UnitType("Elite Teutonic Knight", 100, 2.0, 0.0, 0.75, Number.MAX_VALUE, 0.80, 85, 0, 40);
 	public static utl_teutonicKnight: UnitTypeLine = new UnitTypeLine("Teutonic Knight line", [AoeData.ut_teutonicKnight, AoeData.ut_eliteTeutonicKnight]);
 
-	public static ut_janissary: UnitType = new UnitType("Janissary", 35, 3.49, 8.0, 0.4, 5.5, 0.96, 60, 0, 55, 0.2, 0.0, 50);
-	public static ut_eliteJanissary: UnitType = new UnitType("Elite Janissary", 40, 3.49, 8.0, 0.0, 5.5, 0.96, 60, 0, 55, 0.2, 0.0, 50);
+	public static ut_janissary: UnitType = new UnitType("Janissary", 35, 3.49, 8.0, 0.4, 5.5, 0.96, 60, 0, 55, 0.2, 0.0, 65);
+	public static ut_eliteJanissary: UnitType = new UnitType("Elite Janissary", 40, 3.49, 8.0, 0.0, 5.5, 0.96, 60, 0, 55, 0.2, 0.0, 65);
 	public static utl_janissary: UnitTypeLine = new UnitTypeLine("Janissary line", [AoeData.ut_janissary, AoeData.ut_eliteJanissary]);
 	
 	public static ut_berserk: UnitType = new UnitType("Berserk", 54, 2.0, 0.0, 0.8, Number.MAX_VALUE, 1.05, 65, 0, 25, 0.2, 0.0, 100, 20.0);
@@ -199,19 +199,19 @@ export abstract class AoeData
 	public static ut_eliteGenitour: UnitType = new UnitType("Elite Genitour", 55, 3.0, 4.0, 0.5, 7.0, 1.35, 50, 35, 0, 0.4, 1.0, 90);
 	public static utl_genitour: UnitTypeLine = new UnitTypeLine("Genitour line", [AoeData.ut_genitour, AoeData.ut_eliteGenitour]);
 	
-	public static ut_shotelWarrior: UnitType = new UnitType("Shotel Warrior", 40, 2.0, 0.0, 0.75, Number.MAX_VALUE, 1.2, 50, 0, 35);
-	public static ut_eliteShotelWarrior: UnitType = new UnitType("Elite Shotel Warrior", 50, 2.0, 0.0, 0.75, Number.MAX_VALUE, 1.2, 50, 0, 35);
+	public static ut_shotelWarrior: UnitType = new UnitType("Shotel Warrior", 40, 2.0, 0.0, 0.75, Number.MAX_VALUE, 1.2, 50, 0, 30);
+	public static ut_eliteShotelWarrior: UnitType = new UnitType("Elite Shotel Warrior", 50, 2.0, 0.0, 0.75, Number.MAX_VALUE, 1.2, 50, 0, 30);
 	public static utl_shotelWarrior: UnitTypeLine = new UnitTypeLine("Shotel Warrior line", [AoeData.ut_shotelWarrior, AoeData.ut_eliteShotelWarrior]);
 	
-	public static ut_gbeto: UnitType = new UnitType("Gbeto", 30, 2.0, 5.0, 1.2, 7.0, 1.25, 50, 0, 40);
-	public static ut_eliteGbeto: UnitType = new UnitType("Elite Gbeto", 45, 2.0, 6.0, 1.2, 7.0, 1.25, 50, 0, 40);
+	public static ut_gbeto: UnitType = new UnitType("Gbeto", 30, 2.0, 5.0, 1.0, 7.0, 1.25, 50, 0, 40);
+	public static ut_eliteGbeto: UnitType = new UnitType("Elite Gbeto", 45, 2.0, 6.0, 1.0, 7.0, 1.25, 50, 0, 40);
 	public static utl_gbeto: UnitTypeLine = new UnitTypeLine("Gbeto line", [AoeData.ut_gbeto, AoeData.ut_eliteGbeto]);
 
 	public static ut_organGun: UnitType = new UnitType("Organ Gun", 60, 3.45, 7.0, 0.6, 5.5, 0.85, 0, 80, 70, 0.4, 1.0, 50);
 	public static ut_eliteOrganGun: UnitType = new UnitType("Elite Organ Gun", 70, 3.45, 7.0, 0.6, 5.5, 0.85, 0, 80, 70, 0.4, 1.0, 50);
 	public static utl_organGun: UnitTypeLine = new UnitTypeLine("Organ Gun line", [AoeData.ut_organGun, AoeData.ut_eliteOrganGun]);
 
-	public static ut_arambai: UnitType = new UnitType("Arambai", 60, 2.0, 5.0, 0.6, 7.0, 1.3, 0, 75, 60, 0.4, 0.0, 30);
+	public static ut_arambai: UnitType = new UnitType("Arambai", 60, 2.2, 5.0, 0.6, 7.0, 1.3, 0, 75, 60, 0.4, 0.0, 30);
 	public static ut_eliteArambai: UnitType = new UnitType("Elite Arambai", 65, 2.0, 5.0, 0.6, 7.0, 1.3, 0, 75, 60, 0.4, 0.0, 30);
 	public static utl_arambai: UnitTypeLine = new UnitTypeLine("Arambai line", [AoeData.ut_arambai, AoeData.ut_eliteArambai]);
 	
@@ -235,8 +235,8 @@ export abstract class AoeData
 	public static ut_eliteKonnikDismounted: UnitType = new UnitType("Elite Konnik (Foot)", 50, 2.4, 0.0, 0.7, Number.MAX_VALUE, 0.9, 30, 0, 35);
 	public static utl_konnikDismounted: UnitTypeLine = new UnitTypeLine("Konnik (Foot) line", [AoeData.ut_konnikDismounted, AoeData.ut_eliteKonnikDismounted]);
 	
-	public static ut_kipchak: UnitType = new UnitType("Kipchak", 40, 2.2, 4.0, 0.0, 7.0, 1.4, 0, 60, 35, 0.4, 0.0, 90);
-	public static ut_eliteKipchak: UnitType = new UnitType("Elite Kipchak", 45, 2.2, 4.0, 0.0, 7.0, 1.4, 0, 60, 35, 0.4, 0.0, 90);
+	public static ut_kipchak: UnitType = new UnitType("Kipchak", 40, 2.2, 4.0, 0.5, 7.0, 1.4, 0, 60, 35, 0.4, 0.0, 90);
+	public static ut_eliteKipchak: UnitType = new UnitType("Elite Kipchak", 45, 2.2, 4.0, 0.5, 7.0, 1.4, 0, 60, 35, 0.4, 0.0, 90);
 	public static utl_kipchak: UnitTypeLine = new UnitTypeLine("Kipchak line", [AoeData.ut_kipchak, AoeData.ut_eliteKipchak]);
 	
 	public static ut_leitis: UnitType = new UnitType("Leitis", 100, 1.9, 0.0, 0.7, Number.MAX_VALUE, 1.4, 70, 0, 50, 0.4);
@@ -1626,7 +1626,7 @@ export abstract class AoeData
 			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_leitis.armorClasses.set(AoeData.ac_baseMelee, 1);
-		AoeData.ut_leitis.armorClasses.set(AoeData.ac_basePierce, 2);
+		AoeData.ut_leitis.armorClasses.set(AoeData.ac_basePierce, 1);
 		AoeData.ut_leitis.armorClasses.set(AoeData.ac_cavalry, 0);
 		AoeData.ut_leitis.armorClasses.set(AoeData.ac_uniqueUnit, 0);
 		AoeData.ut_leitis.attackValues.set(AoeData.ac_baseMelee, 12); // todo: non elite leitis do also pierce armor
@@ -1635,7 +1635,7 @@ export abstract class AoeData
 			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_eliteLeitis.armorClasses.set(AoeData.ac_baseMelee, 2);
-		AoeData.ut_eliteLeitis.armorClasses.set(AoeData.ac_basePierce, 2);
+		AoeData.ut_eliteLeitis.armorClasses.set(AoeData.ac_basePierce, 1);
 		AoeData.ut_eliteLeitis.armorClasses.set(AoeData.ac_cavalry, 0);
 		AoeData.ut_eliteLeitis.armorClasses.set(AoeData.ac_uniqueUnit, 0);
 		AoeData.ut_eliteLeitis.attackValues.set(AoeData.ac_baseMelee, 14);
@@ -1905,7 +1905,7 @@ export abstract class AoeData
 		AoeData.civ_indians.unitTypeLineLevels.push([this.utl_scorpion, 0]);
 		AoeData.civ_indians.unitTypeLineLevels.push([this.utl_elephantArcher, 1]);
 		AoeData.civ_indians.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_parthianTactics, this.tec_siegeEngineers, this.tec_bloodlines,
-			this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer,
+			this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_bracer,
 			this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.civ_italians.unitTypeLineLevels.push([this.utl_villager, 0]);
