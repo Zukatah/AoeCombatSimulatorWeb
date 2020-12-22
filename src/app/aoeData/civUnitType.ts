@@ -398,7 +398,7 @@ export class CivUnitType extends UnitType {
 		if (AoeData.utl_handCannoneer.unitTypes.includes(this.baseUnitType) && this.age == 4){
 			this.attackRange += 1;
 		}
-		if (this.armorClasses.has(AoeData.ac_cavalry) || this.armorClasses.has(AoeData.ac_camel)){
+		if (AoeData.utl_camelRider.unitTypes.includes(this.baseUnitType) || AoeData.utl_scoutCavalry.unitTypes.includes(this.baseUnitType)){
 			if (this.age == 2){
 				this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 1);
 			} else if (this.age >= 3){
