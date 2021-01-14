@@ -11,7 +11,6 @@ table{
 
 th, td{
 	color: black;
-	width: 3%;
 }
 
 span{
@@ -22,7 +21,14 @@ span{
 	color: lightgray;
 }
 
-.fixedHeight img{
+.fixedHeightImages img{
 	width: 40px;
 	height: 40px;
+}
+
+.scrollbar{
+	display: block;
+	overflow-x: auto;
+	overflow-y: auto;
+	white-space: nowrap;
 }
