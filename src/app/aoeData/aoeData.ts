@@ -211,7 +211,7 @@ export abstract class AoeData
 	public static ut_eliteOrganGun: UnitType = new UnitType("Elite Organ Gun", 70, 3.45, 7.0, 0.6, 5.5, 0.85, 0, 80, 70, 0.4, 1.0, 50);
 	public static utl_organGun: UnitTypeLine = new UnitTypeLine("Organ Gun line", [AoeData.ut_organGun, AoeData.ut_eliteOrganGun]);
 
-	public static ut_arambai: UnitType = new UnitType("Arambai", 60, 2.2, 5.0, 0.6, 7.0, 1.3, 0, 75, 60, 0.4, 0.0, 30);
+	public static ut_arambai: UnitType = new UnitType("Arambai", 60, 2.2, 5.0, 0.6, 7.0, 1.3, 0, 75, 60, 0.4, 0.0, 20);
 	public static ut_eliteArambai: UnitType = new UnitType("Elite Arambai", 65, 2.0, 5.0, 0.6, 7.0, 1.3, 0, 75, 60, 0.4, 0.0, 30);
 	public static utl_arambai: UnitTypeLine = new UnitTypeLine("Arambai line", [AoeData.ut_arambai, AoeData.ut_eliteArambai]);
 	
