@@ -285,7 +285,7 @@ export class CivUnitType extends UnitType {
 			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 5);
 		}
 		if (AoeData.utl_scoutCavalry.unitTypes.includes(this.baseUnitType) || AoeData.utl_knight.unitTypes.includes(this.baseUnitType) ||
-			AoeData.utl_konnik.unitTypes.includes(this.baseUnitType) || AoeData.utl_konnikDismounted.unitTypes.includes(this.baseUnitType)){
+			AoeData.utl_konnik.unitTypes.includes(this.baseUnitType)){
 			if (this.age >= 3){
 				this.attackSpeed *= 0.75;
 			}

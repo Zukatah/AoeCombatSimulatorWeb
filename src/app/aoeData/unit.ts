@@ -318,13 +318,13 @@ export class Unit {
 			else
 			{
 				let distanceToTarget: number = Math.sqrt((this.x - this.target.x) * (this.x - this.target.x) + (this.y - this.target.y) * (this.y - this.target.y));
-				this.battle.arrows.push(new Arrow(this.battle, this, this.target, this.battle.timeInterval + Math.ceil(100.0 * distanceToTarget / this.projectileSpeed), distanceToTarget / (this.attackRange + this.radius), false));
+				this.battle.arrows.push(new Arrow(this.battle, this, this.target, this.battle.timeInterval + Math.ceil(100.0 * distanceToTarget / this.projectileSpeed), distanceToTarget / (this.attackRange + this.radius), false, distanceToTarget - this.radius <= 2 ? true : false));
 
 				if (this.secondaryAttack)
 				{
 					for (let i: number = 0; i < this.secondaryAttackProjectileCount; i++)
 					{
-						this.battle.arrows.push(new Arrow(this.battle, this, this.target, this.battle.timeInterval + Math.ceil(100.0 * distanceToTarget / this.projectileSpeed), distanceToTarget / (this.attackRange + this.radius), true));
+						this.battle.arrows.push(new Arrow(this.battle, this, this.target, this.battle.timeInterval + Math.ceil(100.0 * distanceToTarget / this.projectileSpeed), distanceToTarget / (this.attackRange + this.radius), true, distanceToTarget - this.radius <= 2 ? true : false));
 					}
 				}
 			}

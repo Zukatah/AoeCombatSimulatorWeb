@@ -45,7 +45,7 @@ export class MatrixCreationComponent{
 	constructor() {
 		
 		this.championCivUts.push(
-			new CivUnitType(AoeData.ut_villager, AoeData.civ_generic),
+			/*new CivUnitType(AoeData.ut_villager, AoeData.civ_generic),
 			new CivUnitType(AoeData.ut_champion, AoeData.civ_generic),
 			new CivUnitType(AoeData.ut_halberdier, AoeData.civ_generic),
 			new CivUnitType(AoeData.ut_eliteEagleWarrior, AoeData.civ_generic),
@@ -64,7 +64,7 @@ export class MatrixCreationComponent{
 			new CivUnitType(AoeData.ut_eliteCamelArcher, AoeData.civ_berbers),
 			new CivUnitType(AoeData.ut_eliteLongbowman, AoeData.civ_britons),
 			new CivUnitType(AoeData.ut_eliteKonnik, AoeData.civ_bulgarians),
-			new CivUnitType(AoeData.ut_eliteKonnikDismounted, AoeData.civ_bulgarians),
+			new CivUnitType(AoeData.ut_eliteKonnikDismounted, AoeData.civ_bulgarians),*/
 			new CivUnitType(AoeData.ut_eliteArambai, AoeData.civ_burmese),
 			new CivUnitType(AoeData.ut_eliteCataphract, AoeData.civ_byzantines),
 			new CivUnitType(AoeData.ut_eliteWoadRaider, AoeData.civ_celts),

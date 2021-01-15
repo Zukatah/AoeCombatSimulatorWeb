@@ -7,19 +7,21 @@ export class Arrow extends Projectile
 {
 	public eta: number; // estimated time of arrival (contains the number of the frame in which this arrow will arive)
 	public fractionOfMaxRange: number; // 1.0 if fired over a distance equal to 100% of attacker's attack range, 0.0 if fired over a distance equal to 0% of attacker's attack range
+	private certainHit: boolean; // arrows that travel 2 tiles or less will always hit the target
 
-	constructor(battle: Battle, attacker: Unit, target: Unit, eta: number, fractionOfMaxRange: number, secondary: boolean)
+	constructor(battle: Battle, attacker: Unit, target: Unit, eta: number, fractionOfMaxRange: number, secondary: boolean, certainHit: boolean)
 	{
 		super(battle, attacker, target, secondary);
 		this.eta = eta;
 		this.fractionOfMaxRange = fractionOfMaxRange;
+		this.certainHit = certainHit;
 	}
 
 	public Impact(): void
 	{
 		this.arrived = true;
 		let hitRoll: number = Math.random() * 100.0;
-		if (this.target.alive && (hitRoll < this.attacker.accuracyPercent))
+		if (this.target.alive && (hitRoll < this.attacker.accuracyPercent || this.certainHit))
 		{
 			let damageDealt : number = Unit.CalculateDamageDealtToTarget(this.attacker, this.target, this.secondary);
 			this.target.curHp -= damageDealt;
