@@ -14,8 +14,8 @@ export class MatrixCreationComponent{
 
 	// dynamically calculated parts (of the matrix component) //
 	public combatresults: number[][];
-	public championCivUts: CivUnitType[] = []
-	public trashCivUts: CivUnitType[] = []
+	public player1CivUts: CivUnitType[] = [] // player 1 always has 50 units and occupies the matrix's rows (left)
+	public player2CivUts: CivUnitType[] = [] // player 2 has either 50 units or a number of units with equal costs to player 1's army and occupies the matrix's columns (top)
 
 	public hitAndRunMode: number = 1; // 0=noHit&Run, 1=semi, 2=fullHit&Run
 	public hitAndRunModes: string[] = ["No Hit&Run", "Medium Hit&Run", "Perfect Hit&Run"];
@@ -28,8 +28,8 @@ export class MatrixCreationComponent{
 	public combatTypes: string[] = ["Equal resources", "Equal numbers", "Equal numbers rep."];
 
 	public numberOfSimulations: number = 40;
-	public ut1: number; // counter variable
-	public ut2: number; // counter variable
+	public ut1: number; // global index counter variable
+	public ut2: number; // global index counter variable
 	public showAvgCol: boolean = true;
 	public sortRows: boolean = false;
 
@@ -41,69 +41,11 @@ export class MatrixCreationComponent{
 	public working: boolean = false;
 	// end of dynamically calculated parts //
 
+	private battleRef: Battle;
 
 	constructor() {
 		
-		this.championCivUts.push(
-			/*new CivUnitType(AoeData.ut_villager, AoeData.civ_generic),
-			new CivUnitType(AoeData.ut_champion, AoeData.civ_generic),
-			new CivUnitType(AoeData.ut_halberdier, AoeData.civ_generic),
-			new CivUnitType(AoeData.ut_eliteEagleWarrior, AoeData.civ_generic),
-			new CivUnitType(AoeData.ut_hussar, AoeData.civ_generic),
-			new CivUnitType(AoeData.ut_paladin, AoeData.civ_generic),
-			new CivUnitType(AoeData.ut_heavyCamelRider, AoeData.civ_generic),
-			new CivUnitType(AoeData.ut_eliteBattleElephant, AoeData.civ_generic),
-			new CivUnitType(AoeData.ut_eliteSteppeLancer, AoeData.civ_generic),
-			new CivUnitType(AoeData.ut_arbalester, AoeData.civ_generic),
-			new CivUnitType(AoeData.ut_eliteSkirmisher, AoeData.civ_generic),
-			new CivUnitType(AoeData.ut_heavyCavalryArcher, AoeData.civ_generic),
-			new CivUnitType(AoeData.ut_handCannoneer, AoeData.civ_generic),
-			new CivUnitType(AoeData.ut_siegeRam, AoeData.civ_generic),
-			new CivUnitType(AoeData.ut_heavyScorpion, AoeData.civ_generic),
-			new CivUnitType(AoeData.ut_eliteJaguarWarrior, AoeData.civ_aztecs),
-			new CivUnitType(AoeData.ut_eliteCamelArcher, AoeData.civ_berbers),
-			new CivUnitType(AoeData.ut_eliteLongbowman, AoeData.civ_britons),
-			new CivUnitType(AoeData.ut_eliteKonnik, AoeData.civ_bulgarians),
-			new CivUnitType(AoeData.ut_eliteKonnikDismounted, AoeData.civ_bulgarians),*/
-			new CivUnitType(AoeData.ut_eliteArambai, AoeData.civ_burmese),
-			new CivUnitType(AoeData.ut_eliteCataphract, AoeData.civ_byzantines),
-			new CivUnitType(AoeData.ut_eliteWoadRaider, AoeData.civ_celts),
-			new CivUnitType(AoeData.ut_eliteChuKoNu, AoeData.civ_chinese),
-			new CivUnitType(AoeData.ut_eliteKipchak, AoeData.civ_cumans),
-			new CivUnitType(AoeData.ut_eliteShotelWarrior, AoeData.civ_ethiopians),
-			new CivUnitType(AoeData.ut_eliteThrowingAxeman, AoeData.civ_franks),
-			new CivUnitType(AoeData.ut_eliteHuskarl, AoeData.civ_goths),
-			new CivUnitType(AoeData.ut_eliteTarkan, AoeData.civ_huns),
-			new CivUnitType(AoeData.ut_eliteKamayuk, AoeData.civ_incas),
-			new CivUnitType(AoeData.ut_slinger, AoeData.civ_incas),
-			new CivUnitType(AoeData.ut_eliteElephantArcher, AoeData.civ_indians),
-			new CivUnitType(AoeData.ut_imperialCamelRider, AoeData.civ_indians),
-			new CivUnitType(AoeData.ut_eliteGenoeseCrossbowman, AoeData.civ_italians),
-			new CivUnitType(AoeData.ut_condottiero, AoeData.civ_italians),
-			new CivUnitType(AoeData.ut_eliteSamurai, AoeData.civ_japanese),
-			new CivUnitType(AoeData.ut_eliteBallistaElephant, AoeData.civ_khmer),
-			new CivUnitType(AoeData.ut_eliteWarWagon, AoeData.civ_koreans),
-			new CivUnitType(AoeData.ut_eliteLeitis, AoeData.civ_lithuanians),
-			new CivUnitType(AoeData.ut_eliteMagyarHuszar, AoeData.civ_magyars),
-			new CivUnitType(AoeData.ut_eliteKarambitWarrior, AoeData.civ_malay),
-			new CivUnitType(AoeData.ut_eliteGbeto, AoeData.civ_malians),
-			new CivUnitType(AoeData.ut_elitePlumedArcher, AoeData.civ_mayans),
-			new CivUnitType(AoeData.ut_eliteMangudai, AoeData.civ_mongols),
-			new CivUnitType(AoeData.ut_eliteWarElephant, AoeData.civ_persians),
-			new CivUnitType(AoeData.ut_eliteOrganGun, AoeData.civ_portuguese),
-			new CivUnitType(AoeData.ut_eliteMameluke, AoeData.civ_saracens),
-			new CivUnitType(AoeData.ut_eliteBoyar, AoeData.civ_slavs),
-			new CivUnitType(AoeData.ut_eliteConquistador, AoeData.civ_spanish),
-			new CivUnitType(AoeData.ut_eliteKeshik, AoeData.civ_tatars),
-			new CivUnitType(AoeData.ut_flamingCamel, AoeData.civ_tatars),
-			new CivUnitType(AoeData.ut_eliteTeutonicKnight, AoeData.civ_teutons),
-			new CivUnitType(AoeData.ut_eliteJanissary, AoeData.civ_turks),
-			new CivUnitType(AoeData.ut_eliteRattanArcher, AoeData.civ_vietnamese),
-			new CivUnitType(AoeData.ut_imperialSkirmisher, AoeData.civ_vietnamese),
-			new CivUnitType(AoeData.ut_eliteBerserk, AoeData.civ_vikings),
-		);
-
-		this.trashCivUts.push(
+		this.player1CivUts.push(
 			new CivUnitType(AoeData.ut_villager, AoeData.civ_generic),
 			new CivUnitType(AoeData.ut_champion, AoeData.civ_generic),
 			new CivUnitType(AoeData.ut_halberdier, AoeData.civ_generic),
@@ -162,13 +104,77 @@ export class MatrixCreationComponent{
 			new CivUnitType(AoeData.ut_eliteBerserk, AoeData.civ_vikings),
 		);
 
+		this.player2CivUts.push(
+			new CivUnitType(AoeData.ut_villager, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_champion, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_halberdier, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_eliteEagleWarrior, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_hussar, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_paladin, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_heavyCamelRider, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_eliteBattleElephant, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_eliteSteppeLancer, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_arbalester, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_eliteSkirmisher, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_heavyCavalryArcher, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_handCannoneer, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_siegeRam, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_heavyScorpion, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_eliteJaguarWarrior, AoeData.civ_aztecs),
+			new CivUnitType(AoeData.ut_eliteCamelArcher, AoeData.civ_berbers),
+			new CivUnitType(AoeData.ut_eliteLongbowman, AoeData.civ_britons),
+			new CivUnitType(AoeData.ut_eliteKonnik, AoeData.civ_bulgarians),
+			new CivUnitType(AoeData.ut_eliteKonnikDismounted, AoeData.civ_bulgarians),
+			new CivUnitType(AoeData.ut_eliteArambai, AoeData.civ_burmese),
+			new CivUnitType(AoeData.ut_eliteCataphract, AoeData.civ_byzantines),
+			new CivUnitType(AoeData.ut_eliteWoadRaider, AoeData.civ_celts),
+			new CivUnitType(AoeData.ut_eliteChuKoNu, AoeData.civ_chinese),
+			new CivUnitType(AoeData.ut_eliteKipchak, AoeData.civ_cumans),
+			new CivUnitType(AoeData.ut_eliteShotelWarrior, AoeData.civ_ethiopians),
+			new CivUnitType(AoeData.ut_eliteThrowingAxeman, AoeData.civ_franks),
+			new CivUnitType(AoeData.ut_eliteHuskarl, AoeData.civ_goths),
+			new CivUnitType(AoeData.ut_eliteTarkan, AoeData.civ_huns),
+			new CivUnitType(AoeData.ut_eliteKamayuk, AoeData.civ_incas),
+			new CivUnitType(AoeData.ut_slinger, AoeData.civ_incas),
+			new CivUnitType(AoeData.ut_eliteElephantArcher, AoeData.civ_indians),
+			new CivUnitType(AoeData.ut_imperialCamelRider, AoeData.civ_indians),
+			new CivUnitType(AoeData.ut_eliteGenoeseCrossbowman, AoeData.civ_italians),
+			new CivUnitType(AoeData.ut_condottiero, AoeData.civ_italians),
+			new CivUnitType(AoeData.ut_eliteSamurai, AoeData.civ_japanese),
+			new CivUnitType(AoeData.ut_eliteBallistaElephant, AoeData.civ_khmer),
+			new CivUnitType(AoeData.ut_eliteWarWagon, AoeData.civ_koreans),
+			new CivUnitType(AoeData.ut_eliteLeitis, AoeData.civ_lithuanians),
+			new CivUnitType(AoeData.ut_eliteMagyarHuszar, AoeData.civ_magyars),
+			new CivUnitType(AoeData.ut_eliteKarambitWarrior, AoeData.civ_malay),
+			new CivUnitType(AoeData.ut_eliteGbeto, AoeData.civ_malians),
+			new CivUnitType(AoeData.ut_elitePlumedArcher, AoeData.civ_mayans),
+			new CivUnitType(AoeData.ut_eliteMangudai, AoeData.civ_mongols),
+			new CivUnitType(AoeData.ut_eliteWarElephant, AoeData.civ_persians),
+			new CivUnitType(AoeData.ut_eliteOrganGun, AoeData.civ_portuguese),
+			new CivUnitType(AoeData.ut_eliteMameluke, AoeData.civ_saracens),
+			new CivUnitType(AoeData.ut_eliteBoyar, AoeData.civ_slavs),
+			new CivUnitType(AoeData.ut_eliteConquistador, AoeData.civ_spanish),
+			new CivUnitType(AoeData.ut_eliteKeshik, AoeData.civ_tatars),
+			new CivUnitType(AoeData.ut_flamingCamel, AoeData.civ_tatars),
+			new CivUnitType(AoeData.ut_eliteTeutonicKnight, AoeData.civ_teutons),
+			new CivUnitType(AoeData.ut_eliteJanissary, AoeData.civ_turks),
+			new CivUnitType(AoeData.ut_eliteRattanArcher, AoeData.civ_vietnamese),
+			new CivUnitType(AoeData.ut_imperialSkirmisher, AoeData.civ_vietnamese),
+			new CivUnitType(AoeData.ut_eliteBerserk, AoeData.civ_vikings),
+		);
+
+		this.InitializeMatrix();
+	}
+
+
+	public InitializeMatrix(){
 		this.combatresults = [];
-		this.numberUtToDisplayRows = this.championCivUts.length;
-		this.numberUtToDisplayColumns = this.trashCivUts.length;
+		this.numberUtToDisplayRows = this.player1CivUts.length;
+		this.numberUtToDisplayColumns = this.player2CivUts.length;
 		for(let i: number = 0; i < this.numberUtToDisplayRows; i++){
 			this.combatresults.push([]);
 			for (let j: number = 0; j < this.numberUtToDisplayColumns; j++){
-				this.combatresults[i].push((this.championCivUts[i].civ == this.trashCivUts[j].civ && this.championCivUts[i].baseUnitType.name == this.trashCivUts[j].baseUnitType.name) ? 1 : 0);
+				this.combatresults[i].push((this.player1CivUts[i].civ == this.player2CivUts[j].civ && this.player1CivUts[i].baseUnitType.name == this.player2CivUts[j].baseUnitType.name) ? 1 : 0);
 			}
 			this.combatresults[i].push(0);
 		}
@@ -178,27 +184,18 @@ export class MatrixCreationComponent{
 	public StartMatrixCalculations(){
 		this.working = true;
 		this.ut1 = this.ut2 = 0;
-		this.combatresults = [];
-		this.numberUtToDisplayRows = this.championCivUts.length;
-		this.numberUtToDisplayColumns = this.trashCivUts.length;
-		for(let i: number = 0; i < this.numberUtToDisplayRows; i++){
-			this.combatresults.push([]);
-			for (let j: number = 0; j < this.numberUtToDisplayColumns; j++){
-				this.combatresults[i].push((this.championCivUts[i].civ == this.trashCivUts[j].civ && this.championCivUts[i].baseUnitType.name == this.trashCivUts[j].baseUnitType.name) ? 1 : 0);
-			}
-			this.combatresults[i].push(0);
-		}
+		this.InitializeMatrix();
 		setTimeout(this.CreateBattles.bind(this), 0);
 	}
 
 
 	public CreateBattles(){
 
-		if (this.championCivUts[this.ut1].civ != this.trashCivUts[this.ut2].civ || this.championCivUts[this.ut1].baseUnitType.name != this.trashCivUts[this.ut2].baseUnitType.name){
+		if (this.player1CivUts[this.ut1].civ != this.player2CivUts[this.ut2].civ || this.player1CivUts[this.ut1].baseUnitType.name != this.player2CivUts[this.ut2].baseUnitType.name){
 			this.players = [new Player(new Color(0, 0, 128), 0), new Player(new Color(0, 0, 128), 1)];
 
-			this.players[0].civUts = this.championCivUts;
-			this.players[1].civUts = this.trashCivUts;
+			this.players[0].civUts = this.player1CivUts;
+			this.players[1].civUts = this.player2CivUts;
 			this.players[0].ResetData();
 			this.players[1].ResetData();
 
@@ -216,11 +213,12 @@ export class MatrixCreationComponent{
 					new Battle(0, i, this.hitAndRunMode, this.players);
 				}
 			} else if (this.combatType == 2){
-				new Battle(0, 0, this.hitAndRunMode, this.players, this.numberOfSimulations-1);
+				this.battleRef = new Battle(0, 0, this.hitAndRunMode, this.players, this.numberOfSimulations-1);
 			}
 
 			this.CalculateStats();
-			this.combatresults[this.ut1][this.ut2] = this.players[0].resourcesLostTotal != 0 ? this.players[1].resourcesLostTotal / this.players[0].resourcesLostTotal : Number.POSITIVE_INFINITY;
+			// Since negative values for resourcesLost are possible (e.g. Keshiks with their gold generation vs. Skirmishers), we have to address special cases
+			this.combatresults[this.ut1][this.ut2] = this.players[0].resourcesLostTotal > 0 ? Math.max(this.players[1].resourcesLostTotal / this.players[0].resourcesLostTotal, 0) : Number.POSITIVE_INFINITY;
 			// console.log(this.ut1 + " " + this.ut2 + ": " + this.combatresults[this.ut1][this.ut2] + " (" + this.players[0].resourcesLostTotal + " / " + this.players[1].resourcesLostTotal + ")");
 		}
 
@@ -259,13 +257,13 @@ export class MatrixCreationComponent{
 			if (this.sortRows){
 				let tempSortList = [];
 				for (let row = 0; row < this.numberUtToDisplayRows; row++){
-					tempSortList.push({'civUnitType': this.championCivUts[row], 'cR': this.combatresults[row]});
+					tempSortList.push({'civUnitType': this.player1CivUts[row], 'cR': this.combatresults[row]});
 				}
 				tempSortList.sort(function(a, b){
 					return (a.cR[a.cR.length-1] < b.cR[b.cR.length-1] ? 1 : (a.cR[a.cR.length-1] == b.cR[b.cR.length-1] ? 0 : -1));
 				});
 				for (let row = 0; row < this.numberUtToDisplayRows; row++){
-					this.championCivUts[row] = tempSortList[row].civUnitType;
+					this.player1CivUts[row] = tempSortList[row].civUnitType;
 					this.combatresults[row] = tempSortList[row].cR;
 				}
 			}
@@ -303,6 +301,7 @@ export class MatrixCreationComponent{
 			{
 				this.players[i].resourcesRemaining[k] = 0;
 				this.players[i].resourcesGenerated[k] /= this.numberOfSimulations;
+				this.players[i].resourcesLost[k] = 0;
 			}
 
 			for (let j: number = 0; j < this.players[i].civUts.length; j++)
@@ -319,8 +318,15 @@ export class MatrixCreationComponent{
 
 			for (let j: number = 0; j < 3; j++)
 			{
-				this.players[i].resourcesLost[j] = this.players[i].resourcesInvested[j] - this.players[i].resourcesRemaining[j];
-				this.players[i].resourcesRemaining[j] += this.players[i].resourcesGenerated[j];
+				this.players[i].resourcesRemaining[j] += this.players[i].resourcesGenerated[j]; // first add the resources generated to the resources remaining in order to correctly calculate the resources lost
+				
+				// there is a special case for Konniks - since a Konnik's controller doesn't have to substitute all dead Konniks every repeated battle (they're automatically replaced by dismounted Konniks)
+				if (this.combatType == 2 && this.battleRef.sum_lostKonniks[i] > 0){
+					this.players[i].resourcesLost[j] = (this.battleRef.sum_lostKonniks[i] / this.numberOfSimulations) * AoeData.ut_eliteKonnik.resourceCosts[j];
+				} else{ // normal case
+					this.players[i].resourcesLost[j] = this.players[i].resourcesInvested[j] - this.players[i].resourcesRemaining[j];
+				}
+				// console.log("Res lost Player " + i + " with " + this.player1CivUts[this.ut1].name + " vs " + this.player2CivUts[this.ut2].name + ": " + this.players[i].resourcesLost[j]);
 			}
 		}
 		this.CalculateWeightedSum();

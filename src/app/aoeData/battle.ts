@@ -25,11 +25,17 @@ export class Battle
 	public resourcesGenerated: number[][]  = [[0, 0, 0], [0, 0, 0]]; // currently only relevant for the Keshik gold generation
 	public battleIterationCounter: number = 0; // used only for repeated equal pop battles (when repetitions > 1)
 
+	public start_konnikCount: number[] = []; // we need these variables for statistical purposes (cost efficiency matrix creation)
+	public sum_lostKonniks: number[] = [];
+
 
 	constructor(taskId: number, battleId: number, hitAndRunMode: number, players: Player[], repetitions: number = 0)
 	{
 		this.players = players;
 		this.hitAndRunMode = hitAndRunMode;
+
+		this.start_konnikCount[0] = this.start_konnikCount[1] = 0;
+		this.sum_lostKonniks[0] = this.sum_lostKonniks[1] = 0;
 		
 		while (this.battleIterationCounter <= repetitions){
 			this.gridUnits = [];
@@ -80,12 +86,20 @@ export class Battle
 				else{
 					army_SizeRanged[i] += this.players[i].amountStartUnits[j];
 				}
+
 				let survivorsOfPrevBattle: number = this.armies[i].filter(unit => unit.civUnitType == this.players[i].civUts[j]).length;
+				
+				if (this.players[i].civUts[j].baseUnitType == AoeData.ut_konnik || this.players[i].civUts[j].baseUnitType == AoeData.ut_eliteKonnik){
+					survivorsOfPrevBattle += this.armies[i].filter(unit => unit.civUnitType.baseUnitType == AoeData.ut_konnikDismounted || unit.civUnitType.baseUnitType == AoeData.ut_eliteKonnikDismounted).length;
+				}
+
 				for (let k: number = 0; k < this.players[i].amountStartUnits[j] - survivorsOfPrevBattle; k++)
 				{
 					this.armies[i].push(new Unit(this.players[i].civUts[j], this, i));
 				}
 			}
+
+			this.start_konnikCount[i] = this.armies[i].filter(unit => AoeData.utl_konnik.unitTypes.includes(unit.civUnitType.baseUnitType)).length;
 
 			army_MeleeWidth[i] = Math.ceil(Math.sqrt(army_SizeMelee[i] / 2.0));
 			army_MeleeHeight[i] = army_MeleeWidth[i] * 2;
@@ -136,6 +150,8 @@ export class Battle
 				this.players[i].survivorsSumArmy.set(ut, this.players[i].survivorsSumArmy.get(ut) + utSurvivorsArmy);
 			});
 			this.players[i].resourcesGenerated[2] += Math.round(this.resourcesGenerated[i][2]); // just used for keshig gold currently, so only index 2 used
+
+			this.sum_lostKonniks[i] += (this.start_konnikCount[i] - this.armies[i].filter(unit => AoeData.utl_konnik.unitTypes.includes(unit.civUnitType.baseUnitType)).length);
 		}
 	}
 
