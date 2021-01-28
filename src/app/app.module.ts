@@ -11,8 +11,9 @@ import { PlayerComponent } from './player/player.component';
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { NavbarComponent } from './navbar/navbar.component';
 import { InfoComponent } from './info/info.component';
-import { MatrixComponent } from './matrix/matrix.component';
+import { MatricesComponent } from './matrices/matrices.component';
 import { MatrixCreationComponent } from './matrix-creation/matrix-creation.component';
+import { MatrixComponent } from './matrix/matrix.component';
 
 @NgModule({
   declarations: [
@@ -21,8 +22,10 @@ import { MatrixCreationComponent } from './matrix-creation/matrix-creation.compo
     PlayerComponent,
     NavbarComponent,
     InfoComponent,
-    MatrixComponent,
-    MatrixCreationComponent
+    MatricesComponent,
+    MatrixCreationComponent,
+	MatricesComponent,
+	MatrixComponent
   ],
   imports: [ 
     BrowserModule,
@@ -31,7 +34,7 @@ import { MatrixCreationComponent } from './matrix-creation/matrix-creation.compo
 	NgbModule, // why not?!
 	RouterModule.forRoot([
 		{ path: 'info', component: InfoComponent },
-		{ path: 'matrix', component: MatrixComponent },
+		{ path: 'matrices', component: MatricesComponent },
 		{ path: 'matrix-creation', component: MatrixCreationComponent },
 		{ path: '', component: AoECombatSimulatorComponent },
 		{ path: '**', component: AoECombatSimulatorComponent }

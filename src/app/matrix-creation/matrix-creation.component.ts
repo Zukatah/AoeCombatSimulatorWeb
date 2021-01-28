@@ -20,7 +20,7 @@ export class MatrixCreationComponent{
 	public hitAndRunMode: number = 1; // 0=noHit&Run, 1=semi, 2=fullHit&Run
 	public hitAndRunModes: string[] = ["No Hit&Run", "Medium Hit&Run", "Perfect Hit&Run"];
 
-	public resourceValue: number = 0; // 0=equal worth, 1=gold+50% worth, 2=100f=100w=17g
+	public resourceValue: number = 2; // 0=equal worth, 1=gold+50% worth, 2=100f=100w=17g
 	public resourceValues: string[] = ["100F=100W=100G", "100F=100W=66,6G", "100F=100W=17G"];
 	public resourceValuesFactors: number[][] = [[1, 1, 1], [1, 1, 1.5], [1, 1, 5.88235]];
 

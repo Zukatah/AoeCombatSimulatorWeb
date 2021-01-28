@@ -1,0 +1,32 @@
+.top-buffer { margin-top:10px; }
+
+.matrix-bg {
+	background-color: lightyellow;
+}
+
+table{
+	table-layout: fixed;
+	width: 100%;
+}
+
+th, td{
+	color: black;
+	width: 3%;
+}
+
+span{
+	font-size: small;
+}
+
+.brightText{
+	color: lightgray;
+}
+
+.fixedHeight img{
+	width: 40px;
+	height: 40px;
+}
+
+:host ::ng-deep .card-header, :host ::ng-deep .card-body{
+	padding: 0;
+}
