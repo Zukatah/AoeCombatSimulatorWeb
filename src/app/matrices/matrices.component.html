@@ -3,9 +3,10 @@
 	<div class="row top-buffer">
 		<div class="col-12 text-center">
 			<div ngbDropdown>
-				<button class="btn btn-primary" id="contentSelector" ngbDropdownToggle>{{contentValues[contentValue]}}</button>
+				<button class="btn btn-primary" id="contentSelector" ngbDropdownToggle>{{contentValue == 0 ? "Info" : matrices[contentValue-1].description}}</button>
 				<div ngbDropdownMenu aria-labelledby="contentSelector">
-					<button ngbDropdownItem (click)="SetContentValue(i)" *ngFor="let item of contentValues; index as i">{{contentValues[i]}}</button>
+					<button ngbDropdownItem (click)="SetContentValue(0)">Info</button>
+					<button ngbDropdownItem (click)="SetContentValue(i+1)" *ngFor="let item of matrices; index as i">{{matrices[i].description}}</button>
 				</div>
 			</div>
 		</div>
@@ -122,9 +123,6 @@
 							<li>
 								For more info, have a look at the info tab.
 							</li>
-							<li>
-								Adding the remaining unique units isn't a problem at all, but I have to think about a viable way of visualizing/displaying such a huge matrix.
-							</li>
 						</ul>
 					</ng-template>
 				</ngb-panel>
@@ -135,196 +133,7 @@
 		</div>
 	</div>
 
-
-	<app-matrix *ngFor="let matrix of matrices"></app-matrix>
-
-
-	<!--
-
-
-	<div class="row top-buffer" *ngIf="contentValue==1">
-		<div class="col-12 border border-dark rounded p-2 matrix-bg">
-			<div><h3 class="text-center">Cost efficiency matrix 1</h3></div>
-
-			<div class="row no-gutters">
-				<ul>
-					<li>No Hit&Run</li>
-					<li>Food & wood & gold of equal worth (100F=100W=100G)</li>
-					<li>Both armies of equal worth</li>
-				</ul>
-			</div>
-
-			<div class="row no-gutters text-center">
-				<table class="table table-sm table-dark">
-					<thead>
-						<tr>
-							<th scope="col"></th>
-							<th *ngFor="let utInd of CreateIncrArray(numberUtToDisplay)" scope="col">
-								<span *ngIf="matrixAllUts[utInd].imagePath == ''">{{matrixAllUts[utInd].name}}</span>
-								<img *ngIf="matrixAllUts[utInd].imagePath != ''" src="{{matrixAllUts[utInd].imagePath}}" class="border border-dark img-fluid" title="{{matrixAllUts[utInd].name}}">
-							</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr *ngFor="let utInd of CreateIncrArray(numberUtToDisplay); index as i">
-							<td>
-								<span *ngIf="matrixAllUts[utInd].imagePath == ''">{{matrixAllUts[utInd].name}}</span>
-								<img *ngIf="matrixAllUts[utInd].imagePath != ''" src="{{matrixAllUts[utInd].imagePath}}" class="border border-dark img-fluid" title="{{matrixAllUts[utInd].name}}">
-							</td>
-							<td *ngFor="let utInd2 of CreateIncrArray(numberUtToDisplay); index as j" [style.background-color]="getSurvivorsColor(combatresultsNoHnR[i][j])" class="align-middle">
-								<span class="align-middle">{{combatresultsNoHnR[i][j] | number : '1.0-2'}}</span>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
-
-	<div class="row top-buffer" *ngIf="contentValue==2">
-		<div class="col-12 border border-dark rounded p-2 matrix-bg">
-			<div><h3 class="text-center">Cost efficiency matrix 2</h3></div>
-
-			<div class="row no-gutters">
-				<ul>
-					<li>Medium Hit&Run</li>
-					<li>Food & wood & gold of equal worth (100F=100W=100G)</li>
-					<li>Both armies of equal worth</li>
-				</ul>
-			</div>
-
-			<div class="row no-gutters text-center">
-				<table class="table table-sm table-dark">
-					<thead>
-						<tr>
-							<th scope="col"></th>
-							<th *ngFor="let utInd of CreateIncrArray(numberUtToDisplay)" scope="col">
-								<span *ngIf="matrixAllUts[utInd].imagePath == ''">{{matrixAllUts[utInd].name}}</span>
-								<img *ngIf="matrixAllUts[utInd].imagePath != ''" src="{{matrixAllUts[utInd].imagePath}}" class="border border-dark img-fluid" title="{{matrixAllUts[utInd].name}}">
-							</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr *ngFor="let utInd of CreateIncrArray(numberUtToDisplay); index as i">
-							<td>
-								<span *ngIf="matrixAllUts[utInd].imagePath == ''">{{matrixAllUts[utInd].name}}</span>
-								<img *ngIf="matrixAllUts[utInd].imagePath != ''" src="{{matrixAllUts[utInd].imagePath}}" class="border border-dark img-fluid" title="{{matrixAllUts[utInd].name}}">
-							</td>
-							<td *ngFor="let utInd2 of CreateIncrArray(numberUtToDisplay); index as j" [style.background-color]="getSurvivorsColor(combatresultsSemiHnR[i][j])" class="align-middle">
-								<span class="align-middle">{{combatresultsSemiHnR[i][j] | number : '1.0-2'}}</span>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
-
-	<div class="row top-buffer" *ngIf="contentValue==3">
-		<div class="col-12 border border-dark rounded p-2 matrix-bg">
-			<div><h3 class="text-center">Cost efficiency matrix 3</h3></div>
-
-			<div class="row no-gutters">
-				<ul>
-					<li>Perfect Hit&Run</li>
-					<li>Food & wood & gold of equal worth (100F=100W=100G)</li>
-					<li>Both armies of equal worth</li>
-				</ul>
-			</div>
-
-			<div class="row no-gutters text-center">
-				<table class="table table-sm table-dark">
-					<thead>
-						<tr>
-							<th scope="col"></th>
-							<th *ngFor="let utInd of CreateIncrArray(numberUtToDisplay)" scope="col">
-								<span *ngIf="matrixAllUts[utInd].imagePath == ''">{{matrixAllUts[utInd].name}}</span>
-								<img *ngIf="matrixAllUts[utInd].imagePath != ''" src="{{matrixAllUts[utInd].imagePath}}" class="border border-dark img-fluid" title="{{matrixAllUts[utInd].name}}">
-							</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr *ngFor="let utInd of CreateIncrArray(numberUtToDisplay); index as i">
-							<td>
-								<span *ngIf="matrixAllUts[utInd].imagePath == ''">{{matrixAllUts[utInd].name}}</span>
-								<img *ngIf="matrixAllUts[utInd].imagePath != ''" src="{{matrixAllUts[utInd].imagePath}}" class="border border-dark img-fluid" title="{{matrixAllUts[utInd].name}}">
-							</td>
-							<td *ngFor="let utInd2 of CreateIncrArray(numberUtToDisplay); index as j" [style.background-color]="getSurvivorsColor(combatresultsFullHnR[i][j])" class="align-middle">
-								<span class="align-middle">{{combatresultsFullHnR[i][j] | number : '1.0-2'}}</span>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
-
-	<div class="row top-buffer" *ngIf="contentValue==4">
-		<div class="col-12 border border-dark rounded p-2 matrix-bg">
-			<div><h3 class="text-center">Cost efficiency matrix 4</h3></div>
-
-			<div class="row no-gutters">
-				<ul>
-					<li>No Hit&Run</li>
-					<li>Gold of much higher worth (100F=100W=17G - late game market exchange rates)</li>
-					<li>Both armies of equal worth</li>
-				</ul>
-			</div>
-
-			<div class="row no-gutters text-center">
-				<table class="table table-sm table-dark">
-					<thead>
-						<tr>
-							<th scope="col"></th>
-							<th *ngFor="let utInd of CreateIncrArray(numberUtToDisplay)" scope="col">
-								<span *ngIf="matrixAllUts[utInd].imagePath == ''">{{matrixAllUts[utInd].name}}</span>
-								<img *ngIf="matrixAllUts[utInd].imagePath != ''" src="{{matrixAllUts[utInd].imagePath}}" class="border border-dark img-fluid" title="{{matrixAllUts[utInd].name}}">
-							</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr *ngFor="let utInd of CreateIncrArray(numberUtToDisplay); index as i">
-							<td>
-								<span *ngIf="matrixAllUts[utInd].imagePath == ''">{{matrixAllUts[utInd].name}}</span>
-								<img *ngIf="matrixAllUts[utInd].imagePath != ''" src="{{matrixAllUts[utInd].imagePath}}" class="border border-dark img-fluid" title="{{matrixAllUts[utInd].name}}">
-							</td>
-							<td *ngFor="let utInd2 of CreateIncrArray(numberUtToDisplay); index as j" [style.background-color]="getSurvivorsColor(combatresultsNoHnR_LGMP[i][j])" class="align-middle">
-								<span class="align-middle">{{combatresultsNoHnR_LGMP[i][j] | number : '1.0-2'}}</span>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
-			<div class="row no-gutters">
-				<h5>A few exemplary insights we can deduce from matrix 4</h5>
-			</div>
-
-			<div class="row no-gutters">
-				With late game market exchange rates and no Hit&Run the matrix says about the so called Trash units...
-				<ul>
-					<li><b>Halberdiers</b> are cost efficient vs. everything except Elite Teutonic Knights, Skirmishers and Elite Berserks (almost a draw).</li>
-					<li><b>Hussars</b> are cost efficient vs. everything except Elite Teutonic Knights, Elite War Elephants and Halberdiers.</li>
-					<li><b>Elite Skirmishers</b> are cost efficient vs. everything except Hussars, Paladins, Elite Battle Elephants, Elite War Elephants,
-						Elite Huskarls, Elite Teutonic Knights, Elite Berserks, Champions, Elite Woad Raiders and Elite Samurais.</li>
-				</ul>
-				<p>
-					So when all players are entirely out of gold, the matrix suggests selling food and/or wood at the market in order to create
-					some of the mentioned units instead of (or in addition to) trash units.
-				</p>
-				<p>
-					Especially the <b>Elite Teutonic Knight</b> seems exceptionally well suited for late game trash wars, considering it trades very cost efficiently
-					with all three types of trash units even when you acquire the necessary gold entirely by selling food and wood at the market.
-					But also the <b>Elite War Elephant</b> and the <b>Elite Berserk</b> are able to cost efficiently trade with two of the three trash unit types
-					(or almost cost efficiently in case of the latter one).
-				</p>
-			</div>
-		</div>
-	</div>
-
-
-	-->
-
-
-	<br>
 </div>
+
+
+<app-matrix [matrix]=matrices[contentValue-1] *ngIf="contentValue>0"></app-matrix>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from "rxjs/operators";
 import { AoeData } from './aoeData/aoeData';
+import { MatrixData } from './helper/matrixData';
 
 declare var gtag; // for google analytics
 
@@ -23,5 +24,6 @@ export class AppComponent {
 
 		AoeData.InitializeUnitTypes();
 		AoeData.InitializeCivilizations();
+		MatrixData.InitializeMatrixCivUnitTypeLists();
 	}
 }

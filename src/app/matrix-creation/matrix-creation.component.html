@@ -57,15 +57,6 @@
 	
 <div class="top-buffer">
 	<div class="col-12 border border-dark rounded p-2 matrix-bg">
-		<div class="row no-gutters">
-			<h3>Live Cost efficiency matrix</h3>
-		</div>
-		<div class="row no-gutters">
-			<ul>
-				<li>No Hit&Run</li>
-				<li>Food & wood & gold of equal worth</li>
-			</ul>
-		</div>
 
 		<div class="row no-gutters text-center">
 			<table class="table table-sm table-dark scrollbar fixedHeightImages">
@@ -75,7 +66,7 @@
 						<th style="min-width: 55px; width: 55px;" scope="col"></th>
 						<th *ngFor="let utInd of CreateIncrArray(numberUtToDisplayColumns)" style="min-width: 58px; width: 58px; max-width: 58px;" scope="col">
 							<span class="brightText">{{player2CivUts[utInd].civ.name}}</span><br>
-							<img *ngIf="player2CivUts[utInd].imagePath != ''" src="{{player2CivUts[utInd].imagePath}}" class="border border-dark img-fluid" title="{{player2CivUts[utInd].name}}">
+							<img *ngIf="player2CivUts[utInd].baseUnitType.imagePath != ''" src="{{player2CivUts[utInd].baseUnitType.imagePath}}" class="border border-dark img-fluid" title="{{player2CivUts[utInd].name}}">
 						</th>
 						<th style="min-width: 55px; width: 55px" *ngIf="showAvgCol" scope="col" class="brightText">Points</th>
 					</tr>
@@ -86,18 +77,19 @@
 							<span class="brightText">{{player1CivUts[utInd].civ.name}}</span>
 						</td>
 						<td>
-							<img *ngIf="player1CivUts[utInd].imagePath != ''" src="{{player1CivUts[utInd].imagePath}}" class="border border-dark img-fluid" title="{{player1CivUts[utInd].name}}">
+							<img *ngIf="player1CivUts[utInd].baseUnitType.imagePath != ''" src="{{player1CivUts[utInd].baseUnitType.imagePath}}" class="border border-dark img-fluid" title="{{player1CivUts[utInd].name}}">
 						</td>
-						<td *ngFor="let utInd2 of CreateIncrArray(numberUtToDisplayColumns); index as j" [style.background-color]="getSurvivorsColor(combatresults[i][j])" class="align-middle">
-							<span class="align-middle">{{combatresults[i][j] | number : '1.0-2'}}</span>
+						<td *ngFor="let utInd2 of CreateIncrArray(numberUtToDisplayColumns); index as j" [style.background-color]="getSurvivorsColor(combatResults[i][j])" class="align-middle">
+							<span class="align-middle">{{combatResults[i][j] | number : '1.0-2'}}</span>
 						</td>
-						<td *ngIf="showAvgCol" class="align-middle" style="background-color: cadetblue;"> <!--[style.background-color]="getSurvivorsColor(combatresults[i][numberUtToDisplayColumns])"-->
-							<span class="align-middle">{{combatresults[i][numberUtToDisplayColumns] | number : '1.0-2'}}</span>
+						<td *ngIf="showAvgCol" class="align-middle" style="background-color: cadetblue;">
+							<span class="align-middle">{{combatResultsPoints[i] | number : '1.0-2'}}</span>
 						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
+		
 	</div>
 </div>
 

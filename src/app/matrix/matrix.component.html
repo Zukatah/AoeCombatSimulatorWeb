@@ -1,8 +1,41 @@
-<p>matrix works!</p>
-blaaa bluppp
-blaaa bluppp
-blaaa bluppp
-blaaa bluppp
-blaaa bluppp
-blaaa bluppp
-blaaa bluppp
+<div class="row top-buffer">
+	<div class="col-1"></div>
+	<div class="col-10 border border-dark rounded p-2 matrix-bg">
+		
+		<div><h3 class="text-center">{{matrix.description}}</h3></div>
+
+		<div class="row no-gutters text-center">
+			<table class="table table-sm table-dark scrollbar fixedHeightImages" style="max-height: 74vh;">
+				<thead>
+					<tr>
+						<th style="min-width: 55px; width: 55px;" scope="col"></th>
+						<th style="min-width: 55px; width: 55px;" scope="col"></th>
+						<th *ngFor="let utIndex of CreateIncrArray(matrix.matrixUtsLength2)" style="min-width: 58px; width: 58px; max-width: 58px; background-color: #343a40;" scope="col">
+							<span class="brightText">{{matrix.matrixUts2[utIndex].civ.name}}</span><br>
+							<img *ngIf="matrix.matrixUts2[utIndex].baseUnitType.imagePath != ''" src="{{matrix.matrixUts2[utIndex].baseUnitType.imagePath}}" class="border border-dark img-fluid" title="{{matrix.matrixUts2[utIndex].name}}">
+						</th>
+						<th style="min-width: 55px; width: 55px; background-color: #343a40;" scope="col" class="brightText">Points</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let utIndex of CreateIncrArray(matrix.matrixUtsLength1); index as i">
+						<td>
+							<span class="brightText">{{matrix.matrixUts1[utIndex].civ.name}}</span>
+						</td>
+						<td>
+							<img *ngIf="matrix.matrixUts1[utIndex].baseUnitType.imagePath != ''" src="{{matrix.matrixUts1[utIndex].baseUnitType.imagePath}}" class="border border-dark img-fluid" title="{{matrix.matrixUts1[utIndex].name}}">
+						</td>
+						<td *ngFor="let utIndex2 of CreateIncrArray(matrix.matrixUtsLength2); index as j" [style.background-color]="getSurvivorsColor(matrix.combatResults[i][j])" class="align-middle">
+							<span class="align-middle">{{matrix.combatResults[i][j] | number : '1.0-2'}}</span>
+						</td>
+						<td class="align-middle" style="background-color: cadetblue;">
+							<span class="align-middle">{{matrix.combatResultsPoints[i] | number : '1.0-2'}}</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="col-1"></div>
+</div>
+

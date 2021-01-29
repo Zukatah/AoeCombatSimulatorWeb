@@ -15,6 +15,8 @@ import { MatricesComponent } from './matrices/matrices.component';
 import { MatrixCreationComponent } from './matrix-creation/matrix-creation.component';
 import { MatrixComponent } from './matrix/matrix.component';
 
+//import { Matrix } from './helper/matrix';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +29,7 @@ import { MatrixComponent } from './matrix/matrix.component';
 	MatricesComponent,
 	MatrixComponent
   ],
-  imports: [ 
+  imports: [
     BrowserModule,
     FormsModule,
 	HttpClientModule,
