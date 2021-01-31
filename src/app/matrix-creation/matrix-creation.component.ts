@@ -46,7 +46,7 @@ export class MatrixCreationComponent{
 	private battleRef: Battle;
 
 	constructor() {
-		this.player1CivUts = MatrixData.eliteGenitourUnitTypes;
+		this.player1CivUts = MatrixData.allFinalGenericUnitTypes_excluding_villager_siegeRam;
 		this.player2CivUts = MatrixData.allFinalGenericUnitTypes_excluding_villager_siegeRam;
 		this.InitializeMatrix();
 	}

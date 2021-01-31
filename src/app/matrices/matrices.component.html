@@ -23,7 +23,7 @@
 						<button ngbPanelToggle class="btn btn-link">Purpose</button>
 					</ng-template>
 					<ng-template ngbPanelContent>
-						<p>The purpose of a cost efficiency matrix is to depict the cost efficiency of each unit type versus every other unit type.</p>
+						<p>The purpose of a cost efficiency matrix is to depict the cost efficiency of <b>each unit type depicted in the matrix rows</b> versus <b>each unit type depicted in the matrix columns.</b></p>
 					</ng-template>
 				</ngb-panel>
 
@@ -34,7 +34,7 @@
 					<ng-template ngbPanelContent>
 						<p>There are different cost efficiency matrix types regarding the following aspects:</p>
 						<ul>
-							<li>Cost efficiency with armies worth the same vs. cost efficiency with armies of equal size (population)</li>
+							<li>Cost efficiency with armies worth the same amount of resources vs. cost efficiency with armies of equal size (population)</li>
 							<li>Equal resources worth (also called 100F=100W=100G) vs. Late game resource worth (also called 100F=100W=17G)<br>
 								The first type assumes resources to be of equal worth as usual in earlier stages of the game.<br>
 								The latter type assumes 17 gold to be worth 100 food or 100 wood as usual with late game market exchange rates.</li>
@@ -50,7 +50,7 @@
 					</ng-template>
 					<ng-template ngbPanelContent>
 						<p>Let's have a look at matrix 1. It's about two armies of equal resource worth, considers food, wood and gold to be of equal worth and doesn't include Hit&Run behavior.</p>
-						<p>Let's take the cell [row 2, column 5] as an example. It says 3.43. What does that mean?</p>
+						<p>Let's take the cell [row 2, column 5] as an example. It says 3.21. What does that mean?</p>
 						<ul>
 							<li>Row 2 means Champions. Column 5 means Hussars. So it's about the cost efficiency of Champions vs. Hussars.</li>
 							<li>There are always 50 units of the respective row's unit type, so in our example Champions.</li>
@@ -59,18 +59,18 @@
 							<li>50 Champions cost 50*65=3250 resources. With 3250 resources you get 3250/80=40.625 Hussars (let's round it to 41).</li>
 							<li>So the cell [row 2, column 5] is about a combat simulation between 50 Champions and 41 Hussars (equal worth).</li>
 							<li>To get reliable average results each combat simulation is repeated 20 times.</li>
-							<li>The cost efficiency value of 3.43 means that the worth of all dead units of army 2 (Hussars) is 3.43 times as high as the worth of all dead units of army 1 (Champions).</li>
+							<li>The cost efficiency value of 3.21 means that the worth of all dead units of army 2 (Hussars) is 3.21 times as high as the worth of all dead units of army 1 (Champions).</li>
 						</ul>
 						Some <b>true</b> conclusions we can deduce from the results include:
 						<ul>
 							<li>If we assume food, wood and gold to be of equal worth, Champions are highly cost efficient vs. Hussars.</li>
-							<li>If we have two players with an equally strong economy, player 1 only produces Champions and player 2 only produces Hussars, player 2 will lose 3.43 times as many resources during a fight as player 1.</li>
+							<li>If we have two players with an equally strong economy, player 1 only produces Champions and player 2 only produces Hussars, player 2 will lose 3.21 times as many resources during a fight as player 1.</li>
 						</ul>
 						Some <b>false</b> conclusions would include:
 						<ul>
-							<li>Champions are 3.43 times as strong as Hussars.</li>
-							<li>Champions trade equally with Hussars when there are 3.43 times as many Hussars.</li>
-							<li>A Hussar army fighting a Champion army of equal worth will lose 3.43 times as many units as the Champion army (correct would be: 'will lose 3.43 times as many generic resources').</li>
+							<li>Champions are 3.21 times as strong as Hussars.</li>
+							<li>Champions trade equally with Hussars when there are 3.21 times as many Hussars.</li>
+							<li>A Hussar army fighting a Champion army of equal worth will lose 3.21 times as many units as the Champion army (correct would be: 'will lose 3.21 times as many generic resources').</li>
 						</ul>
 					</ng-template>
 				</ngb-panel>
@@ -110,7 +110,7 @@
 							<li>Some matrices are about cost efficiency with equal army sizes, others about cost efficiency with two armies of equal worth.</li>
 							<li>The higher the number, the more cost efficient the matchup will be for the unit type of the respective row.</li>
 							<li>A number larger than 1 means cost efficient, a number smaller than 1 means cost inefficient.</li>
-							<li>The chosen Hit&Run setting greatly influences the results. E.g. in the matrix without Hit&Run Champions are cost efficient against Arbalesters (value far above 1),
+							<li>The chosen Hit&Run setting greatly influences the results. E.g. in the matrices without Hit&Run Champions are cost efficient against Arbalesters (values far above 1),
 								but with medium or perfect Hit&Run they are not cost efficient anymore (value far below 1).</li>
 						</ul>
 						Furthermore...
