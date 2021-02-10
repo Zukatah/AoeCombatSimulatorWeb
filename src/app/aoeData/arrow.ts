@@ -1,6 +1,7 @@
 import { Projectile } from "./projectile";
 import { Unit } from "./unit";
 import { Battle } from "./battle";
+import { AoeData } from './aoeData';
 
 
 export class Arrow extends Projectile
@@ -25,6 +26,7 @@ export class Arrow extends Projectile
 		{
 			let damageDealt : number = Unit.CalculateDamageDealtToTarget(this.attacker, this.target, this.secondary);
 			this.target.curHp -= damageDealt;
+			this.battle.players[this.attacker.armyIndex].goodRoll_MainTargetHit++; // debug purposes
 		}
 		else
 		{
@@ -41,7 +43,8 @@ export class Arrow extends Projectile
 			let closestUnitDistSq: number = Number.MAX_VALUE;
 			targetArmy.forEach(possibleTarget => {
 				let distToArrowSq: number = (impactX - possibleTarget.x) * (impactX - possibleTarget.x) + (impactY - possibleTarget.y) * (impactY - possibleTarget.y);
-				if (distToArrowSq < possibleTarget.radius * possibleTarget.radius && distToArrowSq < closestUnitDistSq)
+				let possibleTargetRadiusSq: number = (possibleTarget.radius + 0.2) * (possibleTarget.radius + 0.2); // increased the size of the units' hitboxes a bit since the chance for side target hits was too low
+				if (distToArrowSq < possibleTargetRadiusSq && distToArrowSq < closestUnitDistSq)
 				{
 					closestUnit = possibleTarget;
 					closestUnitDistSq = distToArrowSq;
@@ -50,7 +53,39 @@ export class Arrow extends Projectile
 			if (closestUnit != null)
 			{
 				// targets other than the main target only receive half of the normal damage
-				closestUnit.curHp -= (closestUnit == this.target ? 1.0 : 0.5) * Unit.CalculateDamageDealtToTarget(this.attacker, closestUnit, this.secondary);
+				if (closestUnit == this.target){
+					this.battle.players[this.attacker.armyIndex].missedRoll_MainTargetHit++; // debug purposes
+					closestUnit.curHp -= Unit.CalculateDamageDealtToTarget(this.attacker, closestUnit, this.secondary);
+				} else{
+					if (this.target.alive){
+						this.battle.players[this.attacker.armyIndex].missedRoll_mainTargetAlive_SideTargetHit++; // debug purposes
+					}else{
+						if (hitRoll < this.attacker.accuracyPercent){
+							this.battle.players[this.attacker.armyIndex].goodRoll_mainTargetDead_SideTargetHit++; // debug purposes
+						}else{
+							this.battle.players[this.attacker.armyIndex].missedRoll_mainTargetDead_SideTargetHit++; // debug purposes
+						}
+						
+					}
+					
+					if (this.attacker.civUnitType.baseUnitType == AoeData.ut_arambai || this.attacker.civUnitType.baseUnitType == AoeData.ut_eliteArambai){ // Arambai and Elite Arambai always hit for 100% damage
+						closestUnit.curHp -= Unit.CalculateDamageDealtToTarget(this.attacker, closestUnit, this.secondary);
+					}else{
+						closestUnit.curHp -= 0.5 * Unit.CalculateDamageDealtToTarget(this.attacker, closestUnit, this.secondary);
+					}
+					
+				}
+			}
+			else{
+				if (this.target.alive){
+					this.battle.players[this.attacker.armyIndex].missedRoll_mainTargetAlive_Miss++; // debug purposes
+				} else{
+					if (hitRoll < this.attacker.accuracyPercent){
+						this.battle.players[this.attacker.armyIndex].goodRoll_mainTargetDead_Miss++; // debug purposes
+					}else{
+						this.battle.players[this.attacker.armyIndex].missedRoll_mainTargetDead_Miss++; // debug purposes
+					}
+				}
 			}
 		}
 	}

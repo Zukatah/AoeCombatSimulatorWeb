@@ -10,7 +10,7 @@ import { CivUnitType } from './civUnitType';
 export class Battle
 {
 	//private userInterface: AoECombatSimulatorComponent; // a reference to the user interface instance to which this battle's results will be reported
-	private players: Player[];
+	public players: Player[];
 	public hitAndRunMode: number; // 0 => no hit&run (except target too close for units with min range), 1 => hit&run with 50% efficiency, 2 => maximum hit&run possible
 	
 	public armies: Unit[][]  = [[], []]; // the armies of both players

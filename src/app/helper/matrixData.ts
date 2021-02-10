@@ -5,6 +5,18 @@ import { Matrix } from './matrix';
 
 export abstract class MatrixData
 {
+	public static readonly HIT_AND_RUN_MODE_NONE = 0;
+	public static readonly HIT_AND_RUN_MODE_SEMI = 1;
+	public static readonly HIT_AND_RUN_MODE_FULL = 2;
+
+	public static readonly RESOURCE_VALUES_100F100W100G = 0;
+	public static readonly RESOURCE_VALUES_100F100W67G = 1;
+	public static readonly RESOURCE_VALUES_100F100W17G = 2;
+
+	public static readonly COMBAT_TYPE_EQUAL_RESOURCES = 0;
+	public static readonly COMBAT_TYPE_EQUAL_POPULATION = 2;
+
+	public static allFinalUnitTypes_including_HeavyCamelRider_eliteSkirmisher_lotw: CivUnitType[];
 	public static allFinalUnitTypes_including_HeavyCamelRider_eliteSkirmisher: CivUnitType[];
 	public static allFinalGenericUnitTypes_excluding_villager_siegeRam: CivUnitType[];
 	public static someChampionUnitTypes: CivUnitType[];
@@ -23,6 +35,69 @@ export abstract class MatrixData
 	public static combatResults_matrices: Matrix[];
 
 	public static InitializeMatrixCivUnitTypeLists(): void{
+		MatrixData.allFinalUnitTypes_including_HeavyCamelRider_eliteSkirmisher_lotw = [
+			new CivUnitType(AoeData.ut_villager, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_champion, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_halberdier, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_eliteEagleWarrior, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_hussar, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_paladin, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_heavyCamelRider, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_eliteBattleElephant, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_eliteSteppeLancer, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_arbalester, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_eliteSkirmisher, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_heavyCavalryArcher, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_handCannoneer, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_siegeRam, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_heavyScorpion, AoeData.civ_generic),
+			new CivUnitType(AoeData.ut_eliteJaguarWarrior, AoeData.civ_aztecs),
+			new CivUnitType(AoeData.ut_eliteCamelArcher, AoeData.civ_berbers),
+			new CivUnitType(AoeData.ut_eliteGenitour, AoeData.civ_berbers),
+			new CivUnitType(AoeData.ut_eliteLongbowman, AoeData.civ_britons),
+			new CivUnitType(AoeData.ut_eliteKonnik, AoeData.civ_bulgarians),
+			new CivUnitType(AoeData.ut_eliteKonnikDismounted, AoeData.civ_bulgarians),
+			new CivUnitType(AoeData.ut_eliteCoustillier, AoeData.civ_burgundians),
+			new CivUnitType(AoeData.ut_flemishMilitia, AoeData.civ_burgundians),
+			new CivUnitType(AoeData.ut_eliteArambai, AoeData.civ_burmese),
+			new CivUnitType(AoeData.ut_eliteCataphract, AoeData.civ_byzantines),
+			new CivUnitType(AoeData.ut_eliteWoadRaider, AoeData.civ_celts),
+			new CivUnitType(AoeData.ut_eliteChuKoNu, AoeData.civ_chinese),
+			new CivUnitType(AoeData.ut_eliteKipchak, AoeData.civ_cumans),
+			new CivUnitType(AoeData.ut_eliteShotelWarrior, AoeData.civ_ethiopians),
+			new CivUnitType(AoeData.ut_eliteThrowingAxeman, AoeData.civ_franks),
+			new CivUnitType(AoeData.ut_eliteHuskarl, AoeData.civ_goths),
+			new CivUnitType(AoeData.ut_eliteTarkan, AoeData.civ_huns),
+			new CivUnitType(AoeData.ut_eliteKamayuk, AoeData.civ_incas),
+			new CivUnitType(AoeData.ut_slinger, AoeData.civ_incas),
+			new CivUnitType(AoeData.ut_eliteElephantArcher, AoeData.civ_indians),
+			new CivUnitType(AoeData.ut_imperialCamelRider, AoeData.civ_indians),
+			new CivUnitType(AoeData.ut_eliteGenoeseCrossbowman, AoeData.civ_italians),
+			new CivUnitType(AoeData.ut_condottiero, AoeData.civ_italians),
+			new CivUnitType(AoeData.ut_eliteSamurai, AoeData.civ_japanese),
+			new CivUnitType(AoeData.ut_eliteBallistaElephant, AoeData.civ_khmer),
+			new CivUnitType(AoeData.ut_eliteWarWagon, AoeData.civ_koreans),
+			new CivUnitType(AoeData.ut_eliteLeitis, AoeData.civ_lithuanians),
+			new CivUnitType(AoeData.ut_eliteMagyarHuszar, AoeData.civ_magyars),
+			new CivUnitType(AoeData.ut_eliteKarambitWarrior, AoeData.civ_malay),
+			new CivUnitType(AoeData.ut_eliteGbeto, AoeData.civ_malians),
+			new CivUnitType(AoeData.ut_elitePlumedArcher, AoeData.civ_mayans),
+			new CivUnitType(AoeData.ut_eliteMangudai, AoeData.civ_mongols),
+			new CivUnitType(AoeData.ut_eliteWarElephant, AoeData.civ_persians),
+			new CivUnitType(AoeData.ut_eliteOrganGun, AoeData.civ_portuguese),
+			new CivUnitType(AoeData.ut_eliteMameluke, AoeData.civ_saracens),
+			new CivUnitType(AoeData.ut_eliteSerjeant, AoeData.civ_sicilians),
+			new CivUnitType(AoeData.ut_eliteBoyar, AoeData.civ_slavs),
+			new CivUnitType(AoeData.ut_eliteConquistador, AoeData.civ_spanish),
+			new CivUnitType(AoeData.ut_eliteKeshik, AoeData.civ_tatars),
+			new CivUnitType(AoeData.ut_flamingCamel, AoeData.civ_tatars),
+			new CivUnitType(AoeData.ut_eliteTeutonicKnight, AoeData.civ_teutons),
+			new CivUnitType(AoeData.ut_eliteJanissary, AoeData.civ_turks),
+			new CivUnitType(AoeData.ut_eliteRattanArcher, AoeData.civ_vietnamese),
+			new CivUnitType(AoeData.ut_imperialSkirmisher, AoeData.civ_vietnamese),
+			new CivUnitType(AoeData.ut_eliteBerserk, AoeData.civ_vikings)
+		];
+
 		MatrixData.allFinalUnitTypes_including_HeavyCamelRider_eliteSkirmisher = [
 			new CivUnitType(AoeData.ut_villager, AoeData.civ_generic),
 			new CivUnitType(AoeData.ut_champion, AoeData.civ_generic),
@@ -102,7 +177,10 @@ export abstract class MatrixData
 		MatrixData.combatResults_SemiHnR_eqRes_40runs = new Matrix(
 			MatrixData.allFinalUnitTypes_including_HeavyCamelRider_eliteSkirmisher,
 			MatrixData.allFinalUnitTypes_including_HeavyCamelRider_eliteSkirmisher,
-			"Matrix 1 - Medium Hit&Run - 100F=100W=100G - Equal army worth",
+			"Matrix 1 - All land units",
+			MatrixData.HIT_AND_RUN_MODE_SEMI,
+			MatrixData.RESOURCE_VALUES_100F100W100G,
+			MatrixData.COMBAT_TYPE_EQUAL_RESOURCES,
 			[
 				[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.006, 0, 0.0016, 89.13793103448276, 0, 0, 0, 0, 0, 0, 0, 0.028, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.884, 0, 0, 0, 0.0008, 0],
 				[Infinity, 1, 7.414187643020595, 5.75, 3.2093933463796476, 0.8209287531806616, 5.094936708860759, 0.6606153846153846, 3.7660818713450293, 0.5867692307692308, 7.826086956521739, 1.3956466069142126, 0.9719813208805871, Infinity, 1.4096539940196497, 0.3507692307692308, 0.3873846153846154, 5.277777777777778, 0.6021538461538462, 0.4803076923076923, 3.676470588235294, 2.3076923076923075, 0.16492307692307692, 2.543171114599686, 0.45876923076923076, 1.015536723163842, 1.5777777777777777, 0.6203076923076923, 2.678659035159444, 2.5058004640371228, 3.2238805970149254, 0.06307692307692307, 1.1399416909620992, 3.2135728542914173, 1.5377313716184149, 2.175084175084175, 1.2459534149230163, 0.3750769230769231, 1.4915887850467289, 0.3036923076923077, 0.711737089201878, 1.552467656923814, 0.6638914585260561, 0.2123076923076923, 0.20584615384615385, 0.019076923076923078, 2.1058064516129034, 1.0685483870967742, 0.35292307692307695, 1.377730192719486, 0.37860769230769226, 1.028352978655623, 0.228, 1.4036617262423714, 1.4179104477611941, 4.682080924855492, 0.948656919415165],
@@ -167,7 +245,10 @@ export abstract class MatrixData
 		MatrixData.combatResults_SemiHnR_eqRes_LGMP_40runs = new Matrix(
 			MatrixData.allFinalUnitTypes_including_HeavyCamelRider_eliteSkirmisher,
 			MatrixData.allFinalUnitTypes_including_HeavyCamelRider_eliteSkirmisher,
-			"Matrix 2 - Medium Hit&Run - 100F=100W=17G - Equal army worth",
+			"Matrix 2 - All land units",
+			MatrixData.HIT_AND_RUN_MODE_SEMI,
+			MatrixData.RESOURCE_VALUES_100F100W17G,
+			MatrixData.COMBAT_TYPE_EQUAL_RESOURCES,
 			[
 				[1, 0, 0, 1.5183927492447131, 0, 0, 0.1631764, 0, 0.11616466, 0.23962341999999998, 0.0068, 1.324520224719101, 2.3953809283551966, Infinity, 1.5966701083492671, 0, 0, 0.0008, 0.7386657690738474, 0, 0.1619764, 2.250347063978966, 0, 0, 0.13218818, 0.10044702, 0, 0, 0, 0, 0, 2.122352, 0, 0.0027529399999999997, 0.4790115599999999, 0, 0, 0, 0.01771764, 0, 0, 0.00315294, 0.00865882, 0.00963529, 0, 0, 2.0134996721311476, 0.2632950423216445, 0, 1.0582952392821534, 0, 1.9388627602158828, 0, 0.29856457999999997, 0.6349582563278425, 0, 0],
 				[Infinity, 1, 0.49395316237004067, 19.632350828972655, 0.1773165198251428, 3.2435516632241668, 9.448228206785387, 1.5690993477632766, 5.036512331556423, 2.4267485590793294, 0.9890143837381291, 3.271226073362501, 2.1756425825895023, Infinity, 2.773333150656724, 0.41871970586607804, 1.608698592657719, 0.3918916426371221, 1.846073358741974, 2.708382792859889, 6.757533199345377, 3.4000342642914276, 0.508781157967869, 2.2262489361009985, 1.3366479696376208, 1.5150564570323675, 2.303856318299118, 0.6777576838183305, 3.128732395774586, 4.954652602081701, 3.688969216274527, 0.4354430023301998, 1.917513766078965, 6.512042356107148, 2.7504518988976128, 3.3015510257732825, 1.5840528298365681, 1.2526547016257241, 2.047059813140511, 0.841674383055116, 0.08681377461619336, 2.303856318299118, 1.4844469535640286, 0.8641885449551602, 1.0495728412380523, 0.007522604167307113, 2.836012353344728, 2.8039186001013285, 2.560578430588944, 2.724729002310143, 1.5099497945477378, 0.9832605582868272, 0.25897287376957456, 2.4087820933547732, 2.270427182939348, 0.34356612787201735, 0.6601499458359101],
@@ -232,7 +313,10 @@ export abstract class MatrixData
 		MatrixData.combatResults_SemiHnR_eqPop_40runs = new Matrix(
 			MatrixData.allFinalUnitTypes_including_HeavyCamelRider_eliteSkirmisher,
 			MatrixData.allFinalUnitTypes_including_HeavyCamelRider_eliteSkirmisher,
-			"Matrix 3 - Medium Hit&Run - 100F=100W=100G - Equal army size",
+			"Matrix 3 - All land units",
+			MatrixData.HIT_AND_RUN_MODE_SEMI,
+			MatrixData.RESOURCE_VALUES_100F100W100G,
+			MatrixData.COMBAT_TYPE_EQUAL_POPULATION,
 			[
 				[1, 0.0272, 0.0824, 0.0448, 0.012, 0, 0.0008, 0, 0, 0, 0.046, 0, 0, 3.4340497260851244, 0, 0.0348, 0, 0.0028, 0, 0, 0.054, 0, 0, 0.0176, 0, 0, 0.0232, 0, 0.0336, 0, 0.018, 0.0048, 0, 0.0008, 0, 0.0304, 0.016, 0, 0, 0, 0.0112, 0.0224, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.9324, 0.01, 0, 0, 0.0172, 0],
 				[38.46153846153846, 1, 3.911342894393742, 3.283302063789869, 1.5100261551874454, 0.3852307692307692, 1.4636109167249824, 0.31261538461538463, 1.1522890065400186, 0.49723076923076925, 4.25531914893617, 0.5513846153846154, 0.32861538461538464, 78.85906040268456, 0.08061538461538462, 0.4603076923076923, 0.044, 2.3558758314855877, 0.4673846153846154, 0.425, 2.219945355191257, 0.5615384615384615, 0.19507692307692306, 1.2037617554858935, 0.36738461538461537, 0.4470769230769231, 1.0606926097822207, 0.4978461538461538, 1.508176100628931, 0.7089230769230769, 1.3652788688138255, 0.08184615384615385, 0.11876923076923077, 0.8898461538461538, 0.6406153846153846, 1.1072867081655071, 0.7837252475247525, 0.10523076923076922, 0.23846153846153847, 0.28892307692307695, 0.7120743034055728, 0.917425431711146, 0.38, 0.16738461538461538, 0.03046153846153846, 0.1036923076923077, 0.4298461538461538, 0.18738461538461537, 0.3030769230769231, 0.31076923076923074, 0.39703846153846156, 1.1427692307692308, 0.29507692307692307, 0.2836923076923077, 0.524, 2.785515320334262, 0.5095384615384615],
@@ -297,7 +381,10 @@ export abstract class MatrixData
 		MatrixData.combatResults_SemiHnR_eqPop_LGMP_40runs = new Matrix(
 			MatrixData.allFinalUnitTypes_including_HeavyCamelRider_eliteSkirmisher,
 			MatrixData.allFinalUnitTypes_including_HeavyCamelRider_eliteSkirmisher,
-			"Matrix 4 - Medium Hit&Run - 100F=100W=17G - Equal army size",
+			"Matrix 4 - All land units",
+			MatrixData.HIT_AND_RUN_MODE_SEMI,
+			MatrixData.RESOURCE_VALUES_100F100W17G,
+			MatrixData.COMBAT_TYPE_EQUAL_POPULATION,
 			[
 				[1, 0.0654588, 0.0828, 0.19828226, 0.0152, 0, 0.0027529399999999997, 0, 0, 0, 0.0444, 0, 0, 8.632649893707482, 0, 0.08788231999999999, 0, 0, 0, 0, 0.18084698, 0, 0, 0.05404703999999999, 0, 0, 0.06616468, 0, 0.0792235, 0.0027529399999999997, 0.04138822, 0.02122352, 0, 0, 0, 0.11101172, 0.0472941, 0, 0, 0, 0.0048, 0.07207056, 0, 0, 0, 0, 0, 0, 0.00510588, 0, 0, 2.2563286199999997, 0.025623519999999997, 0, 0, 0.0124, 0],
 				[14.012533931350916, 1, 1.5826227598931002, 5.925300627646973, 0.6044353889651712, 0.5637106248501356, 2.0380400914792687, 0.34656056982299094, 1.3412795971784075, 0.8407232472778472, 1.7311615219575767, 0.8633272301364304, 0.496166329535743, 83.7704912778821, 0.11594212619968398, 0.48850632351042445, 0.08012295953814089, 0.9259363617008567, 0.6489041113577256, 0.6294176744729383, 3.2016988170237486, 0.7560650611446876, 0.2824954594920288, 1.1394861963632887, 0.5104882168130983, 0.5268643626995887, 1.1952407762232915, 0.49001808210418885, 1.5906441700267133, 1.0053959556585734, 1.4594718370563022, 0.12879564947401428, 0.1366292891968496, 1.2967377018942865, 0.8869149507829841, 1.354530216293598, 0.805579979555578, 0.12798552693870777, 0.29002530633826634, 0.3502061335284389, 0.282821078777967, 1.0082492045419598, 0.4814610967309572, 0.24119347421102144, 0.04556238356686567, 0.10079566177058293, 0.49617357836295783, 0.30185169108560256, 0.4737070096589547, 0.4698878491456959, 0.42012657642010004, 1.1038625796971355, 0.3062350796510234, 0.3892585660971306, 0.6792693993741047, 1.1275955346389925, 0.4819819240440955],
@@ -362,7 +449,10 @@ export abstract class MatrixData
 		MatrixData.combatResults_SemiHnR_eqRes_40runs_basic = new Matrix(
 			MatrixData.allFinalGenericUnitTypes_excluding_villager_siegeRam,
 			MatrixData.allFinalGenericUnitTypes_excluding_villager_siegeRam,
-			"Matrix 5 - Medium Hit&Run - 100F=100W=100G - Equal army worth",
+			"Matrix 5 - Non-Unique land units",
+			MatrixData.HIT_AND_RUN_MODE_SEMI,
+			MatrixData.RESOURCE_VALUES_100F100W100G,
+			MatrixData.COMBAT_TYPE_EQUAL_RESOURCES,
 			[
 				[1,8.01980198019802,5.689045936395759,3.2347140039447733,0.8585858585858586,5.152,0.6528721432983323,3.797169811320755,0.6003076923076923,7.980295566502463,1.3993174061433447,1.0196213425129088,1.4472406181015454],
 				[0.12766666666666668,1,0.327,5.925925925925926,3.281767955801105,6.953488372093023,6.141414141414141,5.164075993091537,0.005666666666666667,0.5296666666666666,0.459,0.193,0.4874118831822759],
@@ -383,7 +473,10 @@ export abstract class MatrixData
 		MatrixData.combatResults_SemiHnR_eqRes_LGMP_40runs_basic = new Matrix(
 			MatrixData.allFinalGenericUnitTypes_excluding_villager_siegeRam,
 			MatrixData.allFinalGenericUnitTypes_excluding_villager_siegeRam,
-			"Matrix 6 - Medium Hit&Run - 100F=100W=17G - Equal army worth",
+			"Matrix 6 - Non-Unique land units",
+			MatrixData.HIT_AND_RUN_MODE_SEMI,
+			MatrixData.RESOURCE_VALUES_100F100W17G,
+			MatrixData.COMBAT_TYPE_EQUAL_RESOURCES,
 			[
 				[1,0.4932153682514894,18.249209409217386,0.17092230413103224,3.1788818243282484,9.448228206785387,1.589757978616039,5.118824327035564,2.3749244273385512,0.9496848235111489,3.3364249664326193,2.151821801736526,2.7669384488849578],
 				[2.3957823240589198,1,15.174758454106279,5.79047619047619,36.67143292682927,190.37246666666667,37.0998488372093,36.73599695121951,3.341473471741638,0.5496666666666666,5.239213333333333,4.746590202177294,11.643073308270676],
@@ -404,7 +497,10 @@ export abstract class MatrixData
 		MatrixData.combatResults_SemiHnR_eqPop_40runs_basic = new Matrix(
 			MatrixData.allFinalGenericUnitTypes_excluding_villager_siegeRam,
 			MatrixData.allFinalGenericUnitTypes_excluding_villager_siegeRam,
-			"Matrix 7 - Medium Hit&Run - 100F=100W=100G - Equal army size",
+			"Matrix 7 - Non-Unique land units",
+			MatrixData.HIT_AND_RUN_MODE_SEMI,
+			MatrixData.RESOURCE_VALUES_100F100W100G,
+			MatrixData.COMBAT_TYPE_EQUAL_POPULATION,
 			[
 				[1,4.016064257028113,3.258845437616387,1.5494646680942183,0.38,1.4584077115315959,0.31846153846153846,1.134651019147622,0.5249230769230769,4.25531914893617,0.5436923076923077,0.3443076923076923,0.08676923076923077],
 				[0.256,1,0.48633333333333334,2.67022696929239,0.8536666666666667,1.925300133392619,1.273,1.8552268244575938,0.013,0.617,0.15833333333333333,0.087,0.042666666666666665],
@@ -425,7 +521,10 @@ export abstract class MatrixData
 		MatrixData.combatResults_SemiHnR_eqPop_LGMP_40runs_basic = new Matrix(
 			MatrixData.allFinalGenericUnitTypes_excluding_villager_siegeRam,
 			MatrixData.allFinalGenericUnitTypes_excluding_villager_siegeRam,
-			"Matrix 8 - Medium Hit&Run - 100F=100W=17G - Equal army size",
+			"Matrix 8 - Non-Unique land units",
+			MatrixData.HIT_AND_RUN_MODE_SEMI,
+			MatrixData.RESOURCE_VALUES_100F100W17G,
+			MatrixData.COMBAT_TYPE_EQUAL_POPULATION,
 			[
 				[1,1.5834580988352849,5.870711776016023,0.6100197181317335,0.5727739152889386,2.0457972777041884,0.34292946688226655,1.3218505068538124,0.8573887068313587,1.7233229181440572,0.8600650242549817,0.496166329535743,0.12186617644346347],
 				[0.6183919333333333,1,2.227940133333333,2.7229407760381212,3.17837115,6.861950241439859,3.499802566666667,5.230602880820837,0.040921549999999994,0.6176666666666667,0.5982546333333333,0.33027436666666665,0.10782348333333332],

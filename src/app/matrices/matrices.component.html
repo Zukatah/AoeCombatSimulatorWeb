@@ -3,10 +3,15 @@
 	<div class="row top-buffer">
 		<div class="col-12 text-center">
 			<div ngbDropdown>
-				<button class="btn btn-primary" id="contentSelector" ngbDropdownToggle>{{contentValue == 0 ? "Info" : matrices[contentValue-1].description}}</button>
+				<button class="btn btn-primary" id="contentSelector" ngbDropdownToggle>
+					{{contentValue == 0 ? "Info" : matrices[contentValue-1].description}}
+					<!--  + " - " + matrices[contentValue-1].hitAndRunModes[matrix[contentValue-1].hitAndRunMode + " - " + matrices[contentValue-1].resourceValues[matrix[contentValue-1].resourceValue + " - " + matrices[contentValue-1].combatTypes[matrix[contentValue-1].combatType -->
+				</button>
 				<div ngbDropdownMenu aria-labelledby="contentSelector">
 					<button ngbDropdownItem (click)="SetContentValue(0)">Info</button>
-					<button ngbDropdownItem (click)="SetContentValue(i+1)" *ngFor="let item of matrices; index as i">{{matrices[i].description}}</button>
+					<button ngbDropdownItem (click)="SetContentValue(i+1)" *ngFor="let item of matrices; index as i">
+						{{matrices[i].description}} - {{matrices[i].hitAndRunModes[matrices[i].hitAndRunMode]}} - {{matrices[i].resourceValues[matrices[i].resourceValue]}} - {{matrices[i].combatTypes[matrices[i].combatType]}}
+					</button>
 				</div>
 			</div>
 		</div>

@@ -56,6 +56,7 @@ export class Unit {
 	public armyIndex: number; // 0=Army1, 1=Army2
 	public running: boolean = false; // for hit&run calculations
 	public timeSinceFirstTryToAttackTarget: number = 0; // if the target is surrounded by attackers for a longer while, the unit will eventually target a different unit
+	public lastChargeAttackTime = Number.MIN_SAFE_INTEGER; // only needed for the burgundians' coustilliers (charge ability every 40s)
 
 
 	constructor(civUnitType: CivUnitType, battle: Battle, armyIndex: number) {
@@ -232,8 +233,20 @@ export class Unit {
 		else
 		{
 			const avIterator = secondary ? attacker.secondaryAttackValues[Symbol.iterator]() : attacker.attackValues[Symbol.iterator]();
+			if ((attacker.civUnitType.baseUnitType == AoeData.ut_coustillier || attacker.civUnitType.baseUnitType == AoeData.ut_eliteCoustillier) && attacker.lastChargeAttackTime <= attacker.battle.timeInterval - 4000){
+				attacker.lastChargeAttackTime = attacker.battle.timeInterval;
+				attacker.attackValues.set(AoeData.ac_baseMelee, attacker.attackValues.get(AoeData.ac_baseMelee) + (attacker.civUnitType.baseUnitType == AoeData.ut_coustillier ? 35 : 40));
+			}
 			for (let [attackedArmorClass, attackValue] of avIterator){
-				damageDealt += Math.max(0, target.armorClasses.has(attackedArmorClass) ? attackValue - target.armorClasses.get(attackedArmorClass) : 0);
+				if (target.civUnitType.civ == AoeData.civ_sicilians && attackedArmorClass != AoeData.ac_baseMelee && attackedArmorClass != AoeData.ac_basePierce){ // the Sicilians' land units take only 50% bonus damage
+					damageDealt += Math.max(0, target.armorClasses.has(attackedArmorClass) ? (attackValue - target.armorClasses.get(attackedArmorClass))*0.5 : 0);
+				}else{
+					damageDealt += Math.max(0, target.armorClasses.has(attackedArmorClass) ? attackValue - target.armorClasses.get(attackedArmorClass) : 0);
+				}
+				
+			}
+			if ((attacker.civUnitType.baseUnitType == AoeData.ut_coustillier || attacker.civUnitType.baseUnitType == AoeData.ut_eliteCoustillier) && attacker.lastChargeAttackTime == attacker.battle.timeInterval){
+				attacker.attackValues.set(AoeData.ac_baseMelee, attacker.attackValues.get(AoeData.ac_baseMelee) - (attacker.civUnitType.baseUnitType == AoeData.ut_coustillier ? 35 : 40));
 			}
 		}
 		if (damageDealt < 1)
@@ -304,7 +317,7 @@ export class Unit {
 				let dyPerFrame: number = dyNorm * this.projectileSpeed / 100.0;
 				this.battle.missiles.push(new Missile(this.battle, this, this.target, this.x, this.y, dxPerFrame, dyPerFrame, Math.ceil(this.missileFlightDistance * 100.0 / this.projectileSpeed), false));
 
-				if (this.secondaryAttack) // only relevant for elite ballista elephant with double crossbow (and theoretically heavy scorpion with double crossbow too)
+				if (this.secondaryAttack) // only relevant for elite ballista elephant and heavy scorpion with double crossbow
 				{
 					let directionRadian: number = Math.atan2(dyNorm, dxNorm);
 					directionRadian += (-0.17453 + 0.34906 * Math.random()); // double crossbow bolts have an angle varying between +10 degree and -10 degree of the primary missile
@@ -397,5 +410,6 @@ export class Unit {
 		this.attackAnimDur = 0;
 		this.running = false;
 		this.timeSinceFirstTryToAttackTarget = 0;
+		this.lastChargeAttackTime = Number.MIN_SAFE_INTEGER;
 	}
 }

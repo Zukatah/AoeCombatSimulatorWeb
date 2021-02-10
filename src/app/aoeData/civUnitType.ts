@@ -40,6 +40,7 @@ export class CivUnitType extends UnitType {
 		if (civ == AoeData.civ_berbers){ this.ApplyBerbersBonusses(); }
 		if (civ == AoeData.civ_britons){ this.ApplyBritonsBonusses(); }
 		if (civ == AoeData.civ_bulgarians){ this.ApplyBulgariansBonusses(); }
+		if (civ == AoeData.civ_burgundians){ this.ApplyBurgundiansBonusses(); }
 		if (civ == AoeData.civ_burmese){ this.ApplyBurmeseBonusses(); }
 		if (civ == AoeData.civ_byzantines){ this.ApplyByzantinesBonusses(); }
 		if (civ == AoeData.civ_celts){ this.ApplyCeltsBonusses(); }
@@ -64,6 +65,7 @@ export class CivUnitType extends UnitType {
 		if (civ == AoeData.civ_persians){ this.ApplyPersiansBonusses(); }
 		if (civ == AoeData.civ_portuguese){ this.ApplyPortugueseBonusses(); }
 		if (civ == AoeData.civ_saracens){ this.ApplySaracensBonusses(); }
+		if (civ == AoeData.civ_sicilians){ this.ApplySiciliansBonusses(); }
 		if (civ == AoeData.civ_slavs){ this.ApplySlavsBonusses(); }
 		if (civ == AoeData.civ_spanish){ this.ApplySpanishBonusses(); }
 		if (civ == AoeData.civ_tatars){ this.ApplyTatarsBonusses(); }
@@ -293,6 +295,15 @@ export class CivUnitType extends UnitType {
 	}
 
 
+	public ApplyBurgundiansBonusses(): void{
+		if (AoeData.utl_handCannoneer.unitTypes.includes(this.baseUnitType)){
+			this.attackValues.forEach((value: number, key: ArmorClass) => {
+				this.attackValues.set(key, value * 1.25);
+			});
+		}
+	}
+
+
 	public ApplyBurmeseBonusses(): void{
 		if (AoeData.utl_battleElephant.unitTypes.includes(this.baseUnitType) && this.age >= 3){
 			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 1);
@@ -507,6 +518,12 @@ export class CivUnitType extends UnitType {
 		if (AoeData.utl_eagleScout.unitTypes.includes(this.baseUnitType) && this.age == 4){
 			this.hp += 40;
 		}
+		if (AoeData.utl_skirmisher.unitTypes.includes(this.baseUnitType) && this.age >= 3){
+			this.secondaryAttack = true;
+			this.secondaryAttackProjectileCount = 1;
+			this.secondaryAttackValues = new Map();
+			this.secondaryAttackValues.set(AoeData.ac_basePierce, 1);
+		}
 		if (AoeData.utl_archer.unitTypes.includes(this.baseUnitType) || AoeData.utl_plumedArcher.unitTypes.includes(this.baseUnitType)){
 			for (let i: number = 0; i < 3; i++){
 				this.resourceCosts[i] *= this.age == 1 ? 0.9 : (this.age == 2 ? 0.8 : (this.age >= 3 ? 0.7 : 1.0));
@@ -549,7 +566,20 @@ export class CivUnitType extends UnitType {
 
 	public ApplySaracensBonusses(): void{
 		if (this.armorClasses.has(AoeData.ac_camel)){
-			this.hp += 30;
+			if (this.age == 4){
+				this.hp += 20;
+			}
+			this.hp += 10;
+		}
+	}
+
+
+	public ApplySiciliansBonusses(): void{
+		if (this.baseUnitType == AoeData.ut_serjeant && this.age >= 2){
+			this.attackValues.set(AoeData.ac_baseMelee, this.attackValues.get(AoeData.ac_baseMelee) + 3);
+			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 2);
+			this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 1);
+			this.hp += 15;
 		}
 	}
 

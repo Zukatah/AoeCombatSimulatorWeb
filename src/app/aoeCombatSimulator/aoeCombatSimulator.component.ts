@@ -70,10 +70,11 @@ export class AoECombatSimulatorComponent {
 		}
 		this.CalculateWeightedSum();
 
-		/*for (let i: number = 0; i < 2; i++){
-			console.log("Army " + (i + 1) + ": Attacking attacker: " + this.players[i].attackAttacker + ". Attacking random nearby target: " + this.players[i].attackRandomNearbyTarget + ".");
-			console.log(this.players[i] + " Hit: " + this.players[i].regularHit + " Total Miss MTAlive: " + this.players[i].missTotalMainTargetAlive + " Total Miss MTDead: " + this.players[i].missTotalMainTargetDead + " Miss Main Target: " + this.players[i].missMainTarget + " Miss Side Target: " + this.players[i].missSideTarget);
-		}*/
+		for (let i: number = 0; i < 2; i++){
+			console.log("Army " + (i + 1) + ". goodRoll_MainTargetHit: " + this.players[i].goodRoll_MainTargetHit + ". missedRoll_MainTargetHit: " + this.players[i].missedRoll_MainTargetHit + ".");
+			console.log("Army " + (i + 1) + ". missedRoll_mainTargetAlive_SideTargetHit: " + this.players[i].missedRoll_mainTargetAlive_SideTargetHit + ". missedRoll_mainTargetDead_SideTargetHit: " + this.players[i].missedRoll_mainTargetDead_SideTargetHit + ". goodRoll_mainTargetDead_SideTargetHit: " + this.players[i].goodRoll_mainTargetDead_SideTargetHit);
+			console.log("Army " + (i + 1) + ". goodRoll_mainTargetDead_Miss: " + this.players[i].goodRoll_mainTargetDead_Miss + ". missedRoll_mainTargetAlive_Miss: " + this.players[i].missedRoll_mainTargetAlive_Miss + ". missedRoll_mainTargetDead_Miss: " + this.players[i].missedRoll_mainTargetDead_Miss + ".");
+		}
 		console.log("Elapsed time for simulation: " + (performance.now() - this.startTime) + "ms.");
 	}
 

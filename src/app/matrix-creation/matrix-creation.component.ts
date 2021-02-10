@@ -46,8 +46,8 @@ export class MatrixCreationComponent{
 	private battleRef: Battle;
 
 	constructor() {
-		this.player1CivUts = MatrixData.allFinalGenericUnitTypes_excluding_villager_siegeRam;
-		this.player2CivUts = MatrixData.allFinalGenericUnitTypes_excluding_villager_siegeRam;
+		this.player1CivUts = MatrixData.allFinalUnitTypes_including_HeavyCamelRider_eliteSkirmisher_lotw;
+		this.player2CivUts = MatrixData.allFinalUnitTypes_including_HeavyCamelRider_eliteSkirmisher_lotw;
 		this.InitializeMatrix();
 	}
 

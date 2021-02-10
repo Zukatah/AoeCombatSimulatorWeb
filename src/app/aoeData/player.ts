@@ -7,17 +7,22 @@ import { CivUnitType } from './civUnitType';
 import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 
 export class Player{
-	// public userInterface: AoECombatSimulatorComponent; // a reference to the user interface instance to which this player's gui elements will be added
-	public sumWins: number = 0; // number of battle wins (actually win = 2 points, draw = 1 point)
-	public attackAttacker: number = 0; // DEBUG purposes
-	public attackRandomNearbyTarget: number = 0; // DEBUG purposes
-	public regularHit: number = 0; // DEBUG purposes
-	public missTotalMainTargetAlive: number = 0; // DEBUG purposes
-	public missTotalMainTargetDead: number = 0; // DEBUG purposes
-	public missMainTarget: number = 0; // DEBUG purposes
-	public missSideTarget: number = 0; // DEBUG purposes
 	public playerIndex: number; // currently either 0 (first player) or 1 (second player)
+	public sumWins: number = 0; // number of battle wins (actually win = 2 points, draw = 1 point)
 	public numberOfRelics: number = 0; // currently only relevant for Lithuanians
+
+	/* The following attributes are just for debug purposes */
+	public attackAttacker: number = 0; // counts how often a unit (after killing its target) targets a unit that is attacking it
+	public attackRandomNearbyTarget: number = 0; // counts how often a unit (after killing its target) targets a random nearby unit
+
+	public goodRoll_MainTargetHit: number = 0;
+	public missedRoll_MainTargetHit: number = 0;
+	public missedRoll_mainTargetAlive_SideTargetHit: number = 0;
+	public missedRoll_mainTargetDead_SideTargetHit: number = 0;
+	public goodRoll_mainTargetDead_SideTargetHit: number = 0;
+	public goodRoll_mainTargetDead_Miss: number = 0;
+	public missedRoll_mainTargetAlive_Miss: number = 0;
+	public missedRoll_mainTargetDead_Miss: number = 0;
 
 	public amountStartUnits: number[] = []; // contains the number of start units of each unit type; a list of all unit types can be found in the static AoeData.cs class
 	public survivorsSumArmy: Map<CivUnitType, number>  = new Map<CivUnitType, number>(); // the sum of survivors of all battles by unit type
@@ -65,6 +70,15 @@ export class Player{
 		}
 		this.attackAttacker = 0;
 		this.attackRandomNearbyTarget = 0;
+
+		this.goodRoll_MainTargetHit = 0;
+		this.missedRoll_MainTargetHit = 0;
+		this.missedRoll_mainTargetAlive_SideTargetHit = 0;
+		this.missedRoll_mainTargetDead_SideTargetHit = 0;
+		this.goodRoll_mainTargetDead_SideTargetHit = 0;
+		this.goodRoll_mainTargetDead_Miss = 0;
+		this.missedRoll_mainTargetAlive_Miss = 0;
+		this.missedRoll_mainTargetDead_Miss = 0;
 
 		this.survivorsSumArmy.clear();
 		if (resetInput) { this.amountStartUnits = []; }
