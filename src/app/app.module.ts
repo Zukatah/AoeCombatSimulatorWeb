@@ -14,6 +14,7 @@ import { InfoComponent } from './info/info.component';
 import { MatricesComponent } from './matrices/matrices.component';
 import { MatrixCreationComponent } from './matrix-creation/matrix-creation.component';
 import { MatrixComponent } from './matrix/matrix.component';
+import { MatrixInfoComponent } from './matrix-info/matrix-info.component';
 
 //import { Matrix } from './helper/matrix';
 
@@ -27,7 +28,8 @@ import { MatrixComponent } from './matrix/matrix.component';
     MatricesComponent,
     MatrixCreationComponent,
 	MatricesComponent,
-	MatrixComponent
+	MatrixComponent,
+	MatrixInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +39,7 @@ import { MatrixComponent } from './matrix/matrix.component';
 	RouterModule.forRoot([
 		{ path: 'info', component: InfoComponent },
 		{ path: 'matrices', component: MatricesComponent },
+		{ path: 'matrix-info', component: MatrixInfoComponent },
 		{ path: 'matrix-creation', component: MatrixCreationComponent },
 		{ path: '', component: AoECombatSimulatorComponent },
 		{ path: '**', component: AoECombatSimulatorComponent }

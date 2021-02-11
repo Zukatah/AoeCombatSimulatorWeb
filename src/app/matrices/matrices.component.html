@@ -4,12 +4,11 @@
 		<div class="col-12 text-center">
 			<div ngbDropdown>
 				<button class="btn btn-primary" id="contentSelector" ngbDropdownToggle>
-					{{contentValue == 0 ? "Info" : matrices[contentValue-1].description}}
+					{{matrices[contentValue].description}}
 					<!--  + " - " + matrices[contentValue-1].hitAndRunModes[matrix[contentValue-1].hitAndRunMode + " - " + matrices[contentValue-1].resourceValues[matrix[contentValue-1].resourceValue + " - " + matrices[contentValue-1].combatTypes[matrix[contentValue-1].combatType -->
 				</button>
 				<div ngbDropdownMenu aria-labelledby="contentSelector">
-					<button ngbDropdownItem (click)="SetContentValue(0)">Info</button>
-					<button ngbDropdownItem (click)="SetContentValue(i+1)" *ngFor="let item of matrices; index as i">
+					<button ngbDropdownItem (click)="SetContentValue(i)" *ngFor="let item of matrices; index as i">
 						{{matrices[i].description}} - {{matrices[i].hitAndRunModes[matrices[i].hitAndRunMode]}} - {{matrices[i].resourceValues[matrices[i].resourceValue]}} - {{matrices[i].combatTypes[matrices[i].combatType]}}
 					</button>
 				</div>
@@ -17,128 +16,7 @@
 		</div>
 	</div>
 
-	<div class="row top-buffer" *ngIf="contentValue==0">
-		<div class="col-12 border border-dark rounded p-2 matrix-bg">
-			<div><h3 class="text-center">Cost efficiency matrices</h3></div>
-			
-			<ngb-accordion [closeOthers]="true" activeIds="static-1">
-
-				<ngb-panel id="panel-1">
-					<ng-template ngbPanelHeader>
-						<button ngbPanelToggle class="btn btn-link">Purpose</button>
-					</ng-template>
-					<ng-template ngbPanelContent>
-						<p>The purpose of a cost efficiency matrix is to depict the cost efficiency of <b>each unit type depicted in the matrix rows</b> versus <b>each unit type depicted in the matrix columns.</b></p>
-					</ng-template>
-				</ngb-panel>
-
-				<ngb-panel id="panel-2">
-					<ng-template ngbPanelHeader>
-						<button ngbPanelToggle class="btn btn-link">Types</button>
-					</ng-template>
-					<ng-template ngbPanelContent>
-						<p>There are different cost efficiency matrix types regarding the following aspects:</p>
-						<ul>
-							<li>Cost efficiency with armies worth the same amount of resources vs. cost efficiency with armies of equal size (population)</li>
-							<li>Equal resources worth (also called 100F=100W=100G) vs. Late game resource worth (also called 100F=100W=17G)<br>
-								The first type assumes resources to be of equal worth as usual in earlier stages of the game.<br>
-								The latter type assumes 17 gold to be worth 100 food or 100 wood as usual with late game market exchange rates.</li>
-							<li>Hit&Run behavior<br>
-								No Hit&Run of ranged units vs. 'mediocre' Hit&Run of ranged units vs. 'perfect' Hit&Run of ranged units</li>
-						</ul>
-					</ng-template>
-				</ngb-panel>
-
-				<ngb-panel id="panel-3">
-					<ng-template ngbPanelHeader>
-						<button ngbPanelToggle class="btn btn-link">Example</button>
-					</ng-template>
-					<ng-template ngbPanelContent>
-						<p>Let's have a look at matrix 1. It's about two armies of equal resource worth, considers food, wood and gold to be of equal worth and doesn't include Hit&Run behavior.</p>
-						<p>Let's take the cell [row 2, column 5] as an example. It says 3.21. What does that mean?</p>
-						<ul>
-							<li>Row 2 means Champions. Column 5 means Hussars. So it's about the cost efficiency of Champions vs. Hussars.</li>
-							<li>There are always 50 units of the respective row's unit type, so in our example Champions.</li>
-							<li>They are fighting against units of equal worth of the respective column's unit type, so in our example Hussars.</li>
-							<li>Since matrix 1 assumes food, wood & gold to be of equal worth, a Champion costs 65 generic resources and a Hussar costs 80.</li>
-							<li>50 Champions cost 50*65=3250 resources. With 3250 resources you get 3250/80=40.625 Hussars (let's round it to 41).</li>
-							<li>So the cell [row 2, column 5] is about a combat simulation between 50 Champions and 41 Hussars (equal worth).</li>
-							<li>To get reliable average results each combat simulation is repeated 20 times.</li>
-							<li>The cost efficiency value of 3.21 means that the worth of all dead units of army 2 (Hussars) is 3.21 times as high as the worth of all dead units of army 1 (Champions).</li>
-						</ul>
-						Some <b>true</b> conclusions we can deduce from the results include:
-						<ul>
-							<li>If we assume food, wood and gold to be of equal worth, Champions are highly cost efficient vs. Hussars.</li>
-							<li>If we have two players with an equally strong economy, player 1 only produces Champions and player 2 only produces Hussars, player 2 will lose 3.21 times as many resources during a fight as player 1.</li>
-						</ul>
-						Some <b>false</b> conclusions would include:
-						<ul>
-							<li>Champions are 3.21 times as strong as Hussars.</li>
-							<li>Champions trade equally with Hussars when there are 3.21 times as many Hussars.</li>
-							<li>A Hussar army fighting a Champion army of equal worth will lose 3.21 times as many units as the Champion army (correct would be: 'will lose 3.21 times as many generic resources').</li>
-						</ul>
-					</ng-template>
-				</ngb-panel>
-
-				<ngb-panel id="panel-4">
-					<ng-template ngbPanelHeader>
-						<button ngbPanelToggle class="btn btn-link">How are cost efficiency values of 0 or &#8734; possible?</button>
-					</ng-template>
-					<ng-template ngbPanelContent>
-						<p>
-							The remaining hitpoints of combat survivors are not respected in the cost efficiency value; only the number of survivors are respected!
-							Hence, if in a certain matchup all units of army 1 or army 2 survive (in each simulation repetition) the cost efficiency value will be &#8734; or 0 respectively.
-							Two examples:
-						</p>
-						<ul>
-							<li>
-								Example 1: 50 Villagers fight an army of Champions of equal worth (approximately 38 Champions). All 38 Champions will always survive.
-								Hence the worth of units lost by army 2 (the Champions) is '0 times as high' as the worth of units lost by army 1 (the Villagers).
-								That means: The cost efficiency value of Villagers vs. Champions is 0.
-							</li>
-							<li>
-								Example 2: 50 Champions fight an army of Villagers of equal worth (65 Villagers). All 50 Champions will always survive.
-								Hence the worth of units lost by army 2 (the Villagers) is '&#8734; times as high' (because we divide by zero) as the worth of units lost by army 1 (the Champions).
-								That means: The cost efficiency value of Champions vs. Villagers is &#8734;.
-							</li>
-						</ul>
-					</ng-template>
-				</ngb-panel>
-
-				<ngb-panel id="panel-5">
-					<ng-template ngbPanelHeader>
-						<button ngbPanelToggle class="btn btn-link">Important notes</button>
-					</ng-template>
-					<ng-template ngbPanelContent>
-						Always keep in mind...
-						<ul>
-							<li>Some matrices are about cost efficiency with equal army sizes, others about cost efficiency with two armies of equal worth.</li>
-							<li>The higher the number, the more cost efficient the matchup will be for the unit type of the respective row.</li>
-							<li>A number larger than 1 means cost efficient, a number smaller than 1 means cost inefficient.</li>
-							<li>The chosen Hit&Run setting greatly influences the results. E.g. in the matrices without Hit&Run Champions are cost efficient against Arbalesters (values far above 1),
-								but with medium or perfect Hit&Run they are not cost efficient anymore (value far below 1).</li>
-						</ul>
-						Furthermore...
-						<ul>
-							<li>
-								Ranged vs. ranged simulation results are the most accurate ones, followed by melee vs. melee and melee vs. ranged ones.
-								This is because Hit&Run, path finding and target selection issues are less problematic when either all involved unit types are melee or all involved unit types are ranged.
-								However, also most melee vs. ranged results seem very reasonable to me.
-							</li>
-							<li>
-								For more info, have a look at the info tab.
-							</li>
-						</ul>
-					</ng-template>
-				</ngb-panel>
-
-			</ngb-accordion>
-
-
-		</div>
-	</div>
-
 </div>
 
 
-<app-matrix [matrix]=matrices[contentValue-1] *ngIf="contentValue>0"></app-matrix>
+<app-matrix [matrix]=matrices[contentValue]></app-matrix>

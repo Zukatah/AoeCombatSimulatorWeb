@@ -3,3 +3,7 @@
 .matrix-bg {
 	background-color: lightyellow;
 }
+
+:host ::ng-deep .card-header, :host ::ng-deep .card-body{
+	padding: 0;
+}
