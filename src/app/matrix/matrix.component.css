@@ -15,6 +15,7 @@ th, td{
 }
 
 th{
+	position: -webkit-sticky; /* for Safari */
 	position: sticky;
 	top: 0;
 }
@@ -37,4 +38,49 @@ span{
 	overflow-x: auto;
 	overflow-y: auto;
 	white-space: nowrap;
+}
+
+.tooltipWidth{
+	size: 100px;
+}
+
+.resultColumnColor{
+	background-color: cadetblue;
+}
+
+.tableEdgeCellsWidth{
+	min-width: 55px;
+	width: 55px;
+}
+
+.tableCenterCellsWidth{
+	min-width: 58px;
+	width: 58px; 
+	max-width: 58px;
+}
+
+.tableColor{
+	background-color: #343a40;
+}
+
+.tableHeight{
+	max-height: 77vh;
+}
+	
+tbody td:nth-child(1){
+	position: -webkit-sticky; /* for Safari */
+	position: sticky;
+	left: 0;
+	z-index: 1;
+}
+
+tbody td:nth-child(2){
+	position: -webkit-sticky; /* for Safari */
+	position: sticky;
+	left: 0;
+	z-index: 1;
+}
+
+.table-very-small th, .table-very-small td{
+	padding: 0rem 0rem 0rem 0rem;
 }

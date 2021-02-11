@@ -4,54 +4,54 @@
 		
 		<div class="row">
 			<div class="col-3">
-				<h5 class="text-center">{{matrix.description}}</h5>
+				<h5 class="text-center"><u>{{matrix.description}}</u></h5>
 			</div>
 			<div class="col-3">
-				<ng-template #hnrTooltip style="size: 100px;">
+				<ng-template #hnrTooltip class="tooltipWidth">
 					<span>{{matrix.hitAndRunModes_description[matrix.hitAndRunMode]}}</span>
 				</ng-template>
-				<h5 class="text-center" [ngbTooltip]="hnrTooltip">{{matrix.hitAndRunModes[matrix.hitAndRunMode]}}</h5>
+				<h5 class="text-center" [ngbTooltip]="hnrTooltip"><u>{{matrix.hitAndRunModes[matrix.hitAndRunMode]}}&#10068;</u></h5>
 			</div>
 			<div class="col-3">
-				<ng-template #rvTooltip style="size: 100px;">
+				<ng-template #rvTooltip class="tooltipWidth">
 					<span>{{matrix.resourceValues_description[matrix.resourceValue]}}</span>
 				</ng-template>
-				<h5 class="text-center" [ngbTooltip]="rvTooltip">{{matrix.resourceValues[matrix.resourceValue]}}</h5>
+				<h5 class="text-center" [ngbTooltip]="rvTooltip"><u>{{matrix.resourceValues[matrix.resourceValue]}}&#10068;</u></h5>
 			</div>
 			<div class="col-3">
-				<ng-template #ctTooltip style="size: 100px;">
+				<ng-template #ctTooltip class="tooltipWidth">
 					<span>{{matrix.combatTypes_description[matrix.combatType]}}</span>
 				</ng-template>
-				<h5 class="text-center" [ngbTooltip]="ctTooltip">{{matrix.combatTypes[matrix.combatType]}}</h5>
+				<h5 class="text-center" [ngbTooltip]="ctTooltip"><u>{{matrix.combatTypes[matrix.combatType]}}&#10068;</u></h5>
 			</div>
 		</div>
 		
 
 		<div class="row no-gutters text-center">
-			<table class="table table-sm table-dark scrollbar fixedHeightImages" style="max-height: 74vh;">
+			<table class="table table-very-small table-dark scrollbar fixedHeightImages tableHeight">
 				<thead>
 					<tr>
-						<th style="min-width: 55px; width: 55px;" scope="col"></th>
-						<th style="min-width: 55px; width: 55px;" scope="col"></th>
-						<th *ngFor="let utIndex of CreateIncrArray(matrix.matrixUtsLength2)" style="min-width: 58px; width: 58px; max-width: 58px; background-color: #343a40;" scope="col">
+						<th class="tableEdgeCellsWidth" scope="col"></th>
+						<th class="tableEdgeCellsWidth" scope="col"></th>
+						<th *ngFor="let utIndex of CreateIncrArray(matrix.matrixUtsLength2)" class="tableCenterCellsWidth tableColor" scope="col">
 							<span class="brightText">{{matrix.matrixUts2[utIndex].civ.name}}</span><br>
 							<img *ngIf="matrix.matrixUts2[utIndex].baseUnitType.imagePath != ''" src="{{matrix.matrixUts2[utIndex].baseUnitType.imagePath}}" class="border border-dark img-fluid" title="{{matrix.matrixUts2[utIndex].name}}">
 						</th>
-						<th style="min-width: 55px; width: 55px; background-color: #343a40;" scope="col" class="brightText">Points</th>
+						<th class="tableEdgeCellsWidth tableColor brightText" scope="col">Points</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr *ngFor="let utIndex of CreateIncrArray(matrix.matrixUtsLength1); index as i">
-						<td>
+						<td class="tableColor">
 							<span class="brightText">{{matrix.matrixUts1[utIndex].civ.name}}</span>
 						</td>
-						<td>
+						<td class="tableColor">
 							<img *ngIf="matrix.matrixUts1[utIndex].baseUnitType.imagePath != ''" src="{{matrix.matrixUts1[utIndex].baseUnitType.imagePath}}" class="border border-dark img-fluid" title="{{matrix.matrixUts1[utIndex].name}}">
 						</td>
 						<td *ngFor="let utIndex2 of CreateIncrArray(matrix.matrixUtsLength2); index as j" [style.background-color]="getSurvivorsColor(matrix.combatResults[i][j])" class="align-middle">
 							<span class="align-middle">{{matrix.combatResults[i][j] | number : '1.0-2'}}</span>
 						</td>
-						<td class="align-middle" style="background-color: cadetblue;">
+						<td class="align-middle" class="resultColumnColor">
 							<span class="align-middle">{{matrix.combatResultsPoints[i] | number : '1.0-2'}}</span>
 						</td>
 					</tr>
