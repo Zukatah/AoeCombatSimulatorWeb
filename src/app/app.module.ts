@@ -15,6 +15,7 @@ import { MatricesComponent } from './matrices/matrices.component';
 import { MatrixCreationComponent } from './matrix-creation/matrix-creation.component';
 import { MatrixComponent } from './matrix/matrix.component';
 import { MatrixInfoComponent } from './matrix-info/matrix-info.component';
+import { FooterComponent } from './footer/footer.component';
 
 //import { Matrix } from './helper/matrix';
 
@@ -29,7 +30,8 @@ import { MatrixInfoComponent } from './matrix-info/matrix-info.component';
     MatrixCreationComponent,
 	MatricesComponent,
 	MatrixComponent,
-	MatrixInfoComponent
+	MatrixInfoComponent,
+	FooterComponent
   ],
   imports: [
     BrowserModule,
