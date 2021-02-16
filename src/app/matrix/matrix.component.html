@@ -31,13 +31,18 @@
 			<table class="table table-very-small table-dark scrollbar fixedHeightImages tableHeight">
 				<thead>
 					<tr>
-						<th class="tableEdgeCellsWidth" scope="col"></th>
+						<th class="tableEdgeCellsWidth" scope="col" sortable="name"></th>
 						<th class="tableEdgeCellsWidth" scope="col"></th>
 						<th *ngFor="let utIndex of CreateIncrArray(matrix.matrixUtsLength2)" class="tableCenterCellsWidth tableColor" scope="col">
 							<span class="brightText">{{matrix.matrixUts2[utIndex].civ.name}}</span><br>
 							<img *ngIf="matrix.matrixUts2[utIndex].baseUnitType.imagePath != ''" src="{{matrix.matrixUts2[utIndex].baseUnitType.imagePath}}" class="border border-dark img-fluid" title="{{matrix.matrixUts2[utIndex].name}}">
 						</th>
-						<th class="tableEdgeCellsWidth tableColor brightText" scope="col">Points</th>
+						<ng-template #pointsTooltip class="tooltipWidth">
+							<span>{{matrix.points_description}}</span>
+						</ng-template>
+						<th class="tableEdgeCellsWidth tableColor brightText" scope="col" sortable="points">
+							<span [ngbTooltip]="pointsTooltip" placement="left-top">Points<br>&#10068;</span>
+						</th>
 					</tr>
 				</thead>
 				<tbody>

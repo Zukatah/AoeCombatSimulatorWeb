@@ -1,10 +1,10 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { AoeData } from "./../aoeData/aoeData";
-import { Player } from "./../aoeData/player";
+import { Component } from '@angular/core';
+import { AoeData } from "../data/aoeData";
+import { Player } from "./../classes/player";
 import { Color } from "./../helper/color";
-import { Battle } from "./../aoeData/battle";
-import { CivUnitType } from '../aoeData/civUnitType';
-import { MatrixData } from '../helper/matrixData';
+import { Battle } from "./../classes/battle";
+import { CivUnitType } from '../classes/civUnitType';
+import { MatrixData } from '../data/matrixData';
 
 @Component({
   selector: 'app-matrix-creation',

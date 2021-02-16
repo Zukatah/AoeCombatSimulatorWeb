@@ -1,4 +1,3 @@
-import { ArmorClass } from './armorClass';
 import { UnitType } from './unitType';
 
 export class UnitTypeLine {

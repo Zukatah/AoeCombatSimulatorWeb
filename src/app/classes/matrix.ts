@@ -1,5 +1,9 @@
-import { CivUnitType } from '../aoeData/civUnitType';
-import { UnitType } from '../aoeData/unitType';
+import { CivUnitType } from '../classes/civUnitType';
+
+export interface MatrixRow{
+	civUnitType: CivUnitType;
+	combatResults: number[];
+}
 
 export class Matrix{
 
@@ -34,6 +38,8 @@ export class Matrix{
 		"",
 		"Both armies have the same size (they occupy the same population space): 50 units (or 100, in case of Karambit warriors). After each fight the armies are refilled to 50 population space and the resources lost by either player are added together in order to calculate cost efficiency values. "
 	];
+
+	public points_description: string = "Each cost efficiency > 2 gives 4 points, each cost efficiency > 1.25 gives 3 points, each cost efficiency >= 0.8 gives 2 points, each cost efficiency >= 0.5 gives 1 point, each cost efficiency < 0.5 gives no points.";
 
 	constructor(matrixUts1: CivUnitType[], matrixUts2: CivUnitType[], description: string, hitAndRunMode: number, resourceValue: number, combatType: number, combatResults: number[][]){
 		this.matrixUts1 = matrixUts1;

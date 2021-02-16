@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { Player } from '../aoeData/player';
+import { Player } from '../classes/player';
 import { Color } from '../helper/color';
-import { AoeData } from "./../aoeData/aoeData";
-import { Battle } from "./../aoeData/battle";
+import { AoeData } from "../data/aoeData";
+import { Battle } from "./../classes/battle";
 
 @Component({
     selector: 'app-aoeCombatSimulator',

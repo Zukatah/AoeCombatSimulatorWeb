@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from "rxjs/operators";
-import { AoeData } from './aoeData/aoeData';
-import { MatrixData } from './helper/matrixData';
+import { AoeData } from './data/aoeData';
+import { MatrixData } from './data/matrixData';
 
 declare var gtag; // for google analytics
 

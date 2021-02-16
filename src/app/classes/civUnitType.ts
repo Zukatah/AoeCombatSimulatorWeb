@@ -1,7 +1,7 @@
 import { ArmorClass } from './armorClass';
 import { UnitType } from "./unitType";
 import { Civilization } from './civilization';
-import { AoeData } from './aoeData';
+import { AoeData } from './../data/aoeData';
 
 
 export class CivUnitType extends UnitType {

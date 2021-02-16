@@ -1,8 +1,8 @@
 import { Unit } from "./unit";
 import { Arrow } from "./arrow";
 import { Missile } from "./missile";
-import { AoeData } from "./aoeData";
-import { ExtensionMethods } from "./extensionMethods";
+import { AoeData } from "./../data/aoeData";
+import { ExtensionMethods } from "../helper/extensionMethods";
 import { Player } from './player';
 import { CivUnitType } from './civUnitType';
 

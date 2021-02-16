@@ -1,7 +1,7 @@
 import { Projectile } from "./projectile";
 import { Unit } from "./unit";
 import { Battle } from "./battle";
-import { AoeData } from './aoeData';
+import { AoeData } from './../data/aoeData';
 
 export class Missile extends Projectile
 {

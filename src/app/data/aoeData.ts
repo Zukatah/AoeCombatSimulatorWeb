@@ -1,8 +1,8 @@
-import { ArmorClass } from './armorClass';
-import { UnitType } from './unitType';
-import { UnitTypeLine } from './unitTypeLine';
-import { Civilization } from './civilization';
-import { Technology } from './technology';
+import { ArmorClass } from '../classes/armorClass';
+import { UnitType } from '../classes/unitType';
+import { UnitTypeLine } from '../classes/unitTypeLine';
+import { Civilization } from '../classes/civilization';
+import { Technology } from '../classes/technology';
 
 export abstract class AoeData
 {

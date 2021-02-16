@@ -1,7 +1,6 @@
-import { AoeData } from '../aoeData/aoeData';
-import { CivUnitType } from '../aoeData/civUnitType';
-import { UnitType } from '../aoeData/unitType';
-import { Matrix } from './matrix';
+import { AoeData } from './aoeData';
+import { CivUnitType } from '../classes/civUnitType';
+import { Matrix } from '../classes/matrix';
 
 export abstract class MatrixData
 {

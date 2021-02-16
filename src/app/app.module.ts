@@ -13,7 +13,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { InfoComponent } from './info/info.component';
 import { MatricesComponent } from './matrices/matrices.component';
 import { MatrixCreationComponent } from './matrix-creation/matrix-creation.component';
-import { MatrixComponent } from './matrix/matrix.component';
+import { MatrixComponent, NgbdSortableHeader } from './matrix/matrix.component';
 import { MatrixInfoComponent } from './matrix-info/matrix-info.component';
 import { FooterComponent } from './footer/footer.component';
 
@@ -31,7 +31,8 @@ import { FooterComponent } from './footer/footer.component';
 	MatricesComponent,
 	MatrixComponent,
 	MatrixInfoComponent,
-	FooterComponent
+	FooterComponent,
+	NgbdSortableHeader
   ],
   imports: [
     BrowserModule,
@@ -45,7 +46,7 @@ import { FooterComponent } from './footer/footer.component';
 		{ path: 'matrix-creation', component: MatrixCreationComponent },
 		{ path: '', component: AoECombatSimulatorComponent },
 		{ path: '**', component: AoECombatSimulatorComponent }
-	])
+	]),
   ],
   providers: [],
   bootstrap: [AppComponent]

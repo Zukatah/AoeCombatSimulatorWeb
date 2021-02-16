@@ -1,7 +1,6 @@
-import { UnitType } from "./../aoeData/unitType";
-import { Color } from "./../helper/color";
-import { AoECombatSimulatorComponent } from "./../aoeCombatSimulator/aoeCombatSimulator.component";
-import { AoeData } from "./aoeData";
+import { UnitType } from "./unitType";
+import { Color } from "../helper/color";
+import { AoeData } from "../data/aoeData";
 import { Civilization } from './civilization';
 import { CivUnitType } from './civUnitType';
 import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';

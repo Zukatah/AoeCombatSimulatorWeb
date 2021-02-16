@@ -1,9 +1,9 @@
 import { Component, OnInit, AfterViewInit, AfterContentInit } from '@angular/core';
-import { AoeData } from "../aoeData/aoeData";
-import { UnitType } from "../aoeData/unitType";
+import { AoeData } from "../data/aoeData";
+import { UnitType } from "../classes/unitType";
 import { Color } from "../helper/color";
-import { Matrix } from "../helper/matrix"
-import { MatrixData } from '../helper/matrixData';
+import { Matrix } from "../classes/matrix"
+import { MatrixData } from '../data/matrixData';
 
 @Component({
   selector: 'app-matrices',

@@ -1,6 +1,5 @@
 import { ArmorClass } from './armorClass';
-import { UnitType } from './unitType';
-import { AoeData} from './aoeData';
+import { AoeData} from '../data/aoeData';
 import { Battle } from "./battle";
 import { Arrow } from "./arrow";
 import { Missile } from "./missile";

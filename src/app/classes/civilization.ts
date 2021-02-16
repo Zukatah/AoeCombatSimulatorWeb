@@ -1,5 +1,3 @@
-import { ArmorClass } from './armorClass';
-import { UnitType } from './unitType';
 import { UnitTypeLine } from './unitTypeLine';
 import { Technology } from './technology';
 

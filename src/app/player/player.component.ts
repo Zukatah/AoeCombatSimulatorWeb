@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, DoCheck, IterableDiffers, IterableDiffer } from '@angular/core';
 import { AoECombatSimulatorComponent } from "./../aoeCombatSimulator/aoeCombatSimulator.component";
-import { Player } from "./../aoeData/player";
+import { Player } from "./../classes/player";
 
 @Component({
   selector: 'app-player',
