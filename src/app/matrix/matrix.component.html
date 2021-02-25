@@ -31,33 +31,40 @@
 			<table class="table table-very-small table-dark scrollbar fixedHeightImages tableHeight">
 				<thead>
 					<tr>
-						<th class="tableEdgeCellsWidth" scope="col" sortable="name"></th>
-						<th class="tableEdgeCellsWidth" scope="col"></th>
-						<th *ngFor="let utIndex of CreateIncrArray(matrix.matrixUtsLength2)" class="tableCenterCellsWidth tableColor" scope="col">
-							<span class="brightText">{{matrix.matrixUts2[utIndex].civ.name}}</span><br>
-							<img *ngIf="matrix.matrixUts2[utIndex].baseUnitType.imagePath != ''" src="{{matrix.matrixUts2[utIndex].baseUnitType.imagePath}}" class="border border-dark img-fluid" title="{{matrix.matrixUts2[utIndex].name}}">
+						<ng-template #sortableTooltip class="tooltipWidth higherZIndex">
+							<span>{{matrix.sortable_description}}</span>
+						</ng-template>
+						<th class="tableEdgeCellsWidth centerVertically" scope="col" sortable="civUnitType" (sort)="onSort($event)">
+							<span class="brightText" [ngbTooltip]="sortableTooltip" placement="bottom">Civ</span>
+						</th>
+						<th class="tableEdgeCellsWidth centerVertically" scope="col" sortable="civUnitTypeIndex" (sort)="onSort($event)">
+							<span class="brightText" [ngbTooltip]="sortableTooltip" placement="bottom">Id</span>
+						</th>
+						<th *ngFor="let ut2 of matrix.matrixUts2" class="tableCenterCellsWidth tableColor" scope="col">
+							<span class="brightText">{{ut2.civ.name}}</span><br>
+							<img *ngIf="ut2.baseUnitType.imagePath != ''" src="{{ut2.baseUnitType.imagePath}}" class="border border-dark img-fluid" title="{{ut2.name}}">
 						</th>
 						<ng-template #pointsTooltip class="tooltipWidth">
 							<span>{{matrix.points_description}}</span>
 						</ng-template>
-						<th class="tableEdgeCellsWidth tableColor brightText" scope="col" sortable="points">
+						<th class="tableEdgeCellsWidth tableColor brightText centerVertically" scope="col" sortable="points" (sort)="onSort($event)">
 							<span [ngbTooltip]="pointsTooltip" placement="left-top">Points<br>&#10068;</span>
 						</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr *ngFor="let utIndex of CreateIncrArray(matrix.matrixUtsLength1); index as i">
+					<tr *ngFor="let matrixRow of matrix.matrixRows; index as i">
 						<td class="tableColor">
-							<span class="brightText">{{matrix.matrixUts1[utIndex].civ.name}}</span>
+							<span class="brightText">{{matrixRow.civUnitType.civ.name}}</span>
 						</td>
 						<td class="tableColor">
-							<img *ngIf="matrix.matrixUts1[utIndex].baseUnitType.imagePath != ''" src="{{matrix.matrixUts1[utIndex].baseUnitType.imagePath}}" class="border border-dark img-fluid" title="{{matrix.matrixUts1[utIndex].name}}">
+							<img *ngIf="matrixRow.civUnitType.baseUnitType.imagePath != ''" src="{{matrixRow.civUnitType.baseUnitType.imagePath}}" class="border border-dark img-fluid" title="{{matrixRow.civUnitType.name}}">
 						</td>
-						<td *ngFor="let utIndex2 of CreateIncrArray(matrix.matrixUtsLength2); index as j" [style.background-color]="getSurvivorsColor(matrix.combatResults[i][j])" class="align-middle">
-							<span class="align-middle">{{matrix.combatResults[i][j] | number : '1.0-2'}}</span>
+						<td *ngFor="let ut2 of matrix.matrixUts2; index as j" [style.background-color]="getSurvivorsColor(matrixRow.matrixCellsValues[j])" class="align-middle">
+							<span class="align-middle">{{matrixRow.matrixCellsValues[j] | number : '1.0-2'}}</span>
 						</td>
 						<td class="align-middle" class="resultColumnColor">
-							<span class="align-middle">{{matrix.combatResultsPoints[i] | number : '1.0-2'}}</span>
+							<span class="align-middle">{{matrixRow.points | number : '1.0-2'}}</span>
 						</td>
 					</tr>
 				</tbody>

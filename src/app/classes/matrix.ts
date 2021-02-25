@@ -1,8 +1,10 @@
 import { CivUnitType } from '../classes/civUnitType';
 
-export interface MatrixRow{
-	civUnitType: CivUnitType;
-	combatResults: number[];
+export class MatrixRow{
+	public civUnitType: CivUnitType;
+	public civUnitTypeIndex: number; // for sorting purposes
+	public matrixCellsValues: number[]; // the combat results displayed in the cells
+	public points: number; // the total number of points for this row's civ unit type
 }
 
 export class Matrix{
@@ -12,8 +14,7 @@ export class Matrix{
 	public matrixUtsLength1: number; // the height of the matrix (#p1 civ unit types)
 	public matrixUtsLength2: number; // the width of the matrix (#p1 civ unit types)
 	public description: string; // the description of the matrix's settings
-	public combatResults: number[][]; // the matrix entries
-	public combatResultsPoints: number[]; // the total number of points for each unit type
+	public matrixRows: MatrixRow[] = []; // the matrix' rows
 
 	public hitAndRunMode: number; // 0=noHit&Run, 1=semi, 2=fullHit&Run
 	public hitAndRunModes: string[] = ["No Hit&Run", "Medium Hit&Run", "Perfect Hit&Run"];
@@ -39,34 +40,40 @@ export class Matrix{
 		"Both armies have the same size (they occupy the same population space): 50 units (or 100, in case of Karambit warriors). After each fight the armies are refilled to 50 population space and the resources lost by either player are added together in order to calculate cost efficiency values. "
 	];
 
-	public points_description: string = "Each cost efficiency > 2 gives 4 points, each cost efficiency > 1.25 gives 3 points, each cost efficiency >= 0.8 gives 2 points, each cost efficiency >= 0.5 gives 1 point, each cost efficiency < 0.5 gives no points.";
+	public sortable_description: string = "Sortable";
+	public points_description: string = "Sortable. Each cost efficiency >2 gives 4 points, >1.25 gives 3 points, >=0.8 gives 2 points, >=0.5 gives 1 point, <0.5 gives 0 points.";
 
 	constructor(matrixUts1: CivUnitType[], matrixUts2: CivUnitType[], description: string, hitAndRunMode: number, resourceValue: number, combatType: number, combatResults: number[][]){
 		this.matrixUts1 = matrixUts1;
 		this.matrixUts2 = matrixUts2;
 		this.description = description;
-		this.combatResults = combatResults;
 		this.matrixUtsLength1 = this.matrixUts1.length;
 		this.matrixUtsLength2 = this.matrixUts2.length;
-		this.combatResultsPoints = [];
 		this.hitAndRunMode = hitAndRunMode;
 		this.resourceValue = resourceValue;
 		this.combatType = combatType;
 
 		for (let i: number = 0; i < this.matrixUtsLength1; i++){
+			let curMatrixRow: MatrixRow = new MatrixRow();
+			curMatrixRow.civUnitType = this.matrixUts1[i];
+			curMatrixRow.matrixCellsValues = combatResults[i];
+			curMatrixRow.civUnitTypeIndex = i;
+			
 			let points = 0;
 			for (let j: number = 0; j < this.matrixUtsLength2; j++){
-				if (this.combatResults[i][j] > 2.0){
+				if (curMatrixRow.matrixCellsValues[j] > 2.0){
 					points += 4;
-				} else if (this.combatResults[i][j] > 1.25){
+				} else if (curMatrixRow.matrixCellsValues[j] > 1.25){
 					points += 3;
-				} else if (this.combatResults[i][j] >= 0.8){
+				} else if (curMatrixRow.matrixCellsValues[j] >= 0.8){
 					points += 2;
-				} else if (this.combatResults[i][j] >= 0.5){
+				} else if (curMatrixRow.matrixCellsValues[j] >= 0.5){
 					points += 1;
 				} //else => no points
 			}
-			this.combatResultsPoints.push(points);
+			curMatrixRow.points = points;
+
+			this.matrixRows.push(curMatrixRow);
 		}
 	}
 }

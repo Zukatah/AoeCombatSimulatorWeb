@@ -42,6 +42,11 @@ span{
 
 .tooltipWidth{
 	size: 100px;
+	
+}
+
+.higherZIndex{
+	z-index: 2;
 }
 
 .resultColumnColor{
@@ -83,4 +88,8 @@ tbody td:nth-child(2){
 
 .table-very-small th, .table-very-small td{
 	padding: 0rem 0rem 0rem 0rem;
+}
+
+.centerVertically{
+	vertical-align: middle;
 }
