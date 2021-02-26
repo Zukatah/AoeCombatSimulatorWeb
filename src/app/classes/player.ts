@@ -123,26 +123,11 @@ export class Player{
 	public RelicCountChanged(newValue): void{
 		this.numberOfRelics = newValue > 4 ? 4 : newValue;
 		if (this.civilization == AoeData.civ_lithuanians){
-			if (this.civUts.find(ut => ut.baseUnitType == AoeData.ut_knight) != undefined){
-				this.civUts.find(ut => ut.baseUnitType == AoeData.ut_knight).attackValues
-				.set(AoeData.ac_baseMelee, new CivUnitType(AoeData.ut_knight, this.civilization).attackValues.get(AoeData.ac_baseMelee) + this.numberOfRelics);
-			}
-			if (this.civUts.find(ut => ut.baseUnitType == AoeData.ut_cavalier) != undefined){
-				this.civUts.find(ut => ut.baseUnitType == AoeData.ut_cavalier).attackValues
-				.set(AoeData.ac_baseMelee, new CivUnitType(AoeData.ut_cavalier, this.civilization).attackValues.get(AoeData.ac_baseMelee) + this.numberOfRelics);
-			}
-			if (this.civUts.find(ut => ut.baseUnitType == AoeData.ut_paladin) != undefined){
-				this.civUts.find(ut => ut.baseUnitType == AoeData.ut_paladin).attackValues
-				.set(AoeData.ac_baseMelee, new CivUnitType(AoeData.ut_paladin, this.civilization).attackValues.get(AoeData.ac_baseMelee) + this.numberOfRelics);
-			}
-			if (this.civUts.find(ut => ut.baseUnitType == AoeData.ut_leitis) != undefined){
-				this.civUts.find(ut => ut.baseUnitType == AoeData.ut_leitis).attackValues
-				.set(AoeData.ac_baseMelee, new CivUnitType(AoeData.ut_leitis, this.civilization).attackValues.get(AoeData.ac_baseMelee) + this.numberOfRelics);
-			}
-			if (this.civUts.find(ut => ut.baseUnitType == AoeData.ut_eliteLeitis) != undefined){
-				this.civUts.find(ut => ut.baseUnitType == AoeData.ut_eliteLeitis).attackValues
-				.set(AoeData.ac_baseMelee, new CivUnitType(AoeData.ut_eliteLeitis, this.civilization).attackValues.get(AoeData.ac_baseMelee) + this.numberOfRelics);
-			}
+			this.civUts.find(ut => ut.baseUnitType == AoeData.ut_knight)?.RelicCountChanged(this.numberOfRelics);
+			this.civUts.find(ut => ut.baseUnitType == AoeData.ut_cavalier)?.RelicCountChanged(this.numberOfRelics);
+			this.civUts.find(ut => ut.baseUnitType == AoeData.ut_paladin)?.RelicCountChanged(this.numberOfRelics);
+			this.civUts.find(ut => ut.baseUnitType == AoeData.ut_leitis)?.RelicCountChanged(this.numberOfRelics);
+			this.civUts.find(ut => ut.baseUnitType == AoeData.ut_eliteLeitis)?.RelicCountChanged(this.numberOfRelics);
 		}
 	}
 }

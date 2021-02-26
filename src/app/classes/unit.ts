@@ -234,10 +234,10 @@ export class Unit {
 			const avIterator = secondary ? attacker.secondaryAttackValues[Symbol.iterator]() : attacker.attackValues[Symbol.iterator]();
 			if ((attacker.civUnitType.baseUnitType == AoeData.ut_coustillier || attacker.civUnitType.baseUnitType == AoeData.ut_eliteCoustillier) && attacker.lastChargeAttackTime <= attacker.battle.timeInterval - 4000){
 				attacker.lastChargeAttackTime = attacker.battle.timeInterval;
-				attacker.attackValues.set(AoeData.ac_baseMelee, attacker.attackValues.get(AoeData.ac_baseMelee) + (attacker.civUnitType.baseUnitType == AoeData.ut_coustillier ? 35 : 40));
+				attacker.attackValues.set(AoeData.ac_baseMelee, attacker.attackValues.get(AoeData.ac_baseMelee) + (attacker.civUnitType.baseUnitType == AoeData.ut_coustillier ? 25 : 30));
 			}
 			for (let [attackedArmorClass, attackValue] of avIterator){
-				if (target.civUnitType.civ == AoeData.civ_sicilians && attackedArmorClass != AoeData.ac_baseMelee && attackedArmorClass != AoeData.ac_basePierce){ // the Sicilians' land units take only 50% bonus damage
+				if (target.civUnitType.civ == AoeData.civ_sicilians && !target.armorClasses.has(AoeData.ac_siegeWeapon) && attackedArmorClass != AoeData.ac_baseMelee && attackedArmorClass != AoeData.ac_basePierce){ // the Sicilians' land units take only 50% bonus damage
 					damageDealt += Math.max(0, target.armorClasses.has(attackedArmorClass) ? (attackValue - target.armorClasses.get(attackedArmorClass))*0.5 : 0);
 				}else{
 					damageDealt += Math.max(0, target.armorClasses.has(attackedArmorClass) ? attackValue - target.armorClasses.get(attackedArmorClass) : 0);
@@ -245,7 +245,7 @@ export class Unit {
 				
 			}
 			if ((attacker.civUnitType.baseUnitType == AoeData.ut_coustillier || attacker.civUnitType.baseUnitType == AoeData.ut_eliteCoustillier) && attacker.lastChargeAttackTime == attacker.battle.timeInterval){
-				attacker.attackValues.set(AoeData.ac_baseMelee, attacker.attackValues.get(AoeData.ac_baseMelee) - (attacker.civUnitType.baseUnitType == AoeData.ut_coustillier ? 35 : 40));
+				attacker.attackValues.set(AoeData.ac_baseMelee, attacker.attackValues.get(AoeData.ac_baseMelee) - (attacker.civUnitType.baseUnitType == AoeData.ut_coustillier ? 25 : 30));
 			}
 		}
 		if (damageDealt < 1)

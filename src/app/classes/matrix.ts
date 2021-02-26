@@ -1,4 +1,5 @@
 import { CivUnitType } from '../classes/civUnitType';
+import { Helpers } from '../helper/helpers';
 
 export class MatrixRow{
 	public civUnitType: CivUnitType;
@@ -59,18 +60,7 @@ export class Matrix{
 			curMatrixRow.matrixCellsValues = combatResults[i];
 			curMatrixRow.civUnitTypeIndex = i;
 			
-			let points = 0;
-			for (let j: number = 0; j < this.matrixUtsLength2; j++){
-				if (curMatrixRow.matrixCellsValues[j] > 2.0){
-					points += 4;
-				} else if (curMatrixRow.matrixCellsValues[j] > 1.25){
-					points += 3;
-				} else if (curMatrixRow.matrixCellsValues[j] >= 0.8){
-					points += 2;
-				} else if (curMatrixRow.matrixCellsValues[j] >= 0.5){
-					points += 1;
-				} //else => no points
-			}
+			let points: number = Helpers.calculatePointsOfCivUnitType(curMatrixRow.matrixCellsValues)
 			curMatrixRow.points = points;
 
 			this.matrixRows.push(curMatrixRow);

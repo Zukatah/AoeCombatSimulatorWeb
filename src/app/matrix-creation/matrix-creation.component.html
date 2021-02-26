@@ -74,7 +74,7 @@
 				<tbody>
 					<tr *ngFor="let utInd of CreateIncrArray(numberUtToDisplayRows); index as i">
 						<td>
-							<span class="brightText">{{player1CivUts[utInd].civ.name}}</span>
+							<span class="brightText">{{player1CivUts[utInd].civ.name + (player1CivUts[utInd].numberOfRelics > 0 ? player1CivUts[utInd].numberOfRelics + "R" : "")}}</span>
 						</td>
 						<td>
 							<img *ngIf="player1CivUts[utInd].baseUnitType.imagePath != ''" src="{{player1CivUts[utInd].baseUnitType.imagePath}}" class="border border-dark img-fluid" title="{{player1CivUts[utInd].name}}">

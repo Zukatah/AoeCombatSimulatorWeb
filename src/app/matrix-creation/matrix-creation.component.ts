@@ -5,6 +5,7 @@ import { Color } from "./../helper/color";
 import { Battle } from "./../classes/battle";
 import { CivUnitType } from '../classes/civUnitType';
 import { MatrixData } from '../data/matrixData';
+import { Helpers } from '../helper/helpers';
 
 @Component({
   selector: 'app-matrix-creation',
@@ -46,7 +47,7 @@ export class MatrixCreationComponent{
 	private battleRef: Battle;
 
 	constructor() {
-		this.player1CivUts = MatrixData.allFinalUnitTypes_including_HeavyCamelRider_eliteSkirmisher_lotw;
+		this.player1CivUts = MatrixData.bestKnightLines;
 		this.player2CivUts = MatrixData.allFinalUnitTypes_including_HeavyCamelRider_eliteSkirmisher_lotw;
 		this.InitializeMatrix();
 	}
@@ -110,18 +111,7 @@ export class MatrixCreationComponent{
 
 		this.ut2++;
 		if (this.ut2 == this.numberUtToDisplayColumns){
-			let points = 0;
-			for (let i: number = 0; i < this.numberUtToDisplayColumns; i++){
-				if (this.combatResults[this.ut1][i] > 2.0){
-					points += 4;
-				} else if (this.combatResults[this.ut1][i] > 1.25){
-					points += 3;
-				} else if (this.combatResults[this.ut1][i] >= 0.8){
-					points += 2;
-				} else if (this.combatResults[this.ut1][i] >= 0.5){
-					points += 1;
-				} //else => no points
-			}
+			let points: number = Helpers.calculatePointsOfCivUnitType(this.combatResults[this.ut1]);
 			this.combatResultsPoints[this.ut1] = points;
 			this.ut2 = 0;
 			this.ut1++;

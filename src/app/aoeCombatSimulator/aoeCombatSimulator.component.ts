@@ -122,7 +122,7 @@ export class AoECombatSimulatorComponent {
 					return;
 				}
 			}
-			if (this.players[i].numberOfRelics == NaN || this.players[i].numberOfRelics > 10 || this.players[i].numberOfRelics < 0){
+			if (this.players[i].numberOfRelics == NaN || this.players[i].numberOfRelics > 4 || this.players[i].numberOfRelics < 0){
 				return;
 			}
 		}

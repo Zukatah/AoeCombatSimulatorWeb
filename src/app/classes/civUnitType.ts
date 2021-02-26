@@ -9,15 +9,17 @@ export class CivUnitType extends UnitType {
 	public baseUnitType: UnitType;
 	public civ: Civilization;
 	public age: number = 4; // 0 = dark age, 1 = feudal age, 2 = castle age, 3 = imp age, 4 = post imp age (not fully implemented yet) - always post imp currently
+	public numberOfRelics: number = 0;
 
 
-	constructor(baseUnitType: UnitType, civ: Civilization) {
+	constructor(baseUnitType: UnitType, civ: Civilization, numberOfRelics: number = 0) {
 		super(civ.name + " " + baseUnitType.name, baseUnitType.hp, baseUnitType.attackSpeed, baseUnitType.attackRange, baseUnitType.attackDelay, baseUnitType.projectileSpeed, baseUnitType.moveSpeed,
 			baseUnitType.resourceCosts[0], baseUnitType.resourceCosts[1], baseUnitType.resourceCosts[2], baseUnitType.radius, baseUnitType.attackRangeMin, baseUnitType.accuracyPercent,
 			baseUnitType.hpRegPerMin);
 
 		this.baseUnitType = baseUnitType;
 		this.civ = civ;
+		this.numberOfRelics = numberOfRelics;
 
 		baseUnitType.attackValues.forEach((value: number, key: ArmorClass) => { this.attackValues.set(key, value); });
 		baseUnitType.armorClasses.forEach((value: number, key: ArmorClass) => {	this.armorClasses.set(key, value); });
@@ -78,6 +80,10 @@ export class CivUnitType extends UnitType {
 		this.ApplyUniversityTechs();
 		this.ApplyBarracksStableTcTechs();
 		this.ApplyArcheryRangeTechs();
+
+		if (numberOfRelics > 0){
+			this.RelicCountChanged(numberOfRelics);
+		}
 	}
 
 
@@ -466,7 +472,7 @@ export class CivUnitType extends UnitType {
 	}
 
 
-	public ApplyLithuaniansBonusses(): void{ // todo: implement relic bonus
+	public ApplyLithuaniansBonusses(): void{
 		if (AoeData.utl_spearman.unitTypes.includes(this.baseUnitType) || AoeData.utl_skirmisher.unitTypes.includes(this.baseUnitType)){
 			if (this.age == 4){
 				this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 2);
@@ -678,5 +684,13 @@ export class CivUnitType extends UnitType {
 			}
 			this.hp *= this.age == 1 ? 1.1 : (this.age == 2 ? 1.15 : this.age >= 3 ? 1.2 : 0);
 		}
+	}
+
+
+	// Apply lithuanians' relic bonus for specific civ unit types (necessary to include civ unit types with different relic counts in one matrix)
+	public RelicCountChanged(numberOfRelics): void{
+		this.numberOfRelics = numberOfRelics;
+		this.attackValues.set(AoeData.ac_baseMelee, new CivUnitType(this.baseUnitType, this.civ).attackValues.get(AoeData.ac_baseMelee) + this.numberOfRelics);
+		this.name = this.civ.name + " " + this.baseUnitType.name + (this.numberOfRelics > 0 ? " " + this.numberOfRelics + "R" : "");
 	}
 }

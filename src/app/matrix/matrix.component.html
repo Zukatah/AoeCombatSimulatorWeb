@@ -55,7 +55,7 @@
 				<tbody>
 					<tr *ngFor="let matrixRow of matrix.matrixRows; index as i">
 						<td class="tableColor">
-							<span class="brightText">{{matrixRow.civUnitType.civ.name}}</span>
+							<span class="brightText">{{matrixRow.civUnitType.civ.name + (matrixRow.civUnitType.numberOfRelics > 0 ? matrixRow.civUnitType.numberOfRelics + "R" : "")}}</span>
 						</td>
 						<td class="tableColor">
 							<img *ngIf="matrixRow.civUnitType.baseUnitType.imagePath != ''" src="{{matrixRow.civUnitType.baseUnitType.imagePath}}" class="border border-dark img-fluid" title="{{matrixRow.civUnitType.name}}">
