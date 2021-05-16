@@ -70,7 +70,13 @@ export class Arrow extends Projectile
 					
 					if (this.attacker.civUnitType.baseUnitType == AoeData.ut_arambai || this.attacker.civUnitType.baseUnitType == AoeData.ut_eliteArambai){ // Arambai and Elite Arambai always hit for 100% damage
 						closestUnit.curHp -= Unit.CalculateDamageDealtToTarget(this.attacker, closestUnit, this.secondary);
-					}else{
+					}else if (this.attacker.civUnitType.baseUnitType == AoeData.ut_organGun || this.attacker.civUnitType.baseUnitType == AoeData.ut_eliteOrganGun){ // (Elite) Organ Guns' secondary projectiles always hit for 100% damage
+						if (this.secondary){
+							closestUnit.curHp -= Unit.CalculateDamageDealtToTarget(this.attacker, closestUnit, this.secondary);
+						}else{
+							closestUnit.curHp -= 0.5 * Unit.CalculateDamageDealtToTarget(this.attacker, closestUnit, this.secondary);
+						}
+					} else{
 						closestUnit.curHp -= 0.5 * Unit.CalculateDamageDealtToTarget(this.attacker, closestUnit, this.secondary);
 					}
 					

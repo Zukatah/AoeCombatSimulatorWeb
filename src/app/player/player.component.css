@@ -28,3 +28,7 @@ img{
 	max-height: 20px;
 	line-height: 20px;
 }
+
+::ng-deep .tooltip.show {
+    opacity: 1!important;
+}

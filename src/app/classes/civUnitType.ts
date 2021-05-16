@@ -501,9 +501,14 @@ export class CivUnitType extends UnitType {
 			this.resourceCosts[0] += 20;
 			this.resourceCosts[2] -= 20;
 		}
+		
 		if (AoeData.utl_battleElephant.unitTypes.includes(this.baseUnitType)){
 			for (let i: number = 0; i < 3; i++){
-				this.resourceCosts[i] *= 0.7;
+				if (this.age == 2){
+					this.resourceCosts[i] *= 0.7;
+				} else if (this.age >= 3){
+					this.resourceCosts[i] *= 0.6;
+				}
 			}
 		}
 	}
@@ -583,9 +588,9 @@ export class CivUnitType extends UnitType {
 	public ApplySiciliansBonusses(): void{
 		if (this.baseUnitType == AoeData.ut_serjeant && this.age >= 2){
 			this.attackValues.set(AoeData.ac_baseMelee, this.attackValues.get(AoeData.ac_baseMelee) + 3);
-			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 2);
+			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 1);
 			this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 1);
-			this.hp += 15;
+			this.hp += 20;
 		}
 	}
 

@@ -63,8 +63,8 @@ export abstract class AoeData
 	public static ut_eliteBattleElephant: UnitType = new UnitType("Elite Battle Elephant", 300, 2.0, 0.0, 0.5, Number.MAX_VALUE, 0.85, 120, 0, 70, 0.6);
 	public static utl_battleElephant: UnitTypeLine = new UnitTypeLine("Battle Elephant line", [AoeData.ut_battleElephant, AoeData.ut_eliteBattleElephant]);
 
-	public static ut_steppeLancer: UnitType = new UnitType("Steppe Lancer", 60, 2.3, 1.0, 0.68, Number.MAX_VALUE, 1.45, 70, 0, 45, 0.4);
-	public static ut_eliteSteppeLancer: UnitType = new UnitType("Elite Steppe Lancer", 80, 2.3, 1.0, 0.68, Number.MAX_VALUE, 1.45, 70, 0, 45, 0.4);
+	public static ut_steppeLancer: UnitType = new UnitType("Steppe Lancer", 60, 2.3, 1.0, 0.68, Number.MAX_VALUE, 1.45, 70, 0, 40, 0.4);
+	public static ut_eliteSteppeLancer: UnitType = new UnitType("Elite Steppe Lancer", 80, 2.3, 1.0, 0.68, Number.MAX_VALUE, 1.45, 70, 0, 40, 0.4);
 	public static utl_steppeLancer: UnitTypeLine = new UnitTypeLine("Steppe Lancer line", [AoeData.ut_steppeLancer, AoeData.ut_eliteSteppeLancer]);
 
 	public static ut_archer: UnitType = new UnitType("Archer", 30, 2.0, 4.0, 0.35, 7.0, 0.96, 0, 25, 45, 0.2, 0.0, 80);
@@ -121,8 +121,8 @@ export abstract class AoeData
 	public static ut_eliteSamurai: UnitType = new UnitType("Elite Samurai", 80, 1.9, 0.0, 0.8, Number.MAX_VALUE, 1.0, 60, 0, 30);
 	public static utl_samurai: UnitTypeLine = new UnitTypeLine("Samurai line", [AoeData.ut_samurai, AoeData.ut_eliteSamurai]);
 
-	public static ut_mangudai: UnitType = new UnitType("Mangudai", 60, 2.1, 4.0, 0.5, 7.0, 1.45, 0, 55, 65, 0.4, 0.0, 95);
-	public static ut_eliteMangudai: UnitType = new UnitType("Elite Mangudai", 60, 2.1, 4.0, 0.5, 7.0, 1.45, 0, 55, 65, 0.4, 0.0, 95);
+	public static ut_mangudai: UnitType = new UnitType("Mangudai", 60, 2.1, 4.0, 0.5, 7.0, 1.4, 0, 55, 65, 0.4, 0.0, 95);
+	public static ut_eliteMangudai: UnitType = new UnitType("Elite Mangudai", 60, 2.1, 4.0, 0.5, 7.0, 1.4, 0, 55, 65, 0.4, 0.0, 95);
 	public static utl_mangudai: UnitTypeLine = new UnitTypeLine("Mangudai line", [AoeData.ut_mangudai, AoeData.ut_eliteMangudai]);
 	
 	public static ut_warElephant: UnitType = new UnitType("War Elephant", 450, 2.0, 0.0, 0.56, Number.MAX_VALUE, 0.6, 200, 0, 75, 0.6);
@@ -258,7 +258,7 @@ export abstract class AoeData
 	public static utl_flemishMilitia: UnitTypeLine = new UnitTypeLine("Flemish Militia line", [AoeData.ut_flemishMilitia]);
 
 	public static ut_serjeant: UnitType = new UnitType("Serjeant", 45, 2.0, 0.0, 0.5, Number.MAX_VALUE, 0.9, 60, 0, 35, 0.2);
-	public static ut_eliteSerjeant: UnitType = new UnitType("Serjeant", 75, 2.0, 0.0, 0.5, Number.MAX_VALUE, 0.9, 60, 0, 35, 0.2);
+	public static ut_eliteSerjeant: UnitType = new UnitType("Serjeant", 85, 2.0, 0.0, 0.5, Number.MAX_VALUE, 0.9, 60, 0, 35, 0.2);
 	public static utl_serjeant: UnitTypeLine = new UnitTypeLine("Serjeant line", [AoeData.ut_serjeant, AoeData.ut_eliteSerjeant]);
 
 
@@ -1536,7 +1536,7 @@ export abstract class AoeData
 		AoeData.ut_karambitWarrior.armorClasses.set(AoeData.ac_basePierce, 1);
 		AoeData.ut_karambitWarrior.armorClasses.set(AoeData.ac_infantry, 0);
 		AoeData.ut_karambitWarrior.armorClasses.set(AoeData.ac_uniqueUnit, 0);
-		AoeData.ut_karambitWarrior.attackValues.set(AoeData.ac_baseMelee, 6);
+		AoeData.ut_karambitWarrior.attackValues.set(AoeData.ac_baseMelee, 7);
 		AoeData.ut_karambitWarrior.attackValues.set(AoeData.ac_eagleWarrior, 2);
 		AoeData.ut_karambitWarrior.imagePath = "assets/unitTypes/Karambitwarrioricon-DE.png";
 		AoeData.ut_karambitWarrior.techsForUnitList.push(this.tec_squires,
@@ -1546,7 +1546,7 @@ export abstract class AoeData
 		AoeData.ut_eliteKarambitWarrior.armorClasses.set(AoeData.ac_basePierce, 1);
 		AoeData.ut_eliteKarambitWarrior.armorClasses.set(AoeData.ac_infantry, 0);
 		AoeData.ut_eliteKarambitWarrior.armorClasses.set(AoeData.ac_uniqueUnit, 0);
-		AoeData.ut_eliteKarambitWarrior.attackValues.set(AoeData.ac_baseMelee, 7);
+		AoeData.ut_eliteKarambitWarrior.attackValues.set(AoeData.ac_baseMelee, 8);
 		AoeData.ut_eliteKarambitWarrior.attackValues.set(AoeData.ac_eagleWarrior, 2);
 		AoeData.ut_eliteKarambitWarrior.imagePath = "assets/unitTypes/Karambitwarrioricon-DE.png";
 		AoeData.ut_eliteKarambitWarrior.techsForUnitList.push(this.tec_squires,
@@ -1714,15 +1714,15 @@ export abstract class AoeData
 		AoeData.ut_flemishMilitia.armorClasses.set(AoeData.ac_infantry, 0);
 		AoeData.ut_flemishMilitia.armorClasses.set(AoeData.ac_uniqueUnit, 0);
 		AoeData.ut_flemishMilitia.attackValues.set(AoeData.ac_baseMelee, 12);
-		AoeData.ut_flemishMilitia.attackValues.set(AoeData.ac_cavalry, 12);
-		AoeData.ut_flemishMilitia.attackValues.set(AoeData.ac_camel, 8);
+		AoeData.ut_flemishMilitia.attackValues.set(AoeData.ac_cavalry, 8);
+		AoeData.ut_flemishMilitia.attackValues.set(AoeData.ac_camel, 6);
 		AoeData.ut_flemishMilitia.attackValues.set(AoeData.ac_warElephant, 8);
 		AoeData.ut_flemishMilitia.attackValues.set(AoeData.ac_eagleWarrior, 2);
 		AoeData.ut_flemishMilitia.imagePath = "assets/unitTypes/Aoe2-icon-flemish-militia.png";
 		AoeData.ut_flemishMilitia.techsForUnitList.push(this.tec_squires,
 			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleMailArmor, this.tec_chainMailArmor, this.tec_plateMailArmor);
 		
-		AoeData.ut_serjeant.armorClasses.set(AoeData.ac_baseMelee, 1);
+		AoeData.ut_serjeant.armorClasses.set(AoeData.ac_baseMelee, 2);
 		AoeData.ut_serjeant.armorClasses.set(AoeData.ac_basePierce, 2);
 		AoeData.ut_serjeant.armorClasses.set(AoeData.ac_infantry, 0);
 		AoeData.ut_serjeant.armorClasses.set(AoeData.ac_uniqueUnit, 0);
