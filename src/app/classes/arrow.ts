@@ -22,7 +22,7 @@ export class Arrow extends Projectile
 	{
 		this.arrived = true;
 		let hitRoll: number = Math.random() * 100.0;
-		if (this.target.alive && (hitRoll < this.attacker.accuracyPercent || this.certainHit))
+		if (this.target.alive && (this.certainHit || (hitRoll < (this.secondary ? this.attacker.secondaryAttackAccuracyPercent : this.attacker.accuracyPercent))))
 		{
 			let damageDealt : number = Unit.CalculateDamageDealtToTarget(this.attacker, this.target, this.secondary);
 			this.target.curHp -= damageDealt;
@@ -32,7 +32,7 @@ export class Arrow extends Projectile
 		{
 			let impactX: number = this.target.x;
 			let impactY: number = this.target.y;
-			if (hitRoll >= this.attacker.accuracyPercent)
+			if (hitRoll >= (this.secondary ? this.attacker.secondaryAttackAccuracyPercent : this.attacker.accuracyPercent))
 			{
 				impactX += this.fractionOfMaxRange * (-1.0 + Math.random() * 2.0);
 				impactY += this.fractionOfMaxRange * (-1.0 + Math.random() * 2.0);
@@ -60,7 +60,7 @@ export class Arrow extends Projectile
 					if (this.target.alive){
 						this.battle.players[this.attacker.armyIndex].missedRoll_mainTargetAlive_SideTargetHit++; // debug purposes
 					}else{
-						if (hitRoll < this.attacker.accuracyPercent){
+						if (hitRoll < (this.secondary ? this.attacker.secondaryAttackAccuracyPercent : this.attacker.accuracyPercent)){
 							this.battle.players[this.attacker.armyIndex].goodRoll_mainTargetDead_SideTargetHit++; // debug purposes
 						}else{
 							this.battle.players[this.attacker.armyIndex].missedRoll_mainTargetDead_SideTargetHit++; // debug purposes
@@ -86,7 +86,7 @@ export class Arrow extends Projectile
 				if (this.target.alive){
 					this.battle.players[this.attacker.armyIndex].missedRoll_mainTargetAlive_Miss++; // debug purposes
 				} else{
-					if (hitRoll < this.attacker.accuracyPercent){
+					if (hitRoll < (this.secondary ? this.attacker.secondaryAttackAccuracyPercent : this.attacker.accuracyPercent)){
 						this.battle.players[this.attacker.armyIndex].goodRoll_mainTargetDead_Miss++; // debug purposes
 					}else{
 						this.battle.players[this.attacker.armyIndex].missedRoll_mainTargetDead_Miss++; // debug purposes

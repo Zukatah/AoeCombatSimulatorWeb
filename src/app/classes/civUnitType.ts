@@ -31,6 +31,7 @@ export class CivUnitType extends UnitType {
 		this.secondaryAttack = baseUnitType.secondaryAttack;
 		this.secondaryAttackProjectileCount = baseUnitType.secondaryAttackProjectileCount;
 		baseUnitType.secondaryAttackValues.forEach((value: number, key: ArmorClass) => { this.secondaryAttackValues.set(key, value); });
+		this.secondaryAttackAccuracyPercent = baseUnitType.secondaryAttackAccuracyPercent;
 		this.imagePath = baseUnitType.imagePath;
 		this.techsForUnitList = baseUnitType.techsForUnitList;
 

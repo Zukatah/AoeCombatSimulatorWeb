@@ -29,6 +29,7 @@ export class Unit {
 	public secondaryAttack: boolean = false; // some units fire secondary projectiles in addition to primary ones (chu ko nu, kipchaks, ballista elephants with unique tech, ...)
 	public secondaryAttackProjectileCount: number = 1; // per attack ChuKoNus, Kipchaks and Organ Guns create more than a single secondary projectile
 	public secondaryAttackValues: Map<ArmorClass, number> = new Map(); // // contains all armor classes this unit attacks with its secondary attack (including baseMelee and basePierce) and the respective damage values
+	public secondaryAttackAccuracyPercent: number = 50; // 100 does always hit; 50 does mean 50% will hit and 50% are randomly distributed (they can still hit the main target or other targets)
 
 	public moveSpeed: number; // move speed in tiles/s
 	public radius: number; // size of the unit in tiles
@@ -70,6 +71,7 @@ export class Unit {
 		this.missileFlightDistance = civUnitType.missileFlightDistance;
 		this.secondaryMissileFlightDistance = civUnitType.secondaryMissileFlightDistance;
 		this.secondaryAttackValues = civUnitType.secondaryAttackValues;
+		this.secondaryAttackAccuracyPercent = civUnitType.secondaryAttackAccuracyPercent;
 		this.projectileSpeed = civUnitType.projectileSpeed;
 		this.cleaveType = civUnitType.cleaveType;
 		this.cleaveRadius = civUnitType.cleaveRadius;
