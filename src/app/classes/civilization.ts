@@ -4,7 +4,7 @@ import { Technology } from './technology';
 export class Civilization {
 
 	public name: string; // this civilization's name
-	public unitTypeLineLevels: [UnitTypeLine, number][] = [];
+	public maxUnitTypeLineLevels: [UnitTypeLine, number][] = [];
 	public technologies: Technology[] = [];
 
 	constructor(name: string) {

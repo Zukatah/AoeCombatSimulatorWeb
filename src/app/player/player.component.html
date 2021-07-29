@@ -1,10 +1,49 @@
 <div class="container border border-dark rounded no-gutters pb-2 player{{player.playerIndex}}-bg">
 	<div class="row">
-		<div class="col-12 text-center mt-2" ngbDropdown>
-			<button class="btn btn-success" id="dropdownBasic3" ngbDropdownToggle>Player {{player.playerIndex + 1}}: {{player.civilization.name}}</button>
+		<div class="col-12 text-center mt-2">
+			<h5><u>Player {{player.playerIndex + 1}}</u></h5>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-6 text-center mt-2" ngbDropdown>
+			<button class="btn btn-success" id="dropdownBasic3" ngbDropdownToggle>Civ: {{player.civilization.name}}</button>
 			<div ngbDropdownMenu aria-labelledby="dropdownBasic3">
-				<button *ngFor="let civ of player.civs; index as i" ngbDropdownItem (click)="setCiv(i)">{{player.civs[i].name}}</button>
+				<button *ngFor="let civ of civsList; index as i" ngbDropdownItem (click)="setCiv(i)">{{civsList[i].name}}</button>
 			</div>
+		</div>
+		<div class="col-6 text-center mt-2" ngbDropdown>
+			<button class="btn btn-success" id="dropdownAge" ngbDropdownToggle>Age: {{ages[player.age].name}}</button>
+			<div ngbDropdownMenu aria-labelledby="dropdownAge">
+				<button *ngFor="let age of ages; index as i" ngbDropdownItem (click)="setAge(i)">{{age.name}}</button>
+			</div>
+		</div>
+	</div>
+
+	<hr>
+
+	<div class="row">
+		<div class="col-12 text-center mt-2">
+			<button class="btn btn-info btn-sm" id="toggleTechsVisible" (click)="techsHidden=!techsHidden;">Toggle tech visibility</button>
+			<table class="table table-sm table-dark"  >
+				<thead>
+					<tr class="noPadding">
+						<th scope="col"></th>
+						<th scope="col">Name</th>
+						<th scope="col">Age</th>
+						<th scope="col"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let tech of player.civilization.technologies" class="{{player.techsResearched.includes(tech) ? '' : 'greyOut'}}" (click)="ToggleTech(tech)" [hidden]="techsHidden">
+						<td>
+							<img class="smallImg" src="{{tech.imagePath}}" title="{{tech.name}}">
+						</td>
+						<td><span>{{tech.name}}</span></td>
+						<td><img class="smallImg" src="{{ages[tech.accessibleFromAge].imagePath}}" title="{{ages[tech.accessibleFromAge].name}}"></td>
+						<td><i class="bi {{player.techsResearched.includes(tech) ? 'bi-check' : 'bi-x'}}"></i></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 
@@ -47,9 +86,10 @@
 							<span *ngIf="player.civUts[item].resourceCosts[2] != 0"><img class="smallImg" src="assets/Aoe2de_gold.png" title="Gold">{{player.civUts[item].resourceCosts[2] | number : '1.0-2'}}</span>
 						</ng-template>
 						<td class="align-middle" [ngbTooltip]="utTooltip" container="body">
-							<!--<label [attr.for]="'numberInput'+player.playerIndex+item">{{player.uts[item].name}}</label>-->
+							<div style="display:inline-block;" class="flip-horizontally"><i class="bi bi-node-plus" (click)="SetUnitTypeLineLevel(item, true)" *ngIf="!IsUnitTypeLineMaxed(item)"></i></div>
 							<span *ngIf="player.civUts[item].imagePath == ''">{{player.civUts[item].name}}</span>
 							<img *ngIf="player.civUts[item].imagePath != ''" src="{{player.civUts[item].imagePath}}" class="border border-dark img-fluid" title="{{player.civUts[item].name}}">
+							<i class="bi bi-node-minus" (click)="SetUnitTypeLineLevel(item, false)" *ngIf="!IsUnitTypeLineMinimized(item)"></i>
 						</td>
 						<td><input type="number" class="form-control" id="numberInput{{player.playerIndex}}{{item}}" oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value == ''){ this.value = '0'; }; if (this.value > 200) { this.value = '200'; }" value="0" min="0" max="200" [(ngModel)]="player.amountStartUnits[item]"></td>
 						<td class="text-center align-middle" [style.background-color]="getSurvivorsColor(item)">{{player.avgSurvivorsNumber[item] | number : '1.0-2'}}</td>

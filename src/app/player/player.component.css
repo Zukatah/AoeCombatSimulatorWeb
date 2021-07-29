@@ -29,6 +29,23 @@ img{
 	line-height: 20px;
 }
 
+.table-sm tr{
+	padding: 0px;
+}
+
+.table-sm td{
+	padding: 0px;
+}
+
+.greyOut{
+	opacity: 0.4;
+	background-color: #000000;
+}
+
 ::ng-deep .tooltip.show {
     opacity: 1!important;
+}
+
+.flip-horizontally {
+	transform: scaleX(-1);
 }

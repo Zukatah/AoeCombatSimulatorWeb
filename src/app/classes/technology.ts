@@ -1,12 +1,14 @@
 export class Technology
 {
 	public name: string;
-	public age: number; // 1 = dark, 2 = feudal, 3 = castle, 4 = imperial
+	public accessibleFromAge: number; // age values defined in aoeData.ts
+	public imagePath: string;
 
 
-	public constructor(name: string, age: number)
+	public constructor(name: string, age: number, imagePath: string)
 	{
 		this.name = name;
-		this.age = age;
+		this.accessibleFromAge = age;
+		this.imagePath = imagePath;
 	}
 }

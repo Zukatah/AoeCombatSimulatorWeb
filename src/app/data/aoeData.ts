@@ -3,9 +3,23 @@ import { UnitType } from '../classes/unitType';
 import { UnitTypeLine } from '../classes/unitTypeLine';
 import { Civilization } from '../classes/civilization';
 import { Technology } from '../classes/technology';
+import { Age } from '../classes/age';
 
 export abstract class AoeData
 {
+	public static darkAge: number = 0;
+	public static feudalAge: number = 1;
+	public static castleAge: number = 2;
+	public static imperialAge: number = 3;
+	public static postImperialAge: number = 4;
+
+	public static dark_Age: Age = new Age("Dark Age", 0, "assets/ages/DarkAgeIconDE.png");
+	public static feudal_Age: Age = new Age("Feudal Age", 1, "assets/ages/FeudalAgeIconDE.png");
+	public static castle_Age: Age = new Age("Castle Age", 2, "assets/ages/CastleAgeIconDE.png");
+	public static imperial_Age: Age = new Age("Imperial Age", 3, "assets/ages/ImperialAgeIconDE.png");
+	public static post_imperial_Age: Age = new Age("Post Imperial Age", 4, "assets/ages/ImperialAgeIconDE.png");
+	public static ages: Age[] = [AoeData.dark_Age, AoeData.feudal_Age, AoeData.castle_Age, AoeData.imperial_Age, AoeData.post_imperial_Age];
+	
 	public static ac_infantry: ArmorClass = new ArmorClass("Infantry");
 	public static ac_basePierce: ArmorClass = new ArmorClass("Base pierce");
 	public static ac_baseMelee: ArmorClass = new ArmorClass("Base melee");
@@ -24,241 +38,241 @@ export abstract class AoeData
 	public static ac_mameluke: ArmorClass = new ArmorClass("Mameluke");
 
 
-	public static ut_villager: UnitType = new UnitType("Villager", 25, 2.0, 0.0, 0.53, Number.MAX_VALUE, 0.8, 50, 0, 0);
+	public static ut_villager: UnitType = new UnitType("Villager", AoeData.darkAge, 25, 2.0, 0.0, 0.53, Number.MAX_VALUE, 0.8, 50, 0, 0);
 	public static utl_villager: UnitTypeLine = new UnitTypeLine("Villager line", [AoeData.ut_villager]);
 
-	public static ut_militia: UnitType = new UnitType("Militia", 40, 2.0, 0.0, 0.5, Number.MAX_VALUE, 0.9, 60, 0, 20);
-	public static ut_manAtArms: UnitType = new UnitType("Man-at-Arms", 45, 2.0, 0.0, 0.88, Number.MAX_VALUE, 0.9, 60, 0, 20);
-	public static ut_longSwordsman: UnitType = new UnitType("Long Swordsman", 60, 2.0, 0.0, 0.63, Number.MAX_VALUE, 0.9, 60, 0, 20);
-	public static ut_twoHandedSwordsman: UnitType = new UnitType("Two-Handed Swordsman", 60, 2.0, 0.0, 0.5, Number.MAX_VALUE, 0.9, 60, 0, 20);
-	public static ut_champion: UnitType = new UnitType("Champion", 70, 2.0, 0.0, 0.63, Number.MAX_VALUE, 0.9, 60, 0, 20);
+	public static ut_militia: UnitType = new UnitType("Militia", AoeData.darkAge, 40, 2.0, 0.0, 0.5, Number.MAX_VALUE, 0.9, 60, 0, 20);
+	public static ut_manAtArms: UnitType = new UnitType("Man-at-Arms", AoeData.feudalAge, 45, 2.0, 0.0, 0.88, Number.MAX_VALUE, 0.9, 60, 0, 20);
+	public static ut_longSwordsman: UnitType = new UnitType("Long Swordsman", AoeData.castleAge, 60, 2.0, 0.0, 0.63, Number.MAX_VALUE, 0.9, 60, 0, 20);
+	public static ut_twoHandedSwordsman: UnitType = new UnitType("Two-Handed Swordsman", AoeData.imperialAge, 60, 2.0, 0.0, 0.5, Number.MAX_VALUE, 0.9, 60, 0, 20);
+	public static ut_champion: UnitType = new UnitType("Champion", AoeData.imperialAge, 70, 2.0, 0.0, 0.63, Number.MAX_VALUE, 0.9, 60, 0, 20);
 	public static utl_militia: UnitTypeLine = new UnitTypeLine("Militia line", [AoeData.ut_militia, AoeData.ut_manAtArms, AoeData.ut_longSwordsman, AoeData.ut_twoHandedSwordsman, AoeData.ut_champion]);
 
-	public static ut_spearman: UnitType = new UnitType("Spearman", 45, 3, 0.0, 0.5, Number.MAX_VALUE, 1.0, 35, 25, 0);
-	public static ut_pikeman: UnitType = new UnitType("Pikeman", 55, 3, 0.0, 0.5, Number.MAX_VALUE, 1.0, 35, 25, 0);
-	public static ut_halberdier: UnitType = new UnitType("Halberdier", 60, 3, 0.0, 0.5, Number.MAX_VALUE, 1.0, 35, 25, 0);
+	public static ut_spearman: UnitType = new UnitType("Spearman", AoeData.feudalAge, 45, 3, 0.0, 0.5, Number.MAX_VALUE, 1.0, 35, 25, 0);
+	public static ut_pikeman: UnitType = new UnitType("Pikeman", AoeData.castleAge, 55, 3, 0.0, 0.5, Number.MAX_VALUE, 1.0, 35, 25, 0);
+	public static ut_halberdier: UnitType = new UnitType("Halberdier", AoeData.imperialAge, 60, 3, 0.0, 0.5, Number.MAX_VALUE, 1.0, 35, 25, 0);
 	public static utl_spearman: UnitTypeLine = new UnitTypeLine("Spearman line", [AoeData.ut_spearman, AoeData.ut_pikeman, AoeData.ut_halberdier]);
 
-	public static ut_eagleScout: UnitType = new UnitType("Eagle Scout", 50, 2.0, 0.0, 0.8, Number.MAX_VALUE, 1.1, 20, 0, 50);
-	public static ut_eagleWarrior: UnitType = new UnitType("Eagle Warrior", 55, 2.0, 0.0, 0.63, Number.MAX_VALUE, 1.15, 20, 0, 50);
-	public static ut_eliteEagleWarrior: UnitType = new UnitType("Elite Eagle Warrior", 60, 2.0, 0.0, 0.8, Number.MAX_VALUE, 1.3, 20, 0, 50);
+	public static ut_eagleScout: UnitType = new UnitType("Eagle Scout", AoeData.feudalAge, 50, 2.0, 0.0, 0.8, Number.MAX_VALUE, 1.1, 20, 0, 50);
+	public static ut_eagleWarrior: UnitType = new UnitType("Eagle Warrior", AoeData.castleAge, 55, 2.0, 0.0, 0.63, Number.MAX_VALUE, 1.15, 20, 0, 50);
+	public static ut_eliteEagleWarrior: UnitType = new UnitType("Elite Eagle Warrior", AoeData.imperialAge, 60, 2.0, 0.0, 0.8, Number.MAX_VALUE, 1.3, 20, 0, 50);
 	public static utl_eagleScout: UnitTypeLine = new UnitTypeLine("Eagle Scout line", [AoeData.ut_eagleScout, AoeData.ut_eagleWarrior, AoeData.ut_eliteEagleWarrior]);
 
-	public static ut_scoutCavalry: UnitType = new UnitType("Scout Cavalry", 45, 2.0, 0.0, 0.68, Number.MAX_VALUE, 1.55, 80, 0, 0, 0.4);
-	public static ut_lightCavalry: UnitType = new UnitType("Light Cavalry", 60, 2.0, 0.0, 0.68, Number.MAX_VALUE, 1.5, 80, 0, 0, 0.4);
-	public static ut_hussar: UnitType = new UnitType("Hussar", 75, 1.9, 0.0, 0.68, Number.MAX_VALUE, 1.5, 80, 0, 0, 0.4);
+	public static ut_scoutCavalry: UnitType = new UnitType("Scout Cavalry", AoeData.feudalAge, 45, 2.0, 0.0, 0.68, Number.MAX_VALUE, 1.55, 80, 0, 0, 0.4);
+	public static ut_lightCavalry: UnitType = new UnitType("Light Cavalry", AoeData.castleAge, 60, 2.0, 0.0, 0.68, Number.MAX_VALUE, 1.5, 80, 0, 0, 0.4);
+	public static ut_hussar: UnitType = new UnitType("Hussar", AoeData.imperialAge, 75, 1.9, 0.0, 0.68, Number.MAX_VALUE, 1.5, 80, 0, 0, 0.4);
 	public static utl_scoutCavalry: UnitTypeLine = new UnitTypeLine("Scout Cavalry line", [AoeData.ut_scoutCavalry, AoeData.ut_lightCavalry, AoeData.ut_hussar]);
 
-	public static ut_knight: UnitType = new UnitType("Knight", 100, 1.8, 0.0, 0.68, Number.MAX_VALUE, 1.35, 60, 0, 75, 0.4);
-	public static ut_cavalier: UnitType = new UnitType("Cavalier", 120, 1.8, 0.0, 0.68, Number.MAX_VALUE, 1.35, 60, 0, 75, 0.4);
-	public static ut_paladin: UnitType = new UnitType("Paladin", 160, 1.9, 0.0, 0.68, Number.MAX_VALUE, 1.35, 60, 0, 75, 0.4);
+	public static ut_knight: UnitType = new UnitType("Knight", AoeData.castleAge, 100, 1.8, 0.0, 0.68, Number.MAX_VALUE, 1.35, 60, 0, 75, 0.4);
+	public static ut_cavalier: UnitType = new UnitType("Cavalier", AoeData.imperialAge, 120, 1.8, 0.0, 0.68, Number.MAX_VALUE, 1.35, 60, 0, 75, 0.4);
+	public static ut_paladin: UnitType = new UnitType("Paladin", AoeData.imperialAge, 160, 1.9, 0.0, 0.68, Number.MAX_VALUE, 1.35, 60, 0, 75, 0.4);
 	public static utl_knight: UnitTypeLine = new UnitTypeLine("Knight line", [AoeData.ut_knight, AoeData.ut_cavalier, AoeData.ut_paladin]);
 	
-	public static ut_camelRider: UnitType = new UnitType("Camel Rider", 100, 2.0, 0.0, 0.5, Number.MAX_VALUE, 1.45, 55, 0, 60, 0.4);
-	public static ut_heavyCamelRider: UnitType = new UnitType("Heavy Camel Rider", 120, 2.0, 0.0, 0.5, Number.MAX_VALUE, 1.45, 55, 0, 60, 0.4);
-	public static ut_imperialCamelRider: UnitType = new UnitType("Imperial Camel Rider", 140, 2.0, 0.0, 0.5, Number.MAX_VALUE, 1.45, 55, 0, 60, 0.4);
+	public static ut_camelRider: UnitType = new UnitType("Camel Rider", AoeData.castleAge, 100, 2.0, 0.0, 0.5, Number.MAX_VALUE, 1.45, 55, 0, 60, 0.4);
+	public static ut_heavyCamelRider: UnitType = new UnitType("Heavy Camel Rider",  AoeData.imperialAge, 120, 2.0, 0.0, 0.5, Number.MAX_VALUE, 1.45, 55, 0, 60, 0.4);
+	public static ut_imperialCamelRider: UnitType = new UnitType("Imperial Camel Rider", AoeData.imperialAge, 140, 2.0, 0.0, 0.5, Number.MAX_VALUE, 1.45, 55, 0, 60, 0.4);
 	public static utl_camelRider: UnitTypeLine = new UnitTypeLine("Camel Rider line", [AoeData.ut_camelRider, AoeData.ut_heavyCamelRider, AoeData.ut_imperialCamelRider]);
 
-	public static ut_battleElephant: UnitType = new UnitType("Battle Elephant", 250, 2.0, 0.0, 0.5, Number.MAX_VALUE, 0.85, 120, 0, 70, 0.6);
-	public static ut_eliteBattleElephant: UnitType = new UnitType("Elite Battle Elephant", 300, 2.0, 0.0, 0.5, Number.MAX_VALUE, 0.85, 120, 0, 70, 0.6);
+	public static ut_battleElephant: UnitType = new UnitType("Battle Elephant", AoeData.castleAge, 250, 2.0, 0.0, 0.5, Number.MAX_VALUE, 0.85, 120, 0, 70, 0.6);
+	public static ut_eliteBattleElephant: UnitType = new UnitType("Elite Battle Elephant", AoeData.imperialAge, 300, 2.0, 0.0, 0.5, Number.MAX_VALUE, 0.85, 120, 0, 70, 0.6);
 	public static utl_battleElephant: UnitTypeLine = new UnitTypeLine("Battle Elephant line", [AoeData.ut_battleElephant, AoeData.ut_eliteBattleElephant]);
 
-	public static ut_steppeLancer: UnitType = new UnitType("Steppe Lancer", 60, 2.3, 1.0, 0.68, Number.MAX_VALUE, 1.45, 70, 0, 40, 0.4);
-	public static ut_eliteSteppeLancer: UnitType = new UnitType("Elite Steppe Lancer", 80, 2.3, 1.0, 0.68, Number.MAX_VALUE, 1.45, 70, 0, 40, 0.4);
+	public static ut_steppeLancer: UnitType = new UnitType("Steppe Lancer", AoeData.castleAge, 60, 2.3, 1.0, 0.68, Number.MAX_VALUE, 1.45, 70, 0, 40, 0.4);
+	public static ut_eliteSteppeLancer: UnitType = new UnitType("Elite Steppe Lancer", AoeData.imperialAge, 80, 2.3, 1.0, 0.68, Number.MAX_VALUE, 1.45, 70, 0, 40, 0.4);
 	public static utl_steppeLancer: UnitTypeLine = new UnitTypeLine("Steppe Lancer line", [AoeData.ut_steppeLancer, AoeData.ut_eliteSteppeLancer]);
 
-	public static ut_archer: UnitType = new UnitType("Archer", 30, 2.0, 4.0, 0.35, 7.0, 0.96, 0, 25, 45, 0.2, 0.0, 80);
-	public static ut_crossbowman: UnitType = new UnitType("Crossbowman", 35, 2.0, 5.0, 0.35, 7.0, 0.96, 0, 25, 45, 0.2, 0.0, 85);
-	public static ut_arbalester: UnitType = new UnitType("Arbalester", 40, 2.0, 5.0, 0.35, 7.0, 0.96, 0, 25, 45, 0.2, 0.0, 90);
+	public static ut_archer: UnitType = new UnitType("Archer", AoeData.feudalAge, 30, 2.0, 4.0, 0.35, 7.0, 0.96, 0, 25, 45, 0.2, 0.0, 80);
+	public static ut_crossbowman: UnitType = new UnitType("Crossbowman", AoeData.castleAge, 35, 2.0, 5.0, 0.35, 7.0, 0.96, 0, 25, 45, 0.2, 0.0, 85);
+	public static ut_arbalester: UnitType = new UnitType("Arbalester", AoeData.imperialAge, 40, 2.0, 5.0, 0.35, 7.0, 0.96, 0, 25, 45, 0.2, 0.0, 90);
 	public static utl_archer: UnitTypeLine = new UnitTypeLine("Archer line", [AoeData.ut_archer, AoeData.ut_crossbowman, AoeData.ut_arbalester]);
 
-	public static ut_skirmisher: UnitType = new UnitType("Skirmisher", 30, 3.0, 4.0, 0.51, 7.0, 0.96, 25, 35, 0, 0.2, 1.0, 90);
-	public static ut_eliteSkirmisher: UnitType = new UnitType("Elite Skirmisher", 35, 3.0, 5.0, 0.51, 7.0, 0.96, 25, 35, 0, 0.2, 1.0, 90);
-	public static ut_imperialSkirmisher: UnitType = new UnitType("Imperial Skirmisher", 35, 3.0, 5.0, 0.51, 7.0, 0.96, 25, 35, 0, 0.2, 1.0, 95);
+	public static ut_skirmisher: UnitType = new UnitType("Skirmisher", AoeData.feudalAge, 30, 3.0, 4.0, 0.51, 7.0, 0.96, 25, 35, 0, 0.2, 1.0, 90);
+	public static ut_eliteSkirmisher: UnitType = new UnitType("Elite Skirmisher", AoeData.castleAge, 35, 3.0, 5.0, 0.51, 7.0, 0.96, 25, 35, 0, 0.2, 1.0, 90);
+	public static ut_imperialSkirmisher: UnitType = new UnitType("Imperial Skirmisher", AoeData.imperialAge, 35, 3.0, 5.0, 0.51, 7.0, 0.96, 25, 35, 0, 0.2, 1.0, 95);
 	public static utl_skirmisher: UnitTypeLine = new UnitTypeLine("Skirmisher line", [AoeData.ut_skirmisher, AoeData.ut_eliteSkirmisher, AoeData.ut_imperialSkirmisher]);
 
-	public static ut_cavalryArcher: UnitType = new UnitType("Cavalry Archer", 50, 2.0, 4.0, 1.02, 7.0, 1.4, 0, 40, 60, 0.4, 0.0, 50);
-	public static ut_heavyCavalryArcher: UnitType = new UnitType("Heavy Cavalry Archer", 60, 2.0, 4.0, 1.0, 7.0, 1.4, 0, 40, 60, 0.4, 0.0, 50);
+	public static ut_cavalryArcher: UnitType = new UnitType("Cavalry Archer", AoeData.castleAge, 50, 2.0, 4.0, 1.02, 7.0, 1.4, 0, 40, 60, 0.4, 0.0, 50);
+	public static ut_heavyCavalryArcher: UnitType = new UnitType("Heavy Cavalry Archer", AoeData.imperialAge, 60, 2.0, 4.0, 1.0, 7.0, 1.4, 0, 40, 60, 0.4, 0.0, 50);
 	public static utl_cavalryArcher: UnitTypeLine = new UnitTypeLine("Cavalry Archer line", [AoeData.ut_cavalryArcher, AoeData.ut_heavyCavalryArcher]);
 
-	public static ut_handCannoneer: UnitType = new UnitType("Hand Cannoneer", 35, 3.45, 7.0, 0.35, 5.5, 0.96, 45, 0, 50, 0.2, 0.0, 65);
+	public static ut_handCannoneer: UnitType = new UnitType("Hand Cannoneer", AoeData.imperialAge, 35, 3.45, 7.0, 0.35, 5.5, 0.96, 45, 0, 50, 0.2, 0.0, 65);
 	public static utl_handCannoneer: UnitTypeLine = new UnitTypeLine("Hand Cannoneer line", [AoeData.ut_handCannoneer]);
 
-	public static ut_batteringRam: UnitType = new UnitType("Battering Ram", 175, 5.0, 0.0, 0.75, Number.MAX_VALUE, 0.5, 0, 160, 75, 0.8);
-	public static ut_cappedRam: UnitType = new UnitType("Capped Ram", 200, 5.0, 0.0, 0.75, Number.MAX_VALUE, 0.5, 0, 160, 75, 0.8);
-	public static ut_siegeRam: UnitType = new UnitType("Siege Ram", 270, 5.0, 0.0, 0.75, Number.MAX_VALUE, 0.6, 0, 160, 75, 0.8);
+	public static ut_batteringRam: UnitType = new UnitType("Battering Ram", AoeData.castleAge, 175, 5.0, 0.0, 0.75, Number.MAX_VALUE, 0.5, 0, 160, 75, 0.8);
+	public static ut_cappedRam: UnitType = new UnitType("Capped Ram", AoeData.imperialAge, 200, 5.0, 0.0, 0.75, Number.MAX_VALUE, 0.5, 0, 160, 75, 0.8);
+	public static ut_siegeRam: UnitType = new UnitType("Siege Ram", AoeData.imperialAge, 270, 5.0, 0.0, 0.75, Number.MAX_VALUE, 0.6, 0, 160, 75, 0.8);
 	public static utl_batteringRam: UnitTypeLine = new UnitTypeLine("Battering Ram line", [AoeData.ut_batteringRam, AoeData.ut_cappedRam, AoeData.ut_siegeRam]);
 
-	public static ut_scorpion: UnitType = new UnitType("Scorpion", 40, 3.6, 7.0, 0.21, 6.0, 0.65, 0, 75, 75, 0.5, 2.0, 100);
-	public static ut_heavyScorpion: UnitType = new UnitType("Heavy Scorpion", 50, 3.6, 7.0, 0.21, 6.0, 0.65, 0, 75, 75, 0.5, 2.0, 100);
+	public static ut_scorpion: UnitType = new UnitType("Scorpion", AoeData.castleAge, 40, 3.6, 7.0, 0.21, 6.0, 0.65, 0, 75, 75, 0.5, 2.0, 100);
+	public static ut_heavyScorpion: UnitType = new UnitType("Heavy Scorpion", AoeData.imperialAge, 50, 3.6, 7.0, 0.21, 6.0, 0.65, 0, 75, 75, 0.5, 2.0, 100);
 	public static utl_scorpion: UnitTypeLine = new UnitTypeLine("Scorpion line", [AoeData.ut_scorpion, AoeData.ut_heavyScorpion]);
 
-	public static ut_longbowman: UnitType = new UnitType("Longbowman", 35, 2.0, 5.0, 0.5, 7.0, 0.96, 0, 35, 40, 0.2, 0.0, 70);
-	public static ut_eliteLongbowman: UnitType = new UnitType("Elite Longbowman", 40, 2.0, 6.0, 0.5, 7.0, 0.96, 0, 35, 40, 0.2, 0.0, 80);
+	public static ut_longbowman: UnitType = new UnitType("Longbowman", AoeData.castleAge, 35, 2.0, 5.0, 0.5, 7.0, 0.96, 0, 35, 40, 0.2, 0.0, 70);
+	public static ut_eliteLongbowman: UnitType = new UnitType("Elite Longbowman", AoeData.imperialAge, 40, 2.0, 6.0, 0.5, 7.0, 0.96, 0, 35, 40, 0.2, 0.0, 80);
 	public static utl_longbowman: UnitTypeLine = new UnitTypeLine("Longbowman line", [AoeData.ut_longbowman, AoeData.ut_eliteLongbowman]);
 
-	public static ut_cataphract: UnitType = new UnitType("Cataphract", 110, 1.8, 0.0, 0.68, Number.MAX_VALUE, 1.35, 70, 0, 75, 0.4);
-	public static ut_eliteCataphract: UnitType = new UnitType("Elite Cataphract", 150, 1.7, 0.0, 0.68, Number.MAX_VALUE, 1.35, 70, 0, 75, 0.4);
+	public static ut_cataphract: UnitType = new UnitType("Cataphract", AoeData.castleAge, 110, 1.8, 0.0, 0.68, Number.MAX_VALUE, 1.35, 70, 0, 75, 0.4);
+	public static ut_eliteCataphract: UnitType = new UnitType("Elite Cataphract", AoeData.imperialAge, 150, 1.7, 0.0, 0.68, Number.MAX_VALUE, 1.35, 70, 0, 75, 0.4);
 	public static utl_cataphract: UnitTypeLine = new UnitTypeLine("Cataphract line", [AoeData.ut_cataphract, AoeData.ut_eliteCataphract]);
 
-	public static ut_woadRaider: UnitType = new UnitType("Woad Raider", 65, 2.0, 0.0, 0.72, Number.MAX_VALUE, 1.2, 65, 0, 25);
-	public static ut_eliteWoadRaider: UnitType = new UnitType("Elite Woad Raider", 80, 2.0, 0.0, 0.72, Number.MAX_VALUE, 1.2, 65, 0, 25);
+	public static ut_woadRaider: UnitType = new UnitType("Woad Raider", AoeData.castleAge, 65, 2.0, 0.0, 0.72, Number.MAX_VALUE, 1.2, 65, 0, 25);
+	public static ut_eliteWoadRaider: UnitType = new UnitType("Elite Woad Raider", AoeData.imperialAge, 80, 2.0, 0.0, 0.72, Number.MAX_VALUE, 1.2, 65, 0, 25);
 	public static utl_woadRaider: UnitTypeLine = new UnitTypeLine("Woad Raider line", [AoeData.ut_woadRaider, AoeData.ut_eliteWoadRaider]);
 
-	public static ut_chuKoNu: UnitType = new UnitType("Chu Ko Nu", 45, 3.85, 4.0, 0.83, 7.0, 0.96, 0, 40, 35, 0.2, 0.0, 85); // actually attack delay is 0.23s, but firing all the missiles takes longer
-	public static ut_eliteChuKoNu: UnitType = new UnitType("Elite Chu Ko Nu", 50, 3.85, 4.0, 0.83, 7.0, 0.96, 0, 40, 35, 0.2, 0.0, 85); // actually attack delay is 0.23s, but firing all the missiles takes longer
+	public static ut_chuKoNu: UnitType = new UnitType("Chu Ko Nu", AoeData.castleAge, 45, 3.85, 4.0, 0.83, 7.0, 0.96, 0, 40, 35, 0.2, 0.0, 85); // actually attack delay is 0.23s, but firing all the missiles takes longer
+	public static ut_eliteChuKoNu: UnitType = new UnitType("Elite Chu Ko Nu", AoeData.imperialAge, 50, 3.85, 4.0, 0.83, 7.0, 0.96, 0, 40, 35, 0.2, 0.0, 85); // actually attack delay is 0.23s, but firing all the missiles takes longer
 	public static utl_chuKoNu: UnitTypeLine = new UnitTypeLine("Chu Ko Nu line", [AoeData.ut_chuKoNu, AoeData.ut_eliteChuKoNu]); // check attack rate of chu ko nu again; compare to archers
 	
-	public static ut_throwingAxeman: UnitType = new UnitType("Throwing Axeman", 60, 2.0, 3.0, 1.0, 7.0, 1.0, 55, 0, 25);
-	public static ut_eliteThrowingAxeman: UnitType = new UnitType("Elite Throwing Axeman", 70, 2.0, 4.0, 0.82, 7.0, 1.0, 55, 0, 25);
+	public static ut_throwingAxeman: UnitType = new UnitType("Throwing Axeman", AoeData.castleAge, 60, 2.0, 3.0, 1.0, 7.0, 1.0, 55, 0, 25);
+	public static ut_eliteThrowingAxeman: UnitType = new UnitType("Elite Throwing Axeman", AoeData.imperialAge, 70, 2.0, 4.0, 0.82, 7.0, 1.0, 55, 0, 25);
 	public static utl_throwingAxeman: UnitTypeLine = new UnitTypeLine("Throwing Axeman line", [AoeData.ut_throwingAxeman, AoeData.ut_eliteThrowingAxeman]);
 	
-	public static ut_huskarl: UnitType = new UnitType("Huskarl", 60, 2.0, 0.0, 0.8, Number.MAX_VALUE, 1.05, 80, 0, 40);
-	public static ut_eliteHuskarl: UnitType = new UnitType("Elite Huskarl", 70, 2.0, 0.0, 0.8, Number.MAX_VALUE, 1.05, 80, 0, 40);
+	public static ut_huskarl: UnitType = new UnitType("Huskarl", AoeData.castleAge, 60, 2.0, 0.0, 0.8, Number.MAX_VALUE, 1.05, 80, 0, 40);
+	public static ut_eliteHuskarl: UnitType = new UnitType("Elite Huskarl", AoeData.imperialAge, 70, 2.0, 0.0, 0.8, Number.MAX_VALUE, 1.05, 80, 0, 40);
 	public static utl_huskarl: UnitTypeLine = new UnitTypeLine("Huskarl line", [AoeData.ut_huskarl, AoeData.ut_eliteHuskarl]);
 	
-	public static ut_samurai: UnitType = new UnitType("Samurai", 60, 1.9, 0.0, 0.8, Number.MAX_VALUE, 1.0, 60, 0, 30);
-	public static ut_eliteSamurai: UnitType = new UnitType("Elite Samurai", 80, 1.9, 0.0, 0.8, Number.MAX_VALUE, 1.0, 60, 0, 30);
+	public static ut_samurai: UnitType = new UnitType("Samurai", AoeData.castleAge, 60, 1.9, 0.0, 0.8, Number.MAX_VALUE, 1.0, 60, 0, 30);
+	public static ut_eliteSamurai: UnitType = new UnitType("Elite Samurai", AoeData.imperialAge, 80, 1.9, 0.0, 0.8, Number.MAX_VALUE, 1.0, 60, 0, 30);
 	public static utl_samurai: UnitTypeLine = new UnitTypeLine("Samurai line", [AoeData.ut_samurai, AoeData.ut_eliteSamurai]);
 
-	public static ut_mangudai: UnitType = new UnitType("Mangudai", 60, 2.1, 4.0, 0.5, 7.0, 1.4, 0, 55, 65, 0.4, 0.0, 95);
-	public static ut_eliteMangudai: UnitType = new UnitType("Elite Mangudai", 60, 2.1, 4.0, 0.5, 7.0, 1.4, 0, 55, 65, 0.4, 0.0, 95);
+	public static ut_mangudai: UnitType = new UnitType("Mangudai", AoeData.castleAge, 60, 2.1, 4.0, 0.5, 7.0, 1.4, 0, 55, 65, 0.4, 0.0, 95);
+	public static ut_eliteMangudai: UnitType = new UnitType("Elite Mangudai", AoeData.imperialAge, 60, 2.1, 4.0, 0.5, 7.0, 1.4, 0, 55, 65, 0.4, 0.0, 95);
 	public static utl_mangudai: UnitTypeLine = new UnitTypeLine("Mangudai line", [AoeData.ut_mangudai, AoeData.ut_eliteMangudai]);
 	
-	public static ut_warElephant: UnitType = new UnitType("War Elephant", 450, 2.0, 0.0, 0.56, Number.MAX_VALUE, 0.6, 200, 0, 75, 0.6);
-	public static ut_eliteWarElephant: UnitType = new UnitType("Elite War Elephant", 600, 2.0, 0.0, 0.56, Number.MAX_VALUE, 0.6, 200, 0, 75, 0.6);
+	public static ut_warElephant: UnitType = new UnitType("War Elephant", AoeData.castleAge, 450, 2.0, 0.0, 0.56, Number.MAX_VALUE, 0.6, 200, 0, 75, 0.6);
+	public static ut_eliteWarElephant: UnitType = new UnitType("Elite War Elephant", AoeData.imperialAge, 600, 2.0, 0.0, 0.56, Number.MAX_VALUE, 0.6, 200, 0, 75, 0.6);
 	public static utl_warElephant: UnitTypeLine = new UnitTypeLine("War Elephant line", [AoeData.ut_warElephant, AoeData.ut_eliteWarElephant]);
 	
-	public static ut_mameluke: UnitType = new UnitType("Mameluke", 65, 2.0, 3.0, 0.2, 7.0, 1.4, 55, 0, 85, 0.4);
-	public static ut_eliteMameluke: UnitType = new UnitType("Elite Mameluke", 80, 2.0, 3.0, 0.2, 7.0, 1.4, 55, 0, 85, 0.4);
+	public static ut_mameluke: UnitType = new UnitType("Mameluke", AoeData.castleAge, 65, 2.0, 3.0, 0.2, 7.0, 1.4, 55, 0, 85, 0.4);
+	public static ut_eliteMameluke: UnitType = new UnitType("Elite Mameluke", AoeData.imperialAge, 80, 2.0, 3.0, 0.2, 7.0, 1.4, 55, 0, 85, 0.4);
 	public static utl_mameluke: UnitTypeLine = new UnitTypeLine("Mameluke line", [AoeData.ut_mameluke, AoeData.ut_eliteMameluke]);
 
-	public static ut_teutonicKnight: UnitType = new UnitType("Teutonic Knight", 80, 2.0, 0.0, 0.75, Number.MAX_VALUE, 0.80, 85, 0, 40);
-	public static ut_eliteTeutonicKnight: UnitType = new UnitType("Elite Teutonic Knight", 100, 2.0, 0.0, 0.75, Number.MAX_VALUE, 0.80, 85, 0, 40);
+	public static ut_teutonicKnight: UnitType = new UnitType("Teutonic Knight", AoeData.castleAge, 80, 2.0, 0.0, 0.75, Number.MAX_VALUE, 0.80, 85, 0, 40);
+	public static ut_eliteTeutonicKnight: UnitType = new UnitType("Elite Teutonic Knight", AoeData.imperialAge, 100, 2.0, 0.0, 0.75, Number.MAX_VALUE, 0.80, 85, 0, 40);
 	public static utl_teutonicKnight: UnitTypeLine = new UnitTypeLine("Teutonic Knight line", [AoeData.ut_teutonicKnight, AoeData.ut_eliteTeutonicKnight]);
 
-	public static ut_janissary: UnitType = new UnitType("Janissary", 35, 3.49, 8.0, 0.4, 5.5, 0.96, 60, 0, 55, 0.2, 0.0, 65);
-	public static ut_eliteJanissary: UnitType = new UnitType("Elite Janissary", 40, 3.49, 8.0, 0.0, 5.5, 0.96, 60, 0, 55, 0.2, 0.0, 65);
+	public static ut_janissary: UnitType = new UnitType("Janissary", AoeData.castleAge, 35, 3.49, 8.0, 0.4, 5.5, 0.96, 60, 0, 55, 0.2, 0.0, 65);
+	public static ut_eliteJanissary: UnitType = new UnitType("Elite Janissary", AoeData.imperialAge, 40, 3.49, 8.0, 0.0, 5.5, 0.96, 60, 0, 55, 0.2, 0.0, 65);
 	public static utl_janissary: UnitTypeLine = new UnitTypeLine("Janissary line", [AoeData.ut_janissary, AoeData.ut_eliteJanissary]);
 	
-	public static ut_berserk: UnitType = new UnitType("Berserk", 54, 2.0, 0.0, 0.8, Number.MAX_VALUE, 1.05, 65, 0, 25, 0.2, 0.0, 100, 20.0);
-	public static ut_eliteBerserk: UnitType = new UnitType("Elite Berserk", 62, 2.0, 0.0, 0.5, Number.MAX_VALUE, 1.05, 65, 0, 25, 0.2, 0.0, 100, 20.0);
+	public static ut_berserk: UnitType = new UnitType("Berserk", AoeData.castleAge, 54, 2.0, 0.0, 0.8, Number.MAX_VALUE, 1.05, 65, 0, 25, 0.2, 0.0, 100, 20.0);
+	public static ut_eliteBerserk: UnitType = new UnitType("Elite Berserk", AoeData.imperialAge, 62, 2.0, 0.0, 0.5, Number.MAX_VALUE, 1.05, 65, 0, 25, 0.2, 0.0, 100, 20.0);
 	public static utl_berserk: UnitTypeLine = new UnitTypeLine("Berserk line", [AoeData.ut_berserk, AoeData.ut_eliteBerserk]);
 
-	public static ut_jaguarWarrior: UnitType = new UnitType("Jaguar Warrior", 50, 2.0, 0.0, 0.8, Number.MAX_VALUE, 1.0, 60, 0, 30);
-	public static ut_eliteJaguarWarrior: UnitType = new UnitType("Elite Jaguar Warrior", 75, 2.0, 0.0, 0.8, Number.MAX_VALUE, 1.0, 60, 0, 30);
+	public static ut_jaguarWarrior: UnitType = new UnitType("Jaguar Warrior", AoeData.castleAge, 50, 2.0, 0.0, 0.8, Number.MAX_VALUE, 1.0, 60, 0, 30);
+	public static ut_eliteJaguarWarrior: UnitType = new UnitType("Elite Jaguar Warrior", AoeData.imperialAge, 75, 2.0, 0.0, 0.8, Number.MAX_VALUE, 1.0, 60, 0, 30);
 	public static utl_jaguarWarrior: UnitTypeLine = new UnitTypeLine("Jaguar line", [AoeData.ut_jaguarWarrior, AoeData.ut_eliteJaguarWarrior]);
 	
-	public static ut_tarkan: UnitType = new UnitType("Tarkan", 100, 2.1, 0.0, 0.95, Number.MAX_VALUE, 1.35, 60, 0, 60, 0.4);
-	public static ut_eliteTarkan: UnitType = new UnitType("Elite Tarkan", 150, 2.1, 0.0, 0.95, Number.MAX_VALUE, 1.35, 60, 0, 60, 0.4);
+	public static ut_tarkan: UnitType = new UnitType("Tarkan", AoeData.castleAge, 100, 2.1, 0.0, 0.95, Number.MAX_VALUE, 1.35, 60, 0, 60, 0.4);
+	public static ut_eliteTarkan: UnitType = new UnitType("Elite Tarkan", AoeData.imperialAge, 150, 2.1, 0.0, 0.95, Number.MAX_VALUE, 1.35, 60, 0, 60, 0.4);
 	public static utl_tarkan: UnitTypeLine = new UnitTypeLine("Tarkan line", [AoeData.ut_tarkan, AoeData.ut_eliteTarkan]);
 	
-	public static ut_warWagon: UnitType = new UnitType("War Wagon", 150, 2.5, 4.0, 1.0, 6.0, 1.2, 0, 115, 60, 0.8, 0.0, 100);
-	public static ut_eliteWarWagon: UnitType = new UnitType("Elite War Wagon", 200, 2.5, 5.0, 1.0, 6.0, 1.2, 0, 115, 60, 0.8, 0.0, 100);
+	public static ut_warWagon: UnitType = new UnitType("War Wagon", AoeData.castleAge, 150, 2.5, 4.0, 1.0, 6.0, 1.2, 0, 115, 60, 0.8, 0.0, 100);
+	public static ut_eliteWarWagon: UnitType = new UnitType("Elite War Wagon", AoeData.imperialAge, 200, 2.5, 5.0, 1.0, 6.0, 1.2, 0, 115, 60, 0.8, 0.0, 100);
 	public static utl_warWagon: UnitTypeLine = new UnitTypeLine("War Wagon line", [AoeData.ut_warWagon, AoeData.ut_eliteWarWagon]);
 	
-	public static ut_plumedArcher: UnitType = new UnitType("Plumed Archer", 65, 1.9, 4.0, 0.5, 7.0, 1.2, 0, 55, 55, 0.2, 0.0, 80);
-	public static ut_elitePlumedArcher: UnitType = new UnitType("Elite Plumed Archer", 65, 1.9, 5.0, 0.5, 7.0, 1.2, 0, 55, 55, 0.2, 0.0, 90);
+	public static ut_plumedArcher: UnitType = new UnitType("Plumed Archer", AoeData.castleAge, 65, 1.9, 4.0, 0.5, 7.0, 1.2, 0, 55, 55, 0.2, 0.0, 80);
+	public static ut_elitePlumedArcher: UnitType = new UnitType("Elite Plumed Archer", AoeData.imperialAge, 65, 1.9, 5.0, 0.5, 7.0, 1.2, 0, 55, 55, 0.2, 0.0, 90);
 	public static utl_plumedArcher: UnitTypeLine = new UnitTypeLine("Plumed Archer line", [AoeData.ut_plumedArcher, AoeData.ut_elitePlumedArcher]);
 	
-	public static ut_conquistador: UnitType = new UnitType("Conquistador", 55, 2.9, 6.0, 0.41, 5.5, 1.3, 60, 0, 70, 0.4, 0.0, 65);
-	public static ut_eliteConquistador: UnitType = new UnitType("Elite Conquistador", 70, 2.9, 6.0, 0.41, 5.5, 1.3, 60, 0, 70, 0.4, 0.0, 70);
+	public static ut_conquistador: UnitType = new UnitType("Conquistador", AoeData.castleAge, 55, 2.9, 6.0, 0.41, 5.5, 1.3, 60, 0, 70, 0.4, 0.0, 65);
+	public static ut_eliteConquistador: UnitType = new UnitType("Elite Conquistador", AoeData.imperialAge, 70, 2.9, 6.0, 0.41, 5.5, 1.3, 60, 0, 70, 0.4, 0.0, 70);
 	public static utl_conquistador: UnitTypeLine = new UnitTypeLine("Conquistador line", [AoeData.ut_conquistador, AoeData.ut_eliteConquistador]);
 
-	public static ut_kamayuk: UnitType = new UnitType("Kamayuk", 60, 2.0, 1.0, 0.5, Number.MAX_VALUE, 1.0, 60, 0, 30);
-	public static ut_eliteKamayuk: UnitType = new UnitType("Elite Kamayuk", 80, 2.0, 1.0, 0.5, Number.MAX_VALUE, 1.0, 60, 0, 30);
+	public static ut_kamayuk: UnitType = new UnitType("Kamayuk", AoeData.castleAge, 60, 2.0, 1.0, 0.5, Number.MAX_VALUE, 1.0, 60, 0, 30);
+	public static ut_eliteKamayuk: UnitType = new UnitType("Elite Kamayuk", AoeData.imperialAge, 80, 2.0, 1.0, 0.5, Number.MAX_VALUE, 1.0, 60, 0, 30);
 	public static utl_kamayuk: UnitTypeLine = new UnitTypeLine("Kamayuk line", [AoeData.ut_kamayuk, AoeData.ut_eliteKamayuk]);
 	
-	public static ut_slinger: UnitType = new UnitType("Slinger", 40, 2.0, 5.0, 0.8, 5.5, 0.96, 30, 0, 40, 0.2, 1.0, 90);
+	public static ut_slinger: UnitType = new UnitType("Slinger", AoeData.castleAge, 40, 2.0, 5.0, 0.8, 5.5, 0.96, 30, 0, 40, 0.2, 1.0, 90);
 	public static utl_slinger: UnitTypeLine = new UnitTypeLine("Slinger line", [AoeData.ut_slinger]);
 	
-	public static ut_elephantArcher: UnitType = new UnitType("Elephant Archer", 280, 2.0, 4.0, 0.4, 7.0, 0.8, 100, 0, 70, 0.6);
-	public static ut_eliteElephantArcher: UnitType = new UnitType("Elite Elephant Archer", 330, 2.0, 4.0, 0.4, 7.0, 0.8, 100, 0, 70, 0.6);
+	public static ut_elephantArcher: UnitType = new UnitType("Elephant Archer", AoeData.castleAge, 280, 2.0, 4.0, 0.4, 7.0, 0.8, 100, 0, 70, 0.6);
+	public static ut_eliteElephantArcher: UnitType = new UnitType("Elite Elephant Archer", AoeData.imperialAge, 330, 2.0, 4.0, 0.4, 7.0, 0.8, 100, 0, 70, 0.6);
 	public static utl_elephantArcher: UnitTypeLine = new UnitTypeLine("Elephant Archer line", [AoeData.ut_elephantArcher, AoeData.ut_eliteElephantArcher]);
 	
-	public static ut_genoeseCrossbowman: UnitType = new UnitType("Gen. Crossbowman", 45, 2.0, 4.0, 0.5, 7.0, 0.96, 0, 45, 40);
-	public static ut_eliteGenoeseCrossbowman: UnitType = new UnitType("El. Gen. Crossbowman", 50, 2.0, 4.0, 0.5, 7.0, 0.96, 0, 45, 40);
+	public static ut_genoeseCrossbowman: UnitType = new UnitType("Gen. Crossbowman", AoeData.castleAge, 45, 2.0, 4.0, 0.5, 7.0, 0.96, 0, 45, 40);
+	public static ut_eliteGenoeseCrossbowman: UnitType = new UnitType("El. Gen. Crossbowman", AoeData.imperialAge, 50, 2.0, 4.0, 0.5, 7.0, 0.96, 0, 45, 40);
 	public static utl_genoeseCrossbowman: UnitTypeLine = new UnitTypeLine("Gen. Crossbowman line", [AoeData.ut_genoeseCrossbowman, AoeData.ut_eliteGenoeseCrossbowman]);
 	
-	public static ut_condottiero: UnitType = new UnitType("Condottiero", 80, 1.9, 0.0, 0.75, Number.MAX_VALUE, 1.2, 50, 0, 35);
+	public static ut_condottiero: UnitType = new UnitType("Condottiero", AoeData.imperialAge, 80, 1.9, 0.0, 0.75, Number.MAX_VALUE, 1.2, 50, 0, 35);
 	public static utl_condottiero: UnitTypeLine = new UnitTypeLine("Condottiero line", [AoeData.ut_condottiero]);
 	
-	public static ut_magyarHuszar: UnitType = new UnitType("Magyar Huszar", 70, 1.8, 0.0, 0.68, Number.MAX_VALUE, 1.5, 80, 0, 10, 0.4);
-	public static ut_eliteMagyarHuszar: UnitType = new UnitType("Elite Magyar Huszar", 85, 1.8, 0.0, 0.68, Number.MAX_VALUE, 1.5, 80, 0, 10, 0.4);
+	public static ut_magyarHuszar: UnitType = new UnitType("Magyar Huszar", AoeData.castleAge, 70, 1.8, 0.0, 0.68, Number.MAX_VALUE, 1.5, 80, 0, 10, 0.4);
+	public static ut_eliteMagyarHuszar: UnitType = new UnitType("Elite Magyar Huszar", AoeData.imperialAge, 85, 1.8, 0.0, 0.68, Number.MAX_VALUE, 1.5, 80, 0, 10, 0.4);
 	public static utl_magyarHuszar: UnitTypeLine = new UnitTypeLine("Magyar Huszar line", [AoeData.ut_magyarHuszar, AoeData.ut_eliteMagyarHuszar]);
 	
-	public static ut_boyar: UnitType = new UnitType("Boyar", 100, 1.9, 0.0, 0.7, Number.MAX_VALUE, 1.3, 50, 0, 80, 0.4);
-	public static ut_eliteBoyar: UnitType = new UnitType("Elite Boyar", 130, 1.9, 0.0, 0.7, Number.MAX_VALUE, 1.3, 50, 0, 80, 0.4);
+	public static ut_boyar: UnitType = new UnitType("Boyar", AoeData.castleAge, 100, 1.9, 0.0, 0.7, Number.MAX_VALUE, 1.3, 50, 0, 80, 0.4);
+	public static ut_eliteBoyar: UnitType = new UnitType("Elite Boyar", AoeData.imperialAge, 130, 1.9, 0.0, 0.7, Number.MAX_VALUE, 1.3, 50, 0, 80, 0.4);
 	public static utl_boyar: UnitTypeLine = new UnitTypeLine("Boyar line", [AoeData.ut_boyar, AoeData.ut_eliteBoyar]);
 
-	public static ut_camelArcher: UnitType = new UnitType("Camel Archer", 55, 2.0, 4.0, 0.63, 7.0, 1.4, 0, 50, 60, 0.4, 0.0, 95, 0.0);
-	public static ut_eliteCamelArcher: UnitType = new UnitType("Elite Camel Archer", 60, 2.0, 4.0, 0.63, 7.0, 1.4, 0, 50, 60, 0.4, 0.0, 95, 0.0);
+	public static ut_camelArcher: UnitType = new UnitType("Camel Archer", AoeData.castleAge, 55, 2.0, 4.0, 0.63, 7.0, 1.4, 0, 50, 60, 0.4, 0.0, 95, 0.0);
+	public static ut_eliteCamelArcher: UnitType = new UnitType("Elite Camel Archer", AoeData.imperialAge, 60, 2.0, 4.0, 0.63, 7.0, 1.4, 0, 50, 60, 0.4, 0.0, 95, 0.0);
 	public static utl_camelArcher: UnitTypeLine = new UnitTypeLine("Camel Archer line", [AoeData.ut_camelArcher, AoeData.ut_eliteCamelArcher]);
 	
-	public static ut_genitour: UnitType = new UnitType("Genitour", 50, 3.0, 4.0, 0.5, 7.0, 1.35, 50, 35, 0, 0.4, 1.0, 90);
-	public static ut_eliteGenitour: UnitType = new UnitType("Elite Genitour", 55, 3.0, 4.0, 0.5, 7.0, 1.35, 50, 35, 0, 0.4, 1.0, 90);
+	public static ut_genitour: UnitType = new UnitType("Genitour", AoeData.castleAge, 50, 3.0, 4.0, 0.5, 7.0, 1.35, 50, 35, 0, 0.4, 1.0, 90);
+	public static ut_eliteGenitour: UnitType = new UnitType("Elite Genitour", AoeData.imperialAge, 55, 3.0, 4.0, 0.5, 7.0, 1.35, 50, 35, 0, 0.4, 1.0, 90);
 	public static utl_genitour: UnitTypeLine = new UnitTypeLine("Genitour line", [AoeData.ut_genitour, AoeData.ut_eliteGenitour]);
 	
-	public static ut_shotelWarrior: UnitType = new UnitType("Shotel Warrior", 40, 2.0, 0.0, 0.75, Number.MAX_VALUE, 1.2, 50, 0, 30);
-	public static ut_eliteShotelWarrior: UnitType = new UnitType("Elite Shotel Warrior", 50, 2.0, 0.0, 0.75, Number.MAX_VALUE, 1.2, 50, 0, 30);
+	public static ut_shotelWarrior: UnitType = new UnitType("Shotel Warrior", AoeData.castleAge, 40, 2.0, 0.0, 0.75, Number.MAX_VALUE, 1.2, 50, 0, 30);
+	public static ut_eliteShotelWarrior: UnitType = new UnitType("Elite Shotel Warrior", AoeData.imperialAge, 50, 2.0, 0.0, 0.75, Number.MAX_VALUE, 1.2, 50, 0, 30);
 	public static utl_shotelWarrior: UnitTypeLine = new UnitTypeLine("Shotel Warrior line", [AoeData.ut_shotelWarrior, AoeData.ut_eliteShotelWarrior]);
 	
-	public static ut_gbeto: UnitType = new UnitType("Gbeto", 30, 2.0, 5.0, 1.0, 7.0, 1.25, 50, 0, 40);
-	public static ut_eliteGbeto: UnitType = new UnitType("Elite Gbeto", 45, 2.0, 6.0, 1.0, 7.0, 1.25, 50, 0, 40);
+	public static ut_gbeto: UnitType = new UnitType("Gbeto", AoeData.castleAge, 30, 2.0, 5.0, 1.0, 7.0, 1.25, 50, 0, 40);
+	public static ut_eliteGbeto: UnitType = new UnitType("Elite Gbeto", AoeData.imperialAge, 45, 2.0, 6.0, 1.0, 7.0, 1.25, 50, 0, 40);
 	public static utl_gbeto: UnitTypeLine = new UnitTypeLine("Gbeto line", [AoeData.ut_gbeto, AoeData.ut_eliteGbeto]);
 
-	public static ut_organGun: UnitType = new UnitType("Organ Gun", 60, 3.45, 7.0, 0.6, 5.5, 0.85, 0, 80, 70, 0.4, 1.0, 50);
-	public static ut_eliteOrganGun: UnitType = new UnitType("Elite Organ Gun", 70, 3.45, 7.0, 0.6, 5.5, 0.85, 0, 80, 70, 0.4, 1.0, 50);
+	public static ut_organGun: UnitType = new UnitType("Organ Gun", AoeData.castleAge, 60, 3.45, 7.0, 0.6, 5.5, 0.85, 0, 80, 70, 0.4, 1.0, 50);
+	public static ut_eliteOrganGun: UnitType = new UnitType("Elite Organ Gun", AoeData.imperialAge, 70, 3.45, 7.0, 0.6, 5.5, 0.85, 0, 80, 70, 0.4, 1.0, 50);
 	public static utl_organGun: UnitTypeLine = new UnitTypeLine("Organ Gun line", [AoeData.ut_organGun, AoeData.ut_eliteOrganGun]);
 
-	public static ut_arambai: UnitType = new UnitType("Arambai", 60, 2.0, 5.0, 0.6, 7.0, 1.3, 0, 75, 60, 0.4, 0.0, 20);
-	public static ut_eliteArambai: UnitType = new UnitType("Elite Arambai", 65, 2.0, 5.0, 0.6, 7.0, 1.3, 0, 75, 60, 0.4, 0.0, 30);
+	public static ut_arambai: UnitType = new UnitType("Arambai", AoeData.castleAge, 60, 2.0, 5.0, 0.6, 7.0, 1.3, 0, 75, 60, 0.4, 0.0, 20);
+	public static ut_eliteArambai: UnitType = new UnitType("Elite Arambai", AoeData.imperialAge, 65, 2.0, 5.0, 0.6, 7.0, 1.3, 0, 75, 60, 0.4, 0.0, 30);
 	public static utl_arambai: UnitTypeLine = new UnitTypeLine("Arambai line", [AoeData.ut_arambai, AoeData.ut_eliteArambai]);
 	
-	public static ut_ballistaElephant: UnitType = new UnitType("Ballista Elephant", 250, 2.5, 5.0, 0.4, 6.0, 0.80, 100, 0, 80, 0.6);
-	public static ut_eliteBallistaElephant: UnitType = new UnitType("Elite Ballista Elephant", 290, 2.5, 5.0, 0.4, 6.0, 0.80, 100, 0, 80, 0.6);
+	public static ut_ballistaElephant: UnitType = new UnitType("Ballista Elephant", AoeData.castleAge, 250, 2.5, 5.0, 0.4, 6.0, 0.80, 100, 0, 80, 0.6);
+	public static ut_eliteBallistaElephant: UnitType = new UnitType("Elite Ballista Elephant", AoeData.imperialAge, 290, 2.5, 5.0, 0.4, 6.0, 0.80, 100, 0, 80, 0.6);
 	public static utl_ballistaElephant: UnitTypeLine = new UnitTypeLine("Ballista Elephant line", [AoeData.ut_ballistaElephant, AoeData.ut_eliteBallistaElephant]);
 
-	public static ut_karambitWarrior: UnitType = new UnitType("Karambit Warrior", 30, 2.0, 0.0, 0.81, Number.MAX_VALUE, 1.2, 25, 0, 15);
-	public static ut_eliteKarambitWarrior: UnitType = new UnitType("Elite Karambit Warrior", 40, 2.0, 0.0, 0.81, Number.MAX_VALUE, 1.2, 25, 0, 15);
+	public static ut_karambitWarrior: UnitType = new UnitType("Karambit Warrior", AoeData.castleAge, 30, 2.0, 0.0, 0.81, Number.MAX_VALUE, 1.2, 25, 0, 15);
+	public static ut_eliteKarambitWarrior: UnitType = new UnitType("Elite Karambit Warrior", AoeData.imperialAge, 40, 2.0, 0.0, 0.81, Number.MAX_VALUE, 1.2, 25, 0, 15);
 	public static utl_karambitWarrior: UnitTypeLine = new UnitTypeLine("Karambit Warrior line", [AoeData.ut_karambitWarrior, AoeData.ut_eliteKarambitWarrior]);
 	
-	public static ut_rattanArcher: UnitType = new UnitType("Rattan Archer", 40, 2.0, 4.0, 0.69, 7.0, 1.1, 0, 50, 45, 0.2, 0.0, 80);
-	public static ut_eliteRattanArcher: UnitType = new UnitType("Elite Rattan Archer", 45, 2.0, 5.0, 0.69, 7.0, 1.1, 0, 50, 45, 0.2, 0.0, 90);
+	public static ut_rattanArcher: UnitType = new UnitType("Rattan Archer", AoeData.castleAge, 40, 2.0, 4.0, 0.69, 7.0, 1.1, 0, 50, 45, 0.2, 0.0, 80);
+	public static ut_eliteRattanArcher: UnitType = new UnitType("Elite Rattan Archer", AoeData.imperialAge, 45, 2.0, 5.0, 0.69, 7.0, 1.1, 0, 50, 45, 0.2, 0.0, 90);
 	public static utl_rattanArcher: UnitTypeLine = new UnitTypeLine("Rattan Archer line", [AoeData.ut_rattanArcher, AoeData.ut_eliteRattanArcher]);
 
-	public static ut_konnik: UnitType = new UnitType("Konnik", 100, 2.4, 0.0, 0.7, Number.MAX_VALUE, 1.35, 60, 0, 70, 0.4);
-	public static ut_eliteKonnik: UnitType = new UnitType("Elite Konnik", 120, 2.4, 0.0, 0.7, Number.MAX_VALUE, 1.35, 60, 0, 70, 0.4);
+	public static ut_konnik: UnitType = new UnitType("Konnik", AoeData.castleAge, 100, 2.4, 0.0, 0.7, Number.MAX_VALUE, 1.35, 60, 0, 70, 0.4);
+	public static ut_eliteKonnik: UnitType = new UnitType("Elite Konnik", AoeData.imperialAge, 120, 2.4, 0.0, 0.7, Number.MAX_VALUE, 1.35, 60, 0, 70, 0.4);
 	public static utl_konnik: UnitTypeLine = new UnitTypeLine("Konnik line", [AoeData.ut_konnik, AoeData.ut_eliteKonnik]);
 
-	public static ut_konnikDismounted: UnitType = new UnitType("Konnik (Foot)", 45, 2.4, 0.0, 0.7, Number.MAX_VALUE, 0.9, 30, 0, 35);
-	public static ut_eliteKonnikDismounted: UnitType = new UnitType("Elite Konnik (Foot)", 50, 2.4, 0.0, 0.7, Number.MAX_VALUE, 0.9, 30, 0, 35);
+	public static ut_konnikDismounted: UnitType = new UnitType("Konnik (Foot)", AoeData.castleAge, 45, 2.4, 0.0, 0.7, Number.MAX_VALUE, 0.9, 30, 0, 35);
+	public static ut_eliteKonnikDismounted: UnitType = new UnitType("Elite Konnik (Foot)", AoeData.imperialAge, 50, 2.4, 0.0, 0.7, Number.MAX_VALUE, 0.9, 30, 0, 35);
 	public static utl_konnikDismounted: UnitTypeLine = new UnitTypeLine("Konnik (Foot) line", [AoeData.ut_konnikDismounted, AoeData.ut_eliteKonnikDismounted]);
 	
-	public static ut_kipchak: UnitType = new UnitType("Kipchak", 40, 2.2, 4.0, 0.5, 7.0, 1.4, 0, 60, 35, 0.4, 0.0, 90);
-	public static ut_eliteKipchak: UnitType = new UnitType("Elite Kipchak", 45, 2.2, 4.0, 0.5, 7.0, 1.4, 0, 60, 35, 0.4, 0.0, 90);
+	public static ut_kipchak: UnitType = new UnitType("Kipchak", AoeData.castleAge, 40, 2.2, 4.0, 0.5, 7.0, 1.4, 0, 60, 35, 0.4, 0.0, 90);
+	public static ut_eliteKipchak: UnitType = new UnitType("Elite Kipchak", AoeData.imperialAge, 45, 2.2, 4.0, 0.5, 7.0, 1.4, 0, 60, 35, 0.4, 0.0, 90);
 	public static utl_kipchak: UnitTypeLine = new UnitTypeLine("Kipchak line", [AoeData.ut_kipchak, AoeData.ut_eliteKipchak]);
 	
-	public static ut_leitis: UnitType = new UnitType("Leitis", 100, 1.9, 0.0, 0.7, Number.MAX_VALUE, 1.4, 70, 0, 50, 0.4);
-	public static ut_eliteLeitis: UnitType = new UnitType("Elite Leitis", 130, 1.9, 0.0, 0.7, Number.MAX_VALUE, 1.4, 70, 0, 50, 0.4);
+	public static ut_leitis: UnitType = new UnitType("Leitis", AoeData.castleAge, 100, 1.9, 0.0, 0.7, Number.MAX_VALUE, 1.4, 70, 0, 50, 0.4);
+	public static ut_eliteLeitis: UnitType = new UnitType("Elite Leitis", AoeData.imperialAge, 130, 1.9, 0.0, 0.7, Number.MAX_VALUE, 1.4, 70, 0, 50, 0.4);
 	public static utl_leitis: UnitTypeLine = new UnitTypeLine("Leitis line", [AoeData.ut_leitis, AoeData.ut_eliteLeitis]);
 	
-	public static ut_keshik: UnitType = new UnitType("Keshik", 110, 1.9, 0.0, 0.7, Number.MAX_VALUE, 1.4, 60, 0, 40, 0.4);
-	public static ut_eliteKeshik: UnitType = new UnitType("Elite Keshik", 140, 1.9, 0.0, 0.7, Number.MAX_VALUE, 1.4, 60, 0, 40, 0.4);
+	public static ut_keshik: UnitType = new UnitType("Keshik", AoeData.castleAge, 110, 1.9, 0.0, 0.7, Number.MAX_VALUE, 1.4, 60, 0, 40, 0.4);
+	public static ut_eliteKeshik: UnitType = new UnitType("Elite Keshik", AoeData.imperialAge, 140, 1.9, 0.0, 0.7, Number.MAX_VALUE, 1.4, 60, 0, 40, 0.4);
 	public static utl_keshik: UnitTypeLine = new UnitTypeLine("Keshik line", [AoeData.ut_keshik, AoeData.ut_eliteKeshik]);
 	
-	public static ut_flamingCamel: UnitType = new UnitType("Flaming Camel", 55, Number.MAX_VALUE, 0.0, 0.0, Number.MAX_VALUE, 1.3, 75, 0, 30, 0.4);
+	public static ut_flamingCamel: UnitType = new UnitType("Flaming Camel", AoeData.imperialAge, 55, Number.MAX_VALUE, 0.0, 0.0, Number.MAX_VALUE, 1.3, 75, 0, 30, 0.4);
 	public static utl_flamingCamel: UnitTypeLine = new UnitTypeLine("Flaming Camel line", [AoeData.ut_flamingCamel]);
 
-	public static ut_coustillier: UnitType = new UnitType("Coustillier", 115, 1.9, 0.0, 0.5, Number.MAX_VALUE, 1.35, 55, 0, 55, 0.4); // check attack delay, no values found; guessed 0.5
-	public static ut_eliteCoustillier: UnitType = new UnitType("Elite Coustillier", 145, 1.9, 0.0, 0.5, Number.MAX_VALUE, 1.35, 55, 0, 55, 0.4); // check attack delay, no values found; guessed 0.5
+	public static ut_coustillier: UnitType = new UnitType("Coustillier", AoeData.castleAge, 115, 1.9, 0.0, 0.5, Number.MAX_VALUE, 1.35, 55, 0, 55, 0.4); // check attack delay, no values found; guessed 0.5
+	public static ut_eliteCoustillier: UnitType = new UnitType("Elite Coustillier", AoeData.imperialAge, 145, 1.9, 0.0, 0.5, Number.MAX_VALUE, 1.35, 55, 0, 55, 0.4); // check attack delay, no values found; guessed 0.5
 	public static utl_coustillier: UnitTypeLine = new UnitTypeLine("Coustillier line", [AoeData.ut_coustillier, AoeData.ut_eliteCoustillier]);
 
-	public static ut_flemishMilitia: UnitType = new UnitType("Flemish Militia", 75, 2.0, 0.0, 0.5, Number.MAX_VALUE, 0.9, 60, 0, 25, 0.2);
+	public static ut_flemishMilitia: UnitType = new UnitType("Flemish Militia", AoeData.imperialAge, 75, 2.0, 0.0, 0.5, Number.MAX_VALUE, 0.9, 60, 0, 25, 0.2);
 	public static utl_flemishMilitia: UnitTypeLine = new UnitTypeLine("Flemish Militia line", [AoeData.ut_flemishMilitia]);
 
-	public static ut_serjeant: UnitType = new UnitType("Serjeant", 45, 2.0, 0.0, 0.5, Number.MAX_VALUE, 0.9, 60, 0, 35, 0.2);
-	public static ut_eliteSerjeant: UnitType = new UnitType("Serjeant", 85, 2.0, 0.0, 0.5, Number.MAX_VALUE, 0.9, 60, 0, 35, 0.2);
+	public static ut_serjeant: UnitType = new UnitType("Serjeant", AoeData.feudalAge, 45, 2.0, 0.0, 0.5, Number.MAX_VALUE, 0.9, 60, 0, 35, 0.2);
+	public static ut_eliteSerjeant: UnitType = new UnitType("Elite Serjeant", AoeData.imperialAge, 85, 2.0, 0.0, 0.5, Number.MAX_VALUE, 0.9, 60, 0, 35, 0.2);
 	public static utl_serjeant: UnitTypeLine = new UnitTypeLine("Serjeant line", [AoeData.ut_serjeant, AoeData.ut_eliteSerjeant]);
 
 
@@ -336,32 +350,32 @@ export abstract class AoeData
 		AoeData.utl_coustillier, AoeData.utl_flemishMilitia, AoeData.utl_serjeant,
 	];
 
-	public static tec_supplies: Technology = new Technology("Supplies", 2);
-	public static tec_squires: Technology = new Technology("Squires", 3);
-	public static tec_thumbRing: Technology = new Technology("Thumb Ring", 3);
-	public static tec_parthianTactics: Technology = new Technology("Parthian Tactics", 4);
-	public static tec_chemistry: Technology = new Technology("Chemistry", 4);
-	public static tec_siegeEngineers: Technology = new Technology("Siege Engineers", 4);
-	public static tec_bloodlines: Technology = new Technology("Bloodlines", 2);
-	public static tec_husbandry: Technology = new Technology("Husbandry", 3);
-	public static tec_loom: Technology = new Technology("Loom", 1);
-	public static tec_wheelbarrow: Technology = new Technology("Wheelbarrow", 2);
-	public static tec_handCart: Technology = new Technology("Hand Cart", 3);
-	public static tec_forging: Technology = new Technology("Forging", 2);
-	public static tec_ironCasting: Technology = new Technology("Iron Casting", 3);
-	public static tec_blastFurnace: Technology = new Technology("Blast Furnace", 4);
-	public static tec_scaleMailArmor: Technology = new Technology("Scale Mail Armor", 2);
-	public static tec_chainMailArmor: Technology = new Technology("Chain Mail Armor", 3);
-	public static tec_plateMailArmor: Technology = new Technology("Plate Mail Armor", 4);
-	public static tec_scaleBardingArmor: Technology = new Technology("Scale Barding Armor", 2);
-	public static tec_chainBardingArmor: Technology = new Technology("Chain Barding Armor", 3);
-	public static tec_plateBardingArmor: Technology = new Technology("Plate Barding Armor", 4);
-	public static tec_fletching: Technology = new Technology("Fletching", 2);
-	public static tec_bodkinArrow: Technology = new Technology("Bodkin Arrow", 3);
-	public static tec_bracer: Technology = new Technology("Bracer", 4);
-	public static tec_paddedArcherArmor: Technology = new Technology("Padded Archer Armor", 2);
-	public static tec_leatherArcherArmor: Technology = new Technology("Leather Archer Armor", 3);
-	public static tec_ringArcherArmor: Technology = new Technology("Ring Archer Armor", 4);
+	public static tec_supplies: Technology = new Technology("Supplies", AoeData.feudalAge, "assets/technologies/Suplliesicon.png");
+	public static tec_squires: Technology = new Technology("Squires", AoeData.castleAge, "assets/technologies/SquiresDE.png");
+	public static tec_thumbRing: Technology = new Technology("Thumb Ring", AoeData.castleAge, "assets/technologies/ThumbRingDE.png");
+	public static tec_parthianTactics: Technology = new Technology("Parthian Tactics", AoeData.imperialAge, "assets/technologies/ParthianTacticsDE.png");
+	public static tec_chemistry: Technology = new Technology("Chemistry", AoeData.imperialAge, "assets/technologies/ChemistryDE.png");
+	public static tec_siegeEngineers: Technology = new Technology("Siege Engineers", AoeData.imperialAge, "assets/technologies/SiegeEngineersDE.png");
+	public static tec_bloodlines: Technology = new Technology("Bloodlines", AoeData.feudalAge, "assets/technologies/BloodlinesDE.png");
+	public static tec_husbandry: Technology = new Technology("Husbandry", AoeData.castleAge, "assets/technologies/HusbandryDE.png");
+	public static tec_loom: Technology = new Technology("Loom", AoeData.darkAge, "assets/technologies/LoomDE.png");
+	public static tec_wheelbarrow: Technology = new Technology("Wheelbarrow", AoeData.feudalAge, "assets/technologies/WheelbarrowDE.png");
+	public static tec_handCart: Technology = new Technology("Hand Cart", AoeData.castleAge, "assets/technologies/HandcartDE.png");
+	public static tec_forging: Technology = new Technology("Forging", AoeData.feudalAge, "assets/technologies/Forging_aoe2de.png");
+	public static tec_ironCasting: Technology = new Technology("Iron Casting", AoeData.castleAge, "assets/technologies/IronCastingDE.png");
+	public static tec_blastFurnace: Technology = new Technology("Blast Furnace", AoeData.imperialAge, "assets/technologies/BlastFurnaceDE.png");
+	public static tec_scaleMailArmor: Technology = new Technology("Scale Mail Armor", AoeData.feudalAge, "assets/technologies/ScaleMailArmorDE.png");
+	public static tec_chainMailArmor: Technology = new Technology("Chain Mail Armor", AoeData.castleAge, "assets/technologies/ChainMailArmorDE.png");
+	public static tec_plateMailArmor: Technology = new Technology("Plate Mail Armor", AoeData.imperialAge, "assets/technologies/PlateMailArmorDE.png");
+	public static tec_scaleBardingArmor: Technology = new Technology("Scale Barding Armor", AoeData.feudalAge, "assets/technologies/ScaleBardingArmorDE.png");
+	public static tec_chainBardingArmor: Technology = new Technology("Chain Barding Armor", AoeData.castleAge, "assets/technologies/ChainBardingDE.png");
+	public static tec_plateBardingArmor: Technology = new Technology("Plate Barding Armor", AoeData.imperialAge, "assets/technologies/PlateBardingArmorDE.png");
+	public static tec_fletching: Technology = new Technology("Fletching", AoeData.feudalAge, "assets/technologies/FletchingDE.png");
+	public static tec_bodkinArrow: Technology = new Technology("Bodkin Arrow", AoeData.castleAge, "assets/technologies/BodkinArrowDE.png");
+	public static tec_bracer: Technology = new Technology("Bracer", AoeData.imperialAge, "assets/technologies/BracerDE.png");
+	public static tec_paddedArcherArmor: Technology = new Technology("Padded Archer Armor", AoeData.feudalAge, "assets/technologies/PaddedArcherArmorDE.png");
+	public static tec_leatherArcherArmor: Technology = new Technology("Leather Archer Armor", AoeData.castleAge, "assets/technologies/LeatherArcherArmorDE.png");
+	public static tec_ringArcherArmor: Technology = new Technology("Ring Archer Armor", AoeData.imperialAge, "assets/technologies/RingArcherArmorDE.png");
 
 	
 	public static civ_aztecs: Civilization = new Civilization("Aztecs");
@@ -1749,597 +1763,613 @@ export abstract class AoeData
 				this.tec_paddedArcherArmor, this.tec_wheelbarrow, this.tec_handCart);
 		});
 
-		AoeData.civ_aztecs.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_aztecs.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_aztecs.unitTypeLineLevels.push([this.utl_spearman, 1]);
-		AoeData.civ_aztecs.unitTypeLineLevels.push([this.utl_eagleScout, 2]);
-		AoeData.civ_aztecs.unitTypeLineLevels.push([this.utl_archer, 2]);
-		AoeData.civ_aztecs.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_aztecs.unitTypeLineLevels.push([this.utl_batteringRam, 2]);
-		AoeData.civ_aztecs.unitTypeLineLevels.push([this.utl_scorpion, 0]);
-		AoeData.civ_aztecs.unitTypeLineLevels.push([this.utl_jaguarWarrior, 1]);
+		AoeData.civ_aztecs.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_aztecs.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_aztecs.maxUnitTypeLineLevels.push([this.utl_spearman, 1]);
+		AoeData.civ_aztecs.maxUnitTypeLineLevels.push([this.utl_eagleScout, 2]);
+		AoeData.civ_aztecs.maxUnitTypeLineLevels.push([this.utl_archer, 2]);
+		AoeData.civ_aztecs.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_aztecs.maxUnitTypeLineLevels.push([this.utl_batteringRam, 2]);
+		AoeData.civ_aztecs.maxUnitTypeLineLevels.push([this.utl_scorpion, 0]);
+		AoeData.civ_aztecs.maxUnitTypeLineLevels.push([this.utl_jaguarWarrior, 1]);
 		AoeData.civ_aztecs.technologies.push(this.tec_supplies, this.tec_squires, this.tec_siegeEngineers, this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor,
 			this.tec_bracer, this.tec_leatherArcherArmor);
 
-		AoeData.civ_berbers.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_berbers.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_berbers.unitTypeLineLevels.push([this.utl_spearman, 1]);
-		AoeData.civ_berbers.unitTypeLineLevels.push([this.utl_archer, 1]);
-		AoeData.civ_berbers.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_berbers.unitTypeLineLevels.push([this.utl_handCannoneer, 0]);
-		AoeData.civ_berbers.unitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
-		AoeData.civ_berbers.unitTypeLineLevels.push([this.utl_genitour, 1]);
-		AoeData.civ_berbers.unitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
-		AoeData.civ_berbers.unitTypeLineLevels.push([this.utl_knight, 1]);
-		AoeData.civ_berbers.unitTypeLineLevels.push([this.utl_camelRider, 1]);
-		AoeData.civ_berbers.unitTypeLineLevels.push([this.utl_batteringRam, 1]);
-		AoeData.civ_berbers.unitTypeLineLevels.push([this.utl_scorpion, 1]);
-		AoeData.civ_berbers.unitTypeLineLevels.push([this.utl_camelArcher, 1]);
+		AoeData.civ_berbers.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_berbers.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_berbers.maxUnitTypeLineLevels.push([this.utl_spearman, 1]);
+		AoeData.civ_berbers.maxUnitTypeLineLevels.push([this.utl_archer, 1]);
+		AoeData.civ_berbers.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_berbers.maxUnitTypeLineLevels.push([this.utl_handCannoneer, 0]);
+		AoeData.civ_berbers.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
+		AoeData.civ_berbers.maxUnitTypeLineLevels.push([this.utl_genitour, 1]);
+		AoeData.civ_berbers.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
+		AoeData.civ_berbers.maxUnitTypeLineLevels.push([this.utl_knight, 1]);
+		AoeData.civ_berbers.maxUnitTypeLineLevels.push([this.utl_camelRider, 1]);
+		AoeData.civ_berbers.maxUnitTypeLineLevels.push([this.utl_batteringRam, 1]);
+		AoeData.civ_berbers.maxUnitTypeLineLevels.push([this.utl_scorpion, 1]);
+		AoeData.civ_berbers.maxUnitTypeLineLevels.push([this.utl_camelArcher, 1]);
 		AoeData.civ_berbers.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_siegeEngineers, this.tec_bloodlines, this.tec_husbandry,
 			this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer,
 			this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
-		AoeData.civ_britons.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_britons.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_britons.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_britons.unitTypeLineLevels.push([this.utl_archer, 2]);
-		AoeData.civ_britons.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_britons.unitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
-		AoeData.civ_britons.unitTypeLineLevels.push([this.utl_scoutCavalry, 1]);
-		AoeData.civ_britons.unitTypeLineLevels.push([this.utl_knight, 1]);
-		AoeData.civ_britons.unitTypeLineLevels.push([this.utl_batteringRam, 1]);
-		AoeData.civ_britons.unitTypeLineLevels.push([this.utl_scorpion, 1]);
-		AoeData.civ_britons.unitTypeLineLevels.push([this.utl_longbowman, 1]);
+		AoeData.civ_britons.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_britons.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_britons.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_britons.maxUnitTypeLineLevels.push([this.utl_archer, 2]);
+		AoeData.civ_britons.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_britons.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
+		AoeData.civ_britons.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 1]);
+		AoeData.civ_britons.maxUnitTypeLineLevels.push([this.utl_knight, 1]);
+		AoeData.civ_britons.maxUnitTypeLineLevels.push([this.utl_batteringRam, 1]);
+		AoeData.civ_britons.maxUnitTypeLineLevels.push([this.utl_scorpion, 1]);
+		AoeData.civ_britons.maxUnitTypeLineLevels.push([this.utl_longbowman, 1]);
 		AoeData.civ_britons.technologies.push(this.tec_supplies, this.tec_squires, this.tec_siegeEngineers, this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor,
 			this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor,
 			this.tec_ringArcherArmor);
 
-		AoeData.civ_bulgarians.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_bulgarians.unitTypeLineLevels.push([this.utl_militia, 3]);
-		AoeData.civ_bulgarians.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_bulgarians.unitTypeLineLevels.push([this.utl_archer, 0]);
-		AoeData.civ_bulgarians.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_bulgarians.unitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
-		AoeData.civ_bulgarians.unitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
-		AoeData.civ_bulgarians.unitTypeLineLevels.push([this.utl_knight, 1]);
-		AoeData.civ_bulgarians.unitTypeLineLevels.push([this.utl_batteringRam, 2]);
-		AoeData.civ_bulgarians.unitTypeLineLevels.push([this.utl_scorpion, 1]);
-		AoeData.civ_bulgarians.unitTypeLineLevels.push([this.utl_konnik, 1]);
-		AoeData.civ_bulgarians.unitTypeLineLevels.push([this.utl_konnikDismounted, 1]);
+		AoeData.civ_bulgarians.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_bulgarians.maxUnitTypeLineLevels.push([this.utl_militia, 3]);
+		AoeData.civ_bulgarians.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_bulgarians.maxUnitTypeLineLevels.push([this.utl_archer, 0]);
+		AoeData.civ_bulgarians.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_bulgarians.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
+		AoeData.civ_bulgarians.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
+		AoeData.civ_bulgarians.maxUnitTypeLineLevels.push([this.utl_knight, 1]);
+		AoeData.civ_bulgarians.maxUnitTypeLineLevels.push([this.utl_batteringRam, 2]);
+		AoeData.civ_bulgarians.maxUnitTypeLineLevels.push([this.utl_scorpion, 1]);
+		AoeData.civ_bulgarians.maxUnitTypeLineLevels.push([this.utl_konnik, 1]);
+		AoeData.civ_bulgarians.maxUnitTypeLineLevels.push([this.utl_konnikDismounted, 1]);
 		AoeData.civ_bulgarians.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_parthianTactics, this.tec_siegeEngineers, this.tec_bloodlines,
 			this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor,
 			this.tec_plateBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor);
 
-		AoeData.civ_burgundians.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_burgundians.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_burgundians.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_burgundians.unitTypeLineLevels.push([this.utl_archer, 1]);
-		AoeData.civ_burgundians.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_burgundians.unitTypeLineLevels.push([this.utl_handCannoneer, 0]);
-		AoeData.civ_burgundians.unitTypeLineLevels.push([this.utl_cavalryArcher, 0]);
-		AoeData.civ_burgundians.unitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
-		AoeData.civ_burgundians.unitTypeLineLevels.push([this.utl_knight, 2]);
-		AoeData.civ_burgundians.unitTypeLineLevels.push([this.utl_batteringRam, 1]);
-		AoeData.civ_burgundians.unitTypeLineLevels.push([this.utl_scorpion, 0]);
-		AoeData.civ_burgundians.unitTypeLineLevels.push([this.utl_coustillier, 1]);
-		AoeData.civ_burgundians.unitTypeLineLevels.push([this.utl_flemishMilitia, 0]);
+		AoeData.civ_burgundians.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_burgundians.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_burgundians.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_burgundians.maxUnitTypeLineLevels.push([this.utl_archer, 1]);
+		AoeData.civ_burgundians.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_burgundians.maxUnitTypeLineLevels.push([this.utl_handCannoneer, 0]);
+		AoeData.civ_burgundians.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 0]);
+		AoeData.civ_burgundians.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
+		AoeData.civ_burgundians.maxUnitTypeLineLevels.push([this.utl_knight, 2]);
+		AoeData.civ_burgundians.maxUnitTypeLineLevels.push([this.utl_batteringRam, 1]);
+		AoeData.civ_burgundians.maxUnitTypeLineLevels.push([this.utl_scorpion, 0]);
+		AoeData.civ_burgundians.maxUnitTypeLineLevels.push([this.utl_coustillier, 1]);
+		AoeData.civ_burgundians.maxUnitTypeLineLevels.push([this.utl_flemishMilitia, 0]);
 		AoeData.civ_burgundians.technologies.push(this.tec_squires, this.tec_husbandry,
 			this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor,
 			this.tec_leatherArcherArmor, this.tec_bracer);
 
-		AoeData.civ_burmese.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_burmese.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_burmese.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_burmese.unitTypeLineLevels.push([this.utl_archer, 1]);
-		AoeData.civ_burmese.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_burmese.unitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
-		AoeData.civ_burmese.unitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
-		AoeData.civ_burmese.unitTypeLineLevels.push([this.utl_knight, 1]);
-		AoeData.civ_burmese.unitTypeLineLevels.push([this.utl_battleElephant, 1]);
-		AoeData.civ_burmese.unitTypeLineLevels.push([this.utl_batteringRam, 1]);
-		AoeData.civ_burmese.unitTypeLineLevels.push([this.utl_scorpion, 1]);
-		AoeData.civ_burmese.unitTypeLineLevels.push([this.utl_arambai, 1]);
+		AoeData.civ_burmese.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_burmese.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_burmese.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_burmese.maxUnitTypeLineLevels.push([this.utl_archer, 1]);
+		AoeData.civ_burmese.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_burmese.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
+		AoeData.civ_burmese.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
+		AoeData.civ_burmese.maxUnitTypeLineLevels.push([this.utl_knight, 1]);
+		AoeData.civ_burmese.maxUnitTypeLineLevels.push([this.utl_battleElephant, 1]);
+		AoeData.civ_burmese.maxUnitTypeLineLevels.push([this.utl_batteringRam, 1]);
+		AoeData.civ_burmese.maxUnitTypeLineLevels.push([this.utl_scorpion, 1]);
+		AoeData.civ_burmese.maxUnitTypeLineLevels.push([this.utl_arambai, 1]);
 		AoeData.civ_burmese.technologies.push(this.tec_supplies, this.tec_squires, this.tec_parthianTactics, this.tec_siegeEngineers, this.tec_bloodlines, this.tec_husbandry,
 			this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer);
 
-		AoeData.civ_byzantines.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_byzantines.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_byzantines.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_byzantines.unitTypeLineLevels.push([this.utl_archer, 2]);
-		AoeData.civ_byzantines.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_byzantines.unitTypeLineLevels.push([this.utl_handCannoneer, 0]);
-		AoeData.civ_byzantines.unitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
-		AoeData.civ_byzantines.unitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
-		AoeData.civ_byzantines.unitTypeLineLevels.push([this.utl_knight, 2]);
-		AoeData.civ_byzantines.unitTypeLineLevels.push([this.utl_camelRider, 1]);
-		AoeData.civ_byzantines.unitTypeLineLevels.push([this.utl_batteringRam, 2]);
-		AoeData.civ_byzantines.unitTypeLineLevels.push([this.utl_scorpion, 0]);
-		AoeData.civ_byzantines.unitTypeLineLevels.push([this.utl_cataphract, 1]);
+		AoeData.civ_byzantines.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_byzantines.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_byzantines.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_byzantines.maxUnitTypeLineLevels.push([this.utl_archer, 2]);
+		AoeData.civ_byzantines.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_byzantines.maxUnitTypeLineLevels.push([this.utl_handCannoneer, 0]);
+		AoeData.civ_byzantines.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
+		AoeData.civ_byzantines.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
+		AoeData.civ_byzantines.maxUnitTypeLineLevels.push([this.utl_knight, 2]);
+		AoeData.civ_byzantines.maxUnitTypeLineLevels.push([this.utl_camelRider, 1]);
+		AoeData.civ_byzantines.maxUnitTypeLineLevels.push([this.utl_batteringRam, 2]);
+		AoeData.civ_byzantines.maxUnitTypeLineLevels.push([this.utl_scorpion, 0]);
+		AoeData.civ_byzantines.maxUnitTypeLineLevels.push([this.utl_cataphract, 1]);
 		AoeData.civ_byzantines.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_husbandry, this.tec_chainMailArmor, this.tec_plateMailArmor,
 			this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
-		AoeData.civ_celts.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_celts.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_celts.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_celts.unitTypeLineLevels.push([this.utl_archer, 1]);
-		AoeData.civ_celts.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_celts.unitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
-		AoeData.civ_celts.unitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
-		AoeData.civ_celts.unitTypeLineLevels.push([this.utl_knight, 2]);
-		AoeData.civ_celts.unitTypeLineLevels.push([this.utl_batteringRam, 2]);
-		AoeData.civ_celts.unitTypeLineLevels.push([this.utl_scorpion, 1]);
-		AoeData.civ_celts.unitTypeLineLevels.push([this.utl_woadRaider, 1]);
+		AoeData.civ_celts.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_celts.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_celts.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_celts.maxUnitTypeLineLevels.push([this.utl_archer, 1]);
+		AoeData.civ_celts.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_celts.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
+		AoeData.civ_celts.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
+		AoeData.civ_celts.maxUnitTypeLineLevels.push([this.utl_knight, 2]);
+		AoeData.civ_celts.maxUnitTypeLineLevels.push([this.utl_batteringRam, 2]);
+		AoeData.civ_celts.maxUnitTypeLineLevels.push([this.utl_scorpion, 1]);
+		AoeData.civ_celts.maxUnitTypeLineLevels.push([this.utl_woadRaider, 1]);
 		AoeData.civ_celts.technologies.push(this.tec_supplies, this.tec_siegeEngineers, this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor,
 			this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_leatherArcherArmor);
 
-		AoeData.civ_chinese.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_chinese.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_chinese.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_chinese.unitTypeLineLevels.push([this.utl_archer, 2]);
-		AoeData.civ_chinese.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_chinese.unitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
-		AoeData.civ_chinese.unitTypeLineLevels.push([this.utl_scoutCavalry, 1]);
-		AoeData.civ_chinese.unitTypeLineLevels.push([this.utl_knight, 1]);
-		AoeData.civ_chinese.unitTypeLineLevels.push([this.utl_camelRider, 1]);
-		AoeData.civ_chinese.unitTypeLineLevels.push([this.utl_batteringRam, 2]);
-		AoeData.civ_chinese.unitTypeLineLevels.push([this.utl_scorpion, 1]);
-		AoeData.civ_chinese.unitTypeLineLevels.push([this.utl_chuKoNu, 1]);
+		AoeData.civ_chinese.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_chinese.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_chinese.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_chinese.maxUnitTypeLineLevels.push([this.utl_archer, 2]);
+		AoeData.civ_chinese.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_chinese.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
+		AoeData.civ_chinese.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 1]);
+		AoeData.civ_chinese.maxUnitTypeLineLevels.push([this.utl_knight, 1]);
+		AoeData.civ_chinese.maxUnitTypeLineLevels.push([this.utl_camelRider, 1]);
+		AoeData.civ_chinese.maxUnitTypeLineLevels.push([this.utl_batteringRam, 2]);
+		AoeData.civ_chinese.maxUnitTypeLineLevels.push([this.utl_scorpion, 1]);
+		AoeData.civ_chinese.maxUnitTypeLineLevels.push([this.utl_chuKoNu, 1]);
 		AoeData.civ_chinese.technologies.push(this.tec_squires, this.tec_thumbRing, this.tec_bloodlines, this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor,
 			this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor,
 			this.tec_ringArcherArmor);
 
-		AoeData.civ_cumans.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_cumans.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_cumans.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_cumans.unitTypeLineLevels.push([this.utl_archer, 1]);
-		AoeData.civ_cumans.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_cumans.unitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
-		AoeData.civ_cumans.unitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
-		AoeData.civ_cumans.unitTypeLineLevels.push([this.utl_knight, 2]);
-		AoeData.civ_cumans.unitTypeLineLevels.push([this.utl_camelRider, 0]);
-		AoeData.civ_cumans.unitTypeLineLevels.push([this.utl_steppeLancer, 1]);
-		AoeData.civ_cumans.unitTypeLineLevels.push([this.utl_batteringRam, 2]);
-		AoeData.civ_cumans.unitTypeLineLevels.push([this.utl_scorpion, 0]);
-		AoeData.civ_cumans.unitTypeLineLevels.push([this.utl_kipchak, 1]);
+		AoeData.civ_cumans.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_cumans.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_cumans.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_cumans.maxUnitTypeLineLevels.push([this.utl_archer, 1]);
+		AoeData.civ_cumans.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_cumans.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
+		AoeData.civ_cumans.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
+		AoeData.civ_cumans.maxUnitTypeLineLevels.push([this.utl_knight, 2]);
+		AoeData.civ_cumans.maxUnitTypeLineLevels.push([this.utl_camelRider, 0]);
+		AoeData.civ_cumans.maxUnitTypeLineLevels.push([this.utl_steppeLancer, 1]);
+		AoeData.civ_cumans.maxUnitTypeLineLevels.push([this.utl_batteringRam, 2]);
+		AoeData.civ_cumans.maxUnitTypeLineLevels.push([this.utl_scorpion, 0]);
+		AoeData.civ_cumans.maxUnitTypeLineLevels.push([this.utl_kipchak, 1]);
 		AoeData.civ_cumans.technologies.push(this.tec_squires, this.tec_thumbRing, this.tec_parthianTactics, this.tec_bloodlines, this.tec_blastFurnace, this.tec_chainMailArmor,
 			this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
-		AoeData.civ_ethiopians.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_ethiopians.unitTypeLineLevels.push([this.utl_militia, 3]);
-		AoeData.civ_ethiopians.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_ethiopians.unitTypeLineLevels.push([this.utl_archer, 2]);
-		AoeData.civ_ethiopians.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_ethiopians.unitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
-		AoeData.civ_ethiopians.unitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
-		AoeData.civ_ethiopians.unitTypeLineLevels.push([this.utl_knight, 1]);
-		AoeData.civ_ethiopians.unitTypeLineLevels.push([this.utl_camelRider, 1]);
-		AoeData.civ_ethiopians.unitTypeLineLevels.push([this.utl_batteringRam, 2]);
-		AoeData.civ_ethiopians.unitTypeLineLevels.push([this.utl_scorpion, 1]);
-		AoeData.civ_ethiopians.unitTypeLineLevels.push([this.utl_shotelWarrior, 1]);
+		AoeData.civ_ethiopians.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_ethiopians.maxUnitTypeLineLevels.push([this.utl_militia, 3]);
+		AoeData.civ_ethiopians.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_ethiopians.maxUnitTypeLineLevels.push([this.utl_archer, 2]);
+		AoeData.civ_ethiopians.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_ethiopians.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
+		AoeData.civ_ethiopians.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
+		AoeData.civ_ethiopians.maxUnitTypeLineLevels.push([this.utl_knight, 1]);
+		AoeData.civ_ethiopians.maxUnitTypeLineLevels.push([this.utl_camelRider, 1]);
+		AoeData.civ_ethiopians.maxUnitTypeLineLevels.push([this.utl_batteringRam, 2]);
+		AoeData.civ_ethiopians.maxUnitTypeLineLevels.push([this.utl_scorpion, 1]);
+		AoeData.civ_ethiopians.maxUnitTypeLineLevels.push([this.utl_shotelWarrior, 1]);
 		AoeData.civ_ethiopians.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_siegeEngineers, this.tec_husbandry, this.tec_blastFurnace,
 			this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor,
 			this.tec_ringArcherArmor);
 
-		AoeData.civ_franks.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_franks.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_franks.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_franks.unitTypeLineLevels.push([this.utl_archer, 1]);
-		AoeData.civ_franks.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_franks.unitTypeLineLevels.push([this.utl_handCannoneer, 0]);
-		AoeData.civ_franks.unitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
-		AoeData.civ_franks.unitTypeLineLevels.push([this.utl_scoutCavalry, 1]);
-		AoeData.civ_franks.unitTypeLineLevels.push([this.utl_knight, 2]);
-		AoeData.civ_franks.unitTypeLineLevels.push([this.utl_batteringRam, 1]);
-		AoeData.civ_franks.unitTypeLineLevels.push([this.utl_scorpion, 1]);
-		AoeData.civ_franks.unitTypeLineLevels.push([this.utl_throwingAxeman, 1]);
+		AoeData.civ_franks.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_franks.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_franks.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_franks.maxUnitTypeLineLevels.push([this.utl_archer, 1]);
+		AoeData.civ_franks.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_franks.maxUnitTypeLineLevels.push([this.utl_handCannoneer, 0]);
+		AoeData.civ_franks.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
+		AoeData.civ_franks.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 1]);
+		AoeData.civ_franks.maxUnitTypeLineLevels.push([this.utl_knight, 2]);
+		AoeData.civ_franks.maxUnitTypeLineLevels.push([this.utl_batteringRam, 1]);
+		AoeData.civ_franks.maxUnitTypeLineLevels.push([this.utl_scorpion, 1]);
+		AoeData.civ_franks.maxUnitTypeLineLevels.push([this.utl_throwingAxeman, 1]);
 		AoeData.civ_franks.technologies.push(this.tec_supplies, this.tec_squires, this.tec_siegeEngineers, this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor,
 			this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_leatherArcherArmor);
 
-		AoeData.civ_goths.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_goths.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_goths.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_goths.unitTypeLineLevels.push([this.utl_archer, 1]);
-		AoeData.civ_goths.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_goths.unitTypeLineLevels.push([this.utl_handCannoneer, 0]);
-		AoeData.civ_goths.unitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
-		AoeData.civ_goths.unitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
-		AoeData.civ_goths.unitTypeLineLevels.push([this.utl_knight, 1]);
-		AoeData.civ_goths.unitTypeLineLevels.push([this.utl_batteringRam, 1]);
-		AoeData.civ_goths.unitTypeLineLevels.push([this.utl_scorpion, 1]);
-		AoeData.civ_goths.unitTypeLineLevels.push([this.utl_huskarl, 1]);
+		AoeData.civ_goths.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_goths.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_goths.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_goths.maxUnitTypeLineLevels.push([this.utl_archer, 1]);
+		AoeData.civ_goths.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_goths.maxUnitTypeLineLevels.push([this.utl_handCannoneer, 0]);
+		AoeData.civ_goths.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
+		AoeData.civ_goths.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
+		AoeData.civ_goths.maxUnitTypeLineLevels.push([this.utl_knight, 1]);
+		AoeData.civ_goths.maxUnitTypeLineLevels.push([this.utl_batteringRam, 1]);
+		AoeData.civ_goths.maxUnitTypeLineLevels.push([this.utl_scorpion, 1]);
+		AoeData.civ_goths.maxUnitTypeLineLevels.push([this.utl_huskarl, 1]);
 		AoeData.civ_goths.technologies.push(this.tec_squires, this.tec_bloodlines, this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_scaleBardingArmor,
 			this.tec_chainBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
-		AoeData.civ_huns.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_huns.unitTypeLineLevels.push([this.utl_militia, 3]);
-		AoeData.civ_huns.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_huns.unitTypeLineLevels.push([this.utl_archer, 1]);
-		AoeData.civ_huns.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_huns.unitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
-		AoeData.civ_huns.unitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
-		AoeData.civ_huns.unitTypeLineLevels.push([this.utl_knight, 2]);
-		AoeData.civ_huns.unitTypeLineLevels.push([this.utl_batteringRam, 2]);
-		AoeData.civ_huns.unitTypeLineLevels.push([this.utl_scorpion, 0]);
-		AoeData.civ_huns.unitTypeLineLevels.push([this.utl_tarkan, 1]);
+		AoeData.civ_huns.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_huns.maxUnitTypeLineLevels.push([this.utl_militia, 3]);
+		AoeData.civ_huns.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_huns.maxUnitTypeLineLevels.push([this.utl_archer, 1]);
+		AoeData.civ_huns.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_huns.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
+		AoeData.civ_huns.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
+		AoeData.civ_huns.maxUnitTypeLineLevels.push([this.utl_knight, 2]);
+		AoeData.civ_huns.maxUnitTypeLineLevels.push([this.utl_batteringRam, 2]);
+		AoeData.civ_huns.maxUnitTypeLineLevels.push([this.utl_scorpion, 0]);
+		AoeData.civ_huns.maxUnitTypeLineLevels.push([this.utl_tarkan, 1]);
 		AoeData.civ_huns.technologies.push(this.tec_squires, this.tec_thumbRing, this.tec_parthianTactics, this.tec_bloodlines, this.tec_husbandry, this.tec_blastFurnace,
 			this.tec_chainMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor);
 
-		AoeData.civ_incas.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_incas.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_incas.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_incas.unitTypeLineLevels.push([this.utl_eagleScout, 2]);
-		AoeData.civ_incas.unitTypeLineLevels.push([this.utl_archer, 2]);
-		AoeData.civ_incas.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_incas.unitTypeLineLevels.push([this.utl_slinger, 0]);
-		AoeData.civ_incas.unitTypeLineLevels.push([this.utl_batteringRam, 2]);
-		AoeData.civ_incas.unitTypeLineLevels.push([this.utl_scorpion, 1]);
-		AoeData.civ_incas.unitTypeLineLevels.push([this.utl_kamayuk, 1]);
+		AoeData.civ_incas.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_incas.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_incas.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_incas.maxUnitTypeLineLevels.push([this.utl_eagleScout, 2]);
+		AoeData.civ_incas.maxUnitTypeLineLevels.push([this.utl_archer, 2]);
+		AoeData.civ_incas.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_incas.maxUnitTypeLineLevels.push([this.utl_slinger, 0]);
+		AoeData.civ_incas.maxUnitTypeLineLevels.push([this.utl_batteringRam, 2]);
+		AoeData.civ_incas.maxUnitTypeLineLevels.push([this.utl_scorpion, 1]);
+		AoeData.civ_incas.maxUnitTypeLineLevels.push([this.utl_kamayuk, 1]);
 		AoeData.civ_incas.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_siegeEngineers, this.tec_blastFurnace, this.tec_chainMailArmor,
 			this.tec_plateMailArmor, this.tec_bracer, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
-		AoeData.civ_indians.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_indians.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_indians.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_indians.unitTypeLineLevels.push([this.utl_archer, 1]);
-		AoeData.civ_indians.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_indians.unitTypeLineLevels.push([this.utl_handCannoneer, 0]);
-		AoeData.civ_indians.unitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
-		AoeData.civ_indians.unitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
-		AoeData.civ_indians.unitTypeLineLevels.push([this.utl_camelRider, 2]);
-		AoeData.civ_indians.unitTypeLineLevels.push([this.utl_batteringRam, 1]);
-		AoeData.civ_indians.unitTypeLineLevels.push([this.utl_scorpion, 0]);
-		AoeData.civ_indians.unitTypeLineLevels.push([this.utl_elephantArcher, 1]);
+		AoeData.civ_indians.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_indians.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_indians.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_indians.maxUnitTypeLineLevels.push([this.utl_archer, 1]);
+		AoeData.civ_indians.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_indians.maxUnitTypeLineLevels.push([this.utl_handCannoneer, 0]);
+		AoeData.civ_indians.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
+		AoeData.civ_indians.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
+		AoeData.civ_indians.maxUnitTypeLineLevels.push([this.utl_camelRider, 2]);
+		AoeData.civ_indians.maxUnitTypeLineLevels.push([this.utl_batteringRam, 1]);
+		AoeData.civ_indians.maxUnitTypeLineLevels.push([this.utl_scorpion, 0]);
+		AoeData.civ_indians.maxUnitTypeLineLevels.push([this.utl_elephantArcher, 1]);
 		AoeData.civ_indians.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_parthianTactics, this.tec_siegeEngineers, this.tec_bloodlines,
 			this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_bracer,
 			this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
-		AoeData.civ_italians.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_italians.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_italians.unitTypeLineLevels.push([this.utl_spearman, 1]);
-		AoeData.civ_italians.unitTypeLineLevels.push([this.utl_condottiero, 0]);
-		AoeData.civ_italians.unitTypeLineLevels.push([this.utl_archer, 2]);
-		AoeData.civ_italians.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_italians.unitTypeLineLevels.push([this.utl_handCannoneer, 0]);
-		AoeData.civ_italians.unitTypeLineLevels.push([this.utl_cavalryArcher, 0]);
-		AoeData.civ_italians.unitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
-		AoeData.civ_italians.unitTypeLineLevels.push([this.utl_knight, 1]);
-		AoeData.civ_italians.unitTypeLineLevels.push([this.utl_batteringRam, 1]);
-		AoeData.civ_italians.unitTypeLineLevels.push([this.utl_scorpion, 0]);
-		AoeData.civ_italians.unitTypeLineLevels.push([this.utl_genoeseCrossbowman, 1]);
+		AoeData.civ_italians.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_italians.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_italians.maxUnitTypeLineLevels.push([this.utl_spearman, 1]);
+		AoeData.civ_italians.maxUnitTypeLineLevels.push([this.utl_condottiero, 0]);
+		AoeData.civ_italians.maxUnitTypeLineLevels.push([this.utl_archer, 2]);
+		AoeData.civ_italians.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_italians.maxUnitTypeLineLevels.push([this.utl_handCannoneer, 0]);
+		AoeData.civ_italians.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 0]);
+		AoeData.civ_italians.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
+		AoeData.civ_italians.maxUnitTypeLineLevels.push([this.utl_knight, 1]);
+		AoeData.civ_italians.maxUnitTypeLineLevels.push([this.utl_batteringRam, 1]);
+		AoeData.civ_italians.maxUnitTypeLineLevels.push([this.utl_scorpion, 0]);
+		AoeData.civ_italians.maxUnitTypeLineLevels.push([this.utl_genoeseCrossbowman, 1]);
 		AoeData.civ_italians.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_bloodlines, this.tec_husbandry, this.tec_blastFurnace,
 			this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer,
 			this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
-		AoeData.civ_japanese.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_japanese.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_japanese.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_japanese.unitTypeLineLevels.push([this.utl_archer, 2]);
-		AoeData.civ_japanese.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_japanese.unitTypeLineLevels.push([this.utl_handCannoneer, 0]);
-		AoeData.civ_japanese.unitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
-		AoeData.civ_japanese.unitTypeLineLevels.push([this.utl_scoutCavalry, 1]);
-		AoeData.civ_japanese.unitTypeLineLevels.push([this.utl_knight, 1]);
-		AoeData.civ_japanese.unitTypeLineLevels.push([this.utl_batteringRam, 1]);
-		AoeData.civ_japanese.unitTypeLineLevels.push([this.utl_scorpion, 1]);
-		AoeData.civ_japanese.unitTypeLineLevels.push([this.utl_samurai, 1]);
+		AoeData.civ_japanese.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_japanese.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_japanese.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_japanese.maxUnitTypeLineLevels.push([this.utl_archer, 2]);
+		AoeData.civ_japanese.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_japanese.maxUnitTypeLineLevels.push([this.utl_handCannoneer, 0]);
+		AoeData.civ_japanese.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
+		AoeData.civ_japanese.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 1]);
+		AoeData.civ_japanese.maxUnitTypeLineLevels.push([this.utl_knight, 1]);
+		AoeData.civ_japanese.maxUnitTypeLineLevels.push([this.utl_batteringRam, 1]);
+		AoeData.civ_japanese.maxUnitTypeLineLevels.push([this.utl_scorpion, 1]);
+		AoeData.civ_japanese.maxUnitTypeLineLevels.push([this.utl_samurai, 1]);
 		AoeData.civ_japanese.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_parthianTactics, this.tec_siegeEngineers, this.tec_bloodlines,
 			this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_bracer,
 			this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
-		AoeData.civ_khmer.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_khmer.unitTypeLineLevels.push([this.utl_militia, 3]);
-		AoeData.civ_khmer.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_khmer.unitTypeLineLevels.push([this.utl_archer, 2]);
-		AoeData.civ_khmer.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_khmer.unitTypeLineLevels.push([this.utl_handCannoneer, 0]);
-		AoeData.civ_khmer.unitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
-		AoeData.civ_khmer.unitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
-		AoeData.civ_khmer.unitTypeLineLevels.push([this.utl_knight, 1]);
-		AoeData.civ_khmer.unitTypeLineLevels.push([this.utl_battleElephant, 1]);
-		AoeData.civ_khmer.unitTypeLineLevels.push([this.utl_batteringRam, 2]);
-		AoeData.civ_khmer.unitTypeLineLevels.push([this.utl_scorpion, 1]);
-		AoeData.civ_khmer.unitTypeLineLevels.push([this.utl_ballistaElephant, 1]);
+		AoeData.civ_khmer.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_khmer.maxUnitTypeLineLevels.push([this.utl_militia, 3]);
+		AoeData.civ_khmer.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_khmer.maxUnitTypeLineLevels.push([this.utl_archer, 2]);
+		AoeData.civ_khmer.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_khmer.maxUnitTypeLineLevels.push([this.utl_handCannoneer, 0]);
+		AoeData.civ_khmer.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
+		AoeData.civ_khmer.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
+		AoeData.civ_khmer.maxUnitTypeLineLevels.push([this.utl_knight, 1]);
+		AoeData.civ_khmer.maxUnitTypeLineLevels.push([this.utl_battleElephant, 1]);
+		AoeData.civ_khmer.maxUnitTypeLineLevels.push([this.utl_batteringRam, 2]);
+		AoeData.civ_khmer.maxUnitTypeLineLevels.push([this.utl_scorpion, 1]);
+		AoeData.civ_khmer.maxUnitTypeLineLevels.push([this.utl_ballistaElephant, 1]);
 		AoeData.civ_khmer.technologies.push(this.tec_parthianTactics, this.tec_siegeEngineers, this.tec_bloodlines, this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor,
 			this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
-		AoeData.civ_koreans.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_koreans.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_koreans.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_koreans.unitTypeLineLevels.push([this.utl_archer, 2]);
-		AoeData.civ_koreans.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_koreans.unitTypeLineLevels.push([this.utl_handCannoneer, 0]);
-		AoeData.civ_koreans.unitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
-		AoeData.civ_koreans.unitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
-		AoeData.civ_koreans.unitTypeLineLevels.push([this.utl_knight, 1]);
-		AoeData.civ_koreans.unitTypeLineLevels.push([this.utl_batteringRam, 1]);
-		AoeData.civ_koreans.unitTypeLineLevels.push([this.utl_scorpion, 0]);
-		AoeData.civ_koreans.unitTypeLineLevels.push([this.utl_warWagon, 1]);
+		AoeData.civ_koreans.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_koreans.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_koreans.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_koreans.maxUnitTypeLineLevels.push([this.utl_archer, 2]);
+		AoeData.civ_koreans.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_koreans.maxUnitTypeLineLevels.push([this.utl_handCannoneer, 0]);
+		AoeData.civ_koreans.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
+		AoeData.civ_koreans.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
+		AoeData.civ_koreans.maxUnitTypeLineLevels.push([this.utl_knight, 1]);
+		AoeData.civ_koreans.maxUnitTypeLineLevels.push([this.utl_batteringRam, 1]);
+		AoeData.civ_koreans.maxUnitTypeLineLevels.push([this.utl_scorpion, 0]);
+		AoeData.civ_koreans.maxUnitTypeLineLevels.push([this.utl_warWagon, 1]);
 		AoeData.civ_koreans.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_siegeEngineers, this.tec_husbandry, this.tec_chainMailArmor,
 			this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
-		AoeData.civ_lithuanians.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_lithuanians.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_lithuanians.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_lithuanians.unitTypeLineLevels.push([this.utl_archer, 1]);
-		AoeData.civ_lithuanians.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_lithuanians.unitTypeLineLevels.push([this.utl_handCannoneer, 0]);
-		AoeData.civ_lithuanians.unitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
-		AoeData.civ_lithuanians.unitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
-		AoeData.civ_lithuanians.unitTypeLineLevels.push([this.utl_knight, 2]);
-		AoeData.civ_lithuanians.unitTypeLineLevels.push([this.utl_batteringRam, 1]);
-		AoeData.civ_lithuanians.unitTypeLineLevels.push([this.utl_scorpion, 0]);
-		AoeData.civ_lithuanians.unitTypeLineLevels.push([this.utl_leitis, 1]);
+		AoeData.civ_lithuanians.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_lithuanians.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_lithuanians.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_lithuanians.maxUnitTypeLineLevels.push([this.utl_archer, 1]);
+		AoeData.civ_lithuanians.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_lithuanians.maxUnitTypeLineLevels.push([this.utl_handCannoneer, 0]);
+		AoeData.civ_lithuanians.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
+		AoeData.civ_lithuanians.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
+		AoeData.civ_lithuanians.maxUnitTypeLineLevels.push([this.utl_knight, 2]);
+		AoeData.civ_lithuanians.maxUnitTypeLineLevels.push([this.utl_batteringRam, 1]);
+		AoeData.civ_lithuanians.maxUnitTypeLineLevels.push([this.utl_scorpion, 0]);
+		AoeData.civ_lithuanians.maxUnitTypeLineLevels.push([this.utl_leitis, 1]);
 		AoeData.civ_lithuanians.technologies.push(this.tec_squires, this.tec_thumbRing, this.tec_bloodlines, this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor,
 			this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
-		AoeData.civ_magyars.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_magyars.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_magyars.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_magyars.unitTypeLineLevels.push([this.utl_archer, 2]);
-		AoeData.civ_magyars.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_magyars.unitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
-		AoeData.civ_magyars.unitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
-		AoeData.civ_magyars.unitTypeLineLevels.push([this.utl_knight, 2]);
-		AoeData.civ_magyars.unitTypeLineLevels.push([this.utl_batteringRam, 1]);
-		AoeData.civ_magyars.unitTypeLineLevels.push([this.utl_scorpion, 1]);
-		AoeData.civ_magyars.unitTypeLineLevels.push([this.utl_magyarHuszar, 1]);
+		AoeData.civ_magyars.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_magyars.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_magyars.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_magyars.maxUnitTypeLineLevels.push([this.utl_archer, 2]);
+		AoeData.civ_magyars.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_magyars.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
+		AoeData.civ_magyars.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
+		AoeData.civ_magyars.maxUnitTypeLineLevels.push([this.utl_knight, 2]);
+		AoeData.civ_magyars.maxUnitTypeLineLevels.push([this.utl_batteringRam, 1]);
+		AoeData.civ_magyars.maxUnitTypeLineLevels.push([this.utl_scorpion, 1]);
+		AoeData.civ_magyars.maxUnitTypeLineLevels.push([this.utl_magyarHuszar, 1]);
 		AoeData.civ_magyars.technologies.push(this.tec_supplies, this.tec_thumbRing, this.tec_parthianTactics, this.tec_siegeEngineers, this.tec_bloodlines, this.tec_husbandry,
 			this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer,
 			this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
-		AoeData.civ_malay.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_malay.unitTypeLineLevels.push([this.utl_militia, 3]);
-		AoeData.civ_malay.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_malay.unitTypeLineLevels.push([this.utl_archer, 2]);
-		AoeData.civ_malay.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_malay.unitTypeLineLevels.push([this.utl_cavalryArcher, 0]);
-		AoeData.civ_malay.unitTypeLineLevels.push([this.utl_scoutCavalry, 1]);
-		AoeData.civ_malay.unitTypeLineLevels.push([this.utl_knight, 1]);
-		AoeData.civ_malay.unitTypeLineLevels.push([this.utl_battleElephant, 1]);
-		AoeData.civ_malay.unitTypeLineLevels.push([this.utl_batteringRam, 1]);
-		AoeData.civ_malay.unitTypeLineLevels.push([this.utl_scorpion, 1]);
-		AoeData.civ_malay.unitTypeLineLevels.push([this.utl_karambitWarrior, 1]);
+		AoeData.civ_malay.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_malay.maxUnitTypeLineLevels.push([this.utl_militia, 3]);
+		AoeData.civ_malay.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_malay.maxUnitTypeLineLevels.push([this.utl_archer, 2]);
+		AoeData.civ_malay.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_malay.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 0]);
+		AoeData.civ_malay.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 1]);
+		AoeData.civ_malay.maxUnitTypeLineLevels.push([this.utl_knight, 1]);
+		AoeData.civ_malay.maxUnitTypeLineLevels.push([this.utl_battleElephant, 1]);
+		AoeData.civ_malay.maxUnitTypeLineLevels.push([this.utl_batteringRam, 1]);
+		AoeData.civ_malay.maxUnitTypeLineLevels.push([this.utl_scorpion, 1]);
+		AoeData.civ_malay.maxUnitTypeLineLevels.push([this.utl_karambitWarrior, 1]);
 		AoeData.civ_malay.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_siegeEngineers, this.tec_husbandry, this.tec_blastFurnace,
 			this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
-		AoeData.civ_malians.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_malians.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_malians.unitTypeLineLevels.push([this.utl_spearman, 1]);
-		AoeData.civ_malians.unitTypeLineLevels.push([this.utl_archer, 2]);
-		AoeData.civ_malians.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_malians.unitTypeLineLevels.push([this.utl_handCannoneer, 0]);
-		AoeData.civ_malians.unitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
-		AoeData.civ_malians.unitTypeLineLevels.push([this.utl_scoutCavalry, 1]);
-		AoeData.civ_malians.unitTypeLineLevels.push([this.utl_knight, 1]);
-		AoeData.civ_malians.unitTypeLineLevels.push([this.utl_camelRider, 1]);
-		AoeData.civ_malians.unitTypeLineLevels.push([this.utl_batteringRam, 1]);
-		AoeData.civ_malians.unitTypeLineLevels.push([this.utl_scorpion, 0]);
-		AoeData.civ_malians.unitTypeLineLevels.push([this.utl_gbeto, 1]);
+		AoeData.civ_malians.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_malians.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_malians.maxUnitTypeLineLevels.push([this.utl_spearman, 1]);
+		AoeData.civ_malians.maxUnitTypeLineLevels.push([this.utl_archer, 2]);
+		AoeData.civ_malians.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_malians.maxUnitTypeLineLevels.push([this.utl_handCannoneer, 0]);
+		AoeData.civ_malians.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
+		AoeData.civ_malians.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 1]);
+		AoeData.civ_malians.maxUnitTypeLineLevels.push([this.utl_knight, 1]);
+		AoeData.civ_malians.maxUnitTypeLineLevels.push([this.utl_camelRider, 1]);
+		AoeData.civ_malians.maxUnitTypeLineLevels.push([this.utl_batteringRam, 1]);
+		AoeData.civ_malians.maxUnitTypeLineLevels.push([this.utl_scorpion, 0]);
+		AoeData.civ_malians.maxUnitTypeLineLevels.push([this.utl_gbeto, 1]);
 		AoeData.civ_malians.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_bloodlines, this.tec_husbandry, this.tec_chainMailArmor,
 			this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
-		AoeData.civ_mayans.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_mayans.unitTypeLineLevels.push([this.utl_militia, 3]);
-		AoeData.civ_mayans.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_mayans.unitTypeLineLevels.push([this.utl_eagleScout, 2]);
-		AoeData.civ_mayans.unitTypeLineLevels.push([this.utl_archer, 2]);
-		AoeData.civ_mayans.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_mayans.unitTypeLineLevels.push([this.utl_batteringRam, 2]);
-		AoeData.civ_mayans.unitTypeLineLevels.push([this.utl_scorpion, 1]);
-		AoeData.civ_mayans.unitTypeLineLevels.push([this.utl_plumedArcher, 1]);
+		AoeData.civ_mayans.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_mayans.maxUnitTypeLineLevels.push([this.utl_militia, 3]);
+		AoeData.civ_mayans.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_mayans.maxUnitTypeLineLevels.push([this.utl_eagleScout, 2]);
+		AoeData.civ_mayans.maxUnitTypeLineLevels.push([this.utl_archer, 2]);
+		AoeData.civ_mayans.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_mayans.maxUnitTypeLineLevels.push([this.utl_batteringRam, 2]);
+		AoeData.civ_mayans.maxUnitTypeLineLevels.push([this.utl_scorpion, 1]);
+		AoeData.civ_mayans.maxUnitTypeLineLevels.push([this.utl_plumedArcher, 1]);
 		AoeData.civ_mayans.technologies.push(this.tec_squires, this.tec_thumbRing, this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_bracer,
 			this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
-		AoeData.civ_mongols.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_mongols.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_mongols.unitTypeLineLevels.push([this.utl_spearman, 1]);
-		AoeData.civ_mongols.unitTypeLineLevels.push([this.utl_archer, 2]);
-		AoeData.civ_mongols.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_mongols.unitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
-		AoeData.civ_mongols.unitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
-		AoeData.civ_mongols.unitTypeLineLevels.push([this.utl_knight, 1]);
-		AoeData.civ_mongols.unitTypeLineLevels.push([this.utl_camelRider, 1]);
-		AoeData.civ_mongols.unitTypeLineLevels.push([this.utl_steppeLancer, 1]);
-		AoeData.civ_mongols.unitTypeLineLevels.push([this.utl_batteringRam, 2]);
-		AoeData.civ_mongols.unitTypeLineLevels.push([this.utl_scorpion, 1]);
-		AoeData.civ_mongols.unitTypeLineLevels.push([this.utl_mangudai, 1]);
+		AoeData.civ_mongols.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_mongols.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_mongols.maxUnitTypeLineLevels.push([this.utl_spearman, 1]);
+		AoeData.civ_mongols.maxUnitTypeLineLevels.push([this.utl_archer, 2]);
+		AoeData.civ_mongols.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_mongols.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
+		AoeData.civ_mongols.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
+		AoeData.civ_mongols.maxUnitTypeLineLevels.push([this.utl_knight, 1]);
+		AoeData.civ_mongols.maxUnitTypeLineLevels.push([this.utl_camelRider, 1]);
+		AoeData.civ_mongols.maxUnitTypeLineLevels.push([this.utl_steppeLancer, 1]);
+		AoeData.civ_mongols.maxUnitTypeLineLevels.push([this.utl_batteringRam, 2]);
+		AoeData.civ_mongols.maxUnitTypeLineLevels.push([this.utl_scorpion, 1]);
+		AoeData.civ_mongols.maxUnitTypeLineLevels.push([this.utl_mangudai, 1]);
 		AoeData.civ_mongols.technologies.push(this.tec_squires, this.tec_thumbRing, this.tec_parthianTactics, this.tec_siegeEngineers, this.tec_bloodlines, this.tec_husbandry,
 			this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor);
 
-		AoeData.civ_persians.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_persians.unitTypeLineLevels.push([this.utl_militia, 2]);
-		AoeData.civ_persians.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_persians.unitTypeLineLevels.push([this.utl_archer, 1]);
-		AoeData.civ_persians.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_persians.unitTypeLineLevels.push([this.utl_handCannoneer, 0]);
-		AoeData.civ_persians.unitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
-		AoeData.civ_persians.unitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
-		AoeData.civ_persians.unitTypeLineLevels.push([this.utl_knight, 2]);
-		AoeData.civ_persians.unitTypeLineLevels.push([this.utl_camelRider, 1]);
-		AoeData.civ_persians.unitTypeLineLevels.push([this.utl_batteringRam, 2]);
-		AoeData.civ_persians.unitTypeLineLevels.push([this.utl_scorpion, 1]);
-		AoeData.civ_persians.unitTypeLineLevels.push([this.utl_warElephant, 1]);
+		AoeData.civ_persians.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_persians.maxUnitTypeLineLevels.push([this.utl_militia, 2]);
+		AoeData.civ_persians.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_persians.maxUnitTypeLineLevels.push([this.utl_archer, 1]);
+		AoeData.civ_persians.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_persians.maxUnitTypeLineLevels.push([this.utl_handCannoneer, 0]);
+		AoeData.civ_persians.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
+		AoeData.civ_persians.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
+		AoeData.civ_persians.maxUnitTypeLineLevels.push([this.utl_knight, 2]);
+		AoeData.civ_persians.maxUnitTypeLineLevels.push([this.utl_camelRider, 1]);
+		AoeData.civ_persians.maxUnitTypeLineLevels.push([this.utl_batteringRam, 2]);
+		AoeData.civ_persians.maxUnitTypeLineLevels.push([this.utl_scorpion, 1]);
+		AoeData.civ_persians.maxUnitTypeLineLevels.push([this.utl_warElephant, 1]);
 		AoeData.civ_persians.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_parthianTactics, this.tec_bloodlines, this.tec_husbandry,
 			this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor,
 			this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
-		AoeData.civ_portuguese.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_portuguese.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_portuguese.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_portuguese.unitTypeLineLevels.push([this.utl_archer, 2]);
-		AoeData.civ_portuguese.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_portuguese.unitTypeLineLevels.push([this.utl_handCannoneer, 0]);
-		AoeData.civ_portuguese.unitTypeLineLevels.push([this.utl_cavalryArcher, 0]);
-		AoeData.civ_portuguese.unitTypeLineLevels.push([this.utl_scoutCavalry, 1]);
-		AoeData.civ_portuguese.unitTypeLineLevels.push([this.utl_knight, 1]);
-		AoeData.civ_portuguese.unitTypeLineLevels.push([this.utl_batteringRam, 1]);
-		AoeData.civ_portuguese.unitTypeLineLevels.push([this.utl_scorpion, 0]);
-		AoeData.civ_portuguese.unitTypeLineLevels.push([this.utl_organGun, 1]);
+		AoeData.civ_portuguese.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_portuguese.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_portuguese.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_portuguese.maxUnitTypeLineLevels.push([this.utl_archer, 2]);
+		AoeData.civ_portuguese.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_portuguese.maxUnitTypeLineLevels.push([this.utl_handCannoneer, 0]);
+		AoeData.civ_portuguese.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 0]);
+		AoeData.civ_portuguese.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 1]);
+		AoeData.civ_portuguese.maxUnitTypeLineLevels.push([this.utl_knight, 1]);
+		AoeData.civ_portuguese.maxUnitTypeLineLevels.push([this.utl_batteringRam, 1]);
+		AoeData.civ_portuguese.maxUnitTypeLineLevels.push([this.utl_scorpion, 0]);
+		AoeData.civ_portuguese.maxUnitTypeLineLevels.push([this.utl_organGun, 1]);
 		AoeData.civ_portuguese.technologies.push(this.tec_supplies, this.tec_thumbRing, this.tec_siegeEngineers, this.tec_bloodlines, this.tec_husbandry, this.tec_blastFurnace,
 			this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer,
 			this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
-		AoeData.civ_saracens.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_saracens.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_saracens.unitTypeLineLevels.push([this.utl_spearman, 1]);
-		AoeData.civ_saracens.unitTypeLineLevels.push([this.utl_archer, 2]);
-		AoeData.civ_saracens.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_saracens.unitTypeLineLevels.push([this.utl_handCannoneer, 0]);
-		AoeData.civ_saracens.unitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
-		AoeData.civ_saracens.unitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
-		AoeData.civ_saracens.unitTypeLineLevels.push([this.utl_knight, 0]);
-		AoeData.civ_saracens.unitTypeLineLevels.push([this.utl_camelRider, 1]);
-		AoeData.civ_saracens.unitTypeLineLevels.push([this.utl_batteringRam, 2]);
-		AoeData.civ_saracens.unitTypeLineLevels.push([this.utl_scorpion, 0]);
-		AoeData.civ_saracens.unitTypeLineLevels.push([this.utl_mameluke, 1]);
+		AoeData.civ_saracens.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_saracens.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_saracens.maxUnitTypeLineLevels.push([this.utl_spearman, 1]);
+		AoeData.civ_saracens.maxUnitTypeLineLevels.push([this.utl_archer, 2]);
+		AoeData.civ_saracens.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_saracens.maxUnitTypeLineLevels.push([this.utl_handCannoneer, 0]);
+		AoeData.civ_saracens.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
+		AoeData.civ_saracens.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
+		AoeData.civ_saracens.maxUnitTypeLineLevels.push([this.utl_knight, 0]);
+		AoeData.civ_saracens.maxUnitTypeLineLevels.push([this.utl_camelRider, 1]);
+		AoeData.civ_saracens.maxUnitTypeLineLevels.push([this.utl_batteringRam, 2]);
+		AoeData.civ_saracens.maxUnitTypeLineLevels.push([this.utl_scorpion, 0]);
+		AoeData.civ_saracens.maxUnitTypeLineLevels.push([this.utl_mameluke, 1]);
 		AoeData.civ_saracens.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_parthianTactics, this.tec_siegeEngineers, this.tec_bloodlines,
 			this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor,
 			this.tec_plateBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 		
-		AoeData.civ_sicilians.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_sicilians.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_sicilians.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_sicilians.unitTypeLineLevels.push([this.utl_archer, 2]);
-		AoeData.civ_sicilians.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_sicilians.unitTypeLineLevels.push([this.utl_cavalryArcher, 0]);
-		AoeData.civ_sicilians.unitTypeLineLevels.push([this.utl_scoutCavalry, 1]);
-		AoeData.civ_sicilians.unitTypeLineLevels.push([this.utl_knight, 1]);
-		AoeData.civ_sicilians.unitTypeLineLevels.push([this.utl_batteringRam, 2]);
-		AoeData.civ_sicilians.unitTypeLineLevels.push([this.utl_scorpion, 1]);
-		AoeData.civ_sicilians.unitTypeLineLevels.push([this.utl_serjeant, 1]);
+		AoeData.civ_sicilians.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_sicilians.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_sicilians.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_sicilians.maxUnitTypeLineLevels.push([this.utl_archer, 2]);
+		AoeData.civ_sicilians.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_sicilians.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 0]);
+		AoeData.civ_sicilians.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 1]);
+		AoeData.civ_sicilians.maxUnitTypeLineLevels.push([this.utl_knight, 1]);
+		AoeData.civ_sicilians.maxUnitTypeLineLevels.push([this.utl_batteringRam, 2]);
+		AoeData.civ_sicilians.maxUnitTypeLineLevels.push([this.utl_scorpion, 1]);
+		AoeData.civ_sicilians.maxUnitTypeLineLevels.push([this.utl_serjeant, 1]);
 		AoeData.civ_sicilians.technologies.push(this.tec_supplies, this.tec_squires, this.tec_siegeEngineers, this.tec_bloodlines, this.tec_husbandry,
 			this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor,
 			this.tec_plateBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor);
 
-		AoeData.civ_slavs.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_slavs.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_slavs.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_slavs.unitTypeLineLevels.push([this.utl_archer, 1]);
-		AoeData.civ_slavs.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_slavs.unitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
-		AoeData.civ_slavs.unitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
-		AoeData.civ_slavs.unitTypeLineLevels.push([this.utl_knight, 1]);
-		AoeData.civ_slavs.unitTypeLineLevels.push([this.utl_batteringRam, 2]);
-		AoeData.civ_slavs.unitTypeLineLevels.push([this.utl_scorpion, 1]);
-		AoeData.civ_slavs.unitTypeLineLevels.push([this.utl_boyar, 1]);
+		AoeData.civ_slavs.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_slavs.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_slavs.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_slavs.maxUnitTypeLineLevels.push([this.utl_archer, 1]);
+		AoeData.civ_slavs.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_slavs.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
+		AoeData.civ_slavs.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
+		AoeData.civ_slavs.maxUnitTypeLineLevels.push([this.utl_knight, 1]);
+		AoeData.civ_slavs.maxUnitTypeLineLevels.push([this.utl_batteringRam, 2]);
+		AoeData.civ_slavs.maxUnitTypeLineLevels.push([this.utl_scorpion, 1]);
+		AoeData.civ_slavs.maxUnitTypeLineLevels.push([this.utl_boyar, 1]);
 		AoeData.civ_slavs.technologies.push(this.tec_supplies, this.tec_squires, this.tec_siegeEngineers, this.tec_bloodlines, this.tec_husbandry, this.tec_blastFurnace,
 			this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_leatherArcherArmor,
 			this.tec_ringArcherArmor);
 
-		AoeData.civ_spanish.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_spanish.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_spanish.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_spanish.unitTypeLineLevels.push([this.utl_archer, 0]);
-		AoeData.civ_spanish.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_spanish.unitTypeLineLevels.push([this.utl_handCannoneer, 0]);
-		AoeData.civ_spanish.unitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
-		AoeData.civ_spanish.unitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
-		AoeData.civ_spanish.unitTypeLineLevels.push([this.utl_knight, 2]);
-		AoeData.civ_spanish.unitTypeLineLevels.push([this.utl_batteringRam, 2]);
-		AoeData.civ_spanish.unitTypeLineLevels.push([this.utl_scorpion, 0]);
-		AoeData.civ_spanish.unitTypeLineLevels.push([this.utl_conquistador, 1]);
+		AoeData.civ_spanish.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_spanish.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_spanish.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_spanish.maxUnitTypeLineLevels.push([this.utl_archer, 0]);
+		AoeData.civ_spanish.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_spanish.maxUnitTypeLineLevels.push([this.utl_handCannoneer, 0]);
+		AoeData.civ_spanish.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
+		AoeData.civ_spanish.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
+		AoeData.civ_spanish.maxUnitTypeLineLevels.push([this.utl_knight, 2]);
+		AoeData.civ_spanish.maxUnitTypeLineLevels.push([this.utl_batteringRam, 2]);
+		AoeData.civ_spanish.maxUnitTypeLineLevels.push([this.utl_scorpion, 0]);
+		AoeData.civ_spanish.maxUnitTypeLineLevels.push([this.utl_conquistador, 1]);
 		AoeData.civ_spanish.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_bloodlines, this.tec_husbandry, this.tec_blastFurnace,
 			this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer,
 			this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
-		AoeData.civ_tatars.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_tatars.unitTypeLineLevels.push([this.utl_militia, 3]);
-		AoeData.civ_tatars.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_tatars.unitTypeLineLevels.push([this.utl_archer, 1]);
-		AoeData.civ_tatars.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_tatars.unitTypeLineLevels.push([this.utl_handCannoneer, 0]);
-		AoeData.civ_tatars.unitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
-		AoeData.civ_tatars.unitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
-		AoeData.civ_tatars.unitTypeLineLevels.push([this.utl_knight, 1]);
-		AoeData.civ_tatars.unitTypeLineLevels.push([this.utl_camelRider, 1]);
-		AoeData.civ_tatars.unitTypeLineLevels.push([this.utl_steppeLancer, 1]);
-		AoeData.civ_tatars.unitTypeLineLevels.push([this.utl_batteringRam, 2]);
-		AoeData.civ_tatars.unitTypeLineLevels.push([this.utl_scorpion, 1]);
-		AoeData.civ_tatars.unitTypeLineLevels.push([this.utl_keshik, 1]);
-		AoeData.civ_tatars.unitTypeLineLevels.push([this.utl_flamingCamel, 0]);
+		AoeData.civ_tatars.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_tatars.maxUnitTypeLineLevels.push([this.utl_militia, 3]);
+		AoeData.civ_tatars.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_tatars.maxUnitTypeLineLevels.push([this.utl_archer, 1]);
+		AoeData.civ_tatars.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_tatars.maxUnitTypeLineLevels.push([this.utl_handCannoneer, 0]);
+		AoeData.civ_tatars.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
+		AoeData.civ_tatars.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
+		AoeData.civ_tatars.maxUnitTypeLineLevels.push([this.utl_knight, 1]);
+		AoeData.civ_tatars.maxUnitTypeLineLevels.push([this.utl_camelRider, 1]);
+		AoeData.civ_tatars.maxUnitTypeLineLevels.push([this.utl_steppeLancer, 1]);
+		AoeData.civ_tatars.maxUnitTypeLineLevels.push([this.utl_batteringRam, 2]);
+		AoeData.civ_tatars.maxUnitTypeLineLevels.push([this.utl_scorpion, 1]);
+		AoeData.civ_tatars.maxUnitTypeLineLevels.push([this.utl_keshik, 1]);
+		AoeData.civ_tatars.maxUnitTypeLineLevels.push([this.utl_flamingCamel, 0]);
 		AoeData.civ_tatars.technologies.push(this.tec_squires, this.tec_thumbRing, this.tec_parthianTactics, this.tec_siegeEngineers, this.tec_bloodlines, this.tec_husbandry,
 			this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor,
 			this.tec_ringArcherArmor);
 
-		AoeData.civ_teutons.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_teutons.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_teutons.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_teutons.unitTypeLineLevels.push([this.utl_archer, 1]);
-		AoeData.civ_teutons.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_teutons.unitTypeLineLevels.push([this.utl_handCannoneer, 0]);
-		AoeData.civ_teutons.unitTypeLineLevels.push([this.utl_cavalryArcher, 0]);
-		AoeData.civ_teutons.unitTypeLineLevels.push([this.utl_scoutCavalry, 0]);
-		AoeData.civ_teutons.unitTypeLineLevels.push([this.utl_knight, 2]);
-		AoeData.civ_teutons.unitTypeLineLevels.push([this.utl_batteringRam, 1]);
-		AoeData.civ_teutons.unitTypeLineLevels.push([this.utl_scorpion, 1]);
-		AoeData.civ_teutons.unitTypeLineLevels.push([this.utl_teutonicKnight, 1]);
+		AoeData.civ_teutons.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_teutons.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_teutons.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_teutons.maxUnitTypeLineLevels.push([this.utl_archer, 1]);
+		AoeData.civ_teutons.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_teutons.maxUnitTypeLineLevels.push([this.utl_handCannoneer, 0]);
+		AoeData.civ_teutons.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 0]);
+		AoeData.civ_teutons.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 0]);
+		AoeData.civ_teutons.maxUnitTypeLineLevels.push([this.utl_knight, 2]);
+		AoeData.civ_teutons.maxUnitTypeLineLevels.push([this.utl_batteringRam, 1]);
+		AoeData.civ_teutons.maxUnitTypeLineLevels.push([this.utl_scorpion, 1]);
+		AoeData.civ_teutons.maxUnitTypeLineLevels.push([this.utl_teutonicKnight, 1]);
 		AoeData.civ_teutons.technologies.push(this.tec_supplies, this.tec_squires, this.tec_siegeEngineers, this.tec_bloodlines, this.tec_blastFurnace, this.tec_chainMailArmor,
 			this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
-		AoeData.civ_turks.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_turks.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_turks.unitTypeLineLevels.push([this.utl_spearman, 0]);
-		AoeData.civ_turks.unitTypeLineLevels.push([this.utl_archer, 1]);
-		AoeData.civ_turks.unitTypeLineLevels.push([this.utl_skirmisher, 0]);
-		AoeData.civ_turks.unitTypeLineLevels.push([this.utl_handCannoneer, 0]);
-		AoeData.civ_turks.unitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
-		AoeData.civ_turks.unitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
-		AoeData.civ_turks.unitTypeLineLevels.push([this.utl_knight, 1]);
-		AoeData.civ_turks.unitTypeLineLevels.push([this.utl_camelRider, 1]);
-		AoeData.civ_turks.unitTypeLineLevels.push([this.utl_batteringRam, 2]);
-		AoeData.civ_turks.unitTypeLineLevels.push([this.utl_scorpion, 1]);
-		AoeData.civ_turks.unitTypeLineLevels.push([this.utl_janissary, 1]);
+		AoeData.civ_turks.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_turks.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_turks.maxUnitTypeLineLevels.push([this.utl_spearman, 0]);
+		AoeData.civ_turks.maxUnitTypeLineLevels.push([this.utl_archer, 1]);
+		AoeData.civ_turks.maxUnitTypeLineLevels.push([this.utl_skirmisher, 0]);
+		AoeData.civ_turks.maxUnitTypeLineLevels.push([this.utl_handCannoneer, 0]);
+		AoeData.civ_turks.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
+		AoeData.civ_turks.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
+		AoeData.civ_turks.maxUnitTypeLineLevels.push([this.utl_knight, 1]);
+		AoeData.civ_turks.maxUnitTypeLineLevels.push([this.utl_camelRider, 1]);
+		AoeData.civ_turks.maxUnitTypeLineLevels.push([this.utl_batteringRam, 2]);
+		AoeData.civ_turks.maxUnitTypeLineLevels.push([this.utl_scorpion, 1]);
+		AoeData.civ_turks.maxUnitTypeLineLevels.push([this.utl_janissary, 1]);
 		AoeData.civ_turks.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_parthianTactics, this.tec_bloodlines, this.tec_husbandry,
 			this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer,
 			this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
-		AoeData.civ_vietnamese.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_vietnamese.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_vietnamese.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_vietnamese.unitTypeLineLevels.push([this.utl_archer, 2]);
-		AoeData.civ_vietnamese.unitTypeLineLevels.push([this.utl_skirmisher, 2]);
-		AoeData.civ_vietnamese.unitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
-		AoeData.civ_vietnamese.unitTypeLineLevels.push([this.utl_scoutCavalry, 1]);
-		AoeData.civ_vietnamese.unitTypeLineLevels.push([this.utl_knight, 1]);
-		AoeData.civ_vietnamese.unitTypeLineLevels.push([this.utl_battleElephant, 1]);
-		AoeData.civ_vietnamese.unitTypeLineLevels.push([this.utl_batteringRam, 1]);
-		AoeData.civ_vietnamese.unitTypeLineLevels.push([this.utl_scorpion, 0]);
-		AoeData.civ_vietnamese.unitTypeLineLevels.push([this.utl_rattanArcher, 1]);
+		AoeData.civ_vietnamese.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_vietnamese.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_vietnamese.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_vietnamese.maxUnitTypeLineLevels.push([this.utl_archer, 2]);
+		AoeData.civ_vietnamese.maxUnitTypeLineLevels.push([this.utl_skirmisher, 2]);
+		AoeData.civ_vietnamese.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
+		AoeData.civ_vietnamese.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 1]);
+		AoeData.civ_vietnamese.maxUnitTypeLineLevels.push([this.utl_knight, 1]);
+		AoeData.civ_vietnamese.maxUnitTypeLineLevels.push([this.utl_battleElephant, 1]);
+		AoeData.civ_vietnamese.maxUnitTypeLineLevels.push([this.utl_batteringRam, 1]);
+		AoeData.civ_vietnamese.maxUnitTypeLineLevels.push([this.utl_scorpion, 0]);
+		AoeData.civ_vietnamese.maxUnitTypeLineLevels.push([this.utl_rattanArcher, 1]);
 		AoeData.civ_vietnamese.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_siegeEngineers, this.tec_bloodlines, this.tec_husbandry,
 			this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor, this.tec_bracer,
 			this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
-		AoeData.civ_vikings.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_vikings.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_vikings.unitTypeLineLevels.push([this.utl_spearman, 1]);
-		AoeData.civ_vikings.unitTypeLineLevels.push([this.utl_archer, 2]);
-		AoeData.civ_vikings.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_vikings.unitTypeLineLevels.push([this.utl_cavalryArcher, 0]);
-		AoeData.civ_vikings.unitTypeLineLevels.push([this.utl_scoutCavalry, 1]);
-		AoeData.civ_vikings.unitTypeLineLevels.push([this.utl_knight, 1]);
-		AoeData.civ_vikings.unitTypeLineLevels.push([this.utl_batteringRam, 2]);
-		AoeData.civ_vikings.unitTypeLineLevels.push([this.utl_scorpion, 1]);
-		AoeData.civ_vikings.unitTypeLineLevels.push([this.utl_berserk, 1]);
+		AoeData.civ_vikings.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_vikings.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_vikings.maxUnitTypeLineLevels.push([this.utl_spearman, 1]);
+		AoeData.civ_vikings.maxUnitTypeLineLevels.push([this.utl_archer, 2]);
+		AoeData.civ_vikings.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_vikings.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 0]);
+		AoeData.civ_vikings.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 1]);
+		AoeData.civ_vikings.maxUnitTypeLineLevels.push([this.utl_knight, 1]);
+		AoeData.civ_vikings.maxUnitTypeLineLevels.push([this.utl_batteringRam, 2]);
+		AoeData.civ_vikings.maxUnitTypeLineLevels.push([this.utl_scorpion, 1]);
+		AoeData.civ_vikings.maxUnitTypeLineLevels.push([this.utl_berserk, 1]);
 		AoeData.civ_vikings.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_siegeEngineers, this.tec_blastFurnace, this.tec_chainMailArmor,
 			this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 		
-		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_villager, 0]);
-		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_militia, 4]);
-		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_spearman, 2]);
-		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_eagleScout, 2]);
-		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_archer, 2]);
-		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_skirmisher, 1]);
-		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
-		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_handCannoneer, 0]);
-		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
-		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_knight, 2]);
-		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_camelRider, 1]);
-		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_battleElephant, 1]);
-		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_steppeLancer, 1]);
-		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_batteringRam, 2]);
-		AoeData.civ_generic.unitTypeLineLevels.push([this.utl_scorpion, 1]);
+		AoeData.civ_generic.maxUnitTypeLineLevels.push([this.utl_villager, 0]);
+		AoeData.civ_generic.maxUnitTypeLineLevels.push([this.utl_militia, 4]);
+		AoeData.civ_generic.maxUnitTypeLineLevels.push([this.utl_spearman, 2]);
+		AoeData.civ_generic.maxUnitTypeLineLevels.push([this.utl_eagleScout, 2]);
+		AoeData.civ_generic.maxUnitTypeLineLevels.push([this.utl_archer, 2]);
+		AoeData.civ_generic.maxUnitTypeLineLevels.push([this.utl_skirmisher, 1]);
+		AoeData.civ_generic.maxUnitTypeLineLevels.push([this.utl_cavalryArcher, 1]);
+		AoeData.civ_generic.maxUnitTypeLineLevels.push([this.utl_handCannoneer, 0]);
+		AoeData.civ_generic.maxUnitTypeLineLevels.push([this.utl_scoutCavalry, 2]);
+		AoeData.civ_generic.maxUnitTypeLineLevels.push([this.utl_knight, 2]);
+		AoeData.civ_generic.maxUnitTypeLineLevels.push([this.utl_camelRider, 1]);
+		AoeData.civ_generic.maxUnitTypeLineLevels.push([this.utl_battleElephant, 1]);
+		AoeData.civ_generic.maxUnitTypeLineLevels.push([this.utl_steppeLancer, 1]);
+		AoeData.civ_generic.maxUnitTypeLineLevels.push([this.utl_batteringRam, 2]);
+		AoeData.civ_generic.maxUnitTypeLineLevels.push([this.utl_scorpion, 1]);
 		AoeData.civ_generic.technologies.push(this.tec_supplies, this.tec_squires, this.tec_thumbRing, this.tec_parthianTactics, this.tec_siegeEngineers, this.tec_bloodlines,
 			this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor,
 			this.tec_plateBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
+		
+		this.civsList.forEach(civ => {
+			civ.technologies.sort((a, b) => {
+				if (a.accessibleFromAge < b.accessibleFromAge){
+					return -1;
+				} else if (a.accessibleFromAge > b.accessibleFromAge){
+					return 1;
+				} else {
+					if (a.name < b.name){
+						return -1;
+					} else {
+						return 1;
+					}
+				}
+			});
+		});
 	}
 }

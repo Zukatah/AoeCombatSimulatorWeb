@@ -37,10 +37,12 @@ export class UnitType {
 	public name: string; // this unit type's name
 	public imagePath: string = "";
 	public techsForUnitList: Technology[] = [];
+	public accessibleFromAge: number = 0;
 
-	constructor(name: string, hp: number, attackSpeed: number, attackRange: number, attackDelay: number, projectileSpeed: number, moveSpeed: number,
+	constructor(name: string, accessibleFromAge: number, hp: number, attackSpeed: number, attackRange: number, attackDelay: number, projectileSpeed: number, moveSpeed: number,
 		foodCost: number, woodCost: number, goldCost: number, radius: number = 0.2, attackRangeMin: number = 0.0, accuracyPercent: number = 100, hpRegPerMin: number = 0) {
 		this.name = name;
+		this.accessibleFromAge = accessibleFromAge,
 		this.hp = hp;
 		this.attackSpeed = attackSpeed;
 		this.attackRange = attackRange;

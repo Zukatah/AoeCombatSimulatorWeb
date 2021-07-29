@@ -22,6 +22,7 @@
     "@angular/router": "~9.1.6",
     "@ng-bootstrap/ng-bootstrap": "^6.1.0",
     "bootstrap": "^4.5.0",
+    "bootstrap-icons": "^1.5.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

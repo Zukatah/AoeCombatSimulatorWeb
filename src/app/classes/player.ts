@@ -4,6 +4,9 @@ import { AoeData } from "../data/aoeData";
 import { Civilization } from './civilization';
 import { CivUnitType } from './civUnitType';
 import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
+import { Technology } from './technology';
+import { max } from 'rxjs/operators';
+import { UnitTypeLine } from './unitTypeLine';
 
 export class Player{
 	public playerIndex: number; // currently either 0 (first player) or 1 (second player)
@@ -43,11 +46,12 @@ export class Player{
 	public populationRemaining: number = 0;
 	public populationGenerated: number = 0;
 
-	public uts: UnitType[] = AoeData.unitTypesList;
-	public civs: Civilization[] = AoeData.civsList;
 	public playerColor: Color; // Player GUI //
 	public civilization: Civilization;
 	public civUts: CivUnitType[] = []; // unit types on the basis of the selected civ
+	public techsResearched: Technology[] = []; // all techs researched by the player
+	public currentUnitTypeLineLevels: [UnitTypeLine, number][] = [];
+	public age: number = AoeData.darkAge; // the age the player currently is in (only exists to use it as default when creating the CivUnitTypes)
 
 	public constructor(playerColor: Color, playerIndex: number)
 	{
@@ -111,12 +115,100 @@ export class Player{
 	}
 
 	public SetCiv(civIndex: number): void{
-		this.civilization = this.civs[civIndex];
-		this.civUts = [];
-		this.civilization.unitTypeLineLevels.forEach(tuple => {
-			this.civUts.push(new CivUnitType(tuple[0].unitTypes[tuple[1]], this.civilization));
-		});
+		this.civilization = AoeData.civsList[civIndex];
 		this.numberOfRelics = 0;
+		this.AddTechsToPlayer();
+		this.SetDefaultUnitTypeLineLevels();
+		this.AddCivUnitTypesToPlayer();
+	}
+
+	public SetAge(age: number): void{
+		this.age = age;
+		this.AddTechsToPlayer();
+		this.SetDefaultUnitTypeLineLevels();
+		this.AddCivUnitTypesToPlayer();
+	}
+
+	public ToggleTech(tech: Technology): void{
+		if (this.techsResearched.includes(tech)){
+			this.techsResearched.splice(this.techsResearched.indexOf(tech), 1);
+			this.AddCivUnitTypesToPlayer();
+		} else {
+			if (tech.accessibleFromAge <= this.age){
+				this.techsResearched.push(tech);
+				this.AddCivUnitTypesToPlayer();
+			}
+		}
+	}
+
+	public SetUnitTypeLineLevel(index: number, increase: boolean): void{ // sets unit upgrade levels (e.g. archer, crossbow, arbalest)
+		let newUnitTypeLineLevels: [UnitTypeLine, number] = [this.currentUnitTypeLineLevels[index][0], this.currentUnitTypeLineLevels[index][1] + (increase ? 1 : -1)]
+
+		console.log("STELLE1 " + newUnitTypeLineLevels[0].name + " " + newUnitTypeLineLevels[1]);
+		if (this.currentUnitTypeLineLevels.find(utll => utll[0] == newUnitTypeLineLevels[0]) == undefined || this.civilization.maxUnitTypeLineLevels.find(utll => utll[0] == newUnitTypeLineLevels[0]) == undefined){
+			console.log("Invalid UnitTypeLineLevel.");
+			return;
+		}
+		if (newUnitTypeLineLevels[1] < 0){
+			newUnitTypeLineLevels[1] = 0;
+		} else {
+			
+			let civUnitTypeLineLevel: [UnitTypeLine, number] = this.civilization.maxUnitTypeLineLevels.find(utll => utll[0] == newUnitTypeLineLevels[0]);
+			console.log("CHECK " + newUnitTypeLineLevels[1] + ">" + civUnitTypeLineLevel[1]);
+			if (newUnitTypeLineLevels[1] > civUnitTypeLineLevel[1]) {
+				newUnitTypeLineLevels[1] = civUnitTypeLineLevel[1];
+			}
+		}
+		console.log("STELLE2 " + newUnitTypeLineLevels[0].name + " " + newUnitTypeLineLevels[1]);
+		this.currentUnitTypeLineLevels.find(utll => utll[0] == newUnitTypeLineLevels[0])[1] = newUnitTypeLineLevels[1];
+		console.log("STELLE3 " + this.currentUnitTypeLineLevels.find(utll => utll[0] == newUnitTypeLineLevels[0])[1])
+
+		this.civUts.splice(index, 1); // just creating a new civunittype inplace doesn't trigger angular change detection; so we remove the old civunittype and then add a new one at the same index
+		this.civUts.splice(index, 0, new CivUnitType(newUnitTypeLineLevels[0].unitTypes[newUnitTypeLineLevels[1]], this.civilization, this.age, this.techsResearched));
+	}
+
+	public IsUnitTypeLineMaxed(index: number): boolean{
+		let maxLevel: number = 0;
+		for (let tempLevel: number = this.civilization.maxUnitTypeLineLevels[index][1]; tempLevel >= 0; tempLevel--){
+			if (this.civilization.maxUnitTypeLineLevels[index][0].unitTypes[tempLevel].accessibleFromAge <= this.age){
+				maxLevel = tempLevel;
+				break;
+			}
+		}
+		return maxLevel == this.currentUnitTypeLineLevels[index][1];
+	}
+
+	public IsUnitTypeLineMinimized(index: number): boolean{
+		return this.currentUnitTypeLineLevels[index][1] == 0;
+	}
+
+	public AddTechsToPlayer(): void{
+		this.techsResearched = [];
+		this.civilization.technologies.forEach(tech => {
+			if (tech.accessibleFromAge < this.age){
+				this.techsResearched.push(tech);
+			}
+		});
+		this.techsResearched
+	}
+
+	public SetDefaultUnitTypeLineLevels(): void{
+		this.currentUnitTypeLineLevels = [];
+		this.civilization.maxUnitTypeLineLevels.forEach(tuple => {
+			for (let curUnitTypeLineLevel: number = tuple[1]; curUnitTypeLineLevel >= 0; curUnitTypeLineLevel--){
+				if (tuple[0].unitTypes[curUnitTypeLineLevel].accessibleFromAge <= (curUnitTypeLineLevel == 0 ? this.age : this.age - 1)){
+					this.currentUnitTypeLineLevels.push([tuple[0], curUnitTypeLineLevel]);
+					break;
+				}
+			}
+		});
+	}
+
+	public AddCivUnitTypesToPlayer(): void{
+		this.civUts = [];
+		this.currentUnitTypeLineLevels.forEach(tuple => {
+			this.civUts.push(new CivUnitType(tuple[0].unitTypes[tuple[1]], this.civilization, this.age, this.techsResearched));
+		});
 		this.ResetData();
 	}
 

@@ -2,23 +2,27 @@ import { ArmorClass } from './armorClass';
 import { UnitType } from "./unitType";
 import { Civilization } from './civilization';
 import { AoeData } from './../data/aoeData';
+import { Technology } from './technology';
 
 
 export class CivUnitType extends UnitType {
 
 	public baseUnitType: UnitType;
 	public civ: Civilization;
-	public age: number = 4; // 0 = dark age, 1 = feudal age, 2 = castle age, 3 = imp age, 4 = post imp age (not fully implemented yet) - always post imp currently
+	public age: number; // age values defined in aoeData.ts
+	public techsResearched: Technology[];
 	public numberOfRelics: number = 0;
 
 
-	constructor(baseUnitType: UnitType, civ: Civilization, numberOfRelics: number = 0) {
-		super(civ.name + " " + baseUnitType.name, baseUnitType.hp, baseUnitType.attackSpeed, baseUnitType.attackRange, baseUnitType.attackDelay, baseUnitType.projectileSpeed, baseUnitType.moveSpeed,
+	constructor(baseUnitType: UnitType, civ: Civilization, age: number, techsResearched: Technology[] = null, numberOfRelics: number = 0) {
+		super(civ.name + " " + baseUnitType.name, baseUnitType.accessibleFromAge, baseUnitType.hp, baseUnitType.attackSpeed, baseUnitType.attackRange, baseUnitType.attackDelay, baseUnitType.projectileSpeed, baseUnitType.moveSpeed,
 			baseUnitType.resourceCosts[0], baseUnitType.resourceCosts[1], baseUnitType.resourceCosts[2], baseUnitType.radius, baseUnitType.attackRangeMin, baseUnitType.accuracyPercent,
 			baseUnitType.hpRegPerMin);
 
 		this.baseUnitType = baseUnitType;
 		this.civ = civ;
+		this.age = age;
+		this.techsResearched = techsResearched;
 		this.numberOfRelics = numberOfRelics;
 
 		baseUnitType.attackValues.forEach((value: number, key: ArmorClass) => { this.attackValues.set(key, value); });
@@ -35,7 +39,11 @@ export class CivUnitType extends UnitType {
 		this.imagePath = baseUnitType.imagePath;
 		this.techsForUnitList = baseUnitType.techsForUnitList;
 
-		if (civ == AoeData.civ_incas && baseUnitType == AoeData.ut_villager){
+		if (techsResearched == null){ // this is only called, if the unit's techs have to be set individually (in the matrix mode); in the simulation mode, techs are set via the researched techs of the respective player
+			this.AddDefaultTechsToUnit();
+		}
+
+		if (civ == AoeData.civ_incas && baseUnitType == AoeData.ut_villager){ // unlike generic villagers, the incas' villagers profit from blacksmith upgrades
 			this.techsForUnitList.push(AoeData.tec_forging, AoeData.tec_ironCasting, AoeData.tec_blastFurnace, AoeData.tec_scaleMailArmor, AoeData.tec_chainMailArmor, AoeData.tec_plateMailArmor);
 		}
 
@@ -88,65 +96,76 @@ export class CivUnitType extends UnitType {
 	}
 
 
+	public AddDefaultTechsToUnit(): void{ // this is only called, if the unit's techs have to be set individually (in the matrix mode); in the simulation mode, techs are set via the researched techs of the respective player
+		this.techsResearched = [];
+		this.civ.technologies.forEach(tech => {
+			if (tech.accessibleFromAge < this.age){
+				this.techsResearched.push(tech);
+			}
+		});
+		this.techsResearched
+	}
+
+
 	public ApplyBlacksmithTechs(): void{
-		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_forging) && this.civ.technologies.includes(AoeData.tec_forging) && this.age >= AoeData.tec_forging.age){
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_forging) && this.techsResearched.includes(AoeData.tec_forging)){
 			this.attackValues.set(AoeData.ac_baseMelee, this.attackValues.get(AoeData.ac_baseMelee) + 1);
 		}
-		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_ironCasting) && this.civ.technologies.includes(AoeData.tec_ironCasting) && this.age >= AoeData.tec_ironCasting.age){
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_ironCasting) && this.techsResearched.includes(AoeData.tec_ironCasting)){
 			this.attackValues.set(AoeData.ac_baseMelee, this.attackValues.get(AoeData.ac_baseMelee) + 1);
 		}
-		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_blastFurnace) && this.civ.technologies.includes(AoeData.tec_blastFurnace) && this.age >= AoeData.tec_blastFurnace.age){
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_blastFurnace) && this.techsResearched.includes(AoeData.tec_blastFurnace)){
 			this.attackValues.set(AoeData.ac_baseMelee, this.attackValues.get(AoeData.ac_baseMelee) + 2);
 		}
 
-		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_scaleMailArmor) && this.civ.technologies.includes(AoeData.tec_scaleMailArmor) && this.age >= AoeData.tec_scaleMailArmor.age){
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_scaleMailArmor) && this.techsResearched.includes(AoeData.tec_scaleMailArmor)){
 			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 1);
 			this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 1);
 		}
-		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_chainMailArmor) && this.civ.technologies.includes(AoeData.tec_chainMailArmor) && this.age >= AoeData.tec_chainMailArmor.age){
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_chainMailArmor) && this.techsResearched.includes(AoeData.tec_chainMailArmor)){
 			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 1);
 			this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 1);
 		}
-		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_plateMailArmor) && this.civ.technologies.includes(AoeData.tec_plateMailArmor) && this.age >= AoeData.tec_plateMailArmor.age){
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_plateMailArmor) && this.techsResearched.includes(AoeData.tec_plateMailArmor)){
 			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 1);
 			this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 2);
 		}
 
-		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_scaleBardingArmor) && this.civ.technologies.includes(AoeData.tec_scaleBardingArmor) && this.age >= AoeData.tec_scaleBardingArmor.age){
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_scaleBardingArmor) && this.techsResearched.includes(AoeData.tec_scaleBardingArmor)){
 			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 1);
 			this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 1);
 		}
-		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_chainBardingArmor) && this.civ.technologies.includes(AoeData.tec_chainBardingArmor) && this.age >= AoeData.tec_chainBardingArmor.age){
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_chainBardingArmor) && this.techsResearched.includes(AoeData.tec_chainBardingArmor)){
 			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 1);
 			this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 1);
 		}
-		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_plateBardingArmor) && this.civ.technologies.includes(AoeData.tec_plateBardingArmor) && this.age >= AoeData.tec_plateBardingArmor.age){
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_plateBardingArmor) && this.techsResearched.includes(AoeData.tec_plateBardingArmor)){
 			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 1);
 			this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 2);
 		}
 
-		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_fletching) && this.civ.technologies.includes(AoeData.tec_fletching) && this.age >= AoeData.tec_fletching.age){
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_fletching) && this.techsResearched.includes(AoeData.tec_fletching)){
 			this.attackValues.set(AoeData.ac_basePierce, this.attackValues.get(AoeData.ac_basePierce) + 1);
 			this.attackRange += 1;
 		}
-		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_bodkinArrow) && this.civ.technologies.includes(AoeData.tec_bodkinArrow) && this.age >= AoeData.tec_bodkinArrow.age){
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_bodkinArrow) && this.techsResearched.includes(AoeData.tec_bodkinArrow)){
 			this.attackValues.set(AoeData.ac_basePierce, this.attackValues.get(AoeData.ac_basePierce) + 1);
 			this.attackRange += 1;
 		}
-		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_bracer) && this.civ.technologies.includes(AoeData.tec_bracer) && this.age >= AoeData.tec_bracer.age){
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_bracer) && this.techsResearched.includes(AoeData.tec_bracer)){
 			this.attackValues.set(AoeData.ac_basePierce, this.attackValues.get(AoeData.ac_basePierce) + 1);
 			this.attackRange += 1;
 		}
 
-		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_paddedArcherArmor) && this.civ.technologies.includes(AoeData.tec_paddedArcherArmor) && this.age >= AoeData.tec_paddedArcherArmor.age){
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_paddedArcherArmor) && this.techsResearched.includes(AoeData.tec_paddedArcherArmor)){
 			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 1);
 			this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 1);
 		}
-		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_leatherArcherArmor) && this.civ.technologies.includes(AoeData.tec_leatherArcherArmor) && this.age >= AoeData.tec_leatherArcherArmor.age){
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_leatherArcherArmor) && this.techsResearched.includes(AoeData.tec_leatherArcherArmor)){
 			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 1);
 			this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 1);
 		}
-		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_ringArcherArmor) && this.civ.technologies.includes(AoeData.tec_ringArcherArmor) && this.age >= AoeData.tec_ringArcherArmor.age){
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_ringArcherArmor) && this.techsResearched.includes(AoeData.tec_ringArcherArmor)){
 			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 1);
 			this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 2);
 		}
@@ -154,44 +173,44 @@ export class CivUnitType extends UnitType {
 
 
 	public ApplyUniversityTechs(): void{
-		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_chemistry) && this.civ.technologies.includes(AoeData.tec_chemistry) && this.age >= AoeData.tec_chemistry.age){
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_chemistry) && this.techsResearched.includes(AoeData.tec_chemistry)){
 			this.attackValues.set(AoeData.ac_basePierce, this.attackValues.get(AoeData.ac_basePierce) + 1);
 		}
-		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_siegeEngineers) && this.civ.technologies.includes(AoeData.tec_siegeEngineers) && this.age >= AoeData.tec_siegeEngineers.age){
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_siegeEngineers) && this.techsResearched.includes(AoeData.tec_siegeEngineers)){
 			this.attackRange += 1;
 		}
 	}
 
 
 	public ApplyBarracksStableTcTechs(): void{
-		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_supplies) && this.civ.technologies.includes(AoeData.tec_supplies) && this.age >= AoeData.tec_supplies.age){
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_supplies) && this.techsResearched.includes(AoeData.tec_supplies)){
 			this.resourceCosts[0] -= 15;
 		}
-		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_squires) && this.civ.technologies.includes(AoeData.tec_squires) && this.age >= AoeData.tec_squires.age){
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_squires) && this.techsResearched.includes(AoeData.tec_squires)){
 			this.moveSpeed *= 1.1;
 		}
-		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_bloodlines) && this.civ.technologies.includes(AoeData.tec_bloodlines) && this.age >= AoeData.tec_bloodlines.age){
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_bloodlines) && this.techsResearched.includes(AoeData.tec_bloodlines)){
 			this.hp += 20;
 		}
-		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_husbandry) && this.civ.technologies.includes(AoeData.tec_husbandry) && this.age >= AoeData.tec_husbandry.age){
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_husbandry) && this.techsResearched.includes(AoeData.tec_husbandry)){
 			this.moveSpeed *= 1.1;
 		}
-		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_loom) && this.civ.technologies.includes(AoeData.tec_loom) && this.age >= AoeData.tec_loom.age){
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_loom) && this.techsResearched.includes(AoeData.tec_loom)){
 			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 1);
 			this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 2);
 			this.hp += 15;
 		}
-		if (this.baseUnitType.techsForUnitList.includes(AoeData.tec_wheelbarrow) && this.civ.technologies.includes(AoeData.tec_wheelbarrow) && this.age >= AoeData.tec_wheelbarrow.age){
+		if (this.baseUnitType.techsForUnitList.includes(AoeData.tec_wheelbarrow) && this.techsResearched.includes(AoeData.tec_wheelbarrow)){
 			this.moveSpeed *= 1.1;
 		}
-		if (this.baseUnitType.techsForUnitList.includes(AoeData.tec_handCart) && this.civ.technologies.includes(AoeData.tec_handCart) && this.age >= AoeData.tec_handCart.age){
+		if (this.baseUnitType.techsForUnitList.includes(AoeData.tec_handCart) && this.techsResearched.includes(AoeData.tec_handCart)){
 			this.moveSpeed *= 1.1;
 		}
 	}
 
 
 	public ApplyArcheryRangeTechs(): void{
-		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_parthianTactics) && this.civ.technologies.includes(AoeData.tec_parthianTactics) && this.age >= AoeData.tec_parthianTactics.age){
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_parthianTactics) && this.techsResearched.includes(AoeData.tec_parthianTactics)){
 			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 1);
 			this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 2);
 			if (this.attackValues.has(AoeData.ac_spearman)){
@@ -200,7 +219,7 @@ export class CivUnitType extends UnitType {
 				this.attackValues.set(AoeData.ac_spearman, this.attackValues.get(AoeData.ac_spearman) + 2);
 			}
 		}
-		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_thumbRing) && this.civ.technologies.includes(AoeData.tec_thumbRing) && this.age >= AoeData.tec_thumbRing.age){
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_thumbRing) && this.techsResearched.includes(AoeData.tec_thumbRing)){
 			this.accuracyPercent = 100;
 			if (AoeData.utl_archer.unitTypes.includes(this.baseUnitType)){
 				this.attackSpeed *= 0.85;
@@ -696,7 +715,7 @@ export class CivUnitType extends UnitType {
 	// Apply lithuanians' relic bonus for specific civ unit types (necessary to include civ unit types with different relic counts in one matrix)
 	public RelicCountChanged(numberOfRelics): void{
 		this.numberOfRelics = numberOfRelics;
-		this.attackValues.set(AoeData.ac_baseMelee, new CivUnitType(this.baseUnitType, this.civ).attackValues.get(AoeData.ac_baseMelee) + this.numberOfRelics);
+		this.attackValues.set(AoeData.ac_baseMelee, new CivUnitType(this.baseUnitType, this.civ, this.age, this.techsResearched).attackValues.get(AoeData.ac_baseMelee) + this.numberOfRelics);
 		this.name = this.civ.name + " " + this.baseUnitType.name + (this.numberOfRelics > 0 ? " " + this.numberOfRelics + "R" : "");
 	}
 }
