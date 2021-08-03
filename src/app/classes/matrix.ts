@@ -1,5 +1,6 @@
 import { CivUnitType } from '../classes/civUnitType';
 import { Helpers } from '../helper/helpers';
+import { Age } from './age';
 
 export class MatrixRow{
 	public civUnitType: CivUnitType;
@@ -16,6 +17,7 @@ export class Matrix{
 	public matrixUtsLength2: number; // the width of the matrix (#p1 civ unit types)
 	public description: string; // the description of the matrix's settings
 	public matrixRows: MatrixRow[] = []; // the matrix' rows
+	public age: Age; // the age used for all the civUnitTypes (if there is no global age setting, this property shall remain undefined/null)
 
 	public hitAndRunMode: number; // 0=noHit&Run, 1=semi, 2=fullHit&Run
 	public hitAndRunModes: string[] = ["No Hit&Run", "Medium Hit&Run", "Perfect Hit&Run"];
@@ -44,7 +46,7 @@ export class Matrix{
 	public sortable_description: string = "Sortable";
 	public points_description: string = "Sortable. Each cost efficiency >2 gives 4 points, >1.25 gives 3 points, >=0.8 gives 2 points, >=0.5 gives 1 point, <0.5 gives 0 points.";
 
-	constructor(matrixUts1: CivUnitType[], matrixUts2: CivUnitType[], description: string, hitAndRunMode: number, resourceValue: number, combatType: number, combatResults: number[][]){
+	constructor(matrixUts1: CivUnitType[], matrixUts2: CivUnitType[], description: string, hitAndRunMode: number, resourceValue: number, combatType: number, age: Age, combatResults: number[][]){
 		this.matrixUts1 = matrixUts1;
 		this.matrixUts2 = matrixUts2;
 		this.description = description;
@@ -53,6 +55,7 @@ export class Matrix{
 		this.hitAndRunMode = hitAndRunMode;
 		this.resourceValue = resourceValue;
 		this.combatType = combatType;
+		this.age = age;
 
 		for (let i: number = 0; i < this.matrixUtsLength1; i++){
 			let curMatrixRow: MatrixRow = new MatrixRow();

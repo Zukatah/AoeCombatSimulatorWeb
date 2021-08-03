@@ -144,7 +144,6 @@ export class Player{
 	public SetUnitTypeLineLevel(index: number, increase: boolean): void{ // sets unit upgrade levels (e.g. archer, crossbow, arbalest)
 		let newUnitTypeLineLevels: [UnitTypeLine, number] = [this.currentUnitTypeLineLevels[index][0], this.currentUnitTypeLineLevels[index][1] + (increase ? 1 : -1)]
 
-		console.log("STELLE1 " + newUnitTypeLineLevels[0].name + " " + newUnitTypeLineLevels[1]);
 		if (this.currentUnitTypeLineLevels.find(utll => utll[0] == newUnitTypeLineLevels[0]) == undefined || this.civilization.maxUnitTypeLineLevels.find(utll => utll[0] == newUnitTypeLineLevels[0]) == undefined){
 			console.log("Invalid UnitTypeLineLevel.");
 			return;
@@ -154,14 +153,11 @@ export class Player{
 		} else {
 			
 			let civUnitTypeLineLevel: [UnitTypeLine, number] = this.civilization.maxUnitTypeLineLevels.find(utll => utll[0] == newUnitTypeLineLevels[0]);
-			console.log("CHECK " + newUnitTypeLineLevels[1] + ">" + civUnitTypeLineLevel[1]);
 			if (newUnitTypeLineLevels[1] > civUnitTypeLineLevel[1]) {
 				newUnitTypeLineLevels[1] = civUnitTypeLineLevel[1];
 			}
 		}
-		console.log("STELLE2 " + newUnitTypeLineLevels[0].name + " " + newUnitTypeLineLevels[1]);
 		this.currentUnitTypeLineLevels.find(utll => utll[0] == newUnitTypeLineLevels[0])[1] = newUnitTypeLineLevels[1];
-		console.log("STELLE3 " + this.currentUnitTypeLineLevels.find(utll => utll[0] == newUnitTypeLineLevels[0])[1])
 
 		this.civUts.splice(index, 1); // just creating a new civunittype inplace doesn't trigger angular change detection; so we remove the old civunittype and then add a new one at the same index
 		this.civUts.splice(index, 0, new CivUnitType(newUnitTypeLineLevels[0].unitTypes[newUnitTypeLineLevels[1]], this.civilization, this.age, this.techsResearched));

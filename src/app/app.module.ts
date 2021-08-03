@@ -17,8 +17,6 @@ import { MatrixComponent, NgbdSortableHeader } from './matrix/matrix.component';
 import { MatrixInfoComponent } from './matrix-info/matrix-info.component';
 import { FooterComponent } from './footer/footer.component';
 
-//import { Matrix } from './helper/matrix';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +36,7 @@ import { FooterComponent } from './footer/footer.component';
     BrowserModule,
     FormsModule,
 	HttpClientModule,
-	NgbModule, // why not?!
+	NgbModule,
 	RouterModule.forRoot([
 		{ path: 'info', component: InfoComponent },
 		{ path: 'matrices', component: MatricesComponent },

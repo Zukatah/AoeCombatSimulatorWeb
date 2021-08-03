@@ -1,9 +1,7 @@
-
 export abstract class ExtensionMethods
 {
-	// static Random rnd = new Random(Environment.TickCount);
-
-	public static Shuffle<T>(list: T[]): void // used to shuffle the start formations of the armies (of course melee and ranged units seperately)
+	// used to shuffle the start formations of the armies (of course melee and ranged units seperately)
+	public static Shuffle<T>(list: T[]): void
 	{
 		let n: number = list.length;
 		while (n > 1)

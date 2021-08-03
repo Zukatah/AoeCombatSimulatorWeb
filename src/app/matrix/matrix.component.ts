@@ -1,5 +1,4 @@
-import { Component, Directive, EventEmitter, Input, OnInit, Output, ViewChildren, QueryList } from '@angular/core';
-import { Color } from '../helper/color';
+import { Component, Directive, EventEmitter, Input, Output, ViewChildren, QueryList } from '@angular/core';
 import { Matrix, MatrixRow } from '../classes/matrix';
 import { ColorMap } from '../helper/colorMap';
 import { CivUnitType } from '../classes/civUnitType';
@@ -48,7 +47,7 @@ export class NgbdSortableHeader{
   templateUrl: './matrix.component.html',
   styleUrls: ['./matrix.component.css']
 })
-export class MatrixComponent implements OnInit {
+export class MatrixComponent {
 	@Input() matrix: Matrix;
 
 	@ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
@@ -75,46 +74,8 @@ export class MatrixComponent implements OnInit {
 	constructor() {	}
 
 
-	ngOnInit(): void { }
-
-
-	public getSurvivorsColorAlternativeColoring(number): string {
-		if (number <= 0.25){
-			return new Color(255.0, 0.0, 0.0).GetAsHex(); // 255 0 0 (red)
-		}
-		if (number <= 0.5){
-			return new Color(255.0, (number-0.25)*660.0, 0.0).GetAsHex(); // 255 0 0 (red) to 255 165 0 (orange)
-		}
-		if (number <= 1.0){
-			return new Color(255.0, 165.0 + (number-0.5)*180.0, 0.0).GetAsHex(); // 255 165 0 (orange) to 255 255 0 (yellow)
-		}
-		if (number <= 2.0){
-			return new Color(255.0 - (number-1.0)*111.0, 255.0 - (number-1.0)*17.0, (number-1.0)*144.0).GetAsHex(); // 255 255 0 (yellow) to 144 238 144 (light green)
-		}
-		if (number <= 4.0){
-			return new Color(144.0 - (number-2.0)*72.0, 238.0 - (number-2.0)*69.0, 144 - (number-2.0)*72.0).GetAsHex(); // 144 238 144 (light green) to 0 100 0 (dark green)
-		}
-		return new Color(0.0, 100.0, 0.0).GetAsHex(); // 0 100 0 (dark green)
-	}
-
-
-	public getSurvivorsColor(number): string{
-		if (number <= 0.25){
-			return ColorMap.getColorAsHexByIndex(0);
-		}
-		if (number <= 0.5){
-			return ColorMap.getColorAsHexByIndex(Math.round((number-0.25)*256));
-		}
-		if (number <= 1.0){
-			return ColorMap.getColorAsHexByIndex(64 + Math.round((number-0.5)*128));
-		}
-		if (number <= 2.0){
-			return ColorMap.getColorAsHexByIndex(128 + Math.round((number-1.0)*64));
-		}
-		if (number <= 4.0){
-			return ColorMap.getColorAsHexByIndex(192 + Math.round((number-2.0)*31.5));
-		}
-		return ColorMap.getColorAsHexByIndex(255);
+	public getSurvivorsColor(costEffValue: number): string{
+		return ColorMap.getSurvivorsColor(costEffValue);
 	}
 
 }

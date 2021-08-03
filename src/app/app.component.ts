@@ -16,12 +16,15 @@ export class AppComponent {
 		const navEndEvents = router.events.pipe(
 			filter(event => event instanceof NavigationEnd)
 		);
+
+		// for google analytics
 		navEndEvents.subscribe((event: NavigationEnd) => {
 			gtag('config', 'UA-168844404-1', {
 				'page_path': event.urlAfterRedirects
 			});
 		});
 
+		// initialization of AoE-objects (unit types, civs, ages, techs, ...) has to take place before the simulator's components are loaded
 		AoeData.InitializeUnitTypes();
 		AoeData.InitializeCivilizations();
 		MatrixData.InitializeMatrixCivUnitTypeLists();

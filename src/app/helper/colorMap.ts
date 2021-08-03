@@ -23,6 +23,25 @@ export abstract class ColorMap{
 		return color;
 	}
 
+	public static getSurvivorsColor(costEffValue: number): string{
+		if (costEffValue <= 0.25){
+			return ColorMap.getColorAsHexByIndex(0);
+		}
+		if (costEffValue <= 0.5){
+			return ColorMap.getColorAsHexByIndex(Math.round((costEffValue-0.25)*256));
+		}
+		if (costEffValue <= 1.0){
+			return ColorMap.getColorAsHexByIndex(64 + Math.round((costEffValue-0.5)*128));
+		}
+		if (costEffValue <= 2.0){
+			return ColorMap.getColorAsHexByIndex(128 + Math.round((costEffValue-1.0)*64));
+		}
+		if (costEffValue <= 4.0){
+			return ColorMap.getColorAsHexByIndex(192 + Math.round((costEffValue-2.0)*31.5));
+		}
+		return ColorMap.getColorAsHexByIndex(255);
+	}
+
 	public static colorMapArray: number[][] = [
 		[0.49684, 0.099626, 0],      
 		[0.50141, 0.11159, 0.0038271],      
