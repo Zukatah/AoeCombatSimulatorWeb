@@ -102,7 +102,6 @@ export class Unit {
 
 	public SetUnitIndex (index: number): void {
 		this.index = index;
-		// rnd = new Random(index + armyIndex * 1000 + Environment.TickCount); TODO: random generator seed!
 	}
 
 	public ApplyHpReg (): void {
@@ -110,7 +109,8 @@ export class Unit {
 	}
 
 	public CantReachTarget(): boolean{
-		return this.target.attackedBy.indexOf(this) >= this.target.maxNumberOfAttackers && this.attackRange <= 1.0; // ranged units can always "reach" their target
+		// ranged units can always "reach" their target, but only a certain number of melee attackers can attack a certain unit simultaneously
+		return this.target.attackedBy.indexOf(this) >= this.target.maxNumberOfAttackers && this.attackRange <= 1.0;
 	}
 
 	public CheckIfToSwitchTarget(): void{ // this function is not perfectly symmetrical (because P1 units potentially get new targets first which might influence P2 target switches)
@@ -151,9 +151,6 @@ export class Unit {
 		dx /= dlength;
 		dy /= dlength;
 		let speedAfterBumpReduction: number = this.target.attackedBy[0] == this ? this.moveSpeed * 0.01 : this.moveSpeed * 0.01 / Math.pow(this.target.attackedBy.length, 0.15); // 54
-		//if (speedAfterBumpReduction == NaN ||  !Number.isFinite(speedAfterBumpReduction)){
-		//	console.log("Error at speed calculation");
-		//}
 		this.nx = this.x + (speedAfterBumpReduction > dlength ? dlength : speedAfterBumpReduction) * dx;
 		this.ny = this.y + (speedAfterBumpReduction > dlength ? dlength : speedAfterBumpReduction) * dy;
 	}
@@ -177,6 +174,11 @@ export class Unit {
 			this.nx = this.x + this.moveSpeed * 0.01 * dx * slowFactor;
 			this.ny = this.y + this.moveSpeed * 0.01 * dy * slowFactor;
 		}
+
+		// to shorten extremely extended Hit&Run (e.g. skirmishers vs. rams)
+		// and to avoid possible infinite loops (because of minimum attack range and equal move speed)
+		// the map size is restricted to 240 tiles (=giant map)
+		// units don't run any further when reaching the map's borders
 		this.nx = this.nx > 120 ? 120.0 : (this.nx < -120.0 ? -120.0 : this.nx);
 		this.ny = this.ny > 120 ? 120.0 : (this.ny < -120.0 ? -120.0 : this.ny);
 	}
@@ -184,11 +186,6 @@ export class Unit {
 	public MoveUnit_AssumeNewPos(): void {
 		if (this.nx != this.x || this.ny != this.y)
 		{
-			//if (this.nx == NaN ||  !Number.isFinite(this.nx)){
-			//	console.log(this.nx + " " + this.ny + " " + this.x + " " + this.y);
-			//	console.log(this);
-			//}
-
 			this.x = this.nx;
 			this.y = this.ny;
 
@@ -268,7 +265,8 @@ export class Unit {
 				let targetArmy: Unit[] = this.armyIndex == 0 ? this.battle.armies[1] : this.battle.armies[0];
 				// let possibleCleaveTargets: Unit[] = this.cleaveType == 3 ? (this.armyIndex == 0 ? this.battle.armies[1] : this.battle.armies[0]) : this.attackedBy;
 				let affectedTargets: number = 0;
-				let maxTargets: number = 1; // + Math.round(5.0 * (this.radius - 0.2)); // infantry cleaves up to 1 units, cavalry up to 2, elephants up to 3 (limit to offset non-existing collision detection)
+				// infantry cleaves up to 1 units, cavalry up to 2, elephants up to 3 (limit to offset non-existing collision detection) // + Math.round(5.0 * (this.radius - 0.2)); 
+				let maxTargets: number = 1;
 				let maxBystanderTargets: number = Math.max(0, maxTargets - this.attackedBy.length);
 				let bystandersHit: number = 0;
 				targetArmy.forEach(possibleTarget => {
@@ -296,10 +294,13 @@ export class Unit {
 				});
 			}
 
+			// each (Elite) Keshik generates approximately 0.695 gold per hit
 			if (this.civUnitType.baseUnitType == AoeData.ut_eliteKeshik)
 			{
 				this.battle.resourcesGenerated[this.armyIndex][2] += 0.695;
 			}
+
+			// flaming camels die after one attack
 			if (this.civUnitType.baseUnitType == AoeData.ut_flamingCamel)
 			{
 				this.curHp = 0.0;

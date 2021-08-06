@@ -49,7 +49,7 @@ export class AoECombatSimulatorComponent {
 
 			for (let j: number = 0; j < this.players[i].civUts.length; j++)
 			{
-				this.players[i].avgSurvivorsNumber[j] = 1.0 * this.players[i].survivorsSumArmy.get(this.players[i].civUts[j]) / this.numberOfSimulations;
+				this.players[i].avgSurvivorsNumber[j] = 1.0 * this.players[i].survivorsSumArmy[j] / this.numberOfSimulations;
 				this.players[i].populationRemaining += this.players[i].avgSurvivorsNumber[j] * (this.players[i].civUts[j].baseUnitType == AoeData.ut_eliteKarambitWarrior ? 0.5 : 1.0);
 				this.players[i].avgSurvivorsPercent[j] = this.players[i].avgSurvivorsNumber[j] / this.players[i].amountStartUnits[j];
 				this.players[i].avgSurvivorsColor[j] = this.players[i].amountStartUnits[j] == 0 ? new Color(128, 128, 128) :
@@ -104,7 +104,7 @@ export class AoECombatSimulatorComponent {
 	}
 
 	public CalcResInvForPlayer(player: Player): void{
-		this.players[player.playerIndex].CalculateResourcesInvested(this.resourceValuesFactors[this.resourceValue]);
+		player.CalculateResourcesInvested(this.resourceValuesFactors[this.resourceValue]);
 	}
 
 	public Bt_fight_Click(): void

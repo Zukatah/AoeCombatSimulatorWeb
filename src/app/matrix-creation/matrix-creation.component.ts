@@ -165,7 +165,7 @@ export class MatrixCreationComponent{
 
 			for (let j: number = 0; j < this.players[i].civUts.length; j++)
 			{
-				this.players[i].avgSurvivorsNumber[j] = 1.0 * this.players[i].survivorsSumArmy.get(this.players[i].civUts[j]) / this.numberOfSimulations;
+				this.players[i].avgSurvivorsNumber[j] = 1.0 * this.players[i].survivorsSumArmy[j] / this.numberOfSimulations;
 				this.players[i].populationRemaining += this.players[i].avgSurvivorsNumber[j] * (AoeData.utl_karambitWarrior.unitTypes.includes(this.players[i].civUts[j].baseUnitType) ? 0.5 : 1.0);
 
 				for (let k: number = 0; k < 3; k++)

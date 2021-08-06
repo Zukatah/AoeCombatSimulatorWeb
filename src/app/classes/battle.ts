@@ -134,23 +134,17 @@ export class Battle
 
 	private CountSurvivors(): void
 	{
-		let utSurvivorsArmy: number;
-		let tempCount: number;
+		// For both armies, we count the number of survivors of each civUnitType (to eventually compute the statistical results, cost efficiency values, ...)
 		for (let i: number = 0; i < 2; i++)
 		{
-			this.players[i].civUts.forEach(ut => {
-				tempCount = 0;
-				for (let j=0; j < this.armies[i].length; j++){
-					if (this.armies[i][j].civUnitType == ut){
-						tempCount++;
-					}
-				}
-				// console.log("i " + i + " utname " + ut.name + " tc " + tempCount);
-				utSurvivorsArmy = tempCount;
-				this.players[i].survivorsSumArmy.set(ut, this.players[i].survivorsSumArmy.get(ut) + utSurvivorsArmy);
-			});
-			this.players[i].resourcesGenerated[2] += Math.round(this.resourcesGenerated[i][2]); // just used for keshig gold currently, so only index 2 used
+			for (let j: number = 0; j < this.players[i].civUts.length; j++){
+				this.players[i].survivorsSumArmy[j] += this.armies[i].filter(unit => unit.civUnitType == this.players[i].civUts[j]).length;
+			}
 
+			// save amount of generated gold during the battle - just used for keshig gold currently, so only index 2 used
+			this.players[i].resourcesGenerated[2] += Math.round(this.resourcesGenerated[i][2]);
+
+			// save number of (Elite) Konniks that survived the battle - necessary for equal pop. simulations since (Elite) Konniks spawn (Elite) Dismounted Konniks when dying
 			this.sum_lostKonniks[i] += (this.start_konnikCount[i] - this.armies[i].filter(unit => AoeData.utl_konnik.unitTypes.includes(unit.civUnitType.baseUnitType)).length);
 		}
 	}

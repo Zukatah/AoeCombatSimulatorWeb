@@ -8,8 +8,12 @@ import { Technology } from './technology';
 export class CivUnitType extends UnitType {
 
 	public baseUnitType: UnitType;
+
+	// The following properties are usually adopted from the player and hence equal for all civUnitTypes of a player.
+	// But in the matrix mode, civUnitTypes of one player can have different civs/ages/techsResearched/numberOfRelics,
+	// e.g. in order to make comparisons between different civs' paladins in the same matrix possible.
 	public civ: Civilization;
-	public age: number; // age values defined in aoeData.ts
+	public age: number;
 	public techsResearched: Technology[];
 	public numberOfRelics: number = 0;
 
@@ -545,7 +549,7 @@ export class CivUnitType extends UnitType {
 	}
 
 
-	public ApplyMayansBonusses(): void{ // todo: tell DE developers that 55 * 0.7 != 40 (plumed archers)
+	public ApplyMayansBonusses(): void{
 		if (AoeData.utl_eagleScout.unitTypes.includes(this.baseUnitType) && this.age == 4){
 			this.hp += 40;
 		}

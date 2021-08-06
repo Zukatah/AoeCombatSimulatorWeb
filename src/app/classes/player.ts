@@ -16,7 +16,8 @@ export class Player{
 	/* The following attributes are just for debug purposes */
 	public attackAttacker: number = 0; // counts how often a unit (after killing its target) targets a unit that is attacking it
 	public attackRandomNearbyTarget: number = 0; // counts how often a unit (after killing its target) targets a random nearby unit
-
+	
+	/* The following attributes are just for debug and statistical purposes - concerning the behaviour of various projectiles */
 	public goodRoll_MainTargetHit: number = 0;
 	public missedRoll_MainTargetHit: number = 0;
 	public missedRoll_mainTargetAlive_SideTargetHit: number = 0;
@@ -26,8 +27,8 @@ export class Player{
 	public missedRoll_mainTargetAlive_Miss: number = 0;
 	public missedRoll_mainTargetDead_Miss: number = 0;
 
-	public amountStartUnits: number[] = []; // contains the number of start units of each unit type; a list of all unit types can be found in the static AoeData.cs class
-	public survivorsSumArmy: Map<CivUnitType, number>  = new Map<CivUnitType, number>(); // the sum of survivors of all battles by unit type
+	public amountStartUnits: number[] = []; // contains the number of start units of all civUnitType of this player
+	public survivorsSumArmy: number[]  = []; // the sum of survivors of all battles by unit type
 	public avgSurvivorsNumber: number[] = [];
 	public avgSurvivorsPercent: number[] = [];
 	public avgSurvivorsColor: Color[] = [];
@@ -53,6 +54,7 @@ export class Player{
 	public currentUnitTypeLineLevels: [UnitTypeLine, number][] = [];
 	public age: number = AoeData.darkAge; // the age the player currently is in (only exists to use it as default when creating the CivUnitTypes)
 
+
 	public constructor(playerColor: Color, playerIndex: number)
 	{
 		this.playerColor = playerColor;
@@ -61,13 +63,13 @@ export class Player{
 		this.ResetData();
 	}
 
+
 	public ResetData(resetInput: boolean = true): void
 	{
 		// console.log("ResetData"); // todo: apparently called more often than necessary
 		this.sumWins = 0;
 		for (let i: number = 0; i < 3; i++)
 		{
-			//this.resourcesInvested[i] = 0;
 			this.resourcesRemaining[i] = 0;
 			this.resourcesGenerated[i] = 0;
 		}
@@ -83,13 +85,13 @@ export class Player{
 		this.missedRoll_mainTargetAlive_Miss = 0;
 		this.missedRoll_mainTargetDead_Miss = 0;
 
-		this.survivorsSumArmy.clear();
 		if (resetInput) { this.amountStartUnits = []; }
+		this.survivorsSumArmy = []
 		this.avgSurvivorsNumber = [];
 		this.avgSurvivorsPercent = [];
 		this.avgSurvivorsColor = [];
 		this.civUts.forEach(ut => {
-			this.survivorsSumArmy.set(ut, 0);
+			this.survivorsSumArmy.push(0);
 			if (resetInput) { this.amountStartUnits.push(0); }
 			this.avgSurvivorsNumber.push(0);
 			this.avgSurvivorsPercent.push(0);
@@ -97,6 +99,9 @@ export class Player{
 		});
 	}
 
+
+	// Calculates the worth of the player's army.
+	// The resources are weighted depending on the selected settings (e.g. 100F=100W=100G or 100F=100W=17G).
 	public CalculateResourcesInvested(resourceValuesFactors: number[]): void{
 		this.populationInvested = 0;
 		this.resourcesInvestedTotal = 0;
@@ -106,13 +111,16 @@ export class Player{
 			for (let j: number = 0; j < this.civUts.length; j++)
 			{
 				this.resourcesInvested[k] += this.civUts[j].resourceCosts[k] * this.amountStartUnits[j];
-				if (k == 0){ // count population space only once (not three times)
-					this.populationInvested += this.civUts[j].baseUnitType == AoeData.ut_eliteKarambitWarrior ? this.amountStartUnits[j] * 0.5 : this.amountStartUnits[j];
-				}
 			}
 			this.resourcesInvestedTotal += this.resourcesInvested[k] * resourceValuesFactors[k];
 		}
+
+		for (let j: number = 0; j < this.civUts.length; j++){
+			// (Elite) Karambit Warriors only need half the population space.
+			this.populationInvested += this.civUts[j].baseUnitType == AoeData.ut_eliteKarambitWarrior ? this.amountStartUnits[j] * 0.5 : this.amountStartUnits[j];
+		}
 	}
+
 
 	public SetCiv(civIndex: number): void{
 		this.civilization = AoeData.civsList[civIndex];
@@ -122,6 +130,7 @@ export class Player{
 		this.AddCivUnitTypesToPlayer();
 	}
 
+
 	public SetAge(age: number): void{
 		this.age = age;
 		this.AddTechsToPlayer();
@@ -129,6 +138,9 @@ export class Player{
 		this.AddCivUnitTypesToPlayer();
 	}
 
+
+	// Toggles the respective technology on/off and then recalculates the player's civUnitTypes.
+	// Techs can only be toggled on, if the player's age allows it.
 	public ToggleTech(tech: Technology): void{
 		if (this.techsResearched.includes(tech)){
 			this.techsResearched.splice(this.techsResearched.indexOf(tech), 1);
@@ -141,7 +153,9 @@ export class Player{
 		}
 	}
 
-	public SetUnitTypeLineLevel(index: number, increase: boolean): void{ // sets unit upgrade levels (e.g. archer, crossbow, arbalest)
+
+	// Increases or decreases a unit's upgrade levels (e.g. in castle age militia line units can be anything from militias to longswordsmen)
+	public SetUnitTypeLineLevel(index: number, increase: boolean): void{
 		let newUnitTypeLineLevels: [UnitTypeLine, number] = [this.currentUnitTypeLineLevels[index][0], this.currentUnitTypeLineLevels[index][1] + (increase ? 1 : -1)]
 
 		if (this.currentUnitTypeLineLevels.find(utll => utll[0] == newUnitTypeLineLevels[0]) == undefined || this.civilization.maxUnitTypeLineLevels.find(utll => utll[0] == newUnitTypeLineLevels[0]) == undefined){
@@ -159,10 +173,16 @@ export class Player{
 		}
 		this.currentUnitTypeLineLevels.find(utll => utll[0] == newUnitTypeLineLevels[0])[1] = newUnitTypeLineLevels[1];
 
-		this.civUts.splice(index, 1); // just creating a new civunittype inplace doesn't trigger angular change detection; so we remove the old civunittype and then add a new one at the same index
+		// just creating a new civunittype inplace doesn't trigger angular's change detection; so we remove the old civunittype...
+		this.civUts.splice(index, 1);
+		// ...and in the next step add a new one at the same index
 		this.civUts.splice(index, 0, new CivUnitType(newUnitTypeLineLevels[0].unitTypes[newUnitTypeLineLevels[1]], this.civilization, this.age, this.techsResearched));
 	}
 
+
+	// Checks, if the unitTypeLine in question is already upgraded to the maximum level allowed for the player's civ and age.
+	// E.g. in castle age a Spanish players' archer line is maxed at the archer level because the Spanish don't have access to crossbowmen,
+	// and in castle age a Japanese players' archer line is maxed at the crossbowmen level because the Japanese player isn't imperial age yet.
 	public IsUnitTypeLineMaxed(index: number): boolean{
 		let maxLevel: number = 0;
 		for (let tempLevel: number = this.civilization.maxUnitTypeLineLevels[index][1]; tempLevel >= 0; tempLevel--){
@@ -174,10 +194,15 @@ export class Player{
 		return maxLevel == this.currentUnitTypeLineLevels[index][1];
 	}
 
+
+	// Checks, if the unitTypeLine has its minimum level - which always is 0.
 	public IsUnitTypeLineMinimized(index: number): boolean{
 		return this.currentUnitTypeLineLevels[index][1] == 0;
 	}
 
+
+	// Automatically researches all techs of previous ages for the player.
+	// E.g. if the player is castle age, all dark age and feudal age techs (the players' civ has access to) will be researched for the player.
 	public AddTechsToPlayer(): void{
 		this.techsResearched = [];
 		this.civilization.technologies.forEach(tech => {
@@ -188,6 +213,11 @@ export class Player{
 		this.techsResearched
 	}
 
+
+	// Automatically set the upgrade level for all unit type lines for the player (depending on the player's age and civ).
+	// If the player is castle age, all dark age and feudal age upgrades (the player's civ has access to) will be researched for the player.
+	// E.g. sets the Imperial Spanish archer line level to archers (the Spanish don't have access to crossbowmen)
+	// and the Imperial Japanese militia line level to longswordsmen (can be manually set to 2H-swordsmen or champion or militia or swordsmen in the UI).
 	public SetDefaultUnitTypeLineLevels(): void{
 		this.currentUnitTypeLineLevels = [];
 		this.civilization.maxUnitTypeLineLevels.forEach(tuple => {
@@ -200,6 +230,9 @@ export class Player{
 		});
 	}
 
+
+	// Removes all civUnitTypes of the player and then again adds all civUnitTypes to the player based on
+	// the player's age, civ, techsResearched and currentUnitTypeLineLevels.
 	public AddCivUnitTypesToPlayer(): void{
 		this.civUts = [];
 		this.currentUnitTypeLineLevels.forEach(tuple => {
@@ -208,6 +241,8 @@ export class Player{
 		this.ResetData();
 	}
 
+
+	// If a Lithuanian player's relic count changes, the attack values of some cavalry units have to be updated.
 	public RelicCountChanged(newValue): void{
 		this.numberOfRelics = newValue > 4 ? 4 : newValue;
 		if (this.civilization == AoeData.civ_lithuanians){

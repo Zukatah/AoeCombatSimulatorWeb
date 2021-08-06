@@ -2356,6 +2356,7 @@ export abstract class AoeData
 			this.tec_husbandry, this.tec_blastFurnace, this.tec_chainMailArmor, this.tec_plateMailArmor, this.tec_scaleBardingArmor, this.tec_chainBardingArmor,
 			this.tec_plateBardingArmor, this.tec_bracer, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 		
+		// Sorts the techs of each civ by age and name (alphabetically).
 		this.civsList.forEach(civ => {
 			civ.technologies.sort((a, b) => {
 				if (a.accessibleFromAge < b.accessibleFromAge){
