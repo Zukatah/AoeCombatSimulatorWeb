@@ -33,6 +33,7 @@ export class CivUnitType extends UnitType {
 		baseUnitType.armorClasses.forEach((value: number, key: ArmorClass) => {	this.armorClasses.set(key, value); });
 		this.cleaveType = baseUnitType.cleaveType;
 		this.cleaveRadius = baseUnitType.cleaveRadius;
+		this.cleaveDamage = baseUnitType.cleaveDamage;
 		this.attackIsMissile = baseUnitType.attackIsMissile;
 		this.missileFlightDistance = baseUnitType.missileFlightDistance;
 		this.secondaryMissileFlightDistance = baseUnitType.secondaryMissileFlightDistance;
@@ -47,12 +48,16 @@ export class CivUnitType extends UnitType {
 			this.AddDefaultTechsToUnit();
 		}
 
-		if (civ == AoeData.civ_incas && baseUnitType == AoeData.ut_villager){ // unlike generic villagers, the incas' villagers profit from blacksmith upgrades
+		if (civ == AoeData.civ_incas && baseUnitType == AoeData.ut_villager && age >= 2){ // unlike generic villagers, the incas' villagers profit from blacksmith upgrades
 			this.techsForUnitList.push(AoeData.tec_forging, AoeData.tec_ironCasting, AoeData.tec_blastFurnace, AoeData.tec_scaleMailArmor, AoeData.tec_chainMailArmor, AoeData.tec_plateMailArmor);
+		}
+		if (civ == AoeData.civ_bohemians && baseUnitType == AoeData.ut_villager){ // unlike generic villagers, the bohemians' villagers profit from fervor and sanctity
+			this.techsForUnitList.push(AoeData.tec_sanctity, AoeData.tec_fervor);
 		}
 
 		if (civ == AoeData.civ_aztecs){ this.ApplyAztecsBonusses(); }
 		if (civ == AoeData.civ_berbers){ this.ApplyBerbersBonusses(); }
+		if (civ == AoeData.civ_bohemians){ this.ApplyBohemiansBonusses(); }
 		if (civ == AoeData.civ_britons){ this.ApplyBritonsBonusses(); }
 		if (civ == AoeData.civ_bulgarians){ this.ApplyBulgariansBonusses(); }
 		if (civ == AoeData.civ_burgundians){ this.ApplyBurgundiansBonusses(); }
@@ -78,6 +83,7 @@ export class CivUnitType extends UnitType {
 		if (civ == AoeData.civ_mayans){ this.ApplyMayansBonusses(); }
 		if (civ == AoeData.civ_mongols){ this.ApplyMongolsBonusses(); }
 		if (civ == AoeData.civ_persians){ this.ApplyPersiansBonusses(); }
+		if (civ == AoeData.civ_poles){ this.ApplyPolesBonusses(); }
 		if (civ == AoeData.civ_portuguese){ this.ApplyPortugueseBonusses(); }
 		if (civ == AoeData.civ_saracens){ this.ApplySaracensBonusses(); }
 		if (civ == AoeData.civ_sicilians){ this.ApplySiciliansBonusses(); }
@@ -90,7 +96,7 @@ export class CivUnitType extends UnitType {
 		if (civ == AoeData.civ_vikings){ this.ApplyVikingsBonusses(); }
 
 		this.ApplyBlacksmithTechs();
-		this.ApplyUniversityTechs();
+		this.ApplyUniversityMonasteryTechs();
 		this.ApplyBarracksStableTcTechs();
 		this.ApplyArcheryRangeTechs();
 
@@ -176,12 +182,18 @@ export class CivUnitType extends UnitType {
 	}
 
 
-	public ApplyUniversityTechs(): void{
+	public ApplyUniversityMonasteryTechs(): void{
 		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_chemistry) && this.techsResearched.includes(AoeData.tec_chemistry)){
 			this.attackValues.set(AoeData.ac_basePierce, this.attackValues.get(AoeData.ac_basePierce) + 1);
 		}
 		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_siegeEngineers) && this.techsResearched.includes(AoeData.tec_siegeEngineers)){
 			this.attackRange += 1;
+		}
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_sanctity) && this.techsResearched.includes(AoeData.tec_sanctity)){
+			this.hp += 15;
+		}
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_fervor) && this.techsResearched.includes(AoeData.tec_fervor)){
+			this.moveSpeed *= 1.15;
 		}
 	}
 
@@ -294,6 +306,16 @@ export class CivUnitType extends UnitType {
 					this.resourceCosts[i] *= 0.8;
 				}
 			}
+		}
+	}
+
+
+	public ApplyBohemiansBonusses(): void{
+		if (this.age >= 3 && this.armorClasses.has(AoeData.ac_gunpowderUnit)){
+			this.moveSpeed *= 1.15;
+		}
+		if (AoeData.utl_spearman.unitTypes.includes(this.baseUnitType)){
+			this.attackValues.set(AoeData.ac_cavalry, this.attackValues.get(AoeData.ac_cavalry) * 1.25);
 		}
 	}
 
@@ -594,6 +616,27 @@ export class CivUnitType extends UnitType {
 	}
 
 
+	public ApplyPolesBonusses(): void{
+		if (this.age >= 3 && AoeData.utl_knight.unitTypes.includes(this.baseUnitType)){
+			this.resourceCosts[2] = 30;
+		}
+		if (this.baseUnitType == AoeData.ut_villager){
+			if (this.age == 1){
+				this.hpRegPerMin = 10;
+			} else if (this.age == 2){
+				this.hpRegPerMin = 15;
+			} else if (this.age >= 3){
+				this.hpRegPerMin = 20;
+			}
+		}
+		if (this.age == 4 && AoeData.utl_scoutCavalry_pol_lit.unitTypes.includes(this.baseUnitType)){
+			this.cleaveType = 2;
+			this.cleaveRadius = 0.5;
+			this.cleaveDamage = 0.33;
+		}
+	}
+
+
 	public ApplyPortugueseBonusses(): void{
 		this.resourceCosts[2] *= 0.8;
 	}
@@ -623,6 +666,7 @@ export class CivUnitType extends UnitType {
 		if (this.armorClasses.has(AoeData.ac_infantry) && this.age == 4){ // todo: check druzhina ingame cleave vs simulated cleave
 			this.cleaveType = 1;
 			this.cleaveRadius = 0.5;
+			this.cleaveDamage = 5;
 		}
 		if (AoeData.utl_batteringRam.unitTypes.includes(this.baseUnitType) || AoeData.utl_scorpion.unitTypes.includes(this.baseUnitType)){
 			for (let i: number = 0; i < 3; i++){

@@ -14,8 +14,9 @@ export class UnitType {
 	public attackRangeMin: number; // minimum attack range in tiles (skirmishers, genitours, ...); the actual minimum attack range is attackRangeMin + radius
 	public attackDelay: number; // the time in seconds between starting an attack and dealing the damage (or launching the projectile for ranged units); especially important for Hit&Run
 	public projectileSpeed: number; // projectile speed in tiles/s
-	public cleaveType: number = 0; // 0=none, 1=flat5 (slav infantry, cataphracts), 2=50% (elephants), 3=100% (flaming camels)
+	public cleaveType: number = 0; // 0=none, 1=flat, 2=percentage (after armor), 3=percentage (no target limit <=> explosives)
 	public cleaveRadius: number = 0.0; // cleaves enemy units if they are closer than cleaveRadius+ownRadius to cleaving unit
+	public cleaveDamage: number = 0; // only relevant, if cleaveType != 0; for cleaveType 1 this is an absolute value (5 for slav infantry and cataphracts); for cleaveType 2&3 this is a fraction value (25% for battle elephant line, 33% for polish scout line, 50% for war elephant line, 100% for petards & flaming camels)
 	public accuracyPercent: number; // 100 does always hit; 50 does mean 50% will hit and 50% are randomly distributed (they can still hit the main target or other targets)
 
 	public attackIsMissile: boolean = false; // only true for ranged units that fire missiles which damage targets on their way (scorpions and ballista elephants)
