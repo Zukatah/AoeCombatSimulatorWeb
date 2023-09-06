@@ -56,6 +56,7 @@ export class Battle
 			this.CreateArmys();
 			this.Fight();
 			this.CountSurvivors();
+			this.armies[0].forEach(unit => console.log(unit.civUnitType.name + " " + unit.armorClasses.get(AoeData.ac_baseMelee) + " " + unit.armorClasses.get(AoeData.ac_basePierce) + ",,,"));
 			this.battleIterationCounter++;
 		}
 

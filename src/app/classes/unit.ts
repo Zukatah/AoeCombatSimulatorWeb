@@ -10,6 +10,9 @@ export class Unit {
 	public hp: number; // hit points
 	public hpRegPerMin: number; // hit points regeneration per minute (relevant for berserk and camel archer)
 
+	//public energy: number;
+	//public energyRegPerMin
+
 	public attackValues: Map<ArmorClass, number> = new Map(); // contains all armor classes this unit attacks (including baseMelee and basePierce) and the respective damage values
 	public armorClasses: Map<ArmorClass, number> = new Map(); // contains all armor classes this unit has (including baseMelee and basePierce) and the respective armor values
 
@@ -79,7 +82,7 @@ export class Unit {
 		this.cleaveDamage = civUnitType.cleaveDamage;
 		this.moveSpeed = civUnitType.moveSpeed;
 		this.attackValues = civUnitType.attackValues;
-		this.armorClasses = civUnitType.armorClasses;
+		civUnitType.armorClasses.forEach((ar, ac) => this.armorClasses.set(ac, ar));
 		this.radius = civUnitType.radius;
 		this.accuracyPercent = civUnitType.accuracyPercent;
 		this.hpRegPerMin = civUnitType.hpRegPerMin;
@@ -286,8 +289,20 @@ export class Unit {
 				});
 			}
 
+			if (AoeData.utl_ghulam.unitTypes.includes(this.civUnitType.baseUnitType)){
+				let targetArmy: Unit[] = this.armyIndex == 0 ? this.battle.armies[1] : this.battle.armies[0];
+				targetArmy.forEach(possibleTarget => {
+					if ((this.target.x - possibleTarget.x) * (this.target.x - possibleTarget.x) + (this.target.y - possibleTarget.y) * (this.target.y - possibleTarget.y) < 0.15 * 0.15){
+						if (possibleTarget != this.target){
+							damageDealt = Math.max(Unit.CalculateDamageDealtToTarget(this, possibleTarget) * 0.5, 1);
+							possibleTarget.curHp -= damageDealt;
+						}
+					}
+				});
+			}
+
 			// each (Elite) Keshik generates approximately 0.695 gold per hit
-			if (this.civUnitType.baseUnitType == AoeData.ut_eliteKeshik)
+			if (AoeData.utl_keshik.unitTypes.includes(this.civUnitType.baseUnitType))
 			{
 				this.battle.resourcesGenerated[this.armyIndex][2] += 0.695;
 			}
@@ -296,6 +311,12 @@ export class Unit {
 			if (this.civUnitType.baseUnitType == AoeData.ut_flamingCamel)
 			{
 				this.curHp = 0.0;
+			}
+
+			// obuchs reduce their target's armor
+			if (AoeData.utl_obuch.unitTypes.includes(this.civUnitType.baseUnitType)){
+				this.target.armorClasses.set(AoeData.ac_baseMelee, Math.max(this.target.armorClasses.get(AoeData.ac_baseMelee) - 1, 0));
+				this.target.armorClasses.set(AoeData.ac_basePierce, Math.max(this.target.armorClasses.get(AoeData.ac_basePierce) - 1, 0));
 			}
 		}
 		else // ranged units create arrows or missiles

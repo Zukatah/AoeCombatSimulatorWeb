@@ -364,6 +364,9 @@ export class CivUnitType extends UnitType {
 		if (this.armorClasses.has(AoeData.ac_infantry)){
 			this.attackValues.set(AoeData.ac_baseMelee, this.attackValues.get(AoeData.ac_baseMelee) + (this.age == 1 ? 1 : (this.age == 2 ? 2 : (this.age >= 3 ? 3 : 0))));
 		}
+		if (this.age >= 3 && (AoeData.utl_battleElephant.unitTypes.includes(this.baseUnitType) || AoeData.utl_scoutCavalry.unitTypes.includes(this.baseUnitType) || AoeData.utl_knight.unitTypes.includes(this.baseUnitType))){
+			this.attackValues.set(AoeData.ac_archer, 4);
+		}
 	}
 
 
@@ -659,6 +662,10 @@ export class CivUnitType extends UnitType {
 			this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 1);
 			this.hp += 20;
 		}
+		if (this.age == 4 && AoeData.utl_knight.unitTypes.includes(this.baseUnitType)){
+			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 1);
+			this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 2);
+		}
 	}
 
 
@@ -733,7 +740,7 @@ export class CivUnitType extends UnitType {
 			this.hp *= 1.2;
 		}
 		if (AoeData.utl_battleElephant.unitTypes.includes(this.baseUnitType)){
-			this.hp += 50;
+			this.hp += 100;
 		}
 	}
 
@@ -755,7 +762,7 @@ export class CivUnitType extends UnitType {
 					this.attackValues.set(AoeData.ac_camel, 4);
 				}
 			}
-			this.hp *= this.age == 1 ? 1.1 : (this.age == 2 ? 1.15 : this.age >= 3 ? 1.2 : 0);
+			this.hp *= this.age > 0 ? 1.2 : 1.0;
 		}
 	}
 
