@@ -53,7 +53,19 @@ export class Missile extends Projectile
 		}
 
 		collisionTargets.forEach(unit => {
-			let damageDealt: number = Unit.CalculateDamageDealtToTarget(this.attacker, unit, this.secondary) * (unit == this.target ? 1.0 : 0.5);
+			let damageDealt: number = Unit.CalculateDamageDealtToTarget(this.attacker, unit, this.secondary) * (unit == this.target ? 1.0 : this.attacker.sideTargetDmgFraction);
+
+			// Shrivamsha Riders can block/dodge projectiles
+			if (AoeData.utl_shrivamshaRider.unitTypes.includes(unit.civUnitType.baseUnitType)){
+				if (unit.civUnitType.baseUnitType == AoeData.ut_shrivamshaRider && unit.curEnergy >= 20.0){
+					damageDealt = 0.0;
+					unit.curEnergy -= 20.0;
+				} else if (unit.civUnitType.baseUnitType == AoeData.ut_eliteShrivamshaRider && unit.curEnergy >= 14.4){
+					damageDealt = 0.0;
+					unit.curEnergy -= 14.4;
+				}
+			}
+
 			unit.curHp -= damageDealt;
 			this.alreadyAffectedUnits.add(unit);
 		});

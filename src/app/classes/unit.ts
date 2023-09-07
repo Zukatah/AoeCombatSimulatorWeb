@@ -9,9 +9,7 @@ export class Unit {
 
 	public hp: number; // hit points
 	public hpRegPerMin: number; // hit points regeneration per minute (relevant for berserk and camel archer)
-
-	//public energy: number;
-	//public energyRegPerMin
+	public energyRegPerMin: number; // energy regeneration per minute (only relevant for coustilliers, urumi swordsmen and shrivamsha riders)
 
 	public attackValues: Map<ArmorClass, number> = new Map(); // contains all armor classes this unit attacks (including baseMelee and basePierce) and the respective damage values
 	public armorClasses: Map<ArmorClass, number> = new Map(); // contains all armor classes this unit has (including baseMelee and basePierce) and the respective armor values
@@ -20,6 +18,7 @@ export class Unit {
 	public attackRange: number; // maximum attack range in tiles; the actual attack range is attackRange + radius
 	public attackRangeMin: number; // minimum attack range in tiles (skirmishers, genitours, ...); the actual minimum attack range is attackRangeMin + radius
 	public attackDelay: number; // the time in seconds between starting an attack and dealing the damage (or launching the projectile for ranged units); especially important for Hit&Run
+	public attackIgnoresArmor: boolean;
 	public projectileSpeed: number; // projectile speed in tiles/s
 	public cleaveType: number = 0; // 0=none, 1=flat, 2=percentage (after armor), 3=percentage (no target limit <=> explosives)
 	public cleaveRadius: number = 0.0; // cleaves enemy units if they are closer than cleaveRadius+ownRadius to cleaving unit
@@ -27,6 +26,7 @@ export class Unit {
 	public accuracyPercent: number; // 100 does always hit; 50 does mean 50% will hit and 50% are randomly distributed (they can still hit the main target or other targets)
 
 	public attackIsMissile: boolean = false; // only true for ranged units that fire missiles which damage targets on their way (scorpions and ballista elephants)
+	public sideTargetDmgFraction: number;
 	public missileFlightDistance: number = 0.0; // flight distance of missiles, since they don't necessarily stop flying at the intended target
 	public secondaryMissileFlightDistance: number = 0.0; // flight distance of secondary missiles, since they don't necessarily stop flying at the intended target
 
@@ -43,6 +43,7 @@ export class Unit {
 	public civUnitType: CivUnitType; // this unit's unit type; the unit type defines many attributes of each unit
 	public battle: Battle; // the reference to the battle instance this unit belongs to
 	public curHp: number; // the current hit points of this unit
+	public curEnergy: number; // the current energy of this unit (only relevant for coustilliers, urumi swordsmen and shrivamsha riders)
 	public alive: boolean = true; // a unit is alive until the END of the frame its HP reaches 0 or below 0
 	public target: Unit = null; // the target of this unit; this unit attacks the target or tries to attack it
 	public attackedBy: Unit[] = []; // all units that are currently attacking this unit (<=> all units that target this unit); used for collision simulation and movement speed of the attackers
@@ -60,7 +61,6 @@ export class Unit {
 	public armyIndex: number; // 0=Army1, 1=Army2
 	public running: boolean = false; // for hit&run calculations
 	public timeSinceFirstTryToAttackTarget: number = 0; // if the target is surrounded by attackers for a longer while, the unit will eventually target a different unit
-	public lastChargeAttackTime = Number.MIN_SAFE_INTEGER; // only needed for the burgundians' coustilliers (charge ability every 40s)
 
 
 	constructor(civUnitType: CivUnitType, battle: Battle, armyIndex: number) {
@@ -69,7 +69,9 @@ export class Unit {
 		this.attackRange = civUnitType.attackRange;
 		this.attackRangeMin = civUnitType.attackRangeMin;
 		this.attackDelay = civUnitType.attackDelay;
+		this.attackIgnoresArmor = civUnitType.attackIgnoresArmor;
 		this.attackIsMissile = civUnitType.attackIsMissile;
+		this.sideTargetDmgFraction = civUnitType.sideTargetDmgFraction;
 		this.secondaryAttack = civUnitType.secondaryAttack;
 		this.secondaryAttackProjectileCount = civUnitType.secondaryAttackProjectileCount;
 		this.missileFlightDistance = civUnitType.missileFlightDistance;
@@ -86,11 +88,13 @@ export class Unit {
 		this.radius = civUnitType.radius;
 		this.accuracyPercent = civUnitType.accuracyPercent;
 		this.hpRegPerMin = civUnitType.hpRegPerMin;
+		this.energyRegPerMin = civUnitType.energyRegPerMin;
 		this.maxNumberOfAttackers = civUnitType.maxNumberOfAttackers;
 
 		this.civUnitType = civUnitType;
 		this.battle = battle;
 		this.curHp = this.hp;
+		this.curEnergy = 100.0;
 		this.armyIndex = armyIndex;
 	}
 
@@ -109,8 +113,9 @@ export class Unit {
 		this.index = index;
 	}
 
-	public ApplyHpReg (): void {
-		this.curHp += this.hpRegPerMin / 6000.0;
+	public ApplyReg (): void {
+		this.curHp = Math.min(this.hp, this.curHp + this.hpRegPerMin / 6000.0);
+		this.curEnergy = Math.min(100, this.curEnergy + this.energyRegPerMin / 6000);
 	}
 
 	public CantReachTarget(): boolean{
@@ -222,55 +227,56 @@ export class Unit {
 		this.attackAnimDur += 0.01;
 	}
 
-	public static CalculateDamageDealtToTarget(attacker: Unit, target: Unit, secondary: boolean = false): number
+	public static CalculateDamageDealtToTarget(attacker: Unit, target: Unit, secondary: boolean = false, chargeDmg: number = 0.0): number
 	{
 		let damageDealt: number = 0.0;
-		if (attacker.civUnitType.baseUnitType == AoeData.ut_eliteLeitis) // leitis ignore armor and don't have any attack bonusses
-		{
-			damageDealt = attacker.attackValues.get(AoeData.ac_baseMelee);
-		}
-		else if (secondary && attacker.civUnitType.baseUnitType == AoeData.ut_eliteOrganGun) // secondary missiles of organ guns always deal 2 damage (and 1 if target wasn't the main target)
+
+		if (secondary && attacker.civUnitType.baseUnitType == AoeData.ut_eliteOrganGun) // secondary missiles of organ guns always deal 2 damage (and 1 if target wasn't the main target)
 		{
 			damageDealt = 2;
 		}
 		else
 		{
 			const avIterator = secondary ? attacker.secondaryAttackValues[Symbol.iterator]() : attacker.attackValues[Symbol.iterator]();
-			if ((attacker.civUnitType.baseUnitType == AoeData.ut_coustillier || attacker.civUnitType.baseUnitType == AoeData.ut_eliteCoustillier) && attacker.lastChargeAttackTime <= attacker.battle.timeInterval - 4000){
-				attacker.lastChargeAttackTime = attacker.battle.timeInterval;
-				attacker.attackValues.set(AoeData.ac_baseMelee, attacker.attackValues.get(AoeData.ac_baseMelee) + (attacker.civUnitType.baseUnitType == AoeData.ut_coustillier ? 25 : 30));
-			}
+
+			// sum up damage of each amorClass - respecting sicilians dmg reduction
 			for (let [attackedArmorClass, attackValue] of avIterator){
-				if (target.civUnitType.civ == AoeData.civ_sicilians && !target.armorClasses.has(AoeData.ac_siegeWeapon) && attackedArmorClass != AoeData.ac_baseMelee && attackedArmorClass != AoeData.ac_basePierce){ // the Sicilians' land units take only 50% bonus damage
-					damageDealt += Math.max(0, target.armorClasses.has(attackedArmorClass) ? (attackValue - target.armorClasses.get(attackedArmorClass))*0.5 : 0);
-				}else{
+				if (target.civUnitType.civ == AoeData.civ_sicilians && !target.armorClasses.has(AoeData.ac_siegeWeapon) && attackedArmorClass != AoeData.ac_baseMelee && attackedArmorClass != AoeData.ac_basePierce){ // the Sicilians' land units take only 67% bonus damage
+					damageDealt += Math.max(0, target.armorClasses.has(attackedArmorClass) ? (attackValue - target.armorClasses.get(attackedArmorClass))*0.67 : 0);
+				}else if (attackedArmorClass == AoeData.ac_baseMelee){
+					if (attacker.attackIgnoresArmor){
+						damageDealt += target.armorClasses.has(attackedArmorClass) ? attackValue + chargeDmg : 0;
+					} else {
+						damageDealt += Math.max(0, target.armorClasses.has(attackedArmorClass) ? attackValue + chargeDmg - target.armorClasses.get(attackedArmorClass) : 0);
+					}
+					
+				} else {
 					damageDealt += Math.max(0, target.armorClasses.has(attackedArmorClass) ? attackValue - target.armorClasses.get(attackedArmorClass) : 0);
 				}
-				
-			}
-			if ((attacker.civUnitType.baseUnitType == AoeData.ut_coustillier || attacker.civUnitType.baseUnitType == AoeData.ut_eliteCoustillier) && attacker.lastChargeAttackTime == attacker.battle.timeInterval){
-				attacker.attackValues.set(AoeData.ac_baseMelee, attacker.attackValues.get(AoeData.ac_baseMelee) - (attacker.civUnitType.baseUnitType == AoeData.ut_coustillier ? 25 : 30));
 			}
 		}
-		if (damageDealt < 1)
-		{
-			damageDealt = 1;
-		}
+
+		damageDealt = damageDealt < 1 ? 1 : damageDealt;
 		return damageDealt;
 	}
 
 	public PerformAttackOnTarget(): void {
 		if (this.attackRange <= 1.0)
 		{
-			let damageDealt: number = Unit.CalculateDamageDealtToTarget(this, this.target);
+			let chargeAttack: number = 0;
+			// add charge attack damage
+			if ((AoeData.utl_coustillier.unitTypes.includes(this.civUnitType.baseUnitType) || AoeData.utl_urumiSwordsman.unitTypes.includes(this.civUnitType.baseUnitType)) && this.curEnergy >= 100.0){
+				this.curEnergy = 0.0;
+				chargeAttack = this.civUnitType.baseUnitType == AoeData.ut_coustillier ? 25 : (this.civUnitType.baseUnitType == AoeData.ut_eliteCoustillier ? 30 : (this.civUnitType.baseUnitType == AoeData.ut_urumiSwordsman ? 12 : 15));
+			}
+			let damageDealt: number = Unit.CalculateDamageDealtToTarget(this, this.target, false, chargeAttack);
 			this.target.curHp -= damageDealt;
 			this.target.meleeDamagedBy = this;
-			if (this.cleaveType != 0)
+			if (this.cleaveType != 0 && (chargeAttack > 0 || !AoeData.utl_urumiSwordsman.unitTypes.includes(this.civUnitType.baseUnitType)))
 			{
 				let targetArmy: Unit[] = this.armyIndex == 0 ? this.battle.armies[1] : this.battle.armies[0];
-				// let possibleCleaveTargets: Unit[] = this.cleaveType == 3 ? (this.armyIndex == 0 ? this.battle.armies[1] : this.battle.armies[0]) : this.attackedBy;
 				let affectedTargets: number = 0;
-				// infantry cleaves up to 1 units, cavalry up to 2, elephants up to 3 (limit to offset non-existing collision detection) // + Math.round(5.0 * (this.radius - 0.2)); 
+				// infantry cleaves up to 1 units, cavalry up to 2, elephants up to 3 (limit to offset non-existing collision detection) // 1 + Math.round(5.0 * (this.radius - 0.2)); 
 				let maxTargets: number = 1;
 				let maxBystanderTargets: number = Math.max(0, maxTargets - this.attackedBy.length);
 				let bystandersHit: number = 0;
@@ -281,7 +287,7 @@ export class Unit {
 								bystandersHit++;
 							}
 
-							damageDealt = this.cleaveType == 1 ? this.cleaveDamage : Math.max(Unit.CalculateDamageDealtToTarget(this, possibleTarget) * this.cleaveDamage, 1);
+							damageDealt = this.cleaveType == 1 ? this.cleaveDamage : Math.max(Unit.CalculateDamageDealtToTarget(this, possibleTarget, false, chargeAttack) * this.cleaveDamage, 1);
 							possibleTarget.curHp -= damageDealt;
 							affectedTargets++;
 						}
@@ -294,7 +300,7 @@ export class Unit {
 				targetArmy.forEach(possibleTarget => {
 					if ((this.target.x - possibleTarget.x) * (this.target.x - possibleTarget.x) + (this.target.y - possibleTarget.y) * (this.target.y - possibleTarget.y) < 0.15 * 0.15){
 						if (possibleTarget != this.target){
-							damageDealt = Math.max(Unit.CalculateDamageDealtToTarget(this, possibleTarget) * 0.5, 1);
+							damageDealt = Math.max(Unit.CalculateDamageDealtToTarget(this, possibleTarget) * this.sideTargetDmgFraction, 1);
 							possibleTarget.curHp -= damageDealt;
 						}
 					}
@@ -425,6 +431,5 @@ export class Unit {
 		this.attackAnimDur = 0;
 		this.running = false;
 		this.timeSinceFirstTryToAttackTarget = 0;
-		this.lastChargeAttackTime = Number.MIN_SAFE_INTEGER;
 	}
 }

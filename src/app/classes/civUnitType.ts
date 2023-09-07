@@ -34,7 +34,9 @@ export class CivUnitType extends UnitType {
 		this.cleaveType = baseUnitType.cleaveType;
 		this.cleaveRadius = baseUnitType.cleaveRadius;
 		this.cleaveDamage = baseUnitType.cleaveDamage;
+		this.attackIgnoresArmor = baseUnitType.attackIgnoresArmor;
 		this.attackIsMissile = baseUnitType.attackIsMissile;
+		this.sideTargetDmgFraction = baseUnitType.sideTargetDmgFraction;
 		this.missileFlightDistance = baseUnitType.missileFlightDistance;
 		this.secondaryMissileFlightDistance = baseUnitType.secondaryMissileFlightDistance;
 		this.secondaryAttack = baseUnitType.secondaryAttack;
@@ -43,6 +45,7 @@ export class CivUnitType extends UnitType {
 		this.secondaryAttackAccuracyPercent = baseUnitType.secondaryAttackAccuracyPercent;
 		this.imagePath = baseUnitType.imagePath;
 		this.techsForUnitList = baseUnitType.techsForUnitList;
+		this.energyRegPerMin = baseUnitType.energyRegPerMin;
 
 		if (techsResearched == null){ // this is only called, if the unit's techs have to be set individually (in the matrix mode); in the simulation mode, techs are set via the researched techs of the respective player
 			this.AddDefaultTechsToUnit();
@@ -56,6 +59,7 @@ export class CivUnitType extends UnitType {
 		}
 
 		if (civ == AoeData.civ_aztecs){ this.ApplyAztecsBonusses(); }
+		if (civ == AoeData.civ_bengalis){ this.ApplyBengalisBonusses(); }
 		if (civ == AoeData.civ_berbers){ this.ApplyBerbersBonusses(); }
 		if (civ == AoeData.civ_bohemians){ this.ApplyBohemiansBonusses(); }
 		if (civ == AoeData.civ_britons){ this.ApplyBritonsBonusses(); }
@@ -66,12 +70,14 @@ export class CivUnitType extends UnitType {
 		if (civ == AoeData.civ_celts){ this.ApplyCeltsBonusses(); }
 		if (civ == AoeData.civ_chinese){ this.ApplyChineseBonusses(); }
 		if (civ == AoeData.civ_cumans){ this.ApplyCumansBonusses(); }
+		if (civ == AoeData.civ_dravidians){ this.ApplyDravidiansBonusses(); }
 		if (civ == AoeData.civ_ethiopians){ this.ApplyEthiopiansBonusses(); }
 		if (civ == AoeData.civ_franks){ this.ApplyFranksBonusses(); }
 		if (civ == AoeData.civ_goths){ this.ApplyGothsBonusses(); }
+		if (civ == AoeData.civ_gurjaras){ this.ApplyGurjarasBonusses(); }
 		if (civ == AoeData.civ_huns){ this.ApplyHunsBonusses(); }
 		if (civ == AoeData.civ_incas){ this.ApplyIncasBonusses(); }
-		if (civ == AoeData.civ_indians){ this.ApplyIndiansBonusses(); }
+		if (civ == AoeData.civ_hindustanis){ this.ApplyHindustanisBonusses(); }
 		if (civ == AoeData.civ_italians){ this.ApplyItaliansBonusses(); }
 		if (civ == AoeData.civ_japanese){ this.ApplyJapaneseBonusses(); }
 		if (civ == AoeData.civ_khmer){ this.ApplyKhmerBonusses(); }
@@ -288,6 +294,16 @@ export class CivUnitType extends UnitType {
 	}
 
 
+	public ApplyBengalisBonusses(): void{
+		if (this.age >= 3 && (AoeData.utl_ratha_melee.unitTypes.includes(this.baseUnitType) || AoeData.utl_ratha_ranged.unitTypes.includes(this.baseUnitType) || this.armorClasses.has(AoeData.ac_warElephant))){
+			this.attackSpeed *= 0.8333333333;
+		}
+		if (AoeData.utl_ratha_melee.unitTypes.includes(this.baseUnitType) || AoeData.utl_scoutCavalry.unitTypes.includes(this.baseUnitType) || AoeData.utl_battleElephant.unitTypes.includes(this.baseUnitType) || AoeData.utl_armoredElephant.unitTypes.includes(this.baseUnitType)){
+			this.attackValues.set(AoeData.ac_skirmisher, 2);
+		}
+	}
+
+
 	public ApplyBerbersBonusses(): void{
 		if (AoeData.utl_villager.unitTypes.includes(this.baseUnitType)){
 			this.moveSpeed *= 1.1;
@@ -412,6 +428,22 @@ export class CivUnitType extends UnitType {
 	}
 
 
+	public ApplyDravidiansBonusses(): void{
+		if (this.age >= 3 && this.armorClasses.has(AoeData.ac_warElephant)){
+			this.hpRegPerMin = 30;
+		}
+		if (this.age == 4 && (this.armorClasses.has(AoeData.ac_infantry) || AoeData.utl_scoutCavalry.unitTypes.includes(this.baseUnitType) || AoeData.utl_battleElephant.unitTypes.includes(this.baseUnitType))){
+			this.attackIgnoresArmor = true;
+		}
+		if (this.armorClasses.has(AoeData.ac_siegeWeapon)){
+			this.resourceCosts[1] *= 0.67;
+		}
+		if (AoeData.utl_skirmisher.unitTypes.includes(this.baseUnitType) || AoeData.utl_elephantArcher.unitTypes.includes(this.baseUnitType)){
+			this.attackSpeed *= 0.8;
+		}
+	}
+
+
 	public ApplyEthiopiansBonusses(): void{
 		// torsion engines bonus handled in missile class (instead adding extra attribute to unit type class reasonable?) - extra radius of 0.1t reasonable?
 		if (AoeData.utl_archer.unitTypes.includes(this.baseUnitType)){
@@ -439,6 +471,40 @@ export class CivUnitType extends UnitType {
 	}
 
 
+	public ApplyGurjarasBonusses(): void{
+		if (this.age >= 3){
+			this.resourceCosts[0] *= 0.75;
+		}
+		if (this.age == 4 && (AoeData.utl_camelScout.unitTypes.includes(this.baseUnitType) || AoeData.utl_elephantArcher.unitTypes.includes(this.baseUnitType))){
+			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 4);
+		}
+		if (this.armorClasses.has(AoeData.ac_cavalry)){
+			const avIterator = this.attackValues[Symbol.iterator]();
+
+			// sum up damage of each amorClass - respecting sicilians dmg reduction
+			for (let [attackedArmorClass, attackValue] of avIterator){
+				if (attackedArmorClass != AoeData.ac_baseMelee && attackedArmorClass != AoeData.ac_basePierce){
+					this.attackValues.set(attackedArmorClass, attackValue * (this.age == 0 ? 1 : (this.age == 1 ? 1.2 : (this.age == 2 ? 1.3 : 1.4))));
+				}
+			}
+		}
+	}
+
+
+	public ApplyHindustanisBonusses(): void{
+		if (AoeData.utl_handCannoneer.unitTypes.includes(this.baseUnitType) && this.age == 4){
+			this.attackRange += 2;
+		}
+		if (AoeData.utl_camelRider.unitTypes.includes(this.baseUnitType)){
+			this.attackSpeed *= 0.833333333;
+		}
+		if (AoeData.utl_handCannoneer.unitTypes.includes(this.baseUnitType)){
+			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 1);
+			this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 1);
+		}
+	}
+
+
 	public ApplyHunsBonusses(): void{
 		if (this.armorClasses.has(AoeData.ac_cavalryArcher)){
 			for (let i: number = 0; i < 3; i++){
@@ -456,20 +522,6 @@ export class CivUnitType extends UnitType {
 			&& this.age == 4){
 			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 1);
 			this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 2);
-		}
-	}
-
-
-	public ApplyIndiansBonusses(): void{
-		if (AoeData.utl_handCannoneer.unitTypes.includes(this.baseUnitType) && this.age == 4){
-			this.attackRange += 1;
-		}
-		if (AoeData.utl_camelRider.unitTypes.includes(this.baseUnitType) || AoeData.utl_scoutCavalry.unitTypes.includes(this.baseUnitType)){
-			if (this.age == 2){
-				this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 1);
-			} else if (this.age >= 3){
-				this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 2);
-			}
 		}
 	}
 

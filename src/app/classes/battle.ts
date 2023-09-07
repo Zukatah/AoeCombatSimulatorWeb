@@ -202,7 +202,7 @@ export class Battle
 			this.armies[0].concat(this.armies[1]).forEach(unit =>
 			{
 				unit.EnsureHasTarget(); // first thing to ensure: each unit must have a target
-				unit.ApplyHpReg(); // apply hp regeneration (currently only affects berserks and camel archers)
+				unit.ApplyReg(); // apply hp and energy regeneration (only affects few units)
 
 				if (!unit.inAttackMotion) // if a unit is not currently in attack motion, we consider things like moving towards or away from its target or starting an attack
 				{
