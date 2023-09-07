@@ -173,8 +173,8 @@ export abstract class AoeData
 	public static ut_eliteTarkan: UnitType = new UnitType("Elite Tarkan", AoeData.imperialAge, 150, 2.1, 0.0, 0.95, Number.MAX_VALUE, 1.35, 60, 0, 60, 0.4);
 	public static utl_tarkan: UnitTypeLine = new UnitTypeLine("Tarkan line", [AoeData.ut_tarkan, AoeData.ut_eliteTarkan]);
 	
-	public static ut_warWagon: UnitType = new UnitType("War Wagon", AoeData.castleAge, 150, 2.5, 4.0, 1.0, 6.0, 1.2, 0, 115, 60, 0.8, 0.0, 100);
-	public static ut_eliteWarWagon: UnitType = new UnitType("Elite War Wagon", AoeData.imperialAge, 200, 2.5, 5.0, 1.0, 6.0, 1.2, 0, 115, 60, 0.8, 0.0, 100);
+	public static ut_warWagon: UnitType = new UnitType("War Wagon", AoeData.castleAge, 150, 2.5, 4.0, 1.0, 6.0, 1.2, 0, 125, 60, 0.8, 0.0, 100);
+	public static ut_eliteWarWagon: UnitType = new UnitType("Elite War Wagon", AoeData.imperialAge, 200, 2.5, 5.0, 1.0, 6.0, 1.2, 0, 125, 60, 0.8, 0.0, 100);
 	public static utl_warWagon: UnitTypeLine = new UnitTypeLine("War Wagon line", [AoeData.ut_warWagon, AoeData.ut_eliteWarWagon]);
 	
 	public static ut_plumedArcher: UnitType = new UnitType("Plumed Archer", AoeData.castleAge, 65, 1.9, 4.0, 0.5, 7.0, 1.2, 0, 55, 55, 0.2, 0.0, 80);
@@ -192,8 +192,8 @@ export abstract class AoeData
 	public static ut_slinger: UnitType = new UnitType("Slinger", AoeData.castleAge, 40, 2.0, 5.0, 0.8, 5.5, 0.96, 30, 0, 40, 0.2, 1.0, 90);
 	public static utl_slinger: UnitTypeLine = new UnitTypeLine("Slinger line", [AoeData.ut_slinger]);
 	
-	public static ut_elephantArcher: UnitType = new UnitType("Elephant Archer", AoeData.castleAge, 280, 2.0, 4.0, 0.4, 7.0, 0.8, 100, 0, 70, 0.6);
-	public static ut_eliteElephantArcher: UnitType = new UnitType("Elite Elephant Archer", AoeData.imperialAge, 330, 2.0, 4.0, 0.4, 7.0, 0.8, 100, 0, 70, 0.6);
+	public static ut_elephantArcher: UnitType = new UnitType("Elephant Archer", AoeData.castleAge, 230, 2.0, 4.0, 0.4, 7.0, 0.9, 80, 0, 70, 0.6, 0, 70);
+	public static ut_eliteElephantArcher: UnitType = new UnitType("Elite Elephant Archer", AoeData.imperialAge, 280, 2.0, 4.0, 0.4, 7.0, 0.9, 80, 0, 70, 0.6, 0, 85);
 	public static utl_elephantArcher: UnitTypeLine = new UnitTypeLine("Elephant Archer line", [AoeData.ut_elephantArcher, AoeData.ut_eliteElephantArcher]);
 	
 	public static ut_genoeseCrossbowman: UnitType = new UnitType("Gen. Crossbowman", AoeData.castleAge, 45, 2.0, 4.0, 0.5, 7.0, 0.96, 0, 45, 40);
@@ -215,8 +215,8 @@ export abstract class AoeData
 	public static ut_eliteCamelArcher: UnitType = new UnitType("Elite Camel Archer", AoeData.imperialAge, 60, 2.0, 4.0, 0.63, 7.0, 1.4, 0, 50, 60, 0.4, 0.0, 95, 0.0);
 	public static utl_camelArcher: UnitTypeLine = new UnitTypeLine("Camel Archer line", [AoeData.ut_camelArcher, AoeData.ut_eliteCamelArcher]);
 	
-	public static ut_genitour: UnitType = new UnitType("Genitour", AoeData.castleAge, 50, 3.0, 4.0, 0.5, 7.0, 1.35, 50, 35, 0, 0.4, 1.0, 90);
-	public static ut_eliteGenitour: UnitType = new UnitType("Elite Genitour", AoeData.imperialAge, 55, 3.0, 4.0, 0.5, 7.0, 1.35, 50, 35, 0, 0.4, 1.0, 90);
+	public static ut_genitour: UnitType = new UnitType("Genitour", AoeData.castleAge, 50, 3.0, 4.0, 0.5, 7.0, 1.35, 40, 35, 0, 0.4, 1.0, 90);
+	public static ut_eliteGenitour: UnitType = new UnitType("Elite Genitour", AoeData.imperialAge, 55, 3.0, 4.0, 0.5, 7.0, 1.35, 40, 35, 0, 0.4, 1.0, 90);
 	public static utl_genitour: UnitTypeLine = new UnitTypeLine("Genitour line", [AoeData.ut_genitour, AoeData.ut_eliteGenitour]);
 	
 	public static ut_shotelWarrior: UnitType = new UnitType("Shotel Warrior", AoeData.castleAge, 45, 2.0, 0.0, 0.75, Number.MAX_VALUE, 1.2, 50, 0, 30);
@@ -716,7 +716,7 @@ export abstract class AoeData
 		AoeData.ut_imperialCamelRider.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_imperialCamelRider.armorClasses.set(AoeData.ac_basePierce, 0);
 		AoeData.ut_imperialCamelRider.armorClasses.set(AoeData.ac_camel, 0);
-		AoeData.ut_imperialCamelRider.attackValues.set(AoeData.ac_baseMelee, 9);
+		AoeData.ut_imperialCamelRider.attackValues.set(AoeData.ac_baseMelee, 8);
 		AoeData.ut_imperialCamelRider.attackValues.set(AoeData.ac_cavalry, 18);
 		AoeData.ut_imperialCamelRider.attackValues.set(AoeData.ac_camel, 9);
 		AoeData.ut_imperialCamelRider.attackValues.set(AoeData.ac_mameluke, 7);
@@ -797,6 +797,7 @@ export abstract class AoeData
 		AoeData.ut_skirmisher.armorClasses.set(AoeData.ac_skirmisher, 0);
 		AoeData.ut_skirmisher.attackValues.set(AoeData.ac_basePierce, 2);
 		AoeData.ut_skirmisher.attackValues.set(AoeData.ac_archer, 3);
+		AoeData.ut_skirmisher.attackValues.set(AoeData.ac_cavalryArcher, 0);
 		AoeData.ut_skirmisher.attackValues.set(AoeData.ac_spearman, 3);
 		AoeData.ut_skirmisher.imagePath = "assets/unitTypes/Skirmisher_aoe2DE.png";
 		AoeData.ut_skirmisher.techsForUnitList.push(this.tec_thumbRing, this.tec_chemistry,
@@ -896,7 +897,7 @@ export abstract class AoeData
 		AoeData.ut_scorpion.techsForUnitList.push(this.tec_siegeEngineers, this.tec_chemistry);
 
 		AoeData.ut_heavyScorpion.armorClasses.set(AoeData.ac_baseMelee, 0);
-		AoeData.ut_heavyScorpion.armorClasses.set(AoeData.ac_basePierce, 7);
+		AoeData.ut_heavyScorpion.armorClasses.set(AoeData.ac_basePierce, 8);
 		AoeData.ut_heavyScorpion.armorClasses.set(AoeData.ac_siegeWeapon, 0);
 		AoeData.ut_heavyScorpion.attackValues.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_heavyScorpion.attackValues.set(AoeData.ac_basePierce, 16);
@@ -1125,7 +1126,6 @@ export abstract class AoeData
 
 		AoeData.ut_mameluke.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_mameluke.armorClasses.set(AoeData.ac_basePierce, 0);
-		AoeData.ut_mameluke.armorClasses.set(AoeData.ac_archer, 0);
 		AoeData.ut_mameluke.armorClasses.set(AoeData.ac_mameluke, 0);
 		AoeData.ut_mameluke.armorClasses.set(AoeData.ac_camel, 0);
 		AoeData.ut_mameluke.armorClasses.set(AoeData.ac_uniqueUnit, 0);
@@ -1138,7 +1138,6 @@ export abstract class AoeData
 
 		AoeData.ut_eliteMameluke.armorClasses.set(AoeData.ac_baseMelee, 1);
 		AoeData.ut_eliteMameluke.armorClasses.set(AoeData.ac_basePierce, 0);
-		AoeData.ut_eliteMameluke.armorClasses.set(AoeData.ac_archer, 0);
 		AoeData.ut_eliteMameluke.armorClasses.set(AoeData.ac_mameluke, 0);
 		AoeData.ut_eliteMameluke.armorClasses.set(AoeData.ac_camel, 0);
 		AoeData.ut_eliteMameluke.armorClasses.set(AoeData.ac_uniqueUnit, 0);
@@ -1361,9 +1360,9 @@ export abstract class AoeData
 			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_elephantArcher.armorClasses.set(AoeData.ac_baseMelee, 0);
-		AoeData.ut_elephantArcher.armorClasses.set(AoeData.ac_basePierce, 3);
+		AoeData.ut_elephantArcher.armorClasses.set(AoeData.ac_basePierce, 2);
 		AoeData.ut_elephantArcher.armorClasses.set(AoeData.ac_archer, 0);
-		AoeData.ut_elephantArcher.armorClasses.set(AoeData.ac_cavalryArcher, -2);
+		AoeData.ut_elephantArcher.armorClasses.set(AoeData.ac_cavalryArcher, -4);
 		AoeData.ut_elephantArcher.armorClasses.set(AoeData.ac_cavalry, 0);
 		AoeData.ut_elephantArcher.armorClasses.set(AoeData.ac_warElephant, 0);
 		AoeData.ut_elephantArcher.armorClasses.set(AoeData.ac_uniqueUnit, 0);
@@ -1373,9 +1372,9 @@ export abstract class AoeData
 			this.tec_fletching, this.tec_bodkinArrow, this.tec_bracer, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_eliteElephantArcher.armorClasses.set(AoeData.ac_baseMelee, 0);
-		AoeData.ut_eliteElephantArcher.armorClasses.set(AoeData.ac_basePierce, 3);
+		AoeData.ut_eliteElephantArcher.armorClasses.set(AoeData.ac_basePierce, 2);
 		AoeData.ut_eliteElephantArcher.armorClasses.set(AoeData.ac_archer, 0);
-		AoeData.ut_eliteElephantArcher.armorClasses.set(AoeData.ac_cavalryArcher, -2);
+		AoeData.ut_eliteElephantArcher.armorClasses.set(AoeData.ac_cavalryArcher, -4);
 		AoeData.ut_eliteElephantArcher.armorClasses.set(AoeData.ac_cavalry, 0);
 		AoeData.ut_eliteElephantArcher.armorClasses.set(AoeData.ac_warElephant, 0);
 		AoeData.ut_eliteElephantArcher.armorClasses.set(AoeData.ac_uniqueUnit, 0);
@@ -1602,7 +1601,7 @@ export abstract class AoeData
 		AoeData.ut_arambai.attackValues.set(AoeData.ac_ram, 2);
 		AoeData.ut_arambai.sideTargetDmgFraction = 1.0;
 		AoeData.ut_arambai.imagePath = "assets/unitTypes/Arambaiicon-DE.png";
-		AoeData.ut_arambai.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
+		AoeData.ut_arambai.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry, this.tec_chemistry, this.tec_parthianTactics, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_eliteArambai.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_eliteArambai.armorClasses.set(AoeData.ac_basePierce, 2);
@@ -1614,7 +1613,7 @@ export abstract class AoeData
 		AoeData.ut_eliteArambai.attackValues.set(AoeData.ac_ram, 2);
 		AoeData.ut_eliteArambai.sideTargetDmgFraction = 1.0;
 		AoeData.ut_eliteArambai.imagePath = "assets/unitTypes/Arambaiicon-DE.png";
-		AoeData.ut_eliteArambai.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
+		AoeData.ut_eliteArambai.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry, this.tec_chemistry, this.tec_parthianTactics, this.tec_paddedArcherArmor, this.tec_leatherArcherArmor, this.tec_ringArcherArmor);
 
 		AoeData.ut_ballistaElephant.armorClasses.set(AoeData.ac_baseMelee, 0);
 		AoeData.ut_ballistaElephant.armorClasses.set(AoeData.ac_basePierce, 3);
@@ -1623,7 +1622,7 @@ export abstract class AoeData
 		AoeData.ut_ballistaElephant.armorClasses.set(AoeData.ac_siegeWeapon, -2);
 		AoeData.ut_ballistaElephant.armorClasses.set(AoeData.ac_uniqueUnit, 0);
 		AoeData.ut_ballistaElephant.armorClasses.set(AoeData.ac_heavySiege, 20);
-		AoeData.ut_ballistaElephant.attackValues.set(AoeData.ac_basePierce, 8);
+		AoeData.ut_ballistaElephant.attackValues.set(AoeData.ac_basePierce, 10);
 		AoeData.ut_ballistaElephant.attackIsMissile = true;
 		AoeData.ut_ballistaElephant.missileFlightDistance = 6.0;
 		AoeData.ut_ballistaElephant.secondaryMissileFlightDistance = 12.5;
@@ -1641,7 +1640,7 @@ export abstract class AoeData
 		AoeData.ut_eliteBallistaElephant.armorClasses.set(AoeData.ac_siegeWeapon, -2);
 		AoeData.ut_eliteBallistaElephant.armorClasses.set(AoeData.ac_uniqueUnit, 0);
 		AoeData.ut_eliteBallistaElephant.armorClasses.set(AoeData.ac_heavySiege, 20);
-		AoeData.ut_eliteBallistaElephant.attackValues.set(AoeData.ac_basePierce, 9);
+		AoeData.ut_eliteBallistaElephant.attackValues.set(AoeData.ac_basePierce, 11);
 		AoeData.ut_eliteBallistaElephant.attackIsMissile = true;
 		AoeData.ut_eliteBallistaElephant.missileFlightDistance = 6.0;
 		AoeData.ut_eliteBallistaElephant.secondaryMissileFlightDistance = 12.5;
@@ -1808,6 +1807,7 @@ export abstract class AoeData
 		AoeData.ut_flamingCamel.attackValues.set(AoeData.ac_cavalry, 50);
 		AoeData.ut_flamingCamel.attackValues.set(AoeData.ac_camel, 50);
 		AoeData.ut_flamingCamel.attackValues.set(AoeData.ac_warElephant, 130);
+		AoeData.ut_flamingCamel.attackValues.set(AoeData.ac_siegeWeapon, 25);
 		AoeData.ut_flamingCamel.cleaveType = 3;
 		AoeData.ut_flamingCamel.cleaveRadius = 2.0;
 		AoeData.ut_flamingCamel.cleaveDamage = 1.0;
@@ -2001,7 +2001,7 @@ export abstract class AoeData
 		AoeData.ut_ratha_melee.armorClasses.set(AoeData.ac_uniqueUnit, 0);
 		AoeData.ut_ratha_melee.attackValues.set(AoeData.ac_baseMelee, 10);
 		AoeData.ut_ratha_melee.imagePath = "assets/unitTypes/Aoe2de_ratha_melee.png";
-		AoeData.ut_ratha_melee.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+		AoeData.ut_ratha_melee.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry, this.tec_parthianTactics,
 			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_eliteRatha_melee.armorClasses.set(AoeData.ac_baseMelee, 2);
@@ -2012,7 +2012,7 @@ export abstract class AoeData
 		AoeData.ut_eliteRatha_melee.armorClasses.set(AoeData.ac_uniqueUnit, 0);
 		AoeData.ut_eliteRatha_melee.attackValues.set(AoeData.ac_baseMelee, 12);
 		AoeData.ut_eliteRatha_melee.imagePath = "assets/unitTypes/Aoe2de_ratha_melee.png";
-		AoeData.ut_eliteRatha_melee.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry,
+		AoeData.ut_eliteRatha_melee.techsForUnitList.push(this.tec_bloodlines, this.tec_husbandry, this.tec_parthianTactics,
 			this.tec_forging, this.tec_ironCasting, this.tec_blastFurnace, this.tec_scaleBardingArmor, this.tec_chainBardingArmor, this.tec_plateBardingArmor);
 
 		AoeData.ut_shrivamshaRider.armorClasses.set(AoeData.ac_baseMelee, 0);

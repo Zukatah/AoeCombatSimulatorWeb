@@ -62,6 +62,8 @@ export class Unit {
 	public running: boolean = false; // for hit&run calculations
 	public timeSinceFirstTryToAttackTarget: number = 0; // if the target is surrounded by attackers for a longer while, the unit will eventually target a different unit
 
+	public debugNumber: number = 0;
+
 
 	constructor(civUnitType: CivUnitType, battle: Battle, armyIndex: number) {
 		this.hp = civUnitType.hp;
@@ -160,7 +162,7 @@ export class Unit {
 		dlength = (dlength == 0.0 ? 1.0 : dlength);
 		dx /= dlength;
 		dy /= dlength;
-		let speedAfterBumpReduction: number = this.target.attackedBy[0] == this ? this.moveSpeed * 0.01 : this.moveSpeed * 0.01 / Math.pow(this.target.attackedBy.length, 0.15); // 54
+		let speedAfterBumpReduction: number = this.target.attackedBy[0] == this ? this.moveSpeed * 0.01 : this.moveSpeed * 0.01 / Math.pow(this.target.attackedBy.length, 0.35); // war 0,15
 		this.nx = this.x + (speedAfterBumpReduction > dlength ? dlength : speedAfterBumpReduction) * dx;
 		this.ny = this.y + (speedAfterBumpReduction > dlength ? dlength : speedAfterBumpReduction) * dy;
 	}
@@ -241,15 +243,18 @@ export class Unit {
 
 			// sum up damage of each amorClass - respecting sicilians dmg reduction
 			for (let [attackedArmorClass, attackValue] of avIterator){
-				if (target.civUnitType.civ == AoeData.civ_sicilians && !target.armorClasses.has(AoeData.ac_siegeWeapon) && attackedArmorClass != AoeData.ac_baseMelee && attackedArmorClass != AoeData.ac_basePierce){ // the Sicilians' land units take only 67% bonus damage
+				if (target.civUnitType.civ == AoeData.civ_sicilians && !target.armorClasses.has(AoeData.ac_siegeWeapon) && attackedArmorClass != AoeData.ac_baseMelee && attackedArmorClass != AoeData.ac_basePierce){
+					// the Sicilians' land units take only 67% bonus damage
 					damageDealt += Math.max(0, target.armorClasses.has(attackedArmorClass) ? (attackValue - target.armorClasses.get(attackedArmorClass))*0.67 : 0);
-				}else if (attackedArmorClass == AoeData.ac_baseMelee){
+				} else if(target.civUnitType.civ == AoeData.civ_bengalis && target.armorClasses.has(AoeData.ac_warElephant) && attackedArmorClass != AoeData.ac_baseMelee && attackedArmorClass != AoeData.ac_basePierce){
+					// the Bengalis' elephant units take only 75% bonus damage
+					damageDealt += Math.max(0, target.armorClasses.has(attackedArmorClass) ? (attackValue - target.armorClasses.get(attackedArmorClass))*0.75 : 0);
+				} else if (attackedArmorClass == AoeData.ac_baseMelee){
 					if (attacker.attackIgnoresArmor){
 						damageDealt += target.armorClasses.has(attackedArmorClass) ? attackValue + chargeDmg : 0;
 					} else {
 						damageDealt += Math.max(0, target.armorClasses.has(attackedArmorClass) ? attackValue + chargeDmg - target.armorClasses.get(attackedArmorClass) : 0);
 					}
-					
 				} else {
 					damageDealt += Math.max(0, target.armorClasses.has(attackedArmorClass) ? attackValue - target.armorClasses.get(attackedArmorClass) : 0);
 				}
@@ -297,11 +302,13 @@ export class Unit {
 
 			if (AoeData.utl_ghulam.unitTypes.includes(this.civUnitType.baseUnitType)){
 				let targetArmy: Unit[] = this.armyIndex == 0 ? this.battle.armies[1] : this.battle.armies[0];
+				let targetsHit: number = 0;
 				targetArmy.forEach(possibleTarget => {
-					if ((this.target.x - possibleTarget.x) * (this.target.x - possibleTarget.x) + (this.target.y - possibleTarget.y) * (this.target.y - possibleTarget.y) < 0.15 * 0.15){
+					if (targetsHit == 0 && (this.target.x - possibleTarget.x) * (this.target.x - possibleTarget.x) + (this.target.y - possibleTarget.y) * (this.target.y - possibleTarget.y) < 0.025 * 0.025){
 						if (possibleTarget != this.target){
 							damageDealt = Math.max(Unit.CalculateDamageDealtToTarget(this, possibleTarget) * this.sideTargetDmgFraction, 1);
 							possibleTarget.curHp -= damageDealt;
+							targetsHit += 1;
 						}
 					}
 				});
@@ -367,13 +374,13 @@ export class Unit {
 		this.attackAnimDur = 0; // Reset attack animation time
 	}
 
-	/* Idea for finding new targets tested previously: Pick up to 6 random targets of the enemy army and choose the closest one as the next target. */
 	public EnsureHasTarget(): void
 	{
 		let targetArmy: Unit[] = this.armyIndex == 0 ? this.battle.armies[1] : this.battle.armies[0];
 
 		if (this.target == null || !this.target.alive)
 		{
+			// Solution 1: Pick the six closest units of the enemy army and choose one randomly as the next target.
 			this.inAttackMotion = false;
 			this.attackAnimDur = 0;
 
@@ -405,6 +412,26 @@ export class Unit {
 
 			this.target = targetArmy[closestUnitIndex[Math.floor(Math.random() * (targetArmy.length >= 6 ? 6 : targetArmy.length))]];
 			this.target.attackedBy.push(this);
+
+			// Solution 2: Pick six enemy units randomly and attack the closest.
+			/*
+			let closestUnitIndex: number = -1
+			let closestUnitDistSq: number = Number.MAX_VALUE;
+
+			for (let j: number = 0; j < 6; j++)
+			{
+				let rndIndex: number = Math.floor(Math.random() * targetArmy.length)
+				let distCurUnitSq = (this.x - targetArmy[rndIndex].x) * (this.x - targetArmy[rndIndex].x) + (this.y - targetArmy[rndIndex].y) * (this.y - targetArmy[rndIndex].y);
+				if (distCurUnitSq < closestUnitDistSq)
+				{
+					closestUnitDistSq = distCurUnitSq;
+					closestUnitIndex = rndIndex;
+				}
+			}
+
+			this.target = targetArmy[closestUnitIndex];
+			this.target.attackedBy.push(this);
+			*/
 		}
 	}
 

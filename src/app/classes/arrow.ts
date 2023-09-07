@@ -25,6 +25,19 @@ export class Arrow extends Projectile
 		if (this.target.alive && (this.certainHit || (hitRoll < (this.secondary ? this.attacker.secondaryAttackAccuracyPercent : this.attacker.accuracyPercent))))
 		{
 			let damageDealt : number = Unit.CalculateDamageDealtToTarget(this.attacker, this.target, this.secondary);
+
+			// Shrivamsha Riders can block/dodge projectiles
+			if (AoeData.utl_shrivamshaRider.unitTypes.includes(closestUnit.civUnitType.baseUnitType)){
+				if (closestUnit.civUnitType.baseUnitType == AoeData.ut_shrivamshaRider && closestUnit.curEnergy >= 20.0){
+					damageDealt = 0.0;
+					closestUnit.curEnergy -= 20.0;
+				} else if (closestUnit.civUnitType.baseUnitType == AoeData.ut_eliteShrivamshaRider && closestUnit.curEnergy >= 14.4){
+					damageDealt = 0.0;
+					closestUnit.curEnergy -= 14.4;
+					closestUnit.debugNumber += 1;
+				}
+			}
+
 			this.target.curHp -= damageDealt;
 			this.battle.players[this.attacker.armyIndex].goodRoll_MainTargetHit++; // debug purposes
 		}
@@ -65,6 +78,7 @@ export class Arrow extends Projectile
 						} else if (closestUnit.civUnitType.baseUnitType == AoeData.ut_eliteShrivamshaRider && closestUnit.curEnergy >= 14.4){
 							damageDealt = 0.0;
 							closestUnit.curEnergy -= 14.4;
+							closestUnit.debugNumber += 1;
 						}
 					}
 
@@ -91,6 +105,7 @@ export class Arrow extends Projectile
 						} else if (closestUnit.civUnitType.baseUnitType == AoeData.ut_eliteShrivamshaRider && closestUnit.curEnergy >= 14.4){
 							damageDealt = 0.0;
 							closestUnit.curEnergy -= 14.4;
+							closestUnit.debugNumber += 1;
 						}
 					}
 
