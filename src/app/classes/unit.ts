@@ -320,6 +320,12 @@ export class Unit {
 				this.battle.resourcesGenerated[this.armyIndex][2] += 0.695;
 			}
 
+			// Infantry of the Vikings get 5 gold when killing a villager after researching their castle age unique tech
+			if (this.civUnitType.civ == AoeData.civ_vikings && this.civUnitType.age >= 3 && this.target.civUnitType.baseUnitType == AoeData.ut_villager && this.target.curHp <= 0.001 &&
+				(AoeData.utl_militia.unitTypes.includes(this.civUnitType.baseUnitType) || AoeData.utl_spearman.unitTypes.includes(this.civUnitType.baseUnitType) || AoeData.utl_berserk.unitTypes.includes(this.civUnitType.baseUnitType))){
+				this.battle.resourcesGenerated[this.armyIndex][2] += 5.0;
+			}
+
 			// flaming camels die after one attack
 			if (this.civUnitType.baseUnitType == AoeData.ut_flamingCamel)
 			{

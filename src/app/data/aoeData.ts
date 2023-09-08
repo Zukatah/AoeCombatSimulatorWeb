@@ -1586,6 +1586,7 @@ export abstract class AoeData
 		AoeData.ut_organGun.secondaryAttackValues.set(AoeData.ac_ram, 1);
 		AoeData.ut_organGun.secondaryAttackValues.set(AoeData.ac_skirmisher, 1);
 		AoeData.ut_organGun.secondaryAttackValues.set(AoeData.ac_infantry, 1);
+		AoeData.ut_organGun.secondaryAttackAccuracyPercent = 0;
 		AoeData.ut_organGun.sideTargetDmgFraction = 1.0;
 		AoeData.ut_organGun.imagePath = "assets/unitTypes/OrganGunIcon-DE.png";
 		AoeData.ut_organGun.techsForUnitList.push(this.tec_siegeEngineers);
@@ -1606,6 +1607,7 @@ export abstract class AoeData
 		AoeData.ut_eliteOrganGun.secondaryAttackValues.set(AoeData.ac_ram, 1);
 		AoeData.ut_eliteOrganGun.secondaryAttackValues.set(AoeData.ac_skirmisher, 1);
 		AoeData.ut_eliteOrganGun.secondaryAttackValues.set(AoeData.ac_infantry, 1);
+		AoeData.ut_eliteOrganGun.secondaryAttackAccuracyPercent = 0;
 		AoeData.ut_eliteOrganGun.sideTargetDmgFraction = 1.0;
 		AoeData.ut_eliteOrganGun.imagePath = "assets/unitTypes/OrganGunIcon-DE.png";
 		AoeData.ut_eliteOrganGun.techsForUnitList.push(this.tec_siegeEngineers);

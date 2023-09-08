@@ -585,7 +585,7 @@ export class CivUnitType extends UnitType {
 
 
 	public ApplyKoreansBonusses(): void{
-		if (this.armorClasses.has(AoeData.ac_infantry) || this.armorClasses.has(AoeData.ac_infantry)){
+		if (this.armorClasses.has(AoeData.ac_infantry) || this.armorClasses.has(AoeData.ac_archer)){
 			this.resourceCosts[1] *= 0.5;
 		}
 	}

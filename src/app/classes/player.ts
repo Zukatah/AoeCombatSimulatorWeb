@@ -39,7 +39,7 @@ export class Player{
 	public resourcesLostTotal: number = 0;
 	public resourcesRemaining: number[] = [0, 0, 0]; // worth (food, wood, gold) of all surviving units
 	public resourcesRemainingTotal: number = 0;
-	public resourcesGenerated: number[] = [0, 0, 0]; // sum of all generated resources (currently only for Keshiks)
+	public resourcesGenerated: number[] = [0, 0, 0]; // sum of all generated resources (currently only relevant for the Keshik and Viking infantry)
 	public resourcesGeneratedTotal: number = 0;
 
 	public populationInvested: number = 0;

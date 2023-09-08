@@ -109,7 +109,7 @@ export class AoECombatSimulatorComponent {
 
 	public Bt_fight_Click(): void
 	{
-		if (this.numberOfSimulations == NaN || this.numberOfSimulations < 1 || this.numberOfSimulations > 1000 || !Number.isInteger(this.numberOfSimulations)){
+		if (Number.isNaN(this.numberOfSimulations) || this.numberOfSimulations < 1 || this.numberOfSimulations > 1000 || !Number.isInteger(this.numberOfSimulations)){
 			return;
 		}
 
@@ -118,11 +118,11 @@ export class AoECombatSimulatorComponent {
 			this.players[i].ResetData(false);
 			for (let j: number = 0; j < this.players[i].civUts.length; j++)
 			{
-				if (this.players[i].amountStartUnits[j] == NaN || this.players[i].amountStartUnits[j] > 200 || !Number.isInteger(this.players[i].amountStartUnits[j])){
+				if (Number.isNaN(this.players[i].amountStartUnits[j]) || this.players[i].amountStartUnits[j] > 200 || !Number.isInteger(this.players[i].amountStartUnits[j])){
 					return;
 				}
 			}
-			if (this.players[i].numberOfRelics == NaN || this.players[i].numberOfRelics > 4 || this.players[i].numberOfRelics < 0){
+			if (Number.isNaN(this.players[i].numberOfRelics) || this.players[i].numberOfRelics > 4 || this.players[i].numberOfRelics < 0){
 				return;
 			}
 		}

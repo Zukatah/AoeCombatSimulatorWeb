@@ -22,11 +22,14 @@ export class Battle
 
 	public timeInterval: number = 0; // number of time intervals since begin of the battle; one time interval = 0,01s
 	// private Random rnd; // a random generator for slight shifts of initial unit placement (further reduces determinism and improves quality of battle results if number of iterations is large)
-	public resourcesGenerated: number[][]  = [[0, 0, 0], [0, 0, 0]]; // currently only relevant for the Keshik gold generation
+	public resourcesGenerated: number[][]  = [[0, 0, 0], [0, 0, 0]]; // currently only relevant for the Keshik and Viking infantry
 	public battleIterationCounter: number = 0; // used only for repeated equal pop battles (when repetitions > 1)
 
 	public start_konnikCount: number[] = []; // we need these variables for statistical purposes (cost efficiency matrix creation)
 	public sum_lostKonniks: number[] = [];
+
+	public start_centurionCount: number[] = [0, 0];
+	public centurion_nonElite: boolean[] = [false, false];
 
 
 	constructor(taskId: number, battleId: number, hitAndRunMode: number, players: Player[], repetitions: number = 0)
@@ -100,6 +103,7 @@ export class Battle
 			}
 
 			this.start_konnikCount[i] = this.armies[i].filter(unit => AoeData.utl_konnik.unitTypes.includes(unit.civUnitType.baseUnitType)).length;
+			this.start_centurionCount[i] = this.armies[i].filter(unit => AoeData.utl_centurion.unitTypes.includes(unit.civUnitType.baseUnitType)).length;
 
 			army_MeleeWidth[i] = Math.ceil(Math.sqrt(army_SizeMelee[i] / 2.0));
 			army_MeleeHeight[i] = army_MeleeWidth[i] * 2;
@@ -129,6 +133,16 @@ export class Battle
 			});
 
 			// armies[i].ForEach(unit => { Console.WriteLine("Army " + (i+1) + ":" + unit.unitType.name + " | " + unit.X + " - " + unit.Y); });
+
+			if (this.start_centurionCount[i] > 0){
+				this.centurion_nonElite[i] = this.armies[i].find(ce => AoeData.utl_centurion.unitTypes.includes(ce.civUnitType.baseUnitType)).civUnitType.baseUnitType == AoeData.ut_centurion;
+				this.armies[i].forEach(un => {
+					if (AoeData.utl_militia_romans.unitTypes.includes(un.civUnitType.baseUnitType)){
+						un.moveSpeed *= this.centurion_nonElite[i] ? 1.1 : 1.15;
+						un.attackSpeed *= this.centurion_nonElite[i] ? 0.8 : 0.75;
+					}
+				});
+			}
 		}
 	}
 
@@ -180,6 +194,17 @@ export class Battle
 					let dismountedKonnik: Unit = new Unit(dismountedKonnikCivUnitType, this, i);
 					this.armies[i].push(dismountedKonnik);
 					dismountedKonnik.SetXYInitial(dyingUnit.x, dyingUnit.y);
+				}
+				if (AoeData.utl_centurion.unitTypes.includes(dyingUnit.civUnitType.baseUnitType)){
+					this.start_centurionCount[i] -= 1;
+					if (this.start_centurionCount[i] <= 0){
+						this.armies[i].forEach(un => {
+							if (AoeData.utl_militia_romans.unitTypes.includes(un.civUnitType.baseUnitType)){
+								un.moveSpeed *= this.centurion_nonElite[i] ? 1.0/1.1 : 1.0/1.15;
+								un.attackSpeed *= this.centurion_nonElite[i] ? 1.0/0.8 : 1.0/0.75;
+							}
+						});
+					}
 				}
 			});
 			this.graveyard.push(...this.armies[i].filter(unit => unit.curHp <= 0.001));

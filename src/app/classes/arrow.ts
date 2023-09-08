@@ -55,7 +55,7 @@ export class Arrow extends Projectile
 			let closestUnitDistSq: number = Number.MAX_VALUE;
 			targetArmy.forEach(possibleTarget => {
 				let distToArrowSq: number = (impactX - possibleTarget.x) * (impactX - possibleTarget.x) + (impactY - possibleTarget.y) * (impactY - possibleTarget.y);
-				let possibleTargetRadiusSq: number = (possibleTarget.radius + 0.2) * (possibleTarget.radius + 0.2); // increased the size of the units' hitboxes a bit since the chance for side target hits was too low
+				let possibleTargetRadiusSq: number = (possibleTarget.radius + 0.15) * (possibleTarget.radius + 0.15); // increased the size of the units' hitboxes a bit since the chance for side target hits was too low
 				if (distToArrowSq < possibleTargetRadiusSq && distToArrowSq < closestUnitDistSq)
 				{
 					closestUnit = possibleTarget;
