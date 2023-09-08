@@ -56,7 +56,6 @@ export class Battle
 			this.CreateArmys();
 			this.Fight();
 			this.CountSurvivors();
-			this.armies[0].forEach(unit => console.log(unit.civUnitType.name + " " + unit.armorClasses.get(AoeData.ac_baseMelee) + " " + unit.armorClasses.get(AoeData.ac_basePierce) + ",,,"));
 			this.battleIterationCounter++;
 		}
 
@@ -174,7 +173,6 @@ export class Battle
 			this.armies[i].filter(unit => unit.curHp <= 0.001).forEach(dyingUnit => {
 				dyingUnit.target.attackedBy.splice(dyingUnit.target.attackedBy.indexOf(dyingUnit, 0), 1);
 				dyingUnit.alive = false;
-				console.log("d" + dyingUnit.debugNumber);
 				this.gridUnits[dyingUnit.gx][dyingUnit.gy].delete(dyingUnit);
 				if (dyingUnit.civUnitType.baseUnitType == AoeData.ut_eliteKonnik || dyingUnit.civUnitType.baseUnitType == AoeData.ut_konnik){
 					let isElite: boolean = dyingUnit.civUnitType.baseUnitType == AoeData.ut_eliteKonnik;

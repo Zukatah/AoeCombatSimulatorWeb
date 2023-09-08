@@ -72,8 +72,8 @@
 								<img class="smallImg" src="assets/attackSpeed.png" title="Attack speed">{{player.civUts[item].attackSpeed | number : '1.0-2'}}s
 							</span>
 							<br>
-							<span *ngFor="let av of player.civUts[item].attackValues | keyvalue"><img class="smallImg" src="assets/attack.png" title="Hit points"> {{av.key.name}}: {{av.value}}<br></span>
-							<span *ngFor="let av of player.civUts[item].armorClasses | keyvalue"><img class="smallImg" src="assets/armor.png" title="Hit points"> {{av.key.name}}: {{av.value}}<br></span>
+							<span *ngFor="let av of player.civUts[item].attackValues | keyvalue"><img class="smallImg" src="assets/attack.png" title="Hit points"> {{av.key.name}}: {{av.value | number : '1.0-2'}}<br></span>
+							<span *ngFor="let av of player.civUts[item].armorClasses | keyvalue"><img class="smallImg" src="assets/armor.png" title="Hit points"> {{av.key.name}}: {{av.value | number : '1.0-2'}}<br></span>
 							<span>
 								<img class="smallImg" src="assets/range.png" title="Range and accuracy">
 								{{player.civUts[item].attackRange}}t {{player.civUts[item].attackRangeMin != 0 ? "(min: " + player.civUts[item].attackRangeMin + "t)" : ""}} - {{player.civUts[item].accuracyPercent}}%

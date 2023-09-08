@@ -46,6 +46,7 @@ export class CivUnitType extends UnitType {
 		this.imagePath = baseUnitType.imagePath;
 		this.techsForUnitList = baseUnitType.techsForUnitList;
 		this.energyRegPerMin = baseUnitType.energyRegPerMin;
+		this.chargeDmg = baseUnitType.chargeDmg;
 
 		if (techsResearched == null){ // this is only called, if the unit's techs have to be set individually (in the matrix mode); in the simulation mode, techs are set via the researched techs of the respective player
 			this.AddDefaultTechsToUnit();
@@ -91,6 +92,7 @@ export class CivUnitType extends UnitType {
 		if (civ == AoeData.civ_persians){ this.ApplyPersiansBonusses(); }
 		if (civ == AoeData.civ_poles){ this.ApplyPolesBonusses(); }
 		if (civ == AoeData.civ_portuguese){ this.ApplyPortugueseBonusses(); }
+		if (civ == AoeData.civ_romans){ this.ApplyRomansBonusses(); }
 		if (civ == AoeData.civ_saracens){ this.ApplySaracensBonusses(); }
 		if (civ == AoeData.civ_sicilians){ this.ApplySiciliansBonusses(); }
 		if (civ == AoeData.civ_slavs){ this.ApplySlavsBonusses(); }
@@ -102,7 +104,7 @@ export class CivUnitType extends UnitType {
 		if (civ == AoeData.civ_vikings){ this.ApplyVikingsBonusses(); }
 
 		this.ApplyBlacksmithTechs();
-		this.ApplyUniversityMonasteryTechs();
+		this.ApplyUniversityMonasteryCastleTechs();
 		this.ApplyBarracksStableTcTechs();
 		this.ApplyArcheryRangeTechs();
 
@@ -188,7 +190,7 @@ export class CivUnitType extends UnitType {
 	}
 
 
-	public ApplyUniversityMonasteryTechs(): void{
+	public ApplyUniversityMonasteryCastleTechs(): void{
 		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_chemistry) && this.techsResearched.includes(AoeData.tec_chemistry)){
 			this.attackValues.set(AoeData.ac_basePierce, this.attackValues.get(AoeData.ac_basePierce) + 1);
 		}
@@ -201,12 +203,18 @@ export class CivUnitType extends UnitType {
 		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_fervor) && this.techsResearched.includes(AoeData.tec_fervor)){
 			this.moveSpeed *= 1.15;
 		}
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_sappers) && this.techsResearched.includes(AoeData.tec_sappers)){
+			this.attackValues.set(AoeData.ac_ram, 3);
+		}
 	}
 
 
 	public ApplyBarracksStableTcTechs(): void{
 		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_supplies) && this.techsResearched.includes(AoeData.tec_supplies)){
 			this.resourceCosts[0] -= 15;
+		}
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_gambesons) && this.techsResearched.includes(AoeData.tec_gambesons)){
+			this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 1);
 		}
 		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_squires) && this.techsResearched.includes(AoeData.tec_squires)){
 			this.moveSpeed *= 1.1;
@@ -236,7 +244,7 @@ export class CivUnitType extends UnitType {
 			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 1);
 			this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 2);
 			if (this.attackValues.has(AoeData.ac_spearman)){
-				this.attackValues.set(AoeData.ac_spearman, this.attackValues.get(AoeData.ac_spearman) + (AoeData.utl_cavalryArcher.unitTypes.includes(this.baseUnitType) ? 4 : 2));
+				this.attackValues.set(AoeData.ac_spearman, this.attackValues.get(AoeData.ac_spearman) + 2);
 			} else {
 				this.attackValues.set(AoeData.ac_spearman, 2);
 			}
@@ -306,7 +314,7 @@ export class CivUnitType extends UnitType {
 
 	public ApplyBerbersBonusses(): void{
 		if (AoeData.utl_villager.unitTypes.includes(this.baseUnitType)){
-			this.moveSpeed *= 1.1;
+			this.moveSpeed *= this.age == 0 ? 1.05 : 1.1;
 		}
 		if (this.armorClasses.has(AoeData.ac_camel) && this.age >= 4){
 			this.hpRegPerMin += 15;
@@ -482,7 +490,7 @@ export class CivUnitType extends UnitType {
 		if (this.age == 4 && (AoeData.utl_camelScout.unitTypes.includes(this.baseUnitType) || AoeData.utl_elephantArcher.unitTypes.includes(this.baseUnitType))){
 			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 4);
 		}
-		if (this.armorClasses.has(AoeData.ac_cavalry)){
+		if (this.armorClasses.has(AoeData.ac_cavalry) || this.armorClasses.has(AoeData.ac_camel)){
 			const avIterator = this.attackValues[Symbol.iterator]();
 
 			// sum up damage of each amorClass - respecting sicilians dmg reduction
@@ -521,11 +529,17 @@ export class CivUnitType extends UnitType {
 	public ApplyIncasBonusses(): void{
 		if ((AoeData.utl_skirmisher.unitTypes.includes(this.baseUnitType) || AoeData.utl_slinger.unitTypes.includes(this.baseUnitType)) && this.age >= 3){
 			this.attackRangeMin = 0.0;
+			if (AoeData.utl_slinger.unitTypes.includes(this.baseUnitType)){
+				this.attackValues.set(AoeData.ac_basePierce, this.attackValues.get(AoeData.ac_basePierce) + 1);
+			}
 		}
 		if ((AoeData.utl_kamayuk.unitTypes.includes(this.baseUnitType) || AoeData.utl_slinger.unitTypes.includes(this.baseUnitType) || AoeData.utl_eagleScout.unitTypes.includes(this.baseUnitType))
 			&& this.age == 4){
 			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 1);
 			this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 2);
+		}
+		if (!AoeData.utl_villager.unitTypes.includes(this.baseUnitType)){
+			this.resourceCosts[0] *= this.age == 0 ? 0.85 : (this.age == 1 ? 0.8 : (this.age == 2 ? 0.75 : 0.7));
 		}
 	}
 
@@ -571,8 +585,8 @@ export class CivUnitType extends UnitType {
 
 
 	public ApplyKoreansBonusses(): void{
-		if (!this.armorClasses.has(AoeData.ac_siegeWeapon)){
-			this.resourceCosts[1] *= 0.8;
+		if (this.armorClasses.has(AoeData.ac_infantry) || this.armorClasses.has(AoeData.ac_infantry)){
+			this.resourceCosts[1] *= 0.5;
 		}
 	}
 
@@ -701,6 +715,27 @@ export class CivUnitType extends UnitType {
 	}
 
 
+	public ApplyRomansBonusses(): void{
+		if (this.age >= 3 && AoeData.utl_scorpion.unitTypes.includes(this.baseUnitType)){
+			this.attackSpeed *= 0.75;
+			this.resourceCosts[2] *= 0.4;
+			this.attackRangeMin = 1;
+		}
+		if (this.age == 4 && (AoeData.utl_knight.unitTypes.includes(this.baseUnitType) || AoeData.utl_militia.unitTypes.includes(this.baseUnitType) || AoeData.utl_centurion.unitTypes.includes(this.baseUnitType))){
+			this.energyRegPerMin = 300;
+			this.chargeDmg = 5.0;
+		}
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_scaleMailArmor) && this.techsResearched.includes(AoeData.tec_scaleMailArmor)){
+			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 1);
+			this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 1);
+		}
+		if(this.baseUnitType.techsForUnitList.includes(AoeData.tec_chainMailArmor) && this.techsResearched.includes(AoeData.tec_chainMailArmor)){
+			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 1);
+			this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 1);
+		}
+	}
+
+
 	public ApplySaracensBonusses(): void{
 		if (this.armorClasses.has(AoeData.ac_camel)){
 			if (this.age >= 3){
@@ -716,7 +751,7 @@ export class CivUnitType extends UnitType {
 			this.attackValues.set(AoeData.ac_baseMelee, this.attackValues.get(AoeData.ac_baseMelee) + 3);
 			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 1);
 			this.armorClasses.set(AoeData.ac_basePierce, this.armorClasses.get(AoeData.ac_basePierce) + 1);
-			this.hp += 20;
+			this.hp += 25;
 		}
 		if (this.age == 4 && AoeData.utl_knight.unitTypes.includes(this.baseUnitType)){
 			this.armorClasses.set(AoeData.ac_baseMelee, this.armorClasses.get(AoeData.ac_baseMelee) + 1);
@@ -802,8 +837,8 @@ export class CivUnitType extends UnitType {
 
 
 	public ApplyVikingsBonusses(): void{
-		if (AoeData.utl_berserk.unitTypes.includes(this.baseUnitType) && this.age == 4){
-			this.hpRegPerMin *= 2;
+		if (AoeData.utl_archer.unitTypes.includes(this.baseUnitType) && this.age == 4){
+			this.attackValues.set(AoeData.ac_basePierce, this.attackValues.get(AoeData.ac_basePierce) + 1)
 		}
 		if (this.armorClasses.has(AoeData.ac_infantry)){
 			if (this.age >= 3){

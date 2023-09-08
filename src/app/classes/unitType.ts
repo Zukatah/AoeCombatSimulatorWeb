@@ -20,6 +20,7 @@ export class UnitType {
 	public cleaveRadius: number = 0.0; // cleaves enemy units if they are closer than cleaveRadius+ownRadius to cleaving unit
 	public cleaveDamage: number = 0; // only relevant, if cleaveType != 0; for cleaveType 1 this is an absolute value (5 for slav infantry and cataphracts); for cleaveType 2&3 this is a fraction value (25% for battle elephant line, 33% for polish scout line, 50% for war elephant line, 100% for petards & flaming camels)
 	public accuracyPercent: number; // 100 does always hit; 50 does mean 50% will hit and 50% are randomly distributed (they can still hit the main target or other targets)
+	public chargeDmg: number = 0.0; // almost all units don't have charge damage; coustilliers, urumi swordsmen and potentially some roman units do
 
 	public attackIsMissile: boolean = false; // only true for ranged units that fire missiles which damage targets on their way (scorpions and ballista elephants)
 	public sideTargetDmgFraction: number = 0.5; // most ranged units deal 50% of their normal damage when hitting targets beside their main target; some (Arambai, Chakram Thrower, ...) deal 100%

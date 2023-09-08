@@ -24,6 +24,7 @@ export class Unit {
 	public cleaveRadius: number = 0.0; // cleaves enemy units if they are closer than cleaveRadius+ownRadius to cleaving unit
 	public cleaveDamage: number = 0; // only relevant, if cleaveType != 0; for cleaveType 1 this is an absolute value (5 for slav infantry and cataphracts); for cleaveType 2&3 this is a fraction value (25% for battle elephant line, 33% for polish scout line, 50% for war elephant line, 100% for petards & flaming camels)
 	public accuracyPercent: number; // 100 does always hit; 50 does mean 50% will hit and 50% are randomly distributed (they can still hit the main target or other targets)
+	public chargeDmg: number; // almost all units don't have charge damage; coustilliers, urumi swordsmen and potentially some roman units do
 
 	public attackIsMissile: boolean = false; // only true for ranged units that fire missiles which damage targets on their way (scorpions and ballista elephants)
 	public sideTargetDmgFraction: number;
@@ -91,6 +92,7 @@ export class Unit {
 		this.accuracyPercent = civUnitType.accuracyPercent;
 		this.hpRegPerMin = civUnitType.hpRegPerMin;
 		this.energyRegPerMin = civUnitType.energyRegPerMin;
+		this.chargeDmg = civUnitType.chargeDmg;
 		this.maxNumberOfAttackers = civUnitType.maxNumberOfAttackers;
 
 		this.civUnitType = civUnitType;
@@ -233,32 +235,30 @@ export class Unit {
 	{
 		let damageDealt: number = 0.0;
 
-		if (secondary && attacker.civUnitType.baseUnitType == AoeData.ut_eliteOrganGun) // secondary missiles of organ guns always deal 2 damage (and 1 if target wasn't the main target)
-		{
-			damageDealt = 2;
-		}
-		else
-		{
-			const avIterator = secondary ? attacker.secondaryAttackValues[Symbol.iterator]() : attacker.attackValues[Symbol.iterator]();
-
-			// sum up damage of each amorClass - respecting sicilians dmg reduction
-			for (let [attackedArmorClass, attackValue] of avIterator){
-				if (target.civUnitType.civ == AoeData.civ_sicilians && !target.armorClasses.has(AoeData.ac_siegeWeapon) && attackedArmorClass != AoeData.ac_baseMelee && attackedArmorClass != AoeData.ac_basePierce){
-					// the Sicilians' land units take only 67% bonus damage
-					damageDealt += Math.max(0, target.armorClasses.has(attackedArmorClass) ? (attackValue - target.armorClasses.get(attackedArmorClass))*0.67 : 0);
-				} else if(target.civUnitType.civ == AoeData.civ_bengalis && target.armorClasses.has(AoeData.ac_warElephant) && attackedArmorClass != AoeData.ac_baseMelee && attackedArmorClass != AoeData.ac_basePierce){
-					// the Bengalis' elephant units take only 75% bonus damage
-					damageDealt += Math.max(0, target.armorClasses.has(attackedArmorClass) ? (attackValue - target.armorClasses.get(attackedArmorClass))*0.75 : 0);
-				} else if (attackedArmorClass == AoeData.ac_baseMelee){
-					if (attacker.attackIgnoresArmor){
-						damageDealt += target.armorClasses.has(attackedArmorClass) ? attackValue + chargeDmg : 0;
-					} else {
-						damageDealt += Math.max(0, target.armorClasses.has(attackedArmorClass) ? attackValue + chargeDmg - target.armorClasses.get(attackedArmorClass) : 0);
-					}
+		// sum up damage of each amorClass - respecting several dmg reductions and charge attacks
+		const avIterator = secondary ? attacker.secondaryAttackValues[Symbol.iterator]() : attacker.attackValues[Symbol.iterator]();
+		for (let [attackedArmorClass, attackValue] of avIterator){
+			if (target.civUnitType.civ == AoeData.civ_sicilians && !target.armorClasses.has(AoeData.ac_siegeWeapon) && attackedArmorClass != AoeData.ac_baseMelee && attackedArmorClass != AoeData.ac_basePierce){
+				// the Sicilians' land units take only 67% bonus damage
+				damageDealt += Math.max(0, target.armorClasses.has(attackedArmorClass) ? (attackValue - target.armorClasses.get(attackedArmorClass))*0.67 : 0);
+			} else if(target.civUnitType.civ == AoeData.civ_bengalis && target.armorClasses.has(AoeData.ac_warElephant) && attackedArmorClass != AoeData.ac_baseMelee && attackedArmorClass != AoeData.ac_basePierce){
+				// the Bengalis' elephant units take only 75% bonus damage
+				damageDealt += Math.max(0, target.armorClasses.has(attackedArmorClass) ? (attackValue - target.armorClasses.get(attackedArmorClass))*0.75 : 0);
+			} else if (attackedArmorClass == AoeData.ac_baseMelee){
+				if (attacker.attackIgnoresArmor){
+					damageDealt += target.armorClasses.has(attackedArmorClass) ? attackValue + chargeDmg : 0;
 				} else {
-					damageDealt += Math.max(0, target.armorClasses.has(attackedArmorClass) ? attackValue - target.armorClasses.get(attackedArmorClass) : 0);
+					damageDealt += Math.max(0, target.armorClasses.has(attackedArmorClass) ? attackValue + chargeDmg - target.armorClasses.get(attackedArmorClass) : 0);
 				}
+			} else {
+				damageDealt += Math.max(0, target.armorClasses.has(attackedArmorClass) ? attackValue - target.armorClasses.get(attackedArmorClass) : 0);
 			}
+		}
+
+		// Ethopian camels and shotel warriors receive -3 dmg from mounted units after their imp unique tech
+		if (target.civUnitType.civ == AoeData.civ_ethiopians && (AoeData.utl_camelRider.unitTypes.includes(target.civUnitType.baseUnitType) || AoeData.utl_shotelWarrior.unitTypes.includes(target.civUnitType.baseUnitType))
+			&& (attacker.armorClasses.has(AoeData.ac_cavalry) || attacker.armorClasses.has(AoeData.ac_camel) || attacker.armorClasses.has(AoeData.ac_warElephant)) && target.civUnitType.age == 4){
+				damageDealt -= 3;
 		}
 
 		damageDealt = damageDealt < 1 ? 1 : damageDealt;
@@ -270,9 +270,9 @@ export class Unit {
 		{
 			let chargeAttack: number = 0;
 			// add charge attack damage
-			if ((AoeData.utl_coustillier.unitTypes.includes(this.civUnitType.baseUnitType) || AoeData.utl_urumiSwordsman.unitTypes.includes(this.civUnitType.baseUnitType)) && this.curEnergy >= 100.0){
+			if (this.chargeDmg > 0.0 && this.curEnergy >= 100.0){
 				this.curEnergy = 0.0;
-				chargeAttack = this.civUnitType.baseUnitType == AoeData.ut_coustillier ? 25 : (this.civUnitType.baseUnitType == AoeData.ut_eliteCoustillier ? 30 : (this.civUnitType.baseUnitType == AoeData.ut_urumiSwordsman ? 12 : 15));
+				chargeAttack = this.chargeDmg;
 			}
 			let damageDealt: number = Unit.CalculateDamageDealtToTarget(this, this.target, false, chargeAttack);
 			this.target.curHp -= damageDealt;

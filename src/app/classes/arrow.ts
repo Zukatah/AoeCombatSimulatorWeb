@@ -27,14 +27,13 @@ export class Arrow extends Projectile
 			let damageDealt : number = Unit.CalculateDamageDealtToTarget(this.attacker, this.target, this.secondary);
 
 			// Shrivamsha Riders can block/dodge projectiles
-			if (AoeData.utl_shrivamshaRider.unitTypes.includes(closestUnit.civUnitType.baseUnitType)){
-				if (closestUnit.civUnitType.baseUnitType == AoeData.ut_shrivamshaRider && closestUnit.curEnergy >= 20.0){
+			if (AoeData.utl_shrivamshaRider.unitTypes.includes(this.target.civUnitType.baseUnitType)){
+				if (this.target.civUnitType.baseUnitType == AoeData.ut_shrivamshaRider && this.target.curEnergy >= 20.0){
 					damageDealt = 0.0;
-					closestUnit.curEnergy -= 20.0;
-				} else if (closestUnit.civUnitType.baseUnitType == AoeData.ut_eliteShrivamshaRider && closestUnit.curEnergy >= 14.4){
+					this.target.curEnergy -= 20.0;
+				} else if (this.target.civUnitType.baseUnitType == AoeData.ut_eliteShrivamshaRider && this.target.curEnergy >= 14.4){
 					damageDealt = 0.0;
-					closestUnit.curEnergy -= 14.4;
-					closestUnit.debugNumber += 1;
+					this.target.curEnergy -= 14.4;
 				}
 			}
 
@@ -78,7 +77,6 @@ export class Arrow extends Projectile
 						} else if (closestUnit.civUnitType.baseUnitType == AoeData.ut_eliteShrivamshaRider && closestUnit.curEnergy >= 14.4){
 							damageDealt = 0.0;
 							closestUnit.curEnergy -= 14.4;
-							closestUnit.debugNumber += 1;
 						}
 					}
 
@@ -105,7 +103,6 @@ export class Arrow extends Projectile
 						} else if (closestUnit.civUnitType.baseUnitType == AoeData.ut_eliteShrivamshaRider && closestUnit.curEnergy >= 14.4){
 							damageDealt = 0.0;
 							closestUnit.curEnergy -= 14.4;
-							closestUnit.debugNumber += 1;
 						}
 					}
 
