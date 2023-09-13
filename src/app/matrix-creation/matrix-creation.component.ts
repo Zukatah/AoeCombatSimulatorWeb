@@ -48,8 +48,8 @@ export class MatrixCreationComponent{
 	private battleRef: Battle;
 
 	constructor() {
-		this.player1CivUts = MatrixData.allImperialGenericUnitTypes_excluding_villager_siegeRam;
-		this.player2CivUts = MatrixData.allImperialGenericUnitTypes_excluding_villager_siegeRam;
+		this.player1CivUts = MatrixData.allFinalUnitTypes_ror;
+		this.player2CivUts = MatrixData.allFinalUnitTypes_ror;
 		this.InitializeMatrix();
 	}
 
